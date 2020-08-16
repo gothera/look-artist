@@ -1,13 +1,68 @@
 {
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "prettier",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:react-native/all",
+    "@react-native-community/eslint-config",
+    "standard"
+  ],
   "parserOptions": {
-    "ecmaVersion": 2019,
-    "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
+    },
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["@typescript-eslint", "react", "react-native"],
+  "settings": {
+    "react": {
+      "pragma": "React",
+      "version": "detect"
     }
   },
-  "extends": "@react-native-community",
+  "globals": {
+    "__DEV__": false,
+    "jasmine": false,
+    "beforeAll": false,
+    "afterAll": false,
+    "beforeEach": false,
+    "afterEach": false,
+    "test": false,
+    "expect": false,
+    "describe": false,
+    "jest": false,
+    "it": false
+  },
   "rules": {
-    "strict": ["error", "never"]
+    "no-case-declarations": "off",
+    "react/prop-types": "off",
+    "space-before-function-paren": "off",
+    "react-native/sort-styles": "off",
+    "react-native/no-unused-styles": "off",
+    "semi": "off",
+    "no-extra-semi": "off",
+    "comma-dangle": "off",
+    "no-unused-vars": "warn",
+    "no-undef": "off",
+    "quotes": "off",
+    "react/no-unescaped-entities": "off",
+    "react-native/no-raw-text": "off",
+    "space-before-function-parent": "off",
+    "@typescript-eslint/no-use-before-define": "off",
+    "@typescript-eslint/indent": "off",
+    "@typescript-eslint/explicit-member-accessibility": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/member-delimiter-style": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-object-literal-type-assertion": "off",
+    "@typescript-eslint/no-empty-interface": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/camelcase": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "indent": "off",
+    "no-useless-call": "off",
+    "no-dupe-class-members": "off"
   }
 }

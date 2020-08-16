@@ -1,20 +1,6 @@
-import {Navigation} from 'react-native-navigation';
-import App from './App';
+import { initNavigationAsync } from './src/navigation/registerScreens';
 
-Navigation.registerComponent('com.myApp.WelcomeScreen', () => App);
-
-Navigation.events().registerAppLaunchedListener(() => {
-  Navigation.setRoot({
-    root: {
-      stack: {
-        children: [
-          {
-            component: {
-              name: 'com.myApp.WelcomeScreen',
-            },
-          },
-        ],
-      },
-    },
-  });
-});
+async function start() {
+  initNavigationAsync();
+}
+start();
