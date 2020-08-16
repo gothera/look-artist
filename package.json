@@ -56,10 +56,5 @@
     "**/*.+(js|json|ts|tsx|md)": [
       "prettier --write"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run check-types && lint-staged"
-    }
   }
 }
