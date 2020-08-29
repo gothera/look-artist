@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   StyleSheet,
   Text,
@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Animated,
   StyleProp,
+  TextInput,
 } from 'react-native';
 import { LogoOnHeader, FacebookBtnIcon, GoogleBtnIcon } from '../../../res/svg';
 import { typography, color } from '../../../theme';
@@ -19,6 +20,10 @@ import ButtonWithIcon from '../../../components/button/ButtonWithIcon';
 import { AsyncDispatch } from '../../../store/store.types';
 import { login } from '../../../store/profile/profile.actions';
 import { connect, ConnectedProps } from 'react-redux';
+
+export interface TextInputRef {
+  getValue: () => string;
+}
 
 interface OwnProps {
   componentId: string;
@@ -37,12 +42,11 @@ const LoginContent: React.FC<OwnProps & PropsFromRedux> = ({
   login,
   onChangeAuthType,
 }) => {
-  const [emailEntered, setEmailEntered] = useState('');
-  const [passwordEntered, setPasswordEntered] = useState('');
+  const emailRef = useRef<TextInputRef>(null);
 
-  const onEmailChanged = (text: string) => {
-    setEmailEntered(text);
-  };
+  const emailEntered = emailRef.current?.getValue() || '';
+
+  const [passwordEntered, setPasswordEntered] = useState('');
 
   const onPasswordChanged = (text: string) => {
     setPasswordEntered(text);
@@ -66,7 +70,8 @@ const LoginContent: React.FC<OwnProps & PropsFromRedux> = ({
         containerStyle={styles.emailTextInput}
         label="Email address"
         placeholder={'Enter email address'}
-        onValueChanged={onEmailChanged}
+        passedRef={emailRef}
+        // onValueChanged={onEmailChanged}
       />
       <PasswordInputWithLabel
         containerStyle={styles.passwordInput}
@@ -75,7 +80,12 @@ const LoginContent: React.FC<OwnProps & PropsFromRedux> = ({
       />
       <PrimaryButton
         title="Continue"
-        onPress={onContinuePress}
+        onPress={() => {
+          console.log(
+            '=== login content ref ===',
+            emailRef.current?.getValue(),
+          );
+        }}
         containerStyle={styles.socialBtn}
         isDisabled={isContinueBtnDisabled()}
       />

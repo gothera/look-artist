@@ -1,4 +1,10 @@
-import React, { useState, createRef, useEffect } from 'react';
+import React, {
+  useState,
+  createRef,
+  useEffect,
+  RefObject,
+  useImperativeHandle,
+} from 'react';
 import {
   StyleSheet,
   Text,
@@ -11,31 +17,37 @@ import {
 } from 'react-native';
 import { typography, color } from '../../theme';
 import LineDivider from '../ui/LineDivider';
+import { TextInputRef } from '../../screens/auth/components/LoginContent';
 
 interface OwnProps {
   containerStyle?: StyleProp<ViewStyle>;
   label: string;
-  onValueChanged?: (text: string) => void;
+  // onValueChanged?: (text: string) => void;
   shouldAutofocus?: boolean;
   placeholder: string;
   maxLengthUndefined?: boolean;
   multiline?: boolean;
   numOfLines?: number;
   keyboardType?: KeyboardTypeOptions;
+  passedRef: RefObject<TextInputRef>;
 }
 
 const TextInputWithLabel: React.FC<OwnProps> = ({
   containerStyle,
   label,
-  onValueChanged,
   shouldAutofocus,
   placeholder,
   maxLengthUndefined,
   multiline,
   numOfLines,
   keyboardType,
+  passedRef,
 }) => {
   const [text, setText] = useState('');
+
+  const getValue = () => text;
+
+  useImperativeHandle(passedRef, () => ({ getValue }));
 
   const textInputRef = createRef<TextInput>();
 
@@ -51,7 +63,7 @@ const TextInputWithLabel: React.FC<OwnProps> = ({
 
   const _onChangeText = (newText: string) => {
     setText(newText);
-    onValueChanged && onValueChanged(newText);
+    // onValueChanged && onValueChanged(newText);
   };
 
   return (
