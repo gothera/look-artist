@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigation } from 'react-native-navigation';
 import { gestureHandlerRootHOC } from 'react-native-gesture-handler';
-import { pushHomeScreen, pushAuthScreen } from './Navigation';
+import { pushHomeScreen, pushAuthScreen, setLoggedInRoot } from './Navigation';
 import { persistor, store } from '../store';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -51,12 +51,14 @@ export async function initNavigationAsync() {
 
       // pushHomeScreen();
 
-      if (loggedIn) {
-        store.dispatch(loginKeychain((genericPassword as any).password));
-        pushHomeScreen();
-      } else {
-        pushAuthScreen();
-      }
+      setLoggedInRoot();
+
+      // if (loggedIn) {
+      //   store.dispatch(loginKeychain((genericPassword as any).password));
+      //   pushHomeScreen();
+      // } else {
+      //   pushAuthScreen();
+      // }
     } catch (error) {
       console.log('Error initNavAsync', error);
       pushAuthScreen();

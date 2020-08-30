@@ -21,6 +21,105 @@ function getConfig(config?: Config): Config {
   };
 }
 
+export const setLoggedInRoot = () => {
+  Navigation.setRoot({
+    root: {
+      bottomTabs: {
+        children: [
+          {
+            stack: {
+              children: [
+                {
+                  component: {
+                    name: HOME_SCREEN,
+                  },
+                },
+              ],
+              options: {
+                bottomTab: {
+                  text: 'Home',
+                  icon: require('../res/images/bottom-tabs/home-unselected.png'),
+                  selectedIcon: require('../res/images/bottom-tabs/home-selected.png'),
+                },
+                topBar: {
+                  visible: false,
+                  drawBehind: true,
+                },
+              },
+            },
+          },
+          {
+            stack: {
+              children: [
+                {
+                  component: {
+                    name: HOME_SCREEN,
+                  },
+                },
+              ],
+              options: {
+                bottomTab: {
+                  text: 'Add Post',
+                  icon: require('../res/images/bottom-tabs/home-unselected.png'),
+                  selectedIcon: require('../res/images/bottom-tabs/home-selected.png'),
+                },
+                topBar: {
+                  visible: false,
+                  drawBehind: true,
+                },
+              },
+            },
+          },
+          {
+            stack: {
+              children: [
+                {
+                  component: {
+                    name: HOME_SCREEN,
+                  },
+                },
+              ],
+              options: {
+                bottomTab: {
+                  text: 'Notifications',
+                  icon: require('../res/images/bottom-tabs/home-unselected.png'),
+                  selectedIcon: require('../res/images/bottom-tabs/home-selected.png'),
+                },
+                topBar: {
+                  visible: false,
+                  drawBehind: true,
+                },
+              },
+            },
+          },
+          {
+            stack: {
+              children: [
+                {
+                  component: {
+                    name: HOME_SCREEN,
+                  },
+                },
+              ],
+              options: {
+                bottomTab: {
+                  text: 'Profile',
+                  icon: require('../res/images/bottom-tabs/home-unselected.png'),
+                  selectedIcon: require('../res/images/bottom-tabs/home-selected.png'),
+                },
+                topBar: {
+                  visible: false,
+                  drawBehind: true,
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+  });
+};
+
 export async function pushHomeScreen(pushConfig?: Config) {
   const config = getConfig(pushConfig);
 
