@@ -46,6 +46,7 @@ const LoginContent: React.FC<OwnProps & PropsFromRedux> = ({
   const isContinueBtnDisabled = isEmailEnteredEmpty || isPasswordEnteredEmpty;
 
   const onEmailChangeState = (newState: boolean) => {
+    // update state only if needed
     if (isEmailEnteredEmpty && !newState) {
       setIsEmailEnteredEmpty(false);
     } else if (!isEmailEnteredEmpty && newState) {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   StyleSheet,
   View,
@@ -14,6 +14,7 @@ import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
 import { connect, ConnectedProps } from 'react-redux';
 import { AsyncDispatch } from '../../../store/store.types';
 import { setName } from '../../../store/profile/profile.actions';
+import { TextInputRef } from '../../../types/refTypes';
 
 interface OwnProps {
   slideToNext: () => void;
@@ -33,20 +34,33 @@ const NameStep: React.FC<OwnProps & PropsFromRedux> = ({
   isFocused,
   setName,
 }) => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const firstNameRef = useRef<TextInputRef>(null);
+  const lastNameRef = useRef<TextInputRef>(null);
 
-  const onFirstNameChanged = (text: string) => {
-    setFirstName(text);
+  const [isFirstNameEmpty, setIsFirstNameEmpty] = useState(true);
+  const [isLastNameEmpty, setIsLastNameEmpty] = useState(true);
+
+  const onFirstNameEmptyChangeState = (newState: boolean) => {
+    if (isFirstNameEmpty && !newState) {
+      setIsFirstNameEmpty(false);
+    } else if (!isFirstNameEmpty && newState) {
+      setIsFirstNameEmpty(true);
+    }
   };
 
-  const onLastNameChanged = (text: string) => {
-    setLastName(text);
+  const onLastNameEmptyChangeState = (newState: boolean) => {
+    if (isLastNameEmpty && !newState) {
+      setIsLastNameEmpty(false);
+    } else if (!isLastNameEmpty && newState) {
+      setIsLastNameEmpty(true);
+    }
   };
 
-  const isContinueDisabled = firstName === '' || lastName === '';
+  const isContinueDisabled = isFirstNameEmpty || isLastNameEmpty;
 
   const onContinuePress = () => {
+    const firstName = firstNameRef.current?.getValue() || '';
+    const lastName = lastNameRef.current?.getValue() || '';
     setName(firstName, lastName);
     slideToNext();
   };
@@ -61,15 +75,17 @@ const NameStep: React.FC<OwnProps & PropsFromRedux> = ({
         <TextInputWithLabel
           containerStyle={styles.firstNameContainer}
           label="First Name"
-          onValueChanged={onFirstNameChanged}
           shouldAutofocus={isFocused}
           placeholder="Enter first name"
+          passedRef={firstNameRef}
+          onUpdateParentState={onFirstNameEmptyChangeState}
         />
         <TextInputWithLabel
           containerStyle={styles.lastNameContainer}
           label="Last Name"
-          onValueChanged={onLastNameChanged}
           placeholder="Enter last name"
+          passedRef={lastNameRef}
+          onUpdateParentState={onLastNameEmptyChangeState}
         />
       </ScrollView>
       <KeyboardAccessoryView alwaysVisible style={styles.keyboardAccessory}>
