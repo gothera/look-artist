@@ -6,9 +6,6 @@ import {
   ViewStyle,
   TextStyle,
   TouchableOpacity,
-  Animated,
-  StyleProp,
-  TextInput,
 } from 'react-native';
 import { LogoOnHeader, FacebookBtnIcon, GoogleBtnIcon } from '../../../res/svg';
 import { typography, color } from '../../../theme';
@@ -20,10 +17,7 @@ import ButtonWithIcon from '../../../components/button/ButtonWithIcon';
 import { AsyncDispatch } from '../../../store/store.types';
 import { login } from '../../../store/profile/profile.actions';
 import { connect, ConnectedProps } from 'react-redux';
-
-export interface TextInputRef {
-  getValue: () => string;
-}
+import { TextInputRef } from '../../../types/refTypes';
 
 interface OwnProps {
   componentId: string;
@@ -31,7 +25,8 @@ interface OwnProps {
 }
 
 const mapDispatchToProps = (dispatch: AsyncDispatch) => ({
-  login: (email: string, password: string) => dispatch(login(email, password)),
+  loginWithEmailAndPassword: (email: string, password: string) =>
+    dispatch(login(email, password)),
 });
 
 const connector = connect(null, mapDispatchToProps);
@@ -39,25 +34,38 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 
 const LoginContent: React.FC<OwnProps & PropsFromRedux> = ({
   componentId,
-  login,
+  loginWithEmailAndPassword,
   onChangeAuthType,
 }) => {
   const emailRef = useRef<TextInputRef>(null);
+  const passwordRef = useRef<TextInputRef>(null);
 
-  const emailEntered = emailRef.current?.getValue() || '';
+  const [isEmailEnteredEmpty, setIsEmailEnteredEmpty] = useState(true);
+  const [isPasswordEnteredEmpty, setIsPasswordEnteredEmpty] = useState(true);
 
-  const [passwordEntered, setPasswordEntered] = useState('');
+  const isContinueBtnDisabled = isEmailEnteredEmpty || isPasswordEnteredEmpty;
 
-  const onPasswordChanged = (text: string) => {
-    setPasswordEntered(text);
+  const onEmailChangeState = (newState: boolean) => {
+    if (isEmailEnteredEmpty && !newState) {
+      setIsEmailEnteredEmpty(false);
+    } else if (!isEmailEnteredEmpty && newState) {
+      setIsEmailEnteredEmpty(true);
+    }
+  };
+
+  const onPasswordChangeState = (newState: boolean) => {
+    if (isPasswordEnteredEmpty && !newState) {
+      setIsPasswordEnteredEmpty(false);
+    } else if (!isPasswordEnteredEmpty && newState) {
+      setIsPasswordEnteredEmpty(true);
+    }
   };
 
   const onContinuePress = () => {
-    login(emailEntered, passwordEntered);
+    const emailEntered = emailRef.current?.getValue() || '';
+    const passwordEntered = passwordRef.current?.getValue() || '';
+    loginWithEmailAndPassword(emailEntered, passwordEntered);
   };
-
-  const isContinueBtnDisabled = () =>
-    emailEntered === '' || passwordEntered === '';
 
   return (
     <View style={styles.container}>
@@ -71,23 +79,19 @@ const LoginContent: React.FC<OwnProps & PropsFromRedux> = ({
         label="Email address"
         placeholder={'Enter email address'}
         passedRef={emailRef}
-        // onValueChanged={onEmailChanged}
+        onUpdateParentState={onEmailChangeState}
       />
       <PasswordInputWithLabel
         containerStyle={styles.passwordInput}
         placeholder={'Enter password'}
-        onValueChanged={onPasswordChanged}
+        passedRef={passwordRef}
+        onUpdateParentState={onPasswordChangeState}
       />
       <PrimaryButton
         title="Continue"
-        onPress={() => {
-          console.log(
-            '=== login content ref ===',
-            emailRef.current?.getValue(),
-          );
-        }}
+        onPress={onContinuePress}
         containerStyle={styles.socialBtn}
-        isDisabled={isContinueBtnDisabled()}
+        isDisabled={isContinueBtnDisabled}
       />
       <OrLineDivider containerStyle={styles.orDividerContainer} />
       <ButtonWithIcon
