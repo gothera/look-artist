@@ -51,14 +51,18 @@ export async function initNavigationAsync() {
 
       // pushHomeScreen();
 
-      setLoggedInRoot();
+      // setLoggedInRoot();
 
-      // if (loggedIn) {
-      //   store.dispatch(loginKeychain((genericPassword as any).password));
-      //   pushHomeScreen();
-      // } else {
-      //   pushAuthScreen();
-      // }
+      if (loggedIn) {
+        store.dispatch(loginKeychain((genericPassword as any).password));
+        // pushHomeScreen();
+        /**
+         * Screens with bottom navigation
+         */
+        setLoggedInRoot();
+      } else {
+        pushAuthScreen();
+      }
     } catch (error) {
       console.log('Error initNavAsync', error);
       pushAuthScreen();

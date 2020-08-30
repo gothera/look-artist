@@ -9,7 +9,7 @@ import {
   SetupBody,
 } from '../../services/api/api.types';
 import { setGenericPassword } from 'react-native-keychain';
-import { pushHomeScreen, pushSetupScreen } from '../../navigation';
+import { pushSetupScreen, setLoggedInRoot } from '../../navigation';
 
 /**
  * LOGIN
@@ -55,7 +55,8 @@ export const login = (
       })
       .then(() => {
         if (!isRegister) {
-          pushHomeScreen();
+          // pushHomeScreen();
+          setLoggedInRoot();
         }
       })
       .catch((error) => {
