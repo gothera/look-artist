@@ -3,7 +3,14 @@ import {
   Navigation,
   OptionsModalPresentationStyle,
 } from 'react-native-navigation';
-import { HOME_SCREEN, AUTH_SCREEN, SETUP_SCREEN } from './ScreensConstants';
+import {
+  HOME_SCREEN,
+  AUTH_SCREEN,
+  SETUP_SCREEN,
+  ADD_POST_SCREEN,
+  NOTIFICATIONS_SCREEN,
+  PROFILE_SCREEN,
+} from './ScreensConstants';
 import { LOADING_MODAL } from './ModalsConstants';
 import { color } from '../theme';
 
@@ -54,7 +61,7 @@ export const setLoggedInRoot = () => {
               children: [
                 {
                   component: {
-                    name: HOME_SCREEN,
+                    name: ADD_POST_SCREEN,
                   },
                 },
               ],
@@ -76,7 +83,7 @@ export const setLoggedInRoot = () => {
               children: [
                 {
                   component: {
-                    name: HOME_SCREEN,
+                    name: NOTIFICATIONS_SCREEN,
                   },
                 },
               ],
@@ -98,7 +105,7 @@ export const setLoggedInRoot = () => {
               children: [
                 {
                   component: {
-                    name: HOME_SCREEN,
+                    name: PROFILE_SCREEN,
                   },
                 },
               ],
