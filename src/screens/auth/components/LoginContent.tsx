@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   StyleSheet,
   Text,
@@ -19,6 +19,7 @@ import ButtonWithIcon from '../../../components/button/ButtonWithIcon';
 import { AsyncDispatch } from '../../../store/store.types';
 import { login } from '../../../store/profile/profile.actions';
 import { connect, ConnectedProps } from 'react-redux';
+import { TextInput } from 'react-native-gesture-handler';
 
 interface OwnProps {
   componentId: string;

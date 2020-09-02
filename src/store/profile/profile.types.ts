@@ -1,4 +1,5 @@
 import * as profileConstants from './profile.constants';
+import { ArtistResponseApi } from '../../types/globalTypes';
 
 export interface InvalidateStoreAction {
   type: typeof profileConstants.INVALIDATE_STORE;
@@ -53,6 +54,7 @@ export interface SetupRequest {
 
 export interface SetupSuccess {
   type: typeof profileConstants.SETUP_SUCCESS;
+  payload: ArtistResponseApi;
 }
 
 export interface SetupFailure {

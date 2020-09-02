@@ -1,16 +1,14 @@
 import { SetupBody } from './api.types';
 import { postRequest } from './apiRequest';
+import { ArtistResponseApi } from '../../types/globalTypes';
 
-export const setup = (setupBody: SetupBody, artistId: number): Promise<any> => {
-  const url = `artist/setup/${artistId}`;
-  return postRequest<any>(url, setupBody);
+export const setup = (setupBody: SetupBody): Promise<ArtistResponseApi> => {
+  const url = `artist/setup/`;
+  return postRequest<ArtistResponseApi>(url, setupBody);
 };
 
-export const changeProfilePicture = (
-  formData: FormData,
-  artistId: number,
-): Promise<any> => {
-  const url = `artist/picture/${artistId}`;
+export const changeProfilePicture = (formData: FormData): Promise<any> => {
+  const url = `artist/picture/`;
 
   const config = {
     headers: {
@@ -18,5 +16,5 @@ export const changeProfilePicture = (
     },
   };
 
-  return postRequest<any>(url, formData, config);
+  return postRequest<string>(url, formData, config);
 };

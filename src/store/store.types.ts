@@ -13,6 +13,8 @@ export interface ProfileState {
   email?: string;
   category?: string;
   phoneNumber?: string;
+  profilePicture?: string;
+  bio?: string;
 }
 
 export interface OfferedServicesState {
