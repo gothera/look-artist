@@ -1,16 +1,32 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import HeaderScreenBigTitle from '../../components/header/HeaderScreenBigTitle';
+import { Text, View, FlatListProps } from 'react-native';
+import { color } from '../../theme';
+import ScreenFlatList from '../../containers/screen/ScreenFlatList';
 
 const NotificationsScreen = () => {
+  const renderItem = ({ item, index }: { item: number; index: number }) => {
+    return (
+      <View
+        style={{
+          paddingVertical: 20,
+          backgroundColor: color.unchosen,
+          marginVertical: 10,
+          opacity: 0.5,
+        }}
+      >
+        <Text>{item}</Text>
+      </View>
+    );
+  };
+
+  const flatListProps: FlatListProps<any> = {
+    data: [0, 1, 2, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10, 11, 12, 13],
+    renderItem: renderItem,
+  };
+
   return (
-    <View style={{ flex: 1 }}>
-      <HeaderScreenBigTitle title="Notifi" />
-      <Text>notifications screen</Text>
-    </View>
+    <ScreenFlatList headerTitle="Notifications" flatListProps={flatListProps} />
   );
 };
 
 export default NotificationsScreen;
-
-const styles = StyleSheet.create({});

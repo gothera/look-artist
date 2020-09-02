@@ -104,4 +104,9 @@ export const typography = {
     ...font.bold,
     fontSize: 28,
   } as TextStyle,
+
+  collapsedHeaderTitle: {
+    ...font.bold,
+    fontSize: 18,
+  } as TextStyle,
 };
