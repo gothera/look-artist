@@ -66,7 +66,6 @@ const PhotoStep: React.FC<OwnProps & PropsFromRedux> = ({
   const isContinueDisabled = !imagePicked;
 
   const onContinuePress = () => {
-    slideToNext();
     if (!imagePicked) {
       return;
     }

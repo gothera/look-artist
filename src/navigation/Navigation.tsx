@@ -3,8 +3,16 @@ import {
   Navigation,
   OptionsModalPresentationStyle,
 } from 'react-native-navigation';
-import { HOME_SCREEN, AUTH_SCREEN, SETUP_SCREEN } from './ScreensConstants';
+import {
+  HOME_SCREEN,
+  AUTH_SCREEN,
+  SETUP_SCREEN,
+  ADD_POST_SCREEN,
+  NOTIFICATIONS_SCREEN,
+  PROFILE_SCREEN,
+} from './ScreensConstants';
 import { LOADING_MODAL } from './ModalsConstants';
+import { color } from '../theme';
 
 interface Config {
   props?: any;
@@ -20,6 +28,105 @@ function getConfig(config?: Config): Config {
     ...(config || {}),
   };
 }
+
+export const setLoggedInRoot = () => {
+  Navigation.setRoot({
+    root: {
+      bottomTabs: {
+        children: [
+          {
+            stack: {
+              children: [
+                {
+                  component: {
+                    name: HOME_SCREEN,
+                  },
+                },
+              ],
+              options: {
+                bottomTab: {
+                  icon: require('../res/images/bottom-tabs/calendar.png'),
+                  iconColor: color.muted,
+                  selectedIconColor: color.textPrimary,
+                },
+                topBar: {
+                  visible: false,
+                  drawBehind: true,
+                },
+              },
+            },
+          },
+          {
+            stack: {
+              children: [
+                {
+                  component: {
+                    name: ADD_POST_SCREEN,
+                  },
+                },
+              ],
+              options: {
+                bottomTab: {
+                  icon: require('../res/images/bottom-tabs/add-post.png'),
+                  iconColor: color.muted,
+                  selectedIconColor: color.textPrimary,
+                },
+                topBar: {
+                  visible: false,
+                  drawBehind: true,
+                },
+              },
+            },
+          },
+          {
+            stack: {
+              children: [
+                {
+                  component: {
+                    name: NOTIFICATIONS_SCREEN,
+                  },
+                },
+              ],
+              options: {
+                bottomTab: {
+                  icon: require('../res/images/bottom-tabs/bell.png'),
+                  iconColor: color.muted,
+                  selectedIconColor: color.textPrimary,
+                },
+                topBar: {
+                  visible: false,
+                  drawBehind: true,
+                },
+              },
+            },
+          },
+          {
+            stack: {
+              children: [
+                {
+                  component: {
+                    name: PROFILE_SCREEN,
+                  },
+                },
+              ],
+              options: {
+                bottomTab: {
+                  icon: require('../res/images/bottom-tabs/person.png'),
+                  iconColor: color.muted,
+                  selectedIconColor: color.textPrimary,
+                },
+                topBar: {
+                  visible: false,
+                  drawBehind: true,
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+  });
+};
 
 export async function pushHomeScreen(pushConfig?: Config) {
   const config = getConfig(pushConfig);

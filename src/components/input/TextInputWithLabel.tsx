@@ -1,4 +1,10 @@
-import React, { useState, createRef, useEffect } from 'react';
+import React, {
+  useState,
+  createRef,
+  useEffect,
+  RefObject,
+  useImperativeHandle,
+} from 'react';
 import {
   StyleSheet,
   Text,
@@ -11,33 +17,40 @@ import {
 } from 'react-native';
 import { typography, color } from '../../theme';
 import LineDivider from '../ui/LineDivider';
+import { TextInputRef } from '../../types/refTypes';
 
 interface OwnProps {
   containerStyle?: StyleProp<ViewStyle>;
   label: string;
-  onValueChanged?: (text: string) => void;
   shouldAutofocus?: boolean;
   placeholder: string;
   maxLengthUndefined?: boolean;
   multiline?: boolean;
   numOfLines?: number;
   keyboardType?: KeyboardTypeOptions;
+  passedRef: RefObject<TextInputRef>;
+  onUpdateParentState?: (newState: boolean) => void;
 }
 
 const TextInputWithLabel: React.FC<OwnProps> = ({
   containerStyle,
   label,
-  onValueChanged,
   shouldAutofocus,
   placeholder,
   maxLengthUndefined,
   multiline,
   numOfLines,
   keyboardType,
+  passedRef,
+  onUpdateParentState,
 }) => {
   const [text, setText] = useState('');
 
   const textInputRef = createRef<TextInput>();
+
+  const getValue = () => text;
+
+  useImperativeHandle(passedRef, () => ({ getValue }));
 
   useEffect(() => {
     if (textInputRef && textInputRef.current && shouldAutofocus) {
@@ -50,8 +63,16 @@ const TextInputWithLabel: React.FC<OwnProps> = ({
   }, [shouldAutofocus]);
 
   const _onChangeText = (newText: string) => {
-    setText(newText);
-    onValueChanged && onValueChanged(newText);
+    setText((oldText) => {
+      if (onUpdateParentState) {
+        if (oldText === '') {
+          onUpdateParentState(false);
+        } else if (newText === '') {
+          onUpdateParentState(true);
+        }
+      }
+      return newText;
+    });
   };
 
   return (

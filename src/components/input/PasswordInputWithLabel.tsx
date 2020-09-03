@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, RefObject, useImperativeHandle } from 'react';
 import {
   StyleSheet,
   Text,
@@ -10,25 +10,42 @@ import {
 } from 'react-native';
 import { typography, color } from '../../theme';
 import LineDivider from '../ui/LineDivider';
+import { TextInputRef } from '../../types/refTypes';
 
 interface OwnProps {
   containerStyle?: StyleProp<ViewStyle>;
-  onValueChanged?: (text: string) => void;
   placeholder: string;
   description?: string;
+  passedRef: RefObject<TextInputRef>;
+  onUpdateParentState?: (newState: boolean) => void;
 }
 
 const PasswordInputWithLabel: React.FC<OwnProps> = ({
   containerStyle,
-  onValueChanged,
   placeholder,
   description,
+  passedRef,
+  onUpdateParentState,
 }) => {
   const [text, setText] = useState('');
+
+  const getValue = () => text;
+
+  useImperativeHandle(passedRef, () => ({ getValue }));
+
   const _onChangeText = (newText: string) => {
-    setText(newText);
-    onValueChanged && onValueChanged(newText);
+    setText((oldText) => {
+      if (onUpdateParentState) {
+        if (oldText === '') {
+          onUpdateParentState(false);
+        } else if (newText === '') {
+          onUpdateParentState(true);
+        }
+      }
+      return newText;
+    });
   };
+
   return (
     <View style={[styles.container, containerStyle]}>
       <Text style={styles.label}>Password</Text>
