@@ -10,6 +10,7 @@ import {
 } from '../../services/api/api.types';
 import { setGenericPassword } from 'react-native-keychain';
 import { pushSetupScreen, setLoggedInRoot } from '../../navigation';
+import { ArtistResponseApi } from '../../types/globalTypes';
 
 /**
  * LOGIN
@@ -161,9 +162,12 @@ export const setupRequest = (): profileTypes.SetupRequest => {
   };
 };
 
-export const setupSuccess = (): profileTypes.SetupSuccess => {
+export const setupSuccess = (
+  artist: ArtistResponseApi,
+): profileTypes.SetupSuccess => {
   return {
     type: profileConstants.SETUP_SUCCESS,
+    payload: artist,
   };
 };
 
@@ -197,9 +201,9 @@ export const setup = (
 
     console.log('== setup body ==', setupBody);
 
-    return ProfileService.setup(setupBody, profile.artistId || -1)
-      .then((response: any) => {
-        console.log('then ', response);
+    return ProfileService.setup(setupBody)
+      .then((response: ArtistResponseApi) => {
+        setupSuccess(response);
       })
       .catch((error) => {
         dispatch(setupFailure);
@@ -241,9 +245,9 @@ export const changeProfilePicture = (formData: FormData): ThunkResult<void> => {
       return Promise.resolve();
     }
 
-    return ProfileService.changeProfilePicture(formData, artistId)
-      .then((response: any) => {
-        console.log('change image then ', response);
+    return ProfileService.changeProfilePicture(formData)
+      .then((response: string) => {
+        changeProfilePictureSuccess(response);
       })
       .catch((error) => {
         dispatch(setupFailure);

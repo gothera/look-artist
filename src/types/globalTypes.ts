@@ -18,3 +18,15 @@ export interface OfferedService {
   duration: number;
   id: number;
 }
+
+export interface ArtistResponseApi {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  category: string;
+  phone: string;
+  bio: string;
+  offeredServices: OfferedService[];
+  profilePicture: string;
+}

@@ -77,6 +77,24 @@ function profileReducer(
         category: category,
       };
     }
+    case profileConstants.SETUP_SUCCESS: {
+      return {
+        ...state,
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
+        email: action.payload.email,
+        category: action.payload.category,
+        phoneNumber: action.payload.phone,
+        bio: action.payload.bio,
+        artistId: action.payload.id,
+      };
+    }
+    case profileConstants.CHANGE_PROFILE_PICTURE_SUCCESS: {
+      return {
+        ...state,
+        profilePicture: action.payload.imageUrl,
+      };
+    }
 
     default:
       return state;
