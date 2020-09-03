@@ -20,13 +20,11 @@ const NotificationsScreen = () => {
   };
 
   const flatListProps: FlatListProps<any> = {
-    data: [0, 1, 2, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10, 11, 12, 13],
+    data: [100, 1, 2, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10, 11, 12, 13],
     renderItem: renderItem,
   };
 
-  return (
-    <ScreenFlatList headerTitle="Notifications" flatListProps={flatListProps} />
-  );
+  return <ScreenFlatList headerTitle="Sabin" flatListProps={flatListProps} />;
 };
 
 export default NotificationsScreen;

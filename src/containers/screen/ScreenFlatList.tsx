@@ -30,6 +30,7 @@ const ScreenFlatList: React.FC<OwnPros> = ({ headerTitle, flatListProps }) => {
         renderItem={flatListProps.renderItem}
         contentContainerStyle={{ paddingTop: HEADER_SCREEN_HEIGHT }}
         onScroll={onScroll}
+        ListHeaderComponent={flatListProps.ListHeaderComponent}
       />
     </>
   );
