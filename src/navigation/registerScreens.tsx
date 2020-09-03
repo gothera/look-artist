@@ -5,8 +5,22 @@ import { pushHomeScreen, pushAuthScreen, setLoggedInRoot } from './Navigation';
 import { persistor, store } from '../store';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { HomeScreen, AuthScreen, SetupScreen } from '../screens';
-import { HOME_SCREEN, AUTH_SCREEN, SETUP_SCREEN } from './ScreensConstants';
+import {
+  HomeScreen,
+  AuthScreen,
+  SetupScreen,
+  AddPostScreen,
+  NotificationsScreen,
+  ProfileScreen,
+} from '../screens';
+import {
+  HOME_SCREEN,
+  AUTH_SCREEN,
+  SETUP_SCREEN,
+  ADD_POST_SCREEN,
+  NOTIFICATIONS_SCREEN,
+  PROFILE_SCREEN,
+} from './ScreensConstants';
 import { LOADING_MODAL } from './ModalsConstants';
 import { LoadingModal } from '../modals';
 import { getGenericPassword } from 'react-native-keychain';
@@ -32,6 +46,16 @@ const registerScreens = () => {
   Navigation.registerComponent(SETUP_SCREEN, () =>
     WrappedComponent(SetupScreen),
   );
+  Navigation.registerComponent(ADD_POST_SCREEN, () =>
+    WrappedComponent(AddPostScreen),
+  );
+  Navigation.registerComponent(NOTIFICATIONS_SCREEN, () =>
+    WrappedComponent(NotificationsScreen),
+  );
+  Navigation.registerComponent(PROFILE_SCREEN, () =>
+    WrappedComponent(ProfileScreen),
+  );
+
   registerModals();
 };
 
@@ -51,18 +75,18 @@ export async function initNavigationAsync() {
 
       // pushHomeScreen();
 
-      // setLoggedInRoot();
+      setLoggedInRoot();
 
-      if (loggedIn) {
-        store.dispatch(loginKeychain((genericPassword as any).password));
-        // pushHomeScreen();
-        /**
-         * Screens with bottom navigation
-         */
-        setLoggedInRoot();
-      } else {
-        pushAuthScreen();
-      }
+      // if (loggedIn) {
+      //   store.dispatch(loginKeychain((genericPassword as any).password));
+      //   // pushHomeScreen();
+      //   /**
+      //    * Screens with bottom navigation
+      //    */
+      //   setLoggedInRoot();
+      // } else {
+      //   pushAuthScreen();
+      // }
     } catch (error) {
       console.log('Error initNavAsync', error);
       pushAuthScreen();

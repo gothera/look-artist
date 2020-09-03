@@ -3,8 +3,16 @@ import {
   Navigation,
   OptionsModalPresentationStyle,
 } from 'react-native-navigation';
-import { HOME_SCREEN, AUTH_SCREEN, SETUP_SCREEN } from './ScreensConstants';
+import {
+  HOME_SCREEN,
+  AUTH_SCREEN,
+  SETUP_SCREEN,
+  ADD_POST_SCREEN,
+  NOTIFICATIONS_SCREEN,
+  PROFILE_SCREEN,
+} from './ScreensConstants';
 import { LOADING_MODAL } from './ModalsConstants';
+import { color } from '../theme';
 
 interface Config {
   props?: any;
@@ -37,9 +45,9 @@ export const setLoggedInRoot = () => {
               ],
               options: {
                 bottomTab: {
-                  text: 'Home',
-                  icon: require('../res/images/bottom-tabs/home-unselected.png'),
-                  selectedIcon: require('../res/images/bottom-tabs/home-selected.png'),
+                  icon: require('../res/images/bottom-tabs/calendar.png'),
+                  iconColor: color.muted,
+                  selectedIconColor: color.textPrimary,
                 },
                 topBar: {
                   visible: false,
@@ -53,15 +61,15 @@ export const setLoggedInRoot = () => {
               children: [
                 {
                   component: {
-                    name: HOME_SCREEN,
+                    name: ADD_POST_SCREEN,
                   },
                 },
               ],
               options: {
                 bottomTab: {
-                  text: 'Add Post',
-                  icon: require('../res/images/bottom-tabs/home-unselected.png'),
-                  selectedIcon: require('../res/images/bottom-tabs/home-selected.png'),
+                  icon: require('../res/images/bottom-tabs/add-post.png'),
+                  iconColor: color.muted,
+                  selectedIconColor: color.textPrimary,
                 },
                 topBar: {
                   visible: false,
@@ -75,15 +83,15 @@ export const setLoggedInRoot = () => {
               children: [
                 {
                   component: {
-                    name: HOME_SCREEN,
+                    name: NOTIFICATIONS_SCREEN,
                   },
                 },
               ],
               options: {
                 bottomTab: {
-                  text: 'Notifications',
-                  icon: require('../res/images/bottom-tabs/home-unselected.png'),
-                  selectedIcon: require('../res/images/bottom-tabs/home-selected.png'),
+                  icon: require('../res/images/bottom-tabs/bell.png'),
+                  iconColor: color.muted,
+                  selectedIconColor: color.textPrimary,
                 },
                 topBar: {
                   visible: false,
@@ -97,15 +105,15 @@ export const setLoggedInRoot = () => {
               children: [
                 {
                   component: {
-                    name: HOME_SCREEN,
+                    name: PROFILE_SCREEN,
                   },
                 },
               ],
               options: {
                 bottomTab: {
-                  text: 'Profile',
-                  icon: require('../res/images/bottom-tabs/home-unselected.png'),
-                  selectedIcon: require('../res/images/bottom-tabs/home-selected.png'),
+                  icon: require('../res/images/bottom-tabs/person.png'),
+                  iconColor: color.muted,
+                  selectedIconColor: color.textPrimary,
                 },
                 topBar: {
                   visible: false,
