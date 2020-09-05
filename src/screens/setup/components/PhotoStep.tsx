@@ -69,15 +69,13 @@ const PhotoStep: React.FC<OwnProps & PropsFromRedux> = ({
     if (!imagePicked) {
       return;
     }
+    const picture = {
+      name: imagePicked.filename,
+      type: 'image/jpg',
+      uri: imagePicked.path,
+    };
     const formData = new FormData();
-    formData.append(
-      'picture',
-      JSON.stringify({
-        name: imagePicked.filename,
-        type: 'image/jpg',
-        uri: 'file://' + imagePicked.path,
-      }),
-    );
+    formData.append('picture', picture);
 
     // const config = {
     //   headers: {

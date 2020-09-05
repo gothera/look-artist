@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   StyleSheet,
   Text,
@@ -20,6 +20,7 @@ import { AsyncDispatch } from '../../../store/store.types';
 import { login, signUp } from '../../../store/profile/profile.actions';
 import { connect, ConnectedProps } from 'react-redux';
 import { pushSetupScreen, pushHomeScreen } from '../../../navigation';
+import { TextInputRef } from '../../../types/refTypes';
 
 interface OwnProps {
   componentId: string;
@@ -39,25 +40,38 @@ const SignInContent: React.FC<OwnProps & PropsFromRedux> = ({
   onChangeAuthType,
   signUp,
 }) => {
-  const [emailEntered, setEmailEntered] = useState('');
-  const [passwordEntered, setPasswordEntered] = useState('');
+  const emailRef = useRef<TextInputRef>(null);
+  const passwordRef = useRef<TextInputRef>(null);
 
-  const onEmailChanged = (text: string) => {
-    setEmailEntered(text);
+  const [isEmailEnteredEmpty, setIsEmailEnteredEmpty] = useState(true);
+  const [isPasswordEnteredEmpty, setIsPasswordEnteredEmpty] = useState(true);
+
+  const isContinueBtnDisabled = isEmailEnteredEmpty || isPasswordEnteredEmpty;
+
+  const onEmailChangeState = (newState: boolean) => {
+    // update state only if needed
+    if (isEmailEnteredEmpty && !newState) {
+      setIsEmailEnteredEmpty(false);
+    } else if (!isEmailEnteredEmpty && newState) {
+      setIsEmailEnteredEmpty(true);
+    }
   };
 
-  const onPasswordChanged = (text: string) => {
-    setPasswordEntered(text);
+  const onPasswordChangeState = (newState: boolean) => {
+    if (isPasswordEnteredEmpty && !newState) {
+      setIsPasswordEnteredEmpty(false);
+    } else if (!isPasswordEnteredEmpty && newState) {
+      setIsPasswordEnteredEmpty(true);
+    }
   };
 
   const onContinuePress = () => {
     // pushHomeScreen();
     // pushSetupScreen();
+    const emailEntered = emailRef.current?.getValue() || '';
+    const passwordEntered = passwordRef.current?.getValue() || '';
     signUp(emailEntered, passwordEntered);
   };
-
-  const isContinueBtnDisabled = () =>
-    emailEntered === '' || passwordEntered === '';
 
   // const isContinueBtnDisabled = () => false;
 
@@ -71,20 +85,22 @@ const SignInContent: React.FC<OwnProps & PropsFromRedux> = ({
       <TextInputWithLabel
         containerStyle={styles.emailTextInput}
         label="Email address"
+        passedRef={emailRef}
         placeholder={'Enter email address'}
-        onValueChanged={onEmailChanged}
+        onUpdateParentState={onEmailChangeState}
       />
       <PasswordInputWithLabel
         containerStyle={styles.passwordInput}
         placeholder={'Enter password'}
-        onValueChanged={onPasswordChanged}
+        passedRef={passwordRef}
+        onUpdateParentState={onPasswordChangeState}
         description={'Must include a number and have at least 8 characters'}
       />
       <PrimaryButton
         title="Create account"
         onPress={onContinuePress}
         containerStyle={styles.socialBtn}
-        isDisabled={isContinueBtnDisabled()}
+        isDisabled={isContinueBtnDisabled}
       />
       <OrLineDivider containerStyle={styles.orDividerContainer} />
       <ButtonWithIcon
