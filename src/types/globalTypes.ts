@@ -19,6 +19,18 @@ export interface OfferedService {
   id: number;
 }
 
+export enum NotificationType {
+  NewAppointment,
+  CancelledAppointment,
+  Review,
+}
+
+export interface Notification {
+  extra: any;
+  type: NotificationType;
+  date: string;
+}
+
 export interface ArtistResponseApi {
   id: number;
   firstName: string;

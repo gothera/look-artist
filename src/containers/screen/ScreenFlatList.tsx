@@ -28,8 +28,13 @@ const ScreenFlatList: React.FC<OwnPros> = ({ headerTitle, flatListProps }) => {
       <Animated.FlatList
         data={flatListProps.data}
         renderItem={flatListProps.renderItem}
-        contentContainerStyle={{ paddingTop: HEADER_SCREEN_HEIGHT }}
+        contentContainerStyle={[
+          flatListProps.contentContainerStyle,
+          { paddingTop: HEADER_SCREEN_HEIGHT },
+        ]}
         onScroll={onScroll}
+        onEndReachedThreshold={flatListProps.onEndReachedThreshold}
+        onEndReached={flatListProps.onEndReached}
         ListHeaderComponent={flatListProps.ListHeaderComponent}
       />
     </>
