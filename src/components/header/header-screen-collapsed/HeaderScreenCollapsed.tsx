@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, Animated } from 'react-native';
-import styles from './headerScreenCollapsed.style';
-import { COLLAPSED_HEADER_HEIGHT } from '../../res/constants';
+import styles from './styles';
+import { COLLAPSED_HEADER_HEIGHT } from '../../../res/constants';
 
 interface OwnProps {
   title: string;

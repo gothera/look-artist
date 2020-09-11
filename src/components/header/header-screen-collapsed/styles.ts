@@ -2,8 +2,8 @@ import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import {
   COLLAPSED_HEADER_HEIGHT,
   STATUS_BAR_HEIGHT,
-} from '../../res/constants';
-import { typography, color } from '../../theme';
+} from '../../../res/constants';
+import { typography, color } from '../../../theme';
 
 interface Style {
   container: ViewStyle;
