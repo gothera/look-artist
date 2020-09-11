@@ -15,8 +15,6 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { StoreState, TAction, AsyncDispatch } from './store.types';
 import initialState from './initialState';
 import { PersistPartial } from 'redux-persist/es/persistReducer';
-import { Provider } from 'react';
-import { PersistGate } from 'redux-persist/integration/react';
 
 const VERSION = 12;
 
@@ -32,21 +30,6 @@ const migrations: any = {
   },
 };
 
-// const stashesBlacklist = createBlacklistFilter('stashes', ['isFetching']);
-// const topicsBlacklist = createBlacklistFilter('topics', ['isFetching']);
-// const insightBlacklist = createBlacklistFilter('insights', [
-//   'isFetching',
-//   'isReadsFetching',
-//   'shouldRefreshInsights',
-// ]);
-// const activitiesBlacklist = createBlacklistFilter('activities', ['isFetching']);
-// const articlesBlacklist = createBlacklistFilter('articles', [
-//   'isFetching',
-//   'addArticleLoading',
-//   'isFetchingUserArticles',
-//   'shouldRefreshUserArticles',
-//   'shouldRefreshArchivedArticles',
-// ]);
 const profileBlacklist = createBlacklistFilter('profile', ['isLogging']);
 
 const persistConfig: PersistConfig<StoreState> = {
@@ -54,17 +37,10 @@ const persistConfig: PersistConfig<StoreState> = {
   version: VERSION,
   storage: FilesystemStorage,
   stateReconciler: autoMergeLevel2,
-  transforms: [
-    profileBlacklist,
-    // stashesBlacklist,
-    // topicsBlacklist,
-    // insightBlacklist,
-    // activitiesBlacklist,
-    // articlesBlacklist,
-  ],
+  transforms: [profileBlacklist],
   // There is an issue with redux-persist code. This needs to be null not undefined
   timeout: null as any,
-  // migrate: createMigrate(migrations, { debug: false }),
+  migrate: createMigrate(migrations, { debug: false }),
 };
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
