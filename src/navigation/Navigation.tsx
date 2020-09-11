@@ -33,6 +33,15 @@ export const setLoggedInRoot = () => {
   Navigation.setRoot({
     root: {
       bottomTabs: {
+        options: {
+          bottomTabs: {
+            animate: false,
+            titleDisplayMode: 'alwaysHide',
+            elevation: 30,
+            backgroundColor: color.background,
+            drawBehind: true,
+          },
+        },
         children: [
           {
             stack: {

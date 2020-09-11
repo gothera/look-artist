@@ -39,6 +39,7 @@ interface Style {
 const styles = StyleSheet.create<Style>({
   container: {
     flex: 1,
+    // backgroundColor: 'blue',
   },
   sideMenuContainer: {
     flex: 1,
