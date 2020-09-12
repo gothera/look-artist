@@ -3,16 +3,16 @@ import {
   Navigation,
   OptionsModalPresentationStyle,
 } from 'react-native-navigation';
+import { color } from '../theme';
+import { LOADING_MODAL } from './ModalsConstants';
 import {
-  HOME_SCREEN,
-  AUTH_SCREEN,
-  SETUP_SCREEN,
   ADD_POST_SCREEN,
+  AUTH_SCREEN,
+  HOME_SCREEN,
   NOTIFICATIONS_SCREEN,
   PROFILE_SCREEN,
+  SETUP_SCREEN,
 } from './ScreensConstants';
-import { LOADING_MODAL } from './ModalsConstants';
-import { color } from '../theme';
 
 interface Config {
   props?: any;
@@ -33,6 +33,11 @@ export const setLoggedInRoot = () => {
   Navigation.setRoot({
     root: {
       bottomTabs: {
+        options: {
+          bottomTabs: {
+            tabsAttachMode: 'onSwitchToTab',
+          },
+        },
         children: [
           {
             stack: {

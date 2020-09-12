@@ -337,9 +337,9 @@ PODS:
     - React
   - RNSVG (12.1.0):
     - React
-  - SDWebImage (5.8.4):
-    - SDWebImage/Core (= 5.8.4)
-  - SDWebImage/Core (5.8.4)
+  - SDWebImage (5.9.0):
+    - SDWebImage/Core (= 5.9.0)
+  - SDWebImage/Core (5.9.0)
   - SDWebImageWebPCoder (0.6.1):
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.7)
@@ -540,7 +540,7 @@ SPEC CHECKSUMS:
   RNImageCropPicker: f0557a908758c4a3f83978894ec7227651529b45
   RNKeychain: db956c02a018f7dd3a0ea8a6cf3087bc1894bf2b
   RNSVG: ce9d996113475209013317e48b05c21ee988d42e
-  SDWebImage: cf6922231e95550934da2ada0f20f2becf2ceba9
+  SDWebImage: 62ae4a18473520c67b79e9724c31a63599cc9423
   SDWebImageWebPCoder: d0dac55073088d24b2ac1b191a71a8f8d0adac21
   TOCropViewController: 2a1ae1242600b1f2d996fd91a5268b2309a33b5c
   Yoga: 7740b94929bbacbddda59bf115b5317e9a161598

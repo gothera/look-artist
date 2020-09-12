@@ -9,6 +9,12 @@ const initialState: StoreState = {
   offeredServices: {
     local: {},
   },
+  notification: {
+    notificationsById: [],
+    local: {},
+    fetching: false,
+    nextPage: 0,
+  },
 };
 
 export default initialState;

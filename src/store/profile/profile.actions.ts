@@ -238,7 +238,7 @@ export const changeProfilePictureFailure = (): profileTypes.ChangeProfilePicture
 
 export const changeProfilePicture = (formData: FormData): ThunkResult<void> => {
   return async function (dispatch, getState) {
-    dispatch(changeProfilePictureRequest);
+    dispatch(changeProfilePictureRequest());
 
     const { artistId } = getState().profile;
     if (!artistId) {

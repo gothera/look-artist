@@ -18,7 +18,7 @@ import { PersistPartial } from 'redux-persist/es/persistReducer';
 import { Provider } from 'react';
 import { PersistGate } from 'redux-persist/integration/react';
 
-const VERSION = 12;
+const VERSION = 13;
 
 const migrations: any = {
   [VERSION]: (state: PersistedState & StoreState) => {
