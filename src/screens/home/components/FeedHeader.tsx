@@ -2,13 +2,13 @@ import React from 'react';
 import {
   StyleSheet,
   Text,
+  TextStyle,
+  TouchableOpacity,
   View,
   ViewStyle,
-  TouchableOpacity,
-  TextStyle,
 } from 'react-native';
 import FastImage, { ImageStyle } from 'react-native-fast-image';
-import { typography, font } from '../../../theme';
+import { font } from '../../../theme';
 
 interface OwnProps {
   onProfilePress: () => void;
