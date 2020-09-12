@@ -1,20 +1,20 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import {
+  ScrollView,
   StyleSheet,
+  TextStyle,
   View,
   ViewStyle,
-  TextStyle,
-  ScrollView,
 } from 'react-native';
-import StepTitle from './StepTitle';
-import { color, typography } from '../../../theme';
-import PrimaryButton from '../../../components/button/PrimaryButton';
-import TextInputWithLabel from '../../../components/input/TextInputWithLabel';
 import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
 import { connect, ConnectedProps } from 'react-redux';
-import { AsyncDispatch } from '../../../store/store.types';
+import PrimaryButton from '../../../components/button/PrimaryButton';
+import TextInputWithLabel from '../../../components/input/TextInputWithLabel';
 import { setName } from '../../../store/profile/profile.actions';
+import { AsyncDispatch } from '../../../store/store.types';
+import { color, typography } from '../../../theme';
 import { TextInputRef } from '../../../types/refTypes';
+import StepTitle from './StepTitle';
 
 interface OwnProps {
   slideToNext: () => void;

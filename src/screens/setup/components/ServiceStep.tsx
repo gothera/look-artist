@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, ViewStyle } from 'react-native';
-import StepTitle from './StepTitle';
+import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { connect, ConnectedProps } from 'react-redux';
+import PrimaryButton from '../../../components/button/PrimaryButton';
 import PickerInput from '../../../components/input/PickerInput';
 import TextInputWithLabel from '../../../components/input/TextInputWithLabel';
-import { StoreState, AsyncDispatch } from '../../../store/store.types';
-import { connect, ConnectedProps } from 'react-redux';
-import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
-import { color } from '../../../theme';
-import PrimaryButton from '../../../components/button/PrimaryButton';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {
-  makeupServicesSelection,
-  lashesServicesSelection,
-  eyebrowsServicesSelection,
-  nailsServicesSelection,
   bodyCareServicesSelection,
+  eyebrowsServicesSelection,
   hairServicesSelection,
+  lashesServicesSelection,
+  makeupServicesSelection,
+  nailsServicesSelection,
 } from '../../../res/constants/pickerItems';
 import { setup } from '../../../store/profile/profile.actions';
+import { AsyncDispatch, StoreState } from '../../../store/store.types';
+import { color } from '../../../theme';
+import StepTitle from './StepTitle';
 
 interface OwnProps {}
 

@@ -1,6 +1,9 @@
 import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
-import { HEADER_SCREEN_HEIGHT, STATUS_BAR_HEIGHT } from '../../res/constants';
-import { typography, color } from '../../theme';
+import {
+  HEADER_SCREEN_HEIGHT,
+  STATUS_BAR_HEIGHT,
+} from '../../../res/constants';
+import { typography, color } from '../../../theme';
 
 interface Style {
   container: ViewStyle;

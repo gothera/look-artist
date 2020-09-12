@@ -1,23 +1,22 @@
+import CheckBox from '@react-native-community/checkbox';
 import React, { useState } from 'react';
 import {
-  StyleSheet,
-  View,
-  ViewStyle,
   ScrollView,
+  StyleSheet,
   Text,
   TextStyle,
-  TouchableHighlight,
   TouchableOpacity,
+  View,
+  ViewStyle,
 } from 'react-native';
-import CheckBox from '@react-native-community/checkbox';
-import StepTitle from './StepTitle';
-import { color, typography } from '../../../theme';
-import { Categories } from '../../../res/strings/categories';
-import { Category } from '../../../types/enums';
-import PrimaryButton from '../../../components/button/PrimaryButton';
-import { AsyncDispatch } from '../../../store/store.types';
-import { setCategory } from '../../../store/profile/profile.actions';
 import { connect, ConnectedProps } from 'react-redux';
+import PrimaryButton from '../../../components/button/PrimaryButton';
+import { Categories } from '../../../res/strings/categories';
+import { setCategory } from '../../../store/profile/profile.actions';
+import { AsyncDispatch } from '../../../store/store.types';
+import { color, typography } from '../../../theme';
+import { Category } from '../../../types/enums';
+import StepTitle from './StepTitle';
 
 interface OwnProps {
   slideToNext: () => void;

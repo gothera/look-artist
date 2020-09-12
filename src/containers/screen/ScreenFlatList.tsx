@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { Animated, FlatList, FlatListProps } from 'react-native';
+import AnimatedScreenHeader from '../../components/header/animated-screen-header/AnimatedScreenHeader';
 import { HEADER_SCREEN_HEIGHT } from '../../res/constants';
-import AnimatedScreenHeader from '../header/AnimatedScreenHeader';
 
 interface OwnPros {
   headerTitle: string;

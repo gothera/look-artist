@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, ViewStyle, ScrollView } from 'react-native';
-import StepTitle from './StepTitle';
-import { color } from '../../../theme';
+import { ScrollView, StyleSheet, View, ViewStyle } from 'react-native';
+import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
+import { connect, ConnectedProps } from 'react-redux';
 import PrimaryButton from '../../../components/button/PrimaryButton';
 import TextInputWithLabel from '../../../components/input/TextInputWithLabel';
-import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
-import { AsyncDispatch } from '../../../store/store.types';
 import { setPhoneNumber } from '../../../store/profile/profile.actions';
-import { connect, ConnectedProps } from 'react-redux';
+import { AsyncDispatch } from '../../../store/store.types';
+import { color } from '../../../theme';
+import StepTitle from './StepTitle';
 
 interface OwnProps {
   slideToNext: () => void;

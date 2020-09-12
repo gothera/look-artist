@@ -24,6 +24,7 @@
     "axios": "0.19.1",
     "react": "16.13.1",
     "react-native": "0.63.2",
+    "react-native-calendars": "1.403.0",
     "react-native-fast-image": "8.3.2",
     "react-native-gesture-handler": "1.6.0",
     "react-native-image-crop-picker": "0.32.2",
@@ -42,7 +43,8 @@
     "redux-persist": "6.0.0",
     "redux-persist-filesystem-storage": "2.1.0",
     "redux-persist-transform-filter": "0.0.20",
-    "redux-thunk": "2.3.0"
+    "redux-thunk": "2.3.0",
+    "rn-fetch-blob": "0.12.0"
   },
   "devDependencies": {
     "@babel/cli": "7.10.4",

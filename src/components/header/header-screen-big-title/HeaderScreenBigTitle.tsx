@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, Animated } from 'react-native';
-import styles from './headerScreenBigTitleStyle';
-import { HEADER_SCREEN_HEIGHT } from '../../res/constants';
+import styles from './styles';
+import { HEADER_SCREEN_HEIGHT } from '../../../res/constants';
 
 interface OwnProps {
   title: string;

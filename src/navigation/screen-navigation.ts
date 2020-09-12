@@ -1,10 +1,5 @@
-import {
-  AnimationOptions,
-  Navigation,
-  OptionsModalPresentationStyle,
-} from 'react-native-navigation';
+import { Navigation } from 'react-native-navigation';
 import { color } from '../theme';
-import { LOADING_MODAL } from './ModalsConstants';
 import {
   ADD_POST_SCREEN,
   AUTH_SCREEN,
@@ -12,22 +7,8 @@ import {
   NOTIFICATIONS_SCREEN,
   PROFILE_SCREEN,
   SETUP_SCREEN,
-} from './ScreensConstants';
-
-interface Config {
-  props?: any;
-  animations?: AnimationOptions;
-  options?: any;
-}
-
-function getConfig(config?: Config): Config {
-  return {
-    props: {},
-    animations: {},
-    options: {},
-    ...(config || {}),
-  };
-}
+} from './screen-constants';
+import { Config, getConfig } from './utils-navigation';
 
 export const setLoggedInRoot = () => {
   Navigation.setRoot({
@@ -35,6 +16,11 @@ export const setLoggedInRoot = () => {
       bottomTabs: {
         options: {
           bottomTabs: {
+            animate: false,
+            titleDisplayMode: 'alwaysHide',
+            elevation: 30,
+            backgroundColor: color.background,
+            drawBehind: true,
             tabsAttachMode: 'onSwitchToTab',
           },
         },
@@ -133,41 +119,7 @@ export const setLoggedInRoot = () => {
   });
 };
 
-export async function pushHomeScreen(pushConfig?: Config) {
-  const config = getConfig(pushConfig);
-
-  Navigation.setRoot({
-    root: {
-      stack: {
-        children: [
-          {
-            component: {
-              id: HOME_SCREEN,
-              name: HOME_SCREEN,
-              passProps: { ...config.props },
-            },
-          },
-        ],
-        options: {
-          topBar: {
-            visible: false,
-            drawBehind: true,
-          },
-          statusBar: {
-            style: 'light',
-            backgroundColor: 'white',
-            drawBehind: true,
-          },
-          animations: {
-            ...config.animations,
-          },
-        },
-      },
-    },
-  });
-}
-
-export async function pushAuthScreen(pushConfig?: Config) {
+export const pushAuthScreen = (pushConfig?: Config) => {
   const config = getConfig(pushConfig);
 
   Navigation.setRoot({
@@ -199,9 +151,9 @@ export async function pushAuthScreen(pushConfig?: Config) {
       },
     },
   });
-}
+};
 
-export async function pushSetupScreen(pushConfig?: Config) {
+export const pushSetupScreen = (pushConfig?: Config) => {
   const config = getConfig(pushConfig);
 
   Navigation.setRoot({
@@ -233,22 +185,4 @@ export async function pushSetupScreen(pushConfig?: Config) {
       },
     },
   });
-}
-
-export function showLoadingModal(pushConfig?: Config) {
-  const config = getConfig(pushConfig);
-  Navigation.showOverlay({
-    component: {
-      name: LOADING_MODAL,
-      passProps: { ...config.props },
-      options: {
-        modalPresentationStyle:
-          OptionsModalPresentationStyle.overCurrentContext,
-        layout: {
-          backgroundColor: 'transparent',
-          componentBackgroundColor: 'transparent',
-        },
-      },
-    },
-  });
-}
+};

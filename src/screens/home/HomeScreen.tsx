@@ -2,14 +2,12 @@ import React from 'react';
 import {
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
   ViewStyle,
-  TouchableOpacity,
 } from 'react-native';
 import { resetGenericPassword } from 'react-native-keychain';
-import FeedHeader from './components/FeedHeader';
 import { STATUS_BAR_HEIGHT } from '../../res/constants';
-
 interface OwnProps {
   componentId: string;
 }
@@ -22,10 +20,11 @@ const HomeScreen: React.FC<OwnProps> = ({ componentId }) => {
   return (
     <View style={styles.container}>
       <View style={styles.statusBar} />
-      <FeedHeader onProfilePress={() => {}} />
+      {/* <FeedHeader onProfilePress={() => {}} /> */}
       <TouchableOpacity onPress={onResetKeychain}>
         <Text>reset keychain click</Text>
       </TouchableOpacity>
+      <Text>alo</Text>
     </View>
   );
 };
@@ -39,6 +38,7 @@ interface Style {
 const styles = StyleSheet.create<Style>({
   container: {
     flex: 1,
+    // backgroundColor: 'blue',
   },
   sideMenuContainer: {
     flex: 1,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Animated } from 'react-native';
-import HeaderScreenBigTitle from '../../components/header/HeaderScreenBigTitle';
-import HeaderScreenCollapsed from '../../components/header/HeaderScreenCollapsed';
+import HeaderScreenBigTitle from '../header-screen-big-title/HeaderScreenBigTitle';
+import HeaderScreenCollapsed from '../header-screen-collapsed/HeaderScreenCollapsed';
 
 interface OwnProps {
   title: string;
