@@ -1,15 +1,15 @@
-import React, { useEffect, useRef } from 'react';
-import { Text, View, FlatListProps } from 'react-native';
-import { color } from '../../theme';
-import ScreenFlatList from '../../containers/screen/ScreenFlatList';
-import { StoreState, AsyncDispatch } from '../../store/store.types';
+import React, { useEffect } from 'react';
+import { FlatListProps, Text } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { connect, ConnectedProps } from 'react-redux';
+import ScreenFlatList from '../../containers/screen/ScreenFlatList';
 import { fetchNotifications } from '../../store/notification/notification.actions';
-import FastImage, { ImageStyle } from 'react-native-fast-image';
+import { AsyncDispatch, StoreState } from '../../store/store.types';
+import NotificationRow from './components/notification-row/NotificationRow';
 
 const mapStateToProps = (state: StoreState) => {
   return {
-    notifications: state.notification.notifications,
+    notificationsById: state.notification.notificationsById,
   };
 };
 
@@ -19,67 +19,43 @@ const mapDispatchToProps = (dispatch: AsyncDispatch) => ({
 });
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
+
 type PropsFromRedux = ConnectedProps<typeof connector>;
+
 const NotificationsScreen: React.FC<PropsFromRedux> = ({
   fetchMoreNotifcations,
-  notifications,
+  notificationsById,
 }) => {
   useEffect(() => {
     fetchMoreNotifcations(true);
   }, []);
-  const renderItem = ({ item, index }: { item: number; index: number }) => {
-    return (
-      <View
-        key={index}
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-        }}
-      >
-        <FastImage
-          resizeMode="contain"
-          style={{ width: 50, height: 50, borderRadius: 50 }}
-          source={{ uri: notifications[index].extra.avatar }}
-        />
-        <View
-          style={{
-            paddingVertical: 20,
-            marginVertical: 10,
-            marginHorizontal: 20,
-            display: 'flex',
-          }}
-        >
-          <Text
-            style={{
-              fontSize: 15,
-              color: color.textPrimary,
-            }}
-          >
-            {`${notifications[index].extra.name} reviewed you`}
-          </Text>
-          <Text
-            style={{
-              fontSize: 10,
-              color: color.muted,
-            }}
-          >{`${notifications[index].extra.rating} Stars`}</Text>
-        </View>
-      </View>
-    );
+  const renderItem = ({ item }: { item: number; index: number }) => {
+    return <NotificationRow id={item} />;
   };
 
   const flatListProps: FlatListProps<any> = {
-    data: notifications.map((el) => 1),
+    data: notificationsById,
+    keyExtractor: (item) => `Notification$${item}`,
     renderItem: renderItem,
     onEndReached: () => {
       console.log('bam end');
-      fetchMoreNotifcations(notifications.length === 0);
+      fetchMoreNotifcations(notificationsById.length === 0);
     },
     onEndReachedThreshold: 0.3,
     contentContainerStyle: { paddingHorizontal: 16 },
   };
 
-  return <ScreenFlatList headerTitle="Sabin" flatListProps={flatListProps} />;
+  return (
+    <>
+      <TouchableOpacity
+        style={{ marginTop: 100, width: '100%', height: 100 }}
+        onPress={() => fetchMoreNotifcations(true)}
+      >
+        <Text>Buna ziua</Text>
+      </TouchableOpacity>
+      <ScreenFlatList headerTitle="Sabin" flatListProps={flatListProps} />
+    </>
+  );
 };
 
 export default connector(NotificationsScreen);

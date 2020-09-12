@@ -1,7 +1,7 @@
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
-import { ProfileAction } from './profile/profile.types';
-import { OfferedService, Notification } from '../types/globalTypes';
+import { Notification, OfferedService } from '../types/globalTypes';
 import { NotificationAction } from './notification/notification.types';
+import { ProfileAction } from './profile/profile.types';
 export type Primitive = undefined | null | boolean | string | number | Function;
 
 export interface ProfileState {
@@ -19,7 +19,8 @@ export interface ProfileState {
 }
 
 export interface NotificationState {
-  notifications: Notification[];
+  local: Record<number, Notification>;
+  notificationsById: number[];
   nextPage: number;
   fetching: boolean;
   error?: string;

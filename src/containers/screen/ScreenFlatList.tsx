@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
-import { FlatListProps, FlatList, Animated } from 'react-native';
-import AnimatedScreenHeader from '../header/AnimatedScreenHeader';
+import { Animated, FlatList, FlatListProps } from 'react-native';
 import { HEADER_SCREEN_HEIGHT } from '../../res/constants';
+import AnimatedScreenHeader from '../header/AnimatedScreenHeader';
 
 interface OwnPros {
   headerTitle: string;
@@ -28,6 +28,7 @@ const ScreenFlatList: React.FC<OwnPros> = ({ headerTitle, flatListProps }) => {
       <Animated.FlatList
         data={flatListProps.data}
         renderItem={flatListProps.renderItem}
+        keyExtractor={flatListProps.keyExtractor}
         contentContainerStyle={[
           flatListProps.contentContainerStyle,
           { paddingTop: HEADER_SCREEN_HEIGHT },

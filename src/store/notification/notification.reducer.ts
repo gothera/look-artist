@@ -1,7 +1,7 @@
+import { addArrayToDictByProp } from '../../utils/global';
 import initialState from '../initialState';
-import { TAction, NotificationState } from '../store.types';
+import { NotificationState, TAction } from '../store.types';
 import * as profileConstants from './notification.constants';
-import { act } from 'react-test-renderer';
 
 function getInitialState() {
   return Object.assign({}, initialState.notification);
@@ -25,7 +25,9 @@ function notificationReducer(
     case profileConstants.FETCH_NOTIFICATIONS_REQUEST: {
       return {
         ...state,
-        notifications: action.payload.isFirst ? [] : state.notifications,
+        notificationsById: action.payload.isFirst
+          ? []
+          : state.notificationsById,
         error: undefined,
         nextPage: action.payload.isFirst ? 0 : state.nextPage,
         fetching: true,
@@ -34,10 +36,17 @@ function notificationReducer(
     case profileConstants.FETCH_NOTIFICATIONS_SUCCESS: {
       return {
         ...state,
-        notifications: [
-          ...state.notifications,
-          ...action.payload.notifications,
+        notificationsById: [
+          ...new Set([
+            ...state.notificationsById,
+            ...action.payload.notifications.map(
+              (notification) => notification.id,
+            ),
+          ]),
         ],
+        local: {
+          ...addArrayToDictByProp(state.local, action.payload.notifications),
+        },
         nextPage:
           state.nextPage + (action.payload.notifications.length !== 0 ? 1 : 0),
         fetching: false,

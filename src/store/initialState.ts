@@ -10,7 +10,8 @@ const initialState: StoreState = {
     local: {},
   },
   notification: {
-    notifications: [],
+    notificationsById: [],
+    local: {},
     fetching: false,
     nextPage: 0,
   },
