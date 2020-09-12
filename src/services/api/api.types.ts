@@ -1,3 +1,5 @@
+import { Notification } from '../../types/globalTypes';
+
 export interface UserResponse {
   id: number;
   firstName: string;
@@ -32,4 +34,9 @@ export interface SetupBody {
   description: string;
   price: number;
   duration: number;
+}
+
+export interface FetchNotificationsResponse {
+  totalPages: number;
+  content: Notification[];
 }

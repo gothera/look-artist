@@ -19,6 +19,19 @@ export interface OfferedService {
   id: number;
 }
 
+export enum NotificationType {
+  NewAppointment,
+  CancelledAppointment,
+  Review,
+}
+
+export interface Notification {
+  id: number;
+  extra: any;
+  type: NotificationType;
+  date: string;
+}
+
 export interface ArtistResponseApi {
   id: number;
   firstName: string;
@@ -29,4 +42,17 @@ export interface ArtistResponseApi {
   bio: string;
   offeredServices: OfferedService[];
   profilePicture: string;
+}
+
+declare global {
+  interface FormDataValue {
+    uri: string;
+    name: string;
+    type: string;
+  }
+
+  interface FormData {
+    append(name: string, value: FormDataValue, fileName?: string): void;
+    set(name: string, value: FormDataValue, fileName?: string): void;
+  }
 }

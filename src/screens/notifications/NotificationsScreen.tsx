@@ -1,30 +1,61 @@
-import React from 'react';
-import { Text, View, FlatListProps } from 'react-native';
-import { color } from '../../theme';
+import React, { useEffect } from 'react';
+import { FlatListProps, Text } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { connect, ConnectedProps } from 'react-redux';
 import ScreenFlatList from '../../containers/screen/ScreenFlatList';
+import { fetchNotifications } from '../../store/notification/notification.actions';
+import { AsyncDispatch, StoreState } from '../../store/store.types';
+import NotificationRow from './components/notification-row/NotificationRow';
 
-const NotificationsScreen = () => {
-  const renderItem = ({ item, index }: { item: number; index: number }) => {
-    return (
-      <View
-        style={{
-          paddingVertical: 20,
-          backgroundColor: color.unchosen,
-          marginVertical: 10,
-          opacity: 0.5,
-        }}
-      >
-        <Text>{item}</Text>
-      </View>
-    );
+const mapStateToProps = (state: StoreState) => {
+  return {
+    notificationsById: state.notification.notificationsById,
+  };
+};
+
+const mapDispatchToProps = (dispatch: AsyncDispatch) => ({
+  fetchMoreNotifcations: (isFirst: boolean) =>
+    dispatch(fetchNotifications(isFirst)),
+});
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+const NotificationsScreen: React.FC<PropsFromRedux> = ({
+  fetchMoreNotifcations,
+  notificationsById,
+}) => {
+  useEffect(() => {
+    fetchMoreNotifcations(true);
+  }, []);
+  const renderItem = ({ item }: { item: number; index: number }) => {
+    return <NotificationRow id={item} />;
   };
 
   const flatListProps: FlatListProps<any> = {
-    data: [100, 1, 2, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10, 11, 12, 13],
+    data: notificationsById,
+    keyExtractor: (item) => `Notification$${item}`,
     renderItem: renderItem,
+    onEndReached: () => {
+      console.log('bam end');
+      fetchMoreNotifcations(notificationsById.length === 0);
+    },
+    onEndReachedThreshold: 0.3,
+    contentContainerStyle: { paddingHorizontal: 16 },
   };
 
-  return <ScreenFlatList headerTitle="Sabin" flatListProps={flatListProps} />;
+  return (
+    <>
+      <TouchableOpacity
+        style={{ marginTop: 100, width: '100%', height: 100 }}
+        onPress={() => fetchMoreNotifcations(true)}
+      >
+        <Text>Buna ziua</Text>
+      </TouchableOpacity>
+      <ScreenFlatList headerTitle="Sabin" flatListProps={flatListProps} />
+    </>
+  );
 };
 
-export default NotificationsScreen;
+export default connector(NotificationsScreen);

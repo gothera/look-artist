@@ -1,11 +1,11 @@
 import { Navigation } from 'react-native-navigation';
 import { color } from '../theme';
 import {
-  HOME_SCREEN,
   ADD_POST_SCREEN,
+  AUTH_SCREEN,
+  HOME_SCREEN,
   NOTIFICATIONS_SCREEN,
   PROFILE_SCREEN,
-  AUTH_SCREEN,
   SETUP_SCREEN,
 } from './screen-constants';
 import { Config, getConfig } from './utils-navigation';
@@ -21,6 +21,7 @@ export const setLoggedInRoot = () => {
             elevation: 30,
             backgroundColor: color.background,
             drawBehind: true,
+            tabsAttachMode: 'onSwitchToTab',
           },
         },
         children: [

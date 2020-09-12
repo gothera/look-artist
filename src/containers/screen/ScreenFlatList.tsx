@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { FlatListProps, FlatList, Animated } from 'react-native';
+import { Animated, FlatList, FlatListProps } from 'react-native';
 import AnimatedScreenHeader from '../../components/header/animated-screen-header/AnimatedScreenHeader';
 import { HEADER_SCREEN_HEIGHT } from '../../res/constants';
 
@@ -28,8 +28,14 @@ const ScreenFlatList: React.FC<OwnPros> = ({ headerTitle, flatListProps }) => {
       <Animated.FlatList
         data={flatListProps.data}
         renderItem={flatListProps.renderItem}
-        contentContainerStyle={{ paddingTop: HEADER_SCREEN_HEIGHT }}
+        keyExtractor={flatListProps.keyExtractor}
+        contentContainerStyle={[
+          flatListProps.contentContainerStyle,
+          { paddingTop: HEADER_SCREEN_HEIGHT },
+        ]}
         onScroll={onScroll}
+        onEndReachedThreshold={flatListProps.onEndReachedThreshold}
+        onEndReached={flatListProps.onEndReached}
         ListHeaderComponent={flatListProps.ListHeaderComponent}
       />
     </>

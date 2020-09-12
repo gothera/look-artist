@@ -2,8 +2,8 @@ import {
   Navigation,
   OptionsModalPresentationStyle,
 } from 'react-native-navigation';
-import { Config, getConfig } from './utils-navigation';
 import { LOADING_MODAL } from './modal-constants';
+import { Config, getConfig } from './utils-navigation';
 
 export const showLoadingModal = (pushConfig?: Config) => {
   const config = getConfig(pushConfig);

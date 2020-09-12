@@ -16,7 +16,7 @@ import { StoreState, TAction, AsyncDispatch } from './store.types';
 import initialState from './initialState';
 import { PersistPartial } from 'redux-persist/es/persistReducer';
 
-const VERSION = 12;
+const VERSION = 13;
 
 const migrations: any = {
   [VERSION]: (state: PersistedState & StoreState) => {
