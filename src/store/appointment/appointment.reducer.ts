@@ -1,15 +1,15 @@
 import initialState from '../initialState';
-import { NotificationState, TAction } from '../store.types';
+import { AppointmentState, TAction } from '../store.types';
 import * as appointmentConstants from './appointment.constants';
 
 function getInitialState() {
-  return Object.assign({}, initialState.notification);
+  return Object.assign({}, initialState.appointment);
 }
 
 function notificationReducer(
   state = getInitialState(),
   action: TAction,
-): NotificationState {
+): AppointmentState {
   switch (action.type) {
     case appointmentConstants.INVALIDATE_STORE: {
       return getInitialState();
