@@ -97,6 +97,7 @@ const ServiceStep: React.FC<OwnProps & PropsFromRedux> = ({
         <PickerInput
           label="Service Name"
           containerStyle={styles.input}
+          value={serviceName}
           placeholder="Select a service"
           items={getPickerServices()}
           setSelected={setServiceName}
@@ -108,7 +109,8 @@ const ServiceStep: React.FC<OwnProps & PropsFromRedux> = ({
           placeholder="Enter a description"
           multiline
           numOfLines={3}
-          onValueChanged={setDescription}
+          setText={setDescription}
+          text={description}
         />
 
         <TextInputWithLabel
@@ -116,7 +118,8 @@ const ServiceStep: React.FC<OwnProps & PropsFromRedux> = ({
           containerStyle={styles.input}
           placeholder="Enter a price"
           keyboardType="number-pad"
-          onValueChanged={setPriceStr}
+          setText={setPriceStr}
+          text={priceStr}
         />
 
         <TextInputWithLabel
@@ -124,7 +127,8 @@ const ServiceStep: React.FC<OwnProps & PropsFromRedux> = ({
           containerStyle={styles.input}
           placeholder="Enter duration"
           keyboardType="number-pad"
-          onValueChanged={setDurationStr}
+          text={durationStr}
+          setText={setDurationStr}
         />
       </KeyboardAwareScrollView>
 

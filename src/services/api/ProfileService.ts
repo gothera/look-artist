@@ -1,6 +1,6 @@
+import { ArtistResponseApi } from '../../types/globalTypes';
 import { SetupBody } from './api.types';
 import { postRequest } from './apiRequest';
-import { ArtistResponseApi } from '../../types/globalTypes';
 
 export const setup = (setupBody: SetupBody): Promise<ArtistResponseApi> => {
   const url = `artist/setup/`;

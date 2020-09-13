@@ -1,10 +1,13 @@
-import { StyleSheet, ViewStyle } from 'react-native';
+import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import { ImageStyle } from 'react-native-fast-image';
+import { color, typography } from '../../../../theme';
 
 interface Style {
   container: ViewStyle;
   avatarStyle: ImageStyle;
   textContainer: ViewStyle;
+  reviewTitle: TextStyle;
+  reviewDescription: TextStyle;
 }
 
 const styles = StyleSheet.create<Style>({
@@ -19,6 +22,8 @@ const styles = StyleSheet.create<Style>({
     marginHorizontal: 20,
     display: 'flex',
   },
+  reviewTitle: { ...typography.smallTitle, color: color.textPrimary },
+  reviewDescription: { ...typography.mutedDescription, color: color.muted },
 });
 
 export default styles;

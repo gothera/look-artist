@@ -14,6 +14,7 @@ import {
   SetupScreen,
 } from '../screens';
 import { persistor, store } from '../store';
+import { loginKeychain } from '../store/profile/profile.actions';
 import { LOADING_MODAL } from './modal-constants';
 import {
   ADD_POST_SCREEN,

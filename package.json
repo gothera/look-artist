@@ -13,6 +13,7 @@
     "lint": "eslint --ignore-path .gitignore --ext .js,.ts,.tsx .",
     "prettier": "prettier --ignore-path .gitignore \"**/*.+(js|json|ts|tsx)\"",
     "format": "npm run prettier -- --write",
+    "postinstall": "patch-package",
     "check-format": "npm run prettier -- --list-different",
     "check-types": "tsc",
     "check-build": "react-native bundle --entry-file index.js --bundle-output /dev/null",
@@ -21,7 +22,9 @@
   "dependencies": {
     "@react-native-community/checkbox": "0.4.2",
     "axios": "0.19.1",
-    "lodash": "^4.17.20",
+    "formik": "^2.1.5",
+    "patch-package": "^6.2.2",
+    "postinstall-postinstall": "^2.1.0",
     "react": "16.13.1",
     "react-native": "0.63.2",
     "react-native-calendars": "1.403.0",

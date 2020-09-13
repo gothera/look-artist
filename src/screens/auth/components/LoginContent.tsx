@@ -1,23 +1,22 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Text,
-  View,
-  ViewStyle,
   TextStyle,
   TouchableOpacity,
+  View,
+  ViewStyle,
 } from 'react-native';
-import { LogoOnHeader, FacebookBtnIcon, GoogleBtnIcon } from '../../../res/svg';
-import { typography, color } from '../../../theme';
-import TextInputWithLabel from '../../../components/input/TextInputWithLabel';
-import PasswordInputWithLabel from '../../../components/input/PasswordInputWithLabel';
-import PrimaryButton from '../../../components/button/PrimaryButton';
-import OrLineDivider from '../../../components/ui/OrLineDivider';
-import ButtonWithIcon from '../../../components/button/ButtonWithIcon';
-import { AsyncDispatch } from '../../../store/store.types';
-import { login } from '../../../store/profile/profile.actions';
 import { connect, ConnectedProps } from 'react-redux';
-import { TextInputRef } from '../../../types/refTypes';
+import ButtonWithIcon from '../../../components/button/ButtonWithIcon';
+import PrimaryButton from '../../../components/button/PrimaryButton';
+import PasswordInputWithLabel from '../../../components/input/PasswordInputWithLabel';
+import TextInputWithLabel from '../../../components/input/TextInputWithLabel';
+import OrLineDivider from '../../../components/ui/OrLineDivider';
+import { FacebookBtnIcon, GoogleBtnIcon, LogoOnHeader } from '../../../res/svg';
+import { login } from '../../../store/profile/profile.actions';
+import { AsyncDispatch } from '../../../store/store.types';
+import { color, typography } from '../../../theme';
 
 interface OwnProps {
   componentId: string;
@@ -37,35 +36,13 @@ const LoginContent: React.FC<OwnProps & PropsFromRedux> = ({
   loginWithEmailAndPassword,
   onChangeAuthType,
 }) => {
-  const emailRef = useRef<TextInputRef>(null);
-  const passwordRef = useRef<TextInputRef>(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const [isEmailEnteredEmpty, setIsEmailEnteredEmpty] = useState(true);
-  const [isPasswordEnteredEmpty, setIsPasswordEnteredEmpty] = useState(true);
-
-  const isContinueBtnDisabled = isEmailEnteredEmpty || isPasswordEnteredEmpty;
-
-  const onEmailChangeState = (newState: boolean) => {
-    // update state only if needed
-    if (isEmailEnteredEmpty && !newState) {
-      setIsEmailEnteredEmpty(false);
-    } else if (!isEmailEnteredEmpty && newState) {
-      setIsEmailEnteredEmpty(true);
-    }
-  };
-
-  const onPasswordChangeState = (newState: boolean) => {
-    if (isPasswordEnteredEmpty && !newState) {
-      setIsPasswordEnteredEmpty(false);
-    } else if (!isPasswordEnteredEmpty && newState) {
-      setIsPasswordEnteredEmpty(true);
-    }
-  };
+  const isContinueBtnDisabled = email === '' || password === '';
 
   const onContinuePress = () => {
-    const emailEntered = emailRef.current?.getValue() || '';
-    const passwordEntered = passwordRef.current?.getValue() || '';
-    loginWithEmailAndPassword(emailEntered, passwordEntered);
+    loginWithEmailAndPassword(email, password);
   };
 
   return (
@@ -76,17 +53,17 @@ const LoginContent: React.FC<OwnProps & PropsFromRedux> = ({
         Login back to handle your appointments
       </Text>
       <TextInputWithLabel
+        setText={setEmail}
+        text={email}
         containerStyle={styles.emailTextInput}
         label="Email address"
         placeholder={'Enter email address'}
-        passedRef={emailRef}
-        onUpdateParentState={onEmailChangeState}
       />
       <PasswordInputWithLabel
         containerStyle={styles.passwordInput}
         placeholder={'Enter password'}
-        passedRef={passwordRef}
-        onUpdateParentState={onPasswordChangeState}
+        setText={setPassword}
+        text={password}
       />
       <PrimaryButton
         title="Continue"
@@ -98,6 +75,7 @@ const LoginContent: React.FC<OwnProps & PropsFromRedux> = ({
       <ButtonWithIcon
         title="Continue with Facebook"
         onPress={() => {}}
+        containerStyle={styles.socialBtn}
         icon={<FacebookBtnIcon />}
       />
       <ButtonWithIcon
@@ -132,9 +110,7 @@ interface Style {
 }
 const styles = StyleSheet.create<Style>({
   container: {
-    position: 'absolute',
-    zIndex: 1,
-    top: 50,
+    flex: 1,
   },
   header: {
     ...typography.descriptiveHeader,
@@ -157,15 +133,18 @@ const styles = StyleSheet.create<Style>({
     marginTop: 8,
   },
   emailTextInput: {
-    marginTop: 60,
+    marginTop: 40,
+    minWidth: '100%',
   },
   passwordInput: {
     marginTop: 30,
+    minWidth: '100%',
   },
   orDividerContainer: {
-    marginVertical: 50,
+    marginVertical: 30,
   },
   socialBtn: {
+    minWidth: '100%',
     marginTop: 20,
   },
 });

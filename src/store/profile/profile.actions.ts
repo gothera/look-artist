@@ -1,16 +1,17 @@
-import * as profileTypes from './profile.types';
-import * as profileConstants from './profile.constants';
-import { ThunkResult } from '../store.types';
-import * as AuthService from '../../services/api/AuthService';
-import * as ProfileService from '../../services/api/ProfileService';
-import {
-  LoginResponse,
-  SignupResponse,
-  SetupBody,
-} from '../../services/api/api.types';
 import { setGenericPassword } from 'react-native-keychain';
 import { pushSetupScreen, setLoggedInRoot } from '../../navigation';
+import { pushHomeScreen } from '../../navigation/Navigation';
+import {
+  LoginResponse,
+  SetupBody,
+  SignupResponse,
+} from '../../services/api/api.types';
+import * as AuthService from '../../services/api/AuthService';
+import * as ProfileService from '../../services/api/ProfileService';
 import { ArtistResponseApi } from '../../types/globalTypes';
+import { ThunkResult } from '../store.types';
+import * as profileConstants from './profile.constants';
+import * as profileTypes from './profile.types';
 
 /**
  * LOGIN
@@ -204,6 +205,8 @@ export const setup = (
     return ProfileService.setup(setupBody)
       .then((response: ArtistResponseApi) => {
         setupSuccess(response);
+        pushHomeScreen();
+        setLoggedInRoot();
       })
       .catch((error) => {
         dispatch(setupFailure);
