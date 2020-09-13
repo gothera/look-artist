@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, View, ViewStyle, Text } from 'react-native';
-import { resetGenericPassword } from 'react-native-keychain';
 import { STATUS_BAR_HEIGHT } from '../../res/constants';
 import CalendarHeader from './components/calendar-header/CalendarHeader';
 
@@ -9,19 +8,21 @@ interface OwnProps {
 }
 
 const HomeScreen: React.FC<OwnProps> = ({ componentId }) => {
-  const onResetKeychain = () => {
-    resetGenericPassword();
-  };
-
   return (
     <View style={styles.container}>
       <View style={styles.statusBar} />
-      {/* <FeedHeader onProfilePress={() => {}} /> */}
-      {/* <TouchableOpacity onPress={onResetKeychain}>
-        <Text>reset keychain click</Text>
-      </TouchableOpacity>*/}
       <CalendarHeader />
-      <Text>SALL</Text>
+      {/* <View
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flex: 1,
+          backgroundColor: 'red',
+        }}
+      >
+        <Text style={{ fontSize: 30 }}>Anything you want</Text>
+      </View> */}
     </View>
   );
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import { View, Text } from 'react-native';
 import { ExpandableCalendar, CalendarProvider } from 'react-native-calendars';
 import { color } from '../../../../theme';
 
@@ -19,7 +20,6 @@ const CalendarHeader = () => {
       disabledOpacity={0.6}
     >
       <ExpandableCalendar
-        // horizontal={false}
         hideArrows
         // hideDayNames
         // disablePan
@@ -27,32 +27,49 @@ const CalendarHeader = () => {
         initialPosition={ExpandableCalendar.positions.CLOSED}
         // calendarStyle={{ backgroundColor: 'red' }}
         // headerStyle={{ backgroundColor: 'red' }} // for horizontal only
-        // disableWeekScroll
-        // theme={this.getTheme()}
+        // customHeader={() => (
+        //   <View style={{ width: '100%', height: 100, backgroundColor: 'blue' }}>
+        //     <Text>render header</Text>
+        //   </View>
+        // )}
         theme={{
           calendarBackground: color.background,
-          textSectionTitleColor: '#b6c1cd',
+          // textSectionTitleColor: '#b6c1cd',
           textSectionTitleDisabledColor: '#d9e1e8',
           selectedDayBackgroundColor: color.brand,
-          selectedDayTextColor: '#ffffff',
-          todayTextColor: '#00adf5',
-          dayTextColor: '#2d4150',
-          dotColor: '#00adf5',
-          selectedDotColor: '#ffffff',
+          selectedDayTextColor: color.background,
+          todayTextColor: color.brand,
+          dayTextColor: color.textPrimary,
           arrowColor: 'orange',
-          monthTextColor: 'red',
+          'stylesheet.calendar.header': {
+            header: {
+              // backgroundColor: 'blue',
+            },
+          },
         }}
-        disableAllTouchEventsForDisabledDays
+        // disableAllTouchEventsForDisabledDays
         firstDay={1}
         markedDates={{
           '2020-09-12': { marked: true, dotColor: 'black' },
+          '2020-09-13': { marked: true, dotColor: 'red' },
         }}
         allowShadow={false}
         style={{ marginTop: -10, marginLeft: 0 }}
-
-        // markedDates={getMarkedDates()} // {'2019-06-01': {marked: true}, '2019-06-02': {marked: true}, '2019-06-03': {marked: true}}
-        // leftArrowImageSource={require('../img/previous.png')}
-        // rightArrowImageSource={require('../img/next.png')}
+        // renderHeader={() => (
+        //   <View
+        //     style={{
+        //       flexDirection: 'row',
+        //       justifyContent: 'space-between',
+        //       paddingLeft: 10,
+        //       paddingRight: 10,
+        //       marginTop: 6,
+        //       alignItems: 'center',
+        //       backgroundColor: 'red',
+        //     }}
+        //   >
+        //     <Text>custom header</Text>
+        //   </View>
+        // )}
       />
     </CalendarProvider>
   );
