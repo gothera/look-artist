@@ -16,6 +16,7 @@ const initialState: StoreState = {
     nextPage: 0,
   },
   appointment: {
+    appointmentIDs: {},
     local: {},
     fetching: true,
   },

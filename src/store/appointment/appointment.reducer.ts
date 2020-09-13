@@ -1,3 +1,4 @@
+import { addArrayToDictByProp } from '../../utils/global';
 import initialState from '../initialState';
 import { AppointmentState, TAction } from '../store.types';
 import * as appointmentConstants from './appointment.constants';
@@ -30,10 +31,14 @@ function notificationReducer(
     case appointmentConstants.FETCH_APPOINTMENTS_OF_DAY_SUCCESS: {
       return {
         ...state,
-
+        appointmentIDs: {
+          ...state.appointmentIDs,
+          [action.payload.date]: action.payload.appointments.map(
+            (appointment) => appointment.id,
+          ),
+        },
         local: {
-          ...state.local,
-          [action.payload.date]: action.payload.appointments,
+          ...addArrayToDictByProp(state.local, action.payload.appointments),
         },
 
         fetching: false,
