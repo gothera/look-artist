@@ -33,7 +33,8 @@ export interface NotificationState {
 }
 
 export interface AppointmentState {
-  local: Record<string, Appointment[]>;
+  appointmentIDs: Record<string, string[]>;
+  local: Record<string, Appointment>;
   fetching: boolean;
   error?: string;
 }

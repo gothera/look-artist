@@ -5,12 +5,14 @@ import { connect, ConnectedProps } from 'react-redux';
 import ScreenFlatList from '../../containers/screen/ScreenFlatList';
 import { fetchAppointmentOfDay } from '../../store/appointment/appointment.actions';
 import { fetchNotifications } from '../../store/notification/notification.actions';
+import { fetchProfile } from '../../store/profile/profile.actions';
 import { AsyncDispatch, StoreState } from '../../store/store.types';
 import NotificationRow from './components/notification-row/NotificationRow';
 
 const mapStateToProps = (state: StoreState) => {
   return {
     notificationsById: state.notification.notificationsById,
+    artistId: state.profile.artistId,
   };
 };
 
@@ -19,6 +21,7 @@ const mapDispatchToProps = (dispatch: AsyncDispatch) => ({
     dispatch(fetchNotifications(isFirst)),
   fetchAppointmentsOfDay: (artistId: number, date: string) =>
     dispatch(fetchAppointmentOfDay(artistId, date)),
+  fetchProfile: () => dispatch(fetchProfile()),
 });
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -29,6 +32,8 @@ const NotificationsScreen: React.FC<PropsFromRedux> = ({
   fetchMoreNotifcations,
   notificationsById,
   fetchAppointmentsOfDay,
+  fetchProfile,
+  artistId,
 }) => {
   useEffect(() => {
     fetchMoreNotifcations(true);
@@ -53,9 +58,15 @@ const NotificationsScreen: React.FC<PropsFromRedux> = ({
     <>
       <TouchableOpacity
         style={{ marginTop: 100, width: '100%', height: 100 }}
-        onPress={() => fetchAppointmentsOfDay(33, '2020-09-14')}
+        onPress={() => fetchAppointmentsOfDay(artistId, '2020-09-14')}
       >
         <Text>Buna ziua</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={{ marginTop: 100, width: '100%', height: 100 }}
+        onPress={() => fetchProfile()}
+      >
+        <Text>fetch profile</Text>
       </TouchableOpacity>
       <ScreenFlatList
         headerTitle="Notifications"

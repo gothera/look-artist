@@ -1,6 +1,6 @@
 import { ArtistResponseApi } from '../../types/globalTypes';
 import { SetupBody } from './api.types';
-import { postRequest } from './apiRequest';
+import { getRequest, postRequest } from './apiRequest';
 
 export const setup = (setupBody: SetupBody): Promise<ArtistResponseApi> => {
   const url = `artist/setup/`;
@@ -17,4 +17,10 @@ export const changeProfilePicture = (formData: FormData): Promise<any> => {
   };
 
   return postRequest<string>(url, formData, config);
+};
+
+export const fetchProfile = (): Promise<ArtistResponseApi> => {
+  const url = `artist/current/`;
+
+  return getRequest<ArtistResponseApi>(url);
 };

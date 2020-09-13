@@ -18,3 +18,7 @@ export const SETUP_FAILURE = 'setup_failure';
 export const CHANGE_PROFILE_PICTURE_REQUEST = 'change_profile_picture_request';
 export const CHANGE_PROFILE_PICTURE_SUCCESS = 'change_profile_picture_success';
 export const CHANGE_PROFILE_PICTURE_FAILURE = 'change_profile_picture_failure';
+
+export const FETCH_PROFILE_REQUEST = 'fetch_profile_request';
+export const FETCH_PROFILE_SUCCESS = 'fetch_profile_success';
+export const FETCH_PROFILE_FAILURE = 'fetch_profile_failure';
