@@ -1,7 +1,7 @@
 import { addArrayToDictByProp } from '../../utils/global';
 import initialState from '../initialState';
 import { NotificationState, TAction } from '../store.types';
-import * as profileConstants from './notification.constants';
+import * as notificationConstants from './notification.constants';
 
 function getInitialState() {
   return Object.assign({}, initialState.notification);
@@ -12,17 +12,17 @@ function notificationReducer(
   action: TAction,
 ): NotificationState {
   switch (action.type) {
-    case profileConstants.INVALIDATE_STORE: {
+    case notificationConstants.INVALIDATE_STORE: {
       return getInitialState();
     }
-    case profileConstants.FETCH_NOTIFICATIONS_FAILURE: {
+    case notificationConstants.FETCH_NOTIFICATIONS_FAILURE: {
       return {
         ...state,
         error: action.payload.error,
         fetching: false,
       };
     }
-    case profileConstants.FETCH_NOTIFICATIONS_REQUEST: {
+    case notificationConstants.FETCH_NOTIFICATIONS_REQUEST: {
       return {
         ...state,
         notificationsById: action.payload.isFirst
@@ -33,7 +33,7 @@ function notificationReducer(
         fetching: true,
       };
     }
-    case profileConstants.FETCH_NOTIFICATIONS_SUCCESS: {
+    case notificationConstants.FETCH_NOTIFICATIONS_SUCCESS: {
       return {
         ...state,
         notificationsById: [

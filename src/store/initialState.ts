@@ -15,6 +15,10 @@ const initialState: StoreState = {
     fetching: false,
     nextPage: 0,
   },
+  appointment: {
+    local: {},
+    fetching: true,
+  },
 };
 
 export default initialState;

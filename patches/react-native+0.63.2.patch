@@ -1,0 +1,20 @@
+diff --git a/node_modules/react-native/Libraries/Image/RCTImageLoader.mm b/node_modules/react-native/Libraries/Image/RCTImageLoader.mm
+index 3571647..ad48dae 100644
+--- a/node_modules/react-native/Libraries/Image/RCTImageLoader.mm
++++ b/node_modules/react-native/Libraries/Image/RCTImageLoader.mm
+@@ -1040,6 +1040,7 @@ - (BOOL)canHandleRequest:(NSURLRequest *)request
+ 
+ - (id)sendRequest:(NSURLRequest *)request withDelegate:(id<RCTURLRequestDelegate>)delegate
+ {
++  @synchronized(self) {
+   __block RCTImageLoaderCancellationBlock requestToken;
+   requestToken = [self loadImageWithURLRequest:request callback:^(NSError *error, UIImage *image) {
+     if (error) {
+@@ -1069,6 +1070,7 @@ - (id)sendRequest:(NSURLRequest *)request withDelegate:(id<RCTURLRequestDelegate
+ 
+   return requestToken;
+ }
++}
+ 
+ - (void)cancelRequest:(id)requestToken
+ {

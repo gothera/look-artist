@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
+  ScrollView,
   StyleSheet,
+  TextStyle,
   View,
   ViewStyle,
-  TextStyle,
-  ScrollView,
 } from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
-import { font, typography, color } from '../../theme';
+import { connect, ConnectedProps } from 'react-redux';
 import { showLoadingModal } from '../../navigation';
 import { StoreState } from '../../store/store.types';
-import { connect, ConnectedProps } from 'react-redux';
+import { color, font, typography } from '../../theme';
 import LoginContent from './components/LoginContent';
 import SignInContent from './components/SignInContent';
 
@@ -96,7 +96,7 @@ const styles = StyleSheet.create<Style>({
   },
   scrollContentContainer: {
     paddingHorizontal: 20,
-    paddingTop: 50,
+    paddingTop: 30,
     paddingBottom: 40,
     alignItems: 'center',
   },

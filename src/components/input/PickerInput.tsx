@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import {
+  StyleProp,
   StyleSheet,
   Text,
+  TextStyle,
   View,
   ViewStyle,
-  TextStyle,
-  StyleProp,
 } from 'react-native';
-import { typography, color } from '../../theme';
-import LineDivider from '../ui/LineDivider';
-import { DownArrowIcon } from '../../res/svg';
 import RNPickerSelect, { PickerStyle } from 'react-native-picker-select';
+import { DownArrowIcon } from '../../res/svg';
+import { color, typography } from '../../theme';
 import { PickerItem } from '../../types/globalTypes';
+import LineDivider from '../ui/LineDivider';
 
 interface OwnProps {
   containerStyle?: StyleProp<ViewStyle>;
@@ -20,6 +20,7 @@ interface OwnProps {
   placeholder: string;
   items: PickerItem[];
   setSelected: (newValue: string) => void;
+  value: string | undefined;
 }
 
 const PickerInput: React.FC<OwnProps> = ({
@@ -28,6 +29,7 @@ const PickerInput: React.FC<OwnProps> = ({
   onValueChanged,
   placeholder,
   items,
+  value,
   setSelected,
 }) => {
   const [selection, setSelection] = useState<string | undefined>(undefined);
@@ -48,6 +50,7 @@ const PickerInput: React.FC<OwnProps> = ({
           items={items}
           Icon={renderDownArrowIcon}
           style={pickerStyle}
+          value={value}
           InputAccessoryView={() => null}
           placeholder={{ label: 'Select a service', value: 'select-service' }}
         />

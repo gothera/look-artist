@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -13,7 +13,6 @@ import TextInputWithLabel from '../../../components/input/TextInputWithLabel';
 import { setName } from '../../../store/profile/profile.actions';
 import { AsyncDispatch } from '../../../store/store.types';
 import { color, typography } from '../../../theme';
-import { TextInputRef } from '../../../types/refTypes';
 import StepTitle from './StepTitle';
 
 interface OwnProps {
@@ -34,33 +33,12 @@ const NameStep: React.FC<OwnProps & PropsFromRedux> = ({
   isFocused,
   setName,
 }) => {
-  const firstNameRef = useRef<TextInputRef>(null);
-  const lastNameRef = useRef<TextInputRef>(null);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
-  const [isFirstNameEmpty, setIsFirstNameEmpty] = useState(true);
-  const [isLastNameEmpty, setIsLastNameEmpty] = useState(true);
-
-  const onFirstNameEmptyChangeState = (newState: boolean) => {
-    if (isFirstNameEmpty && !newState) {
-      setIsFirstNameEmpty(false);
-    } else if (!isFirstNameEmpty && newState) {
-      setIsFirstNameEmpty(true);
-    }
-  };
-
-  const onLastNameEmptyChangeState = (newState: boolean) => {
-    if (isLastNameEmpty && !newState) {
-      setIsLastNameEmpty(false);
-    } else if (!isLastNameEmpty && newState) {
-      setIsLastNameEmpty(true);
-    }
-  };
-
-  const isContinueDisabled = isFirstNameEmpty || isLastNameEmpty;
+  const isContinueDisabled = firstName === '' || lastName === '';
 
   const onContinuePress = () => {
-    const firstName = firstNameRef.current?.getValue() || '';
-    const lastName = lastNameRef.current?.getValue() || '';
     setName(firstName, lastName);
     slideToNext();
   };
@@ -77,15 +55,15 @@ const NameStep: React.FC<OwnProps & PropsFromRedux> = ({
           label="First Name"
           shouldAutofocus={isFocused}
           placeholder="Enter first name"
-          passedRef={firstNameRef}
-          onUpdateParentState={onFirstNameEmptyChangeState}
+          setText={setFirstName}
+          text={firstName}
         />
         <TextInputWithLabel
           containerStyle={styles.lastNameContainer}
           label="Last Name"
           placeholder="Enter last name"
-          passedRef={lastNameRef}
-          onUpdateParentState={onLastNameEmptyChangeState}
+          setText={setLastName}
+          text={lastName}
         />
       </ScrollView>
       <KeyboardAccessoryView alwaysVisible style={styles.keyboardAccessory}>

@@ -105,8 +105,18 @@ export const typography = {
     fontSize: 28,
   } as TextStyle,
 
+  smallTitle: {
+    ...font.bold,
+    fontSize: 15,
+  } as TextStyle,
+
   collapsedHeaderTitle: {
     ...font.bold,
     fontSize: 18,
   } as TextStyle,
+
+  mutedDescription: {
+    ...font.regular,
+    fontSize: 15,
+  },
 };

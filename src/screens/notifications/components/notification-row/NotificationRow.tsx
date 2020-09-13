@@ -4,7 +4,6 @@ import FastImage from 'react-native-fast-image';
 import { connect, ConnectedProps } from 'react-redux';
 import { selectNotificationById } from '../../../../store/notification/notification.selectors';
 import { StoreState } from '../../../../store/store.types';
-import { color } from '../../../../theme';
 import styles from './styles';
 
 interface OwnProps {
@@ -32,19 +31,11 @@ const NotificationRow: React.FC<OwnProps & PropsFromRedux> = ({
         source={{ uri: notification.extra.avatar }}
       />
       <View style={styles.textContainer}>
-        <Text
-          style={{
-            fontSize: 15,
-            color: color.textPrimary,
-          }}
-        >
+        <Text style={styles.reviewTitle}>
           {`${notification.extra.name} reviewed you`}
         </Text>
         <Text
-          style={{
-            fontSize: 10,
-            color: color.muted,
-          }}
+          style={styles.reviewDescription}
         >{`${notification.extra.rating} Stars`}</Text>
       </View>
     </View>

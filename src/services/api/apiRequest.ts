@@ -48,6 +48,7 @@ export async function postRequest<T = any, D = any>(
   data?: D | undefined,
   config?: AxiosRequestConfig | undefined,
 ) {
+  console.log(url);
   return client
     .post<T, AxiosResponse<T>>(url, data, config)
     .then(onRequestSuccess)
