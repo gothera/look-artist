@@ -50,7 +50,7 @@ export interface ArtistResponseApi {
 }
 
 export interface Appointment {
-  id: number;
+  id?: number;
   artistId: number;
   clientId?: number;
   serviceId?: number;

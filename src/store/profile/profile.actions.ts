@@ -258,3 +258,44 @@ export const changeProfilePicture = (formData: FormData): ThunkResult<void> => {
       });
   };
 };
+
+export const fetchProfileRequest = (): profileTypes.fetchProfileRequest => {
+  return {
+    type: profileConstants.FETCH_PROFILE_REQUEST,
+  };
+};
+
+export const fetchProfileSuccess = (
+  profile: ArtistResponseApi,
+): profileTypes.fetchProfileSuccess => {
+  return {
+    type: profileConstants.FETCH_PROFILE_SUCCESS,
+    payload: { profile: profile },
+  };
+};
+
+export const fetchProfileFailure = (): profileTypes.fetchProfileFailure => {
+  return {
+    type: profileConstants.FETCH_PROFILE_FAILURE,
+  };
+};
+
+export const fetchProfile = (): ThunkResult<void> => {
+  return async function (dispatch, getState) {
+    dispatch(fetchProfileRequest());
+
+    // const token = getState().token;
+    // if (!token) {
+    //   return Promise.resolve();
+    // }
+
+    return ProfileService.fetchProfile()
+      .then((response: ArtistResponseApi) => {
+        dispatch(fetchProfileSuccess(response));
+      })
+      .catch((error) => {
+        dispatch(setupFailure());
+        console.log('Setup Failure', error);
+      });
+  };
+};

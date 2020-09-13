@@ -1,4 +1,3 @@
-import { addArrayToDictByProp } from '../../utils/global';
 import initialState from '../initialState';
 import { AppointmentState, TAction } from '../store.types';
 import * as appointmentConstants from './appointment.constants';
@@ -29,16 +28,29 @@ function notificationReducer(
       };
     }
     case appointmentConstants.FETCH_APPOINTMENTS_OF_DAY_SUCCESS: {
+      action.payload.appointments.forEach((appointment) => {
+        if (appointment.id) {
+          state.local[appointment.id.toString()] = appointment;
+        } else {
+          state.local[
+            `${action.payload.date}#${appointment.startingDate}`
+          ] = appointment;
+        }
+      });
       return {
         ...state,
         appointmentIDs: {
           ...state.appointmentIDs,
-          [action.payload.date]: action.payload.appointments.map(
-            (appointment) => appointment.id,
+          [action.payload
+            .date]: action.payload.appointments.map((appointment) =>
+            appointment.id
+              ? appointment.id.toString()
+              : `${action.payload.date}#${appointment.startingDate}`,
           ),
         },
+
         local: {
-          ...addArrayToDictByProp(state.local, action.payload.appointments),
+          ...state.local,
         },
 
         fetching: false,

@@ -96,6 +96,20 @@ function profileReducer(
       };
     }
 
+    case profileConstants.FETCH_PROFILE_SUCCESS: {
+      return {
+        ...state,
+        artistId: action.payload.profile.id,
+        email: action.payload.profile.email,
+        category: action.payload.profile.category,
+        firstName: action.payload.profile.firstName,
+        lastName: action.payload.profile.lastName,
+        phoneNumber: action.payload.profile.phone,
+        profilePicture: action.payload.profile.profilePicture,
+        bio: action.payload.profile.bio,
+      };
+    }
+
     default:
       return state;
   }

@@ -1,5 +1,5 @@
-import * as profileConstants from './profile.constants';
 import { ArtistResponseApi } from '../../types/globalTypes';
+import * as profileConstants from './profile.constants';
 
 export interface InvalidateStoreAction {
   type: typeof profileConstants.INVALIDATE_STORE;
@@ -74,6 +74,19 @@ export interface ChangeProfilePictureFailure {
   type: typeof profileConstants.CHANGE_PROFILE_PICTURE_FAILURE;
 }
 
+export interface fetchProfileRequest {
+  type: typeof profileConstants.FETCH_PROFILE_REQUEST;
+}
+
+export interface fetchProfileSuccess {
+  type: typeof profileConstants.FETCH_PROFILE_SUCCESS;
+  payload: { profile: ArtistResponseApi };
+}
+
+export interface fetchProfileFailure {
+  type: typeof profileConstants.FETCH_PROFILE_FAILURE;
+}
+
 export type ProfileAction =
   | InvalidateStoreAction
   | LoginSuccess
@@ -90,4 +103,7 @@ export type ProfileAction =
   | SetupSuccess
   | ChangeProfilePictureRequest
   | ChangeProfilePictureSuccess
-  | ChangeProfilePictureFailure;
+  | ChangeProfilePictureFailure
+  | fetchProfileRequest
+  | fetchProfileSuccess
+  | fetchProfileFailure;
