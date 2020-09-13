@@ -1,24 +1,23 @@
 import React, { useState } from 'react';
 import {
-  StyleSheet,
-  Text,
-  View,
-  ViewStyle,
-  TouchableOpacity,
-  TextStyle,
-  NativeModules,
   Image,
   ImageStyle,
+  NativeModules,
+  StyleSheet,
+  Text,
+  TextStyle,
+  TouchableOpacity,
+  View,
+  ViewStyle,
 } from 'react-native';
-import StepTitle from './StepTitle';
-import { BigAvatarPlaceholder } from '../../../res/svg';
-import { color, typography } from '../../../theme';
-import PrimaryButton from '../../../components/button/PrimaryButton';
-import { ImagePickerResponse } from '../../../types/globalTypes';
-import { AsyncDispatch } from '../../../store/store.types';
-import { changeProfilePicture } from '../../../store/profile/profile.actions';
 import { connect, ConnectedProps } from 'react-redux';
-import Axios from 'axios';
+import PrimaryButton from '../../../components/button/PrimaryButton';
+import { BigAvatarPlaceholder } from '../../../res/svg';
+import { changeProfilePicture } from '../../../store/profile/profile.actions';
+import { AsyncDispatch } from '../../../store/store.types';
+import { color, typography } from '../../../theme';
+import { ImagePickerResponse } from '../../../types/globalTypes';
+import StepTitle from './StepTitle';
 
 const ImagePicker = NativeModules.ImageCropPicker;
 
@@ -72,8 +71,9 @@ const PhotoStep: React.FC<OwnProps & PropsFromRedux> = ({
     const picture = {
       name: imagePicked.filename,
       type: 'image/jpg',
-      uri: imagePicked.path,
+      uri: imagePicked.path.replace('file://', ''),
     };
+    console.log(imagePicked, picture);
     const formData = new FormData();
     formData.append('picture', picture);
 
@@ -91,11 +91,11 @@ const PhotoStep: React.FC<OwnProps & PropsFromRedux> = ({
     //     console.log('=== error ==', error);
     //   });
 
-    changeProfilePicture(formData);
+    // changeProfilePicture(formData);
     console.log('=== formData ===', formData);
 
     // console.log('--image---', imagePicked);
-    // slideToNext();
+    slideToNext();
   };
 
   return (

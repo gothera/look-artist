@@ -25,6 +25,11 @@ export enum NotificationType {
   Review,
 }
 
+export enum AppointmentType {
+  Free,
+  Reserved,
+}
+
 export interface Notification {
   id: number;
   extra: any;
@@ -42,6 +47,20 @@ export interface ArtistResponseApi {
   bio: string;
   offeredServices: OfferedService[];
   profilePicture: string;
+}
+
+export interface Appointment {
+  id: number;
+  artistId: number;
+  clientId?: number;
+  serviceId?: number;
+  clientName: string;
+  photo?: string;
+  serviceName: string;
+  startingDate: string;
+  endingTime: string;
+  type: AppointmentType;
+  date: string;
 }
 
 declare global {

@@ -28,9 +28,6 @@ const PhoneNumberStep: React.FC<OwnProps & PropsFromRedux> = ({
   setPhoneNumber,
 }) => {
   const [phoneNumberStr, setPhoneNumberStr] = useState('');
-  const onPhoneNumberChanged = (newPhoneNumber: string) => {
-    setPhoneNumberStr(newPhoneNumber);
-  };
 
   const onContinuePress = () => {
     setPhoneNumber(phoneNumberStr);
@@ -49,10 +46,11 @@ const PhoneNumberStep: React.FC<OwnProps & PropsFromRedux> = ({
         <TextInputWithLabel
           containerStyle={styles.input}
           label="Phone Number"
-          onValueChanged={onPhoneNumberChanged}
           shouldAutofocus={isFocused}
           placeholder="Enter phone number"
           keyboardType="number-pad"
+          setText={setPhoneNumberStr}
+          text={phoneNumberStr}
         />
       </ScrollView>
       <KeyboardAccessoryView alwaysVisible style={styles.keyboardAccessory}>
