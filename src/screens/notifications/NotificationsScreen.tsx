@@ -29,9 +29,8 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 const NotificationsScreen: React.FC<PropsFromRedux> = ({
-  fetchMoreNotifcations,
   notificationsById,
-  fetchAppointmentsOfDay,
+  fetchMoreNotifcations,
   fetchProfile,
   artistId,
 }) => {
@@ -58,7 +57,7 @@ const NotificationsScreen: React.FC<PropsFromRedux> = ({
     <>
       <TouchableOpacity
         style={{ marginTop: 100, width: '100%', height: 100 }}
-        onPress={() => fetchAppointmentsOfDay(artistId, '2020-09-14')}
+        onPress={() => fetchMoreNotifcations(true)}
       >
         <Text>Buna ziua</Text>
       </TouchableOpacity>

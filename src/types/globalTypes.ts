@@ -53,12 +53,12 @@ export interface Appointment {
   id?: number;
   artistId: number;
   clientId?: number;
-  serviceId?: number;
-  clientName: string;
+  serviceId: number;
+  clientName?: string;
   photo?: string;
-  serviceName: string;
+  serviceName?: string;
   startingDate: string;
-  endingTime: string;
+  endingTime?: string;
   type: AppointmentType;
   date: string;
 }

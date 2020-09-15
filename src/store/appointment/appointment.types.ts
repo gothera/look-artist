@@ -18,8 +18,24 @@ export interface fetchAppointmentsRequest {
   type: typeof appointmentConstants.FETCH_APPOINTMENTS_OF_DAY_REQUEST;
 }
 
+// export interface addAppointmentSuccess {
+//   type: typeof appointmentConstants.FETCH_APPOINTMENTS_OF_DAY_SUCCESS;
+//   payload: { appointments: Appointment[]; date: string };
+// }
+
+export interface addAppointmentFailure {
+  type: typeof appointmentConstants.ADD_APPOINTMENT_FAILURE;
+  payload: { error: string };
+}
+
+export interface addAppointmentRequest {
+  type: typeof appointmentConstants.ADD_APPOINTMENT_REQUEST;
+}
+
 export type AppointmentAction =
   | InvalidateStoreAction
   | fetchAppointmentsSuccess
   | fetchAppointmentsFailure
-  | fetchAppointmentsRequest;
+  | fetchAppointmentsRequest
+  | addAppointmentRequest
+  | addAppointmentFailure;
