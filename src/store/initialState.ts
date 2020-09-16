@@ -2,6 +2,7 @@ import { StoreState } from './store.types';
 const initialState: StoreState = {
   profile: {
     isLogging: false,
+    isUploadingProfilePicture: false,
   },
   view: {
     aux: '',

@@ -1,6 +1,5 @@
 import { setGenericPassword } from 'react-native-keychain';
 import { pushSetupScreen, setLoggedInRoot } from '../../navigation';
-import { pushHomeScreen } from '../../navigation/Navigation';
 import {
   LoginResponse,
   SetupBody,
@@ -205,7 +204,6 @@ export const setup = (
     return ProfileService.setup(setupBody)
       .then((response: ArtistResponseApi) => {
         setupSuccess(response);
-        pushHomeScreen();
         setLoggedInRoot();
       })
       .catch((error) => {
@@ -239,7 +237,10 @@ export const changeProfilePictureFailure = (): profileTypes.ChangeProfilePicture
   };
 };
 
-export const changeProfilePicture = (formData: FormData): ThunkResult<void> => {
+export const changeProfilePicture = (
+  formData: FormData,
+  onSuccess?: () => void,
+): ThunkResult<void> => {
   return async function (dispatch, getState) {
     dispatch(changeProfilePictureRequest());
 
@@ -250,11 +251,14 @@ export const changeProfilePicture = (formData: FormData): ThunkResult<void> => {
 
     return ProfileService.changeProfilePicture(formData)
       .then((response: string) => {
-        changeProfilePictureSuccess(response);
+        dispatch(changeProfilePictureSuccess(response));
+        /**
+         * Callback onSuccess
+         */
+        onSuccess && onSuccess();
       })
-      .catch((error) => {
-        dispatch(setupFailure);
-        console.log('Setup Failure', error);
+      .catch((_) => {
+        dispatch(changeProfilePictureFailure());
       });
   };
 };

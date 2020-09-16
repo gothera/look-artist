@@ -21,6 +21,7 @@ export interface ProfileState {
   category?: string;
   phoneNumber?: string;
   profilePicture?: string;
+  isUploadingProfilePicture: boolean;
   bio?: string;
 }
 

@@ -51,16 +51,16 @@ export interface ArtistResponseApi {
 
 export interface Appointment {
   id?: number;
-  artistId: number;
+  artistId?: number;
   clientId?: number;
-  serviceId: number;
+  serviceId?: number;
   clientName?: string;
   photo?: string;
   serviceName?: string;
-  startingDate: string;
-  endingTime?: string;
+  startingTime: string;
+  endingTime: string;
   type: AppointmentType;
-  date: string;
+  date?: string;
 }
 
 declare global {

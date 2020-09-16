@@ -17,6 +17,7 @@ import { FacebookBtnIcon, GoogleBtnIcon, LogoOnHeader } from '../../../res/svg';
 import { login } from '../../../store/profile/profile.actions';
 import { AsyncDispatch } from '../../../store/store.types';
 import { color, typography } from '../../../theme';
+import { pushSetupScreen } from '../../../navigation';
 
 interface OwnProps {
   componentId: string;
@@ -74,7 +75,9 @@ const LoginContent: React.FC<OwnProps & PropsFromRedux> = ({
       <OrLineDivider containerStyle={styles.orDividerContainer} />
       <ButtonWithIcon
         title="Continue with Facebook"
-        onPress={() => {}}
+        onPress={() => {
+          pushSetupScreen();
+        }}
         containerStyle={styles.socialBtn}
         icon={<FacebookBtnIcon />}
       />

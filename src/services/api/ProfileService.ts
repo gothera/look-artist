@@ -12,11 +12,11 @@ export const changeProfilePicture = (formData: FormData): Promise<any> => {
 
   const config = {
     headers: {
-      'Content-Type': 'multipart/form-data',
+      'content-type': 'multipart/form-data',
     },
   };
 
-  return postRequest<string>(url, formData, config);
+  return postRequest<any>(url, formData, config);
 };
 
 export const fetchProfile = (): Promise<ArtistResponseApi> => {

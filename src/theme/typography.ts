@@ -119,4 +119,19 @@ export const typography = {
     ...font.regular,
     fontSize: 15,
   },
+
+  smallInterval: {
+    ...font.medium,
+    fontSize: 13,
+  },
+
+  userName: {
+    ...font.bold,
+    fontSize: 16,
+  },
+
+  serviceName: {
+    ...font.semiBold,
+    fontSize: 11,
+  },
 };

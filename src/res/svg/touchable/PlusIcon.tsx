@@ -8,7 +8,7 @@ export const PlusIcon = React.memo<SVGProps>((props) => {
       <G
         data-name="Group 480"
         fill="none"
-        stroke="#34353e"
+        stroke={props.stroke || '#34353e'}
         strokeLinecap="round"
         strokeWidth={2.5}
       >

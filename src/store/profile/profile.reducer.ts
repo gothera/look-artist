@@ -89,10 +89,23 @@ function profileReducer(
         artistId: action.payload.id,
       };
     }
+    case profileConstants.CHANGE_PROFILE_PICTURE_REQUEST: {
+      return {
+        ...state,
+        isUploadingProfilePicture: true,
+      };
+    }
     case profileConstants.CHANGE_PROFILE_PICTURE_SUCCESS: {
       return {
         ...state,
         profilePicture: action.payload.imageUrl,
+        isUploadingProfilePicture: false,
+      };
+    }
+    case profileConstants.CHANGE_PROFILE_PICTURE_FAILURE: {
+      return {
+        ...state,
+        isUploadingProfilePicture: false,
       };
     }
 

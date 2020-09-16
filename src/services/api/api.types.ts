@@ -40,3 +40,17 @@ export interface FetchNotificationsResponse {
   totalPages: number;
   content: Notification[];
 }
+
+export interface AppointmentResponse {
+  id?: number;
+  artistId?: number;
+  clientId?: number;
+  serviceId?: number;
+  clientName?: string;
+  photo?: string;
+  serviceName?: string;
+  startingTime: string;
+  endingTime: string;
+  type: string;
+  date?: string;
+}

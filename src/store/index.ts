@@ -30,7 +30,10 @@ const migrations: any = {
   },
 };
 
-const profileBlacklist = createBlacklistFilter('profile', ['isLogging']);
+const profileBlacklist = createBlacklistFilter('profile', [
+  'isLogging',
+  'isUploadingProfilePicture',
+]);
 
 const persistConfig: PersistConfig<StoreState> = {
   key: 'starter',

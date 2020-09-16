@@ -20,7 +20,7 @@ export const setLoggedInRoot = () => {
             titleDisplayMode: 'alwaysHide',
             elevation: 30,
             backgroundColor: color.background,
-            drawBehind: true,
+            // drawBehind: true,
             tabsAttachMode: 'onSwitchToTab',
           },
         },
@@ -37,6 +37,7 @@ export const setLoggedInRoot = () => {
               options: {
                 bottomTab: {
                   icon: require('../res/images/bottom-tabs/calendar.png'),
+                  selectedIcon: require('../res/images/bottom-tabs/calendar-selected.png'),
                   iconColor: color.muted,
                   selectedIconColor: color.textPrimary,
                 },
@@ -59,6 +60,7 @@ export const setLoggedInRoot = () => {
               options: {
                 bottomTab: {
                   icon: require('../res/images/bottom-tabs/add-post.png'),
+                  selectedIcon: require('../res/images/bottom-tabs/add-post-selected.png'),
                   iconColor: color.muted,
                   selectedIconColor: color.textPrimary,
                 },
@@ -81,6 +83,7 @@ export const setLoggedInRoot = () => {
               options: {
                 bottomTab: {
                   icon: require('../res/images/bottom-tabs/bell.png'),
+                  selectedIcon: require('../res/images/bottom-tabs/bell-selected.png'),
                   iconColor: color.muted,
                   selectedIconColor: color.textPrimary,
                 },
@@ -103,6 +106,7 @@ export const setLoggedInRoot = () => {
               options: {
                 bottomTab: {
                   icon: require('../res/images/bottom-tabs/person.png'),
+                  selectedIcon: require('../res/images/bottom-tabs/person-selected.png'),
                   iconColor: color.muted,
                   selectedIconColor: color.textPrimary,
                 },

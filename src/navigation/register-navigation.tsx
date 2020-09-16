@@ -4,7 +4,7 @@ import { getGenericPassword } from 'react-native-keychain';
 import { Navigation } from 'react-native-navigation';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { LoadingModal } from '../modals';
+import { LoadingModal, EditProgramModal } from '../modals';
 import {
   AddPostScreen,
   AuthScreen,
@@ -15,7 +15,7 @@ import {
 } from '../screens';
 import { persistor, store } from '../store';
 import { loginKeychain } from '../store/profile/profile.actions';
-import { LOADING_MODAL } from './modal-constants';
+import { LOADING_MODAL, EDIT_PROGRAM_MODAL } from './modal-constants';
 import {
   ADD_POST_SCREEN,
   AUTH_SCREEN,
@@ -63,6 +63,10 @@ const registerModals = () => {
   Navigation.registerComponent(LOADING_MODAL, () =>
     WrappedComponent(LoadingModal),
   );
+
+  Navigation.registerComponent(EDIT_PROGRAM_MODAL, () =>
+    WrappedComponent(EditProgramModal),
+  );
 };
 
 export async function initNavigationAsync() {
@@ -73,20 +77,17 @@ export async function initNavigationAsync() {
 
       const loggedIn = genericPassword && genericPassword.username === 'token';
 
-      // pushHomeScreen();
+      // setLoggedInRoot();
 
-      setLoggedInRoot();
-
-      // if (loggedIn) {
-      //   store.dispatch(loginKeychain((genericPassword as any).password));
-      //   // pushHomeScreen();
-      //   /**
-      //    * Screens with bottom navigation
-      //    */
-      //   setLoggedInRoot();
-      // } else {
-      //   pushAuthScreen();
-      // }
+      if (loggedIn) {
+        store.dispatch(loginKeychain((genericPassword as any).password));
+        /**
+         * Screens with bottom navigation
+         */
+        setLoggedInRoot();
+      } else {
+        pushAuthScreen();
+      }
     } catch (error) {
       console.log('Error initNavAsync', error);
       pushAuthScreen();

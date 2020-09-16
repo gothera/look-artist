@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Image,
   ImageStyle,
@@ -14,10 +14,11 @@ import { connect, ConnectedProps } from 'react-redux';
 import PrimaryButton from '../../../components/button/PrimaryButton';
 import { BigAvatarPlaceholder } from '../../../res/svg';
 import { changeProfilePicture } from '../../../store/profile/profile.actions';
-import { AsyncDispatch } from '../../../store/store.types';
+import { AsyncDispatch, StoreState } from '../../../store/store.types';
 import { color, typography } from '../../../theme';
 import { ImagePickerResponse } from '../../../types/globalTypes';
 import StepTitle from './StepTitle';
+import { showLoadingModal } from '../../../navigation';
 
 const ImagePicker = NativeModules.ImageCropPicker;
 
@@ -25,21 +26,34 @@ interface OwnProps {
   slideToNext: () => void;
 }
 
+const mapStateToProps = (state: StoreState) => {
+  return {
+    isUploadingProfilePicture: state.profile.isUploadingProfilePicture,
+  };
+};
+
 const mapDispatchToProps = (dispatch: AsyncDispatch) => ({
-  changeProfilePicture: (formData: FormData) =>
-    dispatch(changeProfilePicture(formData)),
+  changeProfilePicture: (formData: FormData, onSuccess: () => void) =>
+    dispatch(changeProfilePicture(formData, onSuccess)),
 });
 
-const connector = connect(null, mapDispatchToProps);
+const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 const PhotoStep: React.FC<OwnProps & PropsFromRedux> = ({
   slideToNext,
   changeProfilePicture,
+  isUploadingProfilePicture,
 }) => {
   const [imagePicked, setImagePicked] = useState<
     ImagePickerResponse | undefined
   >(undefined);
+
+  useEffect(() => {
+    if (isUploadingProfilePicture) {
+      showLoadingModal();
+    }
+  }, [isUploadingProfilePicture]);
 
   const onOpenLibrary = () => {
     ImagePicker.openPicker({
@@ -49,7 +63,6 @@ const PhotoStep: React.FC<OwnProps & PropsFromRedux> = ({
       cropperCircleOverlay: false,
       sortOrder: 'none',
     }).then((image: any) => {
-      console.log('received image', image);
       const imagePickedMapped = {
         path: image.path,
         mime: image.mime,
@@ -57,7 +70,6 @@ const PhotoStep: React.FC<OwnProps & PropsFromRedux> = ({
         height: image.height,
         filename: image.filename,
       } as ImagePickerResponse;
-      console.log('=== image picked mapped ===', imagePickedMapped);
       setImagePicked(imagePickedMapped);
     });
   };
@@ -73,29 +85,10 @@ const PhotoStep: React.FC<OwnProps & PropsFromRedux> = ({
       type: 'image/jpg',
       uri: imagePicked.path.replace('file://', ''),
     };
-    console.log(imagePicked, picture);
     const formData = new FormData();
     formData.append('picture', picture);
 
-    // const config = {
-    //   headers: {
-    //     Authorization:
-    //       'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyMSIsImlhdCI6MTU5NzA5MDY3MSwiZXhwIjoxNTk4ODE4NjcxfQ.9eH5oy-A8kqxQyhM1x9OtHuLJvt7VOO6CDWho2b6Hi_casVtqboRQZF4CMDM1ZMjarSV6CUWsPD89umzieBTXQ',
-    //     'content-type': 'multipart/form-data',
-    //   },
-    // };
-
-    // Axios.post('http://localhost:8080/api/artist/picture/17', formData, config)
-    //   .then((response) => console.log('=== response ===', response))
-    //   .catch((error) => {
-    //     console.log('=== error ==', error);
-    //   });
-
-    // changeProfilePicture(formData);
-    console.log('=== formData ===', formData);
-
-    // console.log('--image---', imagePicked);
-    slideToNext();
+    changeProfilePicture(formData, slideToNext);
   };
 
   return (
