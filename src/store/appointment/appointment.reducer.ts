@@ -21,6 +21,7 @@ function notificationReducer(
         fetching: false,
       };
     }
+    case appointmentConstants.ADD_APPOINTMENT_REQUEST:
     case appointmentConstants.FETCH_APPOINTMENTS_OF_DAY_REQUEST: {
       return {
         ...state,

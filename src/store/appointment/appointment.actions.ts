@@ -2,9 +2,9 @@ import * as AppointmentService from '../../services/api/AppointmentService';
 import { Appointment } from '../../types/globalTypes';
 import { ThunkResult } from '../store.types';
 import * as appointmentConstants from './appointment.constants';
-import * as notificationTypes from './appointment.types';
+import * as appointmentTypes from './appointment.types';
 
-const fetchAppointmentsOfDayRequest = (): notificationTypes.fetchAppointmentsRequest => {
+const fetchAppointmentsOfDayRequest = (): appointmentTypes.fetchAppointmentsRequest => {
   return {
     type: appointmentConstants.FETCH_APPOINTMENTS_OF_DAY_REQUEST,
   };
@@ -13,7 +13,7 @@ const fetchAppointmentsOfDayRequest = (): notificationTypes.fetchAppointmentsReq
 const fetchAppointmentsOfDaySuccess = (
   appointments: Appointment[],
   date: string,
-): notificationTypes.fetchAppointmentsSuccess => {
+): appointmentTypes.fetchAppointmentsSuccess => {
   return {
     type: appointmentConstants.FETCH_APPOINTMENTS_OF_DAY_SUCCESS,
     payload: {
@@ -25,7 +25,7 @@ const fetchAppointmentsOfDaySuccess = (
 
 const fetchAppointmentsOfDayFailure = (
   error: string,
-): notificationTypes.fetchAppointmentsFailure => {
+): appointmentTypes.fetchAppointmentsFailure => {
   return {
     type: appointmentConstants.FETCH_APPOINTMENTS_OF_DAY_FAILURE,
     payload: {
@@ -45,6 +45,49 @@ export const fetchAppointmentOfDay = (
 
     dispatch(fetchAppointmentsOfDayRequest());
     return AppointmentService.fetchAppointmentsOfDay(artistId, date)
+      .then((response: Appointment[]) => {
+        dispatch(fetchAppointmentsOfDaySuccess(response, date));
+      })
+      .catch((error) => {
+        dispatch(fetchAppointmentsOfDayFailure(error));
+      });
+  };
+};
+
+const addAppointmentRequest = (): appointmentTypes.addAppointmentRequest => {
+  return {
+    type: appointmentConstants.ADD_APPOINTMENT_REQUEST,
+  };
+};
+
+// const addAppointmentSuccess = (
+//   appointments: Appointment[],
+//   date: string,
+// ): appointmentTypes.addAppointmentRequest => {
+//   return {
+//     type: appointmentConstants.FETCH_APPOINTMENTS_OF_DAY_SUCCESS,
+//     payload: {
+//       appointments,
+//       date,
+//     },
+//   };
+// };
+
+const addAppointmentFailure = (
+  error: string,
+): appointmentTypes.addAppointmentFailure => {
+  return {
+    type: appointmentConstants.ADD_APPOINTMENT_FAILURE,
+    payload: {
+      error,
+    },
+  };
+};
+
+export const addAppointment = (appointment: Appointment): ThunkResult<void> => {
+  return async function (dispatch, getState) {
+    dispatch(fetchAppointmentsOfDayRequest());
+    return AppointmentService.addAppointment(appointment)
       .then((response: Appointment[]) => {
         dispatch(fetchAppointmentsOfDaySuccess(response, date));
       })
