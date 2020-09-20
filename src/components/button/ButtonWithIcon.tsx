@@ -46,7 +46,7 @@ const styles = StyleSheet.create<Style>({
     width: '100%',
     justifyContent: 'center',
     alignContent: 'center',
-    borderRadius: 4,
+    borderRadius: 12,
     backgroundColor: color.textInverted,
     borderWidth: 0.5,
     borderColor: color.textPrimary,
@@ -54,8 +54,8 @@ const styles = StyleSheet.create<Style>({
   text: {
     ...typography.button,
     color: color.textPrimary,
-    paddingBottom: 12,
-    paddingTop: 13,
+    paddingBottom: 13,
+    paddingTop: 14,
     textAlign: 'center',
   },
   iconContainer: {

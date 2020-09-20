@@ -16,7 +16,7 @@ import OrLineDivider from '../../../components/ui/OrLineDivider';
 import { FacebookBtnIcon, GoogleBtnIcon, LogoOnHeader } from '../../../res/svg';
 import { login } from '../../../store/profile/profile.actions';
 import { AsyncDispatch } from '../../../store/store.types';
-import { color, typography } from '../../../theme';
+import { color, typography, spacing } from '../../../theme';
 import { pushSetupScreen } from '../../../navigation';
 
 interface OwnProps {
@@ -114,6 +114,7 @@ interface Style {
 const styles = StyleSheet.create<Style>({
   container: {
     flex: 1,
+    width: '100%',
   },
   header: {
     ...typography.descriptiveHeader,
@@ -136,11 +137,11 @@ const styles = StyleSheet.create<Style>({
     marginTop: 8,
   },
   emailTextInput: {
-    marginTop: 40,
+    marginTop: spacing.extraLarge,
     minWidth: '100%',
   },
   passwordInput: {
-    marginTop: 30,
+    marginTop: spacing.larger,
     minWidth: '100%',
   },
   orDividerContainer: {

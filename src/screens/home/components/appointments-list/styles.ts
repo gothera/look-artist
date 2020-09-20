@@ -12,7 +12,7 @@ export const styles = StyleSheet.create<Style>({
   },
   contentContainerList: {
     paddingHorizontal: 16,
-    paddingBottom: 16,
-    paddingTop: 16,
+    paddingBottom: 32,
+    paddingTop: 24,
   },
 });

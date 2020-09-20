@@ -1,13 +1,22 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import { styles } from './styles';
 import { PlusIcon } from '../../../res/svg';
 import { color } from '../../../theme';
+import { showAddAppointmentModal } from '../../../navigation';
 
-const AddAppointmentText = () => {
+const AddAppointmentText: React.FC = () => {
+  const onPress = () => {
+    showAddAppointmentModal();
+  };
+
   return (
-    <TouchableOpacity style={styles.container}>
-      <PlusIcon width={14} style={styles.plusIcon} stroke={color.muted} />
+    <TouchableOpacity style={styles.container} onPress={onPress}>
+      <PlusIcon
+        width={14}
+        style={styles.plusIcon}
+        stroke={color.textSecondary}
+      />
       <Text style={styles.btnText}>Add Appointment</Text>
     </TouchableOpacity>
   );

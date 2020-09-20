@@ -17,8 +17,8 @@ export const normalizeAppointment = (
     photo: appointmentResponse.photo,
     serviceName: appointmentResponse.serviceName,
     date: appointmentResponse.date,
-    startingTime: appointmentResponse.startingTime,
-    endingTime: appointmentResponse.endingTime,
+    startingTime: appointmentResponse.startingTime.substring(0, 5), // '20:00:00' to '20:00'
+    endingTime: appointmentResponse.endingTime.substring(0, 5),
     type:
       appointmentResponse.type === 'Free'
         ? AppointmentType.Free

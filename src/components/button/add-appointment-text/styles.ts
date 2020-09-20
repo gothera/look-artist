@@ -14,7 +14,7 @@ export const styles = StyleSheet.create<Style>({
   },
   btnText: {
     ...typography.button,
-    color: color.muted,
+    color: color.textSecondary,
     marginLeft: 10,
   },
   plusIcon: {

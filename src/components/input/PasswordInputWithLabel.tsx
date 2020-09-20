@@ -8,7 +8,7 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import { color, typography } from '../../theme';
+import { color, typography, spacing } from '../../theme';
 import LineDivider from '../ui/LineDivider';
 
 interface OwnProps {
@@ -71,6 +71,7 @@ const styles = StyleSheet.create<Style>({
     ...typography.textInput,
     color: color.textSecondary,
     paddingVertical: 8,
+    marginTop: spacing.smallest,
   },
   labelDescription: {
     ...typography.textInputLabelDescription,

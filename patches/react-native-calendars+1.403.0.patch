@@ -81,8 +81,62 @@ index 358f5b4..94ec8de 100644
      },
      ...(theme[STYLESHEET_ID] || {})
    });
+diff --git a/node_modules/react-native-calendars/src/expandableCalendar/calendarProvider.js b/node_modules/react-native-calendars/src/expandableCalendar/calendarProvider.js
+index aead2f7..d833072 100644
+--- a/node_modules/react-native-calendars/src/expandableCalendar/calendarProvider.js
++++ b/node_modules/react-native-calendars/src/expandableCalendar/calendarProvider.js
+@@ -1,6 +1,6 @@
+ import _ from 'lodash';
+ import React, {Component} from 'react';
+-import {Animated, TouchableOpacity, View} from 'react-native';
++import {Animated, TouchableOpacity, View, Dimensions, Platform} from 'react-native';
+ import PropTypes from 'prop-types';
+ import XDate from 'xdate';
+ 
+@@ -9,6 +9,7 @@ import {xdateToData} from '../interface';
+ import styleConstructor from './style';
+ import CalendarContext from './calendarContext';
+ 
++const screenHeight = Math.round(Dimensions.get('window').height);
+ 
+ const commons = require('./commons');
+ const UPDATE_SOURCES = commons.UPDATE_SOURCES;
+@@ -47,7 +48,7 @@ class CalendarProvider extends Component {
+     this.state = {
+       date: this.props.date || XDate().toString('yyyy-MM-dd'),
+       updateSource: UPDATE_SOURCES.CALENDAR_INIT,
+-      buttonY: new Animated.Value(-props.todayBottomMargin || -TOP_POSITION),
++      buttonY: new Animated.Value((screenHeight + 50)),
+       buttonIcon: this.getButtonIcon(props.date),
+       disabled: false,
+       opacity: new Animated.Value(1)
+@@ -124,13 +125,15 @@ class CalendarProvider extends Component {
+       const isToday = today === date;
+ 
+       Animated.spring(this.state.buttonY, {
+-        toValue: isToday ? TOP_POSITION : -this.props.todayBottomMargin || -TOP_POSITION,
++        // toValue: isToday ? TOP_POSITION : -this.props.todayBottomMargin || -TOP_POSITION,
++        toValue: isToday ? screenHeight + 50 : screenHeight - (Platform.OS === 'ios' ? 300 : 250),
+         tension: 30,
+         friction: 8,
+         useNativeDriver: true
+       }).start();
+     }
+   }
++;
+ 
+   animateOpacity(disabled) {
+     const {disabledOpacity} = this.props;
+@@ -153,6 +156,7 @@ class CalendarProvider extends Component {
+     const todayString = XDate.locales[XDate.defaultLocale].today || commons.todayString;
+     const today = todayString.charAt(0).toUpperCase() + todayString.slice(1);
+ 
++
+     return (
+       <Animated.View style={[this.style.todayButtonContainer, {transform: [{translateY: buttonY}]}]}>
+         <TouchableOpacity style={[this.style.todayButton, this.props.todayButtonStyle]} onPress={this.onTodayPress} disabled={disabled}>
 diff --git a/node_modules/react-native-calendars/src/expandableCalendar/style.js b/node_modules/react-native-calendars/src/expandableCalendar/style.js
-index a226953..9c36af2 100644
+index a226953..c026707 100644
 --- a/node_modules/react-native-calendars/src/expandableCalendar/style.js
 +++ b/node_modules/react-native-calendars/src/expandableCalendar/style.js
 @@ -73,7 +73,8 @@ export default function styleConstructor(theme = {}) {
@@ -111,3 +165,19 @@ index a226953..9c36af2 100644
      },
      dayHeader: {
        width: 32,
+@@ -134,13 +137,13 @@ export default function styleConstructor(theme = {}) {
+       })
+     },
+     todayButtonText: {
+-      color: appStyle.todayButtonTextColor,
++      color: '#34353E',
+       fontSize: commons.isTablet ? appStyle.todayButtonFontSize + 2 : appStyle.todayButtonFontSize, 
+       fontWeight: appStyle.todayButtonFontWeight,
+       fontFamily: appStyle.todayButtonFontFamily
+     },
+     todayButtonImage: {
+-      tintColor: appStyle.todayButtonTextColor, 
++      tintColor: '#34353E', 
+       marginLeft: appStyle.todayButtonPosition === 'right' ? 7 : undefined,
+       marginRight: appStyle.todayButtonPosition === 'right' ? undefined : 7
+     },

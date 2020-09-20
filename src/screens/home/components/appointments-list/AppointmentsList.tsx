@@ -1,20 +1,22 @@
-import React, { useEffect } from 'react';
-import { FlatList } from 'react-native';
+import React, { useEffect, useCallback } from 'react';
+import { FlatList, RefreshControl } from 'react-native';
 import { styles } from './styles';
 import AppointmentRow from '../../../../components/appointment/appointment-row/AppointmentRow';
 import { AsyncDispatch, StoreState } from '../../../../store/store.types';
 import { fetchAppointmentOfDay } from '../../../../store/appointment/appointment.actions';
 import { ConnectedProps, connect } from 'react-redux';
 import { selectAppointmentsIdsPerDay } from '../../../../store/appointment/appointment.selectors';
+import { color } from '../../../../theme';
 
 interface OwnProps {
   date: string;
 }
 
 const mapStateToProps = (state: StoreState, ownProps: OwnProps) => {
-  const appointmentsIds = selectAppointmentsIdsPerDay('2020-09-15')(state);
+  const appointmentsIds = selectAppointmentsIdsPerDay(ownProps.date)(state);
   return {
     appointmentsIds,
+    isLoading: state.appointment.fetching,
   };
 };
 
@@ -31,11 +33,17 @@ const AppointmentsList: React.FC<OwnProps & PropsFromRedux> = ({
   fetchAppointmentsOfDay,
   appointmentsIds,
   date,
+  isLoading,
 }) => {
   useEffect(() => {
-    fetchAppointmentsOfDay('2020-09-15');
-    console.log('appoint', appointmentsIds);
-  }, []);
+    fetchAppointmentsOfDay(date);
+  }, [date]);
+
+  const onPullToRefresh = () => {
+    fetchAppointmentsOfDay(date);
+  };
+
+  const keyExtractor = useCallback((i: string) => `appointment-item-${i}`, []);
 
   const renderAppointmentRow = ({
     item,
@@ -44,8 +52,22 @@ const AppointmentsList: React.FC<OwnProps & PropsFromRedux> = ({
     item: string;
     index: number;
   }) => {
-    return <AppointmentRow appointmentIdStr={item} />;
+    return (
+      <AppointmentRow
+        appointmentIdStr={item}
+        isLast={index === appointmentsIds.length - 1}
+      />
+    );
   };
+
+  const renderRefreshControl = (
+    <RefreshControl
+      tintColor={color.textSecondary}
+      colors={['transparent']}
+      refreshing={isLoading}
+      onRefresh={onPullToRefresh}
+    />
+  );
 
   return (
     <FlatList
@@ -54,6 +76,8 @@ const AppointmentsList: React.FC<OwnProps & PropsFromRedux> = ({
       style={styles.list}
       contentContainerStyle={styles.contentContainerList}
       showsVerticalScrollIndicator={false}
+      refreshControl={renderRefreshControl}
+      keyExtractor={keyExtractor}
     />
   );
 };

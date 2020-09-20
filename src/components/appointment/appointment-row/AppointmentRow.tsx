@@ -9,24 +9,29 @@ import { StoreState } from '../../../store/store.types';
 import { connect, ConnectedProps } from 'react-redux';
 import { selectAppointmentById } from '../../../store/appointment/appointment.selectors';
 import { AppointmentType } from '../../../types/globalTypes';
+import { showAppointmentDetailsModal } from '../../../navigation';
 
 interface OwnProps {
   appointmentIdStr: string;
+  isLast?: boolean;
 }
 
 const mapStateToProps = (state: StoreState, ownProps: OwnProps) => {
   const appointment = selectAppointmentById(ownProps.appointmentIdStr)(state);
-  const isFreeSpot = appointment.type === 'Free';
+  const isFreeSpot = appointment.type === AppointmentType.Free;
   const clientName = appointment.clientName;
   const serviceName = appointment.serviceName;
   const clientPhoto = appointment.photo;
+  const startingTime = appointment.startingTime;
+  const endingTime = appointment.endingTime;
 
   return {
-    appointment,
     isFreeSpot,
     clientName,
     serviceName,
     clientPhoto,
+    startingTime,
+    endingTime,
   };
 };
 
@@ -35,25 +40,43 @@ const connector = connect(mapStateToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 const AppointmentRow: React.FC<OwnProps & PropsFromRedux> = ({
-  appointmentIdStr,
-  appointment,
   isFreeSpot,
   clientName,
   serviceName,
   clientPhoto,
+  startingTime,
+  endingTime,
+  isLast,
+  appointmentIdStr,
 }) => {
+  const intervalStr = startingTime + '-' + endingTime;
+
+  const goToAppointmentDetailsModal = () => {
+    showAppointmentDetailsModal({
+      props: { appointmentIdStr },
+    });
+  };
+
   return (
     <View style={styles.container}>
-      <AppointmentIndicator />
-      <Text style={styles.intervalText}>12:00-13:00</Text>
+      <AppointmentIndicator addCircleOnTail={isLast} />
+      <View style={styles.intervalContainer}>
+        <Text style={styles.intervalText}>{intervalStr}</Text>
+        {isFreeSpot && <Text style={styles.intervalFreeSpotsLabel}> Free</Text>}
+      </View>
 
       {!isFreeSpot && (
-        <TouchableOpacity style={styles.rowContainer} onPress={() => {}}>
+        <TouchableOpacity
+          style={styles.rowContainer}
+          onPress={goToAppointmentDetailsModal}
+        >
           <UserAvatar size={40} photoUrl={clientPhoto} />
-          <AppointmentUserService
-            userName={clientName}
-            serviceName={serviceName}
-          />
+          {clientName && serviceName && (
+            <AppointmentUserService
+              userName={clientName}
+              serviceName={serviceName}
+            />
+          )}
         </TouchableOpacity>
       )}
 

@@ -4,7 +4,13 @@ import { getGenericPassword } from 'react-native-keychain';
 import { Navigation } from 'react-native-navigation';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { LoadingModal, EditProgramModal } from '../modals';
+import {
+  LoadingModal,
+  EditProgramModal,
+  AddAppointmentModal,
+  AppointmentDetailsModal,
+  DeleteConfirmationModal,
+} from '../modals';
 import {
   AddPostScreen,
   AuthScreen,
@@ -15,7 +21,13 @@ import {
 } from '../screens';
 import { persistor, store } from '../store';
 import { loginKeychain } from '../store/profile/profile.actions';
-import { LOADING_MODAL, EDIT_PROGRAM_MODAL } from './modal-constants';
+import {
+  LOADING_MODAL,
+  EDIT_PROGRAM_MODAL,
+  ADD_APPOINTMENT_MODAL,
+  APPOINTMENT_DETAILS_MODAL,
+  DELETE_CONFIRMATION_MODAL,
+} from './modal-constants';
 import {
   ADD_POST_SCREEN,
   AUTH_SCREEN,
@@ -66,6 +78,18 @@ const registerModals = () => {
 
   Navigation.registerComponent(EDIT_PROGRAM_MODAL, () =>
     WrappedComponent(EditProgramModal),
+  );
+
+  Navigation.registerComponent(ADD_APPOINTMENT_MODAL, () =>
+    WrappedComponent(AddAppointmentModal),
+  );
+
+  Navigation.registerComponent(APPOINTMENT_DETAILS_MODAL, () =>
+    WrappedComponent(AppointmentDetailsModal),
+  );
+
+  Navigation.registerComponent(DELETE_CONFIRMATION_MODAL, () =>
+    WrappedComponent(DeleteConfirmationModal),
   );
 };
 

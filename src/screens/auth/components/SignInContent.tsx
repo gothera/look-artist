@@ -16,7 +16,7 @@ import OrLineDivider from '../../../components/ui/OrLineDivider';
 import { FacebookBtnIcon, GoogleBtnIcon, LogoOnHeader } from '../../../res/svg';
 import { signUp } from '../../../store/profile/profile.actions';
 import { AsyncDispatch } from '../../../store/store.types';
-import { color, typography } from '../../../theme';
+import { color, typography, spacing } from '../../../theme';
 
 interface OwnProps {
   componentId: string;
@@ -55,7 +55,7 @@ const SignInContent: React.FC<OwnProps & PropsFromRedux> = ({
       <LogoOnHeader />
       <Text style={styles.header}>Welcome to look for artists</Text>
       <Text style={styles.headerDescription}>
-        Register and get your appointments to the next level
+        Get your appointments to the next level
       </Text>
       <TextInputWithLabel
         containerStyle={styles.emailTextInput}
@@ -117,6 +117,7 @@ interface Style {
 const styles = StyleSheet.create<Style>({
   container: {
     flex: 1,
+    width: '100%',
   },
   header: {
     ...typography.descriptiveHeader,
@@ -139,11 +140,11 @@ const styles = StyleSheet.create<Style>({
     marginTop: 8,
   },
   emailTextInput: {
-    marginTop: 20,
+    marginTop: spacing.extraLarge,
     minWidth: '100%',
   },
   passwordInput: {
-    marginTop: 20,
+    marginTop: spacing.larger,
 
     minWidth: '100%',
   },

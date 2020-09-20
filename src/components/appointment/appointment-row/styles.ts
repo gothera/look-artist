@@ -3,7 +3,9 @@ import { typography, color } from '../../../theme';
 
 interface Style {
   container: ViewStyle;
+  intervalContainer: ViewStyle;
   intervalText: TextStyle;
+  intervalFreeSpotsLabel: TextStyle;
   rowContainer: ViewStyle;
   addAppointmentBtnContainer: ViewStyle;
 }
@@ -12,10 +14,17 @@ export const styles = StyleSheet.create<Style>({
   container: {
     paddingRight: 8,
     paddingLeft: 16,
-    // backgroundColor: 'green',
     height: 90,
   },
+  intervalContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   intervalText: {
+    ...typography.smallInterval,
+    color: color.muted,
+  },
+  intervalFreeSpotsLabel: {
     ...typography.smallInterval,
     color: color.muted,
   },
@@ -23,7 +32,6 @@ export const styles = StyleSheet.create<Style>({
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 16,
-    // backgroundColor: 'red',
   },
   addAppointmentBtnContainer: {
     justifyContent: 'center',

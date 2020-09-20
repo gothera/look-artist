@@ -1,4 +1,5 @@
 import { TextStyle } from 'react-native';
+import designSystemTypography from './designsystem-typography';
 
 export const font = {
   thin: {
@@ -40,14 +41,16 @@ export const font = {
 };
 
 export const typography = {
+  ...designSystemTypography,
+
   descriptiveHeader: {
     ...font.bold,
     fontSize: 20,
   } as TextStyle,
 
   headerDescription: {
-    ...font.semiBold,
-    fontSize: 14,
+    ...font.medium,
+    fontSize: 16,
   } as TextStyle,
 
   textInputLabel: {
@@ -61,7 +64,7 @@ export const typography = {
   } as TextStyle,
 
   textInput: {
-    ...font.semiBold,
+    ...font.medium,
     fontSize: 16,
   } as TextStyle,
 

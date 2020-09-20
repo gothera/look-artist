@@ -44,14 +44,14 @@ const styles = StyleSheet.create<Style>({
     width: '100%',
     justifyContent: 'center',
     alignContent: 'center',
-    borderRadius: 4,
+    borderRadius: 12,
     backgroundColor: color.brand,
   },
   text: {
     ...typography.button,
     color: color.textInverted,
-    paddingBottom: 12,
-    paddingTop: 13,
+    paddingBottom: 13,
+    paddingTop: 14,
     textAlign: 'center',
   },
   disabled: {

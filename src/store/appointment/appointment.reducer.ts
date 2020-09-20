@@ -34,7 +34,7 @@ function notificationReducer(
           state.local[appointment.id.toString()] = appointment;
         } else {
           state.local[
-            `${action.payload.date}#${appointment.startingDate}`
+            `${action.payload.date}#${appointment.startingTime}`
           ] = appointment;
         }
       });
@@ -46,7 +46,7 @@ function notificationReducer(
             .date]: action.payload.appointments.map((appointment) =>
             appointment.id
               ? appointment.id.toString()
-              : `${action.payload.date}#${appointment.startingDate}`,
+              : `${action.payload.date}#${appointment.startingTime}`,
           ),
         },
 

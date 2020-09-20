@@ -41,6 +41,7 @@ const CalendarHeader: React.FC<OwnProps> = ({ onNewDateSelected }) => {
         onDateChanged={onDateChanged}
         onMonthChange={onMonthChange}
         disabledOpacity={0.6}
+        showTodayButton
       >
         <ExpandableCalendar
           hideArrows
