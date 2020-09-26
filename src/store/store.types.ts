@@ -1,6 +1,7 @@
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import {
   Appointment,
+  ArtistProgramEntry,
   Notification,
   OfferedService,
 } from '../types/globalTypes';
@@ -23,6 +24,9 @@ export interface ProfileState {
   profilePicture?: string;
   isUploadingProfilePicture: boolean;
   bio?: string;
+  isFetching: boolean;
+  localProgramEntries: Record<string, ArtistProgramEntry>;
+  programEntriesByDate: string[];
 }
 
 export interface NotificationState {
@@ -41,6 +45,7 @@ export interface AppointmentState {
 }
 
 export interface OfferedServicesState {
+  offeredServicesById: number[];
   local: Record<number, OfferedService>;
 }
 
@@ -51,7 +56,7 @@ export interface State {
   profile: ProfileState;
   view: ViewState;
   notification: NotificationState;
-  offeredServices: OfferedServicesState;
+  offeredService: OfferedServicesState;
   appointment: AppointmentState;
 }
 

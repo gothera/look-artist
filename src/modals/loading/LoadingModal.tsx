@@ -1,18 +1,17 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
+  Animated,
+  Dimensions,
   StyleSheet,
-  Text,
+  TouchableWithoutFeedback,
   View,
   ViewStyle,
-  Dimensions,
-  Animated,
-  TouchableWithoutFeedback,
 } from 'react-native';
-import { color } from '../../theme';
-import { Navigation } from 'react-native-navigation';
 import { MaterialIndicator } from 'react-native-indicators';
-import { StoreState } from '../../store/store.types';
+import { Navigation } from 'react-native-navigation';
 import { connect, ConnectedProps } from 'react-redux';
+import { StoreState } from '../../store/store.types';
+import { color } from '../../theme';
 
 const WIDTH = Dimensions.get('screen').width - 100;
 

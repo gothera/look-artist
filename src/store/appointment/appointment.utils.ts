@@ -1,5 +1,5 @@
 import { AppointmentResponse } from '../../services/api/api.types';
-import { Appointment, AppointmentType } from '../../types/globalTypes';
+import { Appointment } from '../../types/globalTypes';
 
 /**
  * Normalize appointment from server
@@ -19,10 +19,9 @@ export const normalizeAppointment = (
     date: appointmentResponse.date,
     startingTime: appointmentResponse.startingTime.substring(0, 5), // '20:00:00' to '20:00'
     endingTime: appointmentResponse.endingTime.substring(0, 5),
-    type:
-      appointmentResponse.type === 'Free'
-        ? AppointmentType.Free
-        : AppointmentType.Reserved,
+    cost: appointmentResponse.cost,
+    currency: appointmentResponse.currency,
+    type: appointmentResponse.type,
   };
   return normalizedAppointment;
 };

@@ -32,10 +32,20 @@ export interface addAppointmentRequest {
   type: typeof appointmentConstants.ADD_APPOINTMENT_REQUEST;
 }
 
+export interface deleteAppointmentRequest {
+  type: typeof appointmentConstants.DELETE_APPOINTMENT_REQUEST;
+}
+export interface deleteAppointmentFailure {
+  type: typeof appointmentConstants.DELETE_APPOINTMENT_FAILURE;
+  payload: { error: string };
+}
+
 export type AppointmentAction =
   | InvalidateStoreAction
   | fetchAppointmentsSuccess
   | fetchAppointmentsFailure
   | fetchAppointmentsRequest
   | addAppointmentRequest
-  | addAppointmentFailure;
+  | addAppointmentFailure
+  | deleteAppointmentRequest
+  | deleteAppointmentFailure;

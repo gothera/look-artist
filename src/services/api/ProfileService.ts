@@ -1,6 +1,6 @@
-import { ArtistResponseApi } from '../../types/globalTypes';
+import { ArtistProgramEntry, ArtistResponseApi } from '../../types/globalTypes';
 import { SetupBody } from './api.types';
-import { getRequest, postRequest } from './apiRequest';
+import { getRequest, postRequest, putRequest } from './apiRequest';
 
 export const setup = (setupBody: SetupBody): Promise<ArtistResponseApi> => {
   const url = `artist/setup/`;
@@ -23,4 +23,11 @@ export const fetchProfile = (): Promise<ArtistResponseApi> => {
   const url = `artist/current/`;
 
   return getRequest<ArtistResponseApi>(url);
+};
+
+export const updateArtistProgram = (
+  programEntries: ArtistProgramEntry[],
+): Promise<ArtistProgramEntry[]> => {
+  const url = `artist/program/`;
+  return putRequest<ArtistProgramEntry[]>(url, programEntries);
 };

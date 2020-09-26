@@ -1,16 +1,17 @@
-import React, { useRef, useEffect } from 'react';
-import { Navigation } from 'react-native-navigation';
+import React, { useEffect, useRef } from 'react';
 import { Modalize } from 'react-native-modalize';
-import { styles } from './styles';
+import { Navigation } from 'react-native-navigation';
 import { connect, ConnectedProps } from 'react-redux';
+import { MODAL_BIG_SNAP_POINT } from '../../res/constants';
 import { selectAppointmentById } from '../../store/appointment/appointment.selectors';
 import { StoreState } from '../../store/store.types';
-import { MODAL_BIG_SNAP_POINT } from '../../res/constants';
-import ClientDetailsHeader from './components/client-details-header/ClientDetailsHeader';
-import AppointmentDetailsService from './components/appointment-details-service/AppointmentDetailsService';
+import { Currency } from '../../types/enums';
 import AppointmentDetailsDate from './components/appointment-details-date/AppointmentDetailsDate';
-import AppointmentDetailsPrice from './components/appointment-details-price/AppointmentDetailsPrice';
 import AppointmentDetailsFooter from './components/appointment-details-footer/AppointmentDetailsFooter';
+import AppointmentDetailsPrice from './components/appointment-details-price/AppointmentDetailsPrice';
+import AppointmentDetailsService from './components/appointment-details-service/AppointmentDetailsService';
+import ClientDetailsHeader from './components/client-details-header/ClientDetailsHeader';
+import { styles } from './styles';
 
 interface OwnProps {
   componentId: string;
@@ -24,6 +25,9 @@ const mapStateToProps = (state: StoreState, ownProps: OwnProps) => {
   const clientPhoto = appointment.photo;
   const startingTime = appointment.startingTime;
   const endingTime = appointment.endingTime;
+  const date = appointment.date;
+  const currency = appointment.currency;
+  const cost = appointment.cost;
 
   return {
     clientName,
@@ -31,6 +35,9 @@ const mapStateToProps = (state: StoreState, ownProps: OwnProps) => {
     clientPhoto,
     startingTime,
     endingTime,
+    date,
+    currency,
+    cost,
   };
 };
 
@@ -46,6 +53,9 @@ const AppointmentDetailsModal: React.FC<OwnProps & PropsFromRedux> = ({
   startingTime,
   endingTime,
   appointmentIdStr,
+  date,
+  currency,
+  cost,
 }) => {
   const modalizeRef = useRef<Modalize>(null);
 
@@ -63,7 +73,7 @@ const AppointmentDetailsModal: React.FC<OwnProps & PropsFromRedux> = ({
     Navigation.dismissOverlay(componentId);
   };
 
-  if (!clientName || !clientPhoto || !serviceName) {
+  if (!clientName || !serviceName) {
     /**
      * Pay attention, can do bugs
      */
@@ -86,13 +96,20 @@ const AppointmentDetailsModal: React.FC<OwnProps & PropsFromRedux> = ({
         />
         <AppointmentDetailsService serviceName={serviceName} />
         <AppointmentDetailsDate
-          date={'2020-10-10'} // TODO send correct prop
+          date={date} // TODO send correct prop
           startingTime={startingTime}
           endingTime={endingTime}
         />
-        <AppointmentDetailsPrice price={20} currency={'lei'} />
+        <AppointmentDetailsPrice
+          price={cost || 0}
+          currency={Currency[currency]}
+        />
       </Modalize>
-      <AppointmentDetailsFooter appointmentIdStr={appointmentIdStr} />
+      <AppointmentDetailsFooter
+        appointmentIdStr={appointmentIdStr}
+        date={date}
+        closeModal={closeModal}
+      />
     </>
   );
 };

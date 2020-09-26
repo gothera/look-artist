@@ -1,20 +1,20 @@
-import { createStore, applyMiddleware } from 'redux';
-import thunkMiddleware from 'redux-thunk';
+import { applyMiddleware, createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import {
   createMigrate,
-  persistStore,
-  persistReducer,
   PersistConfig,
   PersistedState,
+  persistReducer,
+  persistStore,
 } from 'redux-persist';
 import FilesystemStorage from 'redux-persist-filesystem-storage';
-import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import { createBlacklistFilter } from 'redux-persist-transform-filter';
-import rootReducer from './rootReducer';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import { StoreState, TAction, AsyncDispatch } from './store.types';
-import initialState from './initialState';
 import { PersistPartial } from 'redux-persist/es/persistReducer';
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
+import thunkMiddleware from 'redux-thunk';
+import initialState from './initialState';
+import rootReducer from './rootReducer';
+import { AsyncDispatch, StoreState, TAction } from './store.types';
 
 const VERSION = 13;
 

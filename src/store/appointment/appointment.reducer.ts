@@ -6,7 +6,7 @@ function getInitialState() {
   return Object.assign({}, initialState.appointment);
 }
 
-function notificationReducer(
+function appointmentReducer(
   state = getInitialState(),
   action: TAction,
 ): AppointmentState {
@@ -14,6 +14,7 @@ function notificationReducer(
     case appointmentConstants.INVALIDATE_STORE: {
       return getInitialState();
     }
+    case appointmentConstants.DELETE_APPOINTMENT_FAILURE:
     case appointmentConstants.FETCH_APPOINTMENTS_OF_DAY_FAILURE: {
       return {
         ...state,
@@ -21,6 +22,7 @@ function notificationReducer(
         fetching: false,
       };
     }
+    case appointmentConstants.DELETE_APPOINTMENT_REQUEST:
     case appointmentConstants.ADD_APPOINTMENT_REQUEST:
     case appointmentConstants.FETCH_APPOINTMENTS_OF_DAY_REQUEST: {
       return {
@@ -63,4 +65,4 @@ function notificationReducer(
   }
 }
 
-export default notificationReducer;
+export default appointmentReducer;

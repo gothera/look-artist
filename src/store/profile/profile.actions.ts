@@ -7,7 +7,7 @@ import {
 } from '../../services/api/api.types';
 import * as AuthService from '../../services/api/AuthService';
 import * as ProfileService from '../../services/api/ProfileService';
-import { ArtistResponseApi } from '../../types/globalTypes';
+import { ArtistProgramEntry, ArtistResponseApi } from '../../types/globalTypes';
 import { ThunkResult } from '../store.types';
 import * as profileConstants from './profile.constants';
 import * as profileTypes from './profile.types';
@@ -300,6 +300,51 @@ export const fetchProfile = (): ThunkResult<void> => {
       .catch((error) => {
         dispatch(setupFailure());
         console.log('Setup Failure', error);
+      });
+  };
+};
+
+export const updateArtistProgramRequest = (): profileTypes.updateArtistProgramRequest => {
+  return {
+    type: profileConstants.UPDATE_ARTIST_PROGRAM_REQUEST,
+  };
+};
+
+export const updateArtistProgramSuccess = (
+  programEntries: ArtistProgramEntry[],
+): profileTypes.updateArtistProgramSuccess => {
+  return {
+    type: profileConstants.UPDATE_ARTIST_PROGRAM_SUCCESS,
+    payload: { programEntries: programEntries },
+  };
+};
+
+export const updateArtistProgramFailure = (
+  error: string,
+): profileTypes.updateArtistProgramFailure => {
+  return {
+    type: profileConstants.UPDATE_ARTIST_PROGRAM_FAILURE,
+    payload: { error },
+  };
+};
+
+export const updateArtistProgram = (
+  entries: ArtistProgramEntry[],
+): ThunkResult<void> => {
+  return async function (dispatch, getState) {
+    dispatch(updateArtistProgramRequest());
+
+    const token = getState().profile.token;
+    if (!token) {
+      return Promise.resolve();
+    }
+
+    return ProfileService.updateArtistProgram(entries)
+      .then((response: ArtistProgramEntry[]) => {
+        dispatch(updateArtistProgramSuccess(response));
+      })
+      .catch((error) => {
+        dispatch(updateArtistProgramFailure(error));
       });
   };
 };

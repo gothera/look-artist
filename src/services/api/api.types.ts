@@ -1,4 +1,4 @@
-import { Notification } from '../../types/globalTypes';
+import { AppointmentType, Notification } from '../../types/globalTypes';
 
 export interface UserResponse {
   id: number;
@@ -51,6 +51,8 @@ export interface AppointmentResponse {
   serviceName?: string;
   startingTime: string;
   endingTime: string;
-  type: string;
-  date?: string;
+  type: AppointmentType;
+  currency: string;
+  cost: number;
+  date: string;
 }

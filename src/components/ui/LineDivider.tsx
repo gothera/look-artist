@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, ViewStyle, StyleProp } from 'react-native';
+import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import { color } from '../../theme';
 
 interface OwnProps {
@@ -14,7 +14,6 @@ interface Style {
 }
 const styles = StyleSheet.create<Style>({
   container: {
-    width: '100%',
     height: 1,
     backgroundColor: color.unchosen,
   },

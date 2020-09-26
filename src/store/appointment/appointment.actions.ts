@@ -1,9 +1,9 @@
+import { AppointmentResponse } from '../../services/api/api.types';
 import * as AppointmentService from '../../services/api/AppointmentService';
 import { Appointment } from '../../types/globalTypes';
 import { ThunkResult } from '../store.types';
 import * as appointmentConstants from './appointment.constants';
 import * as appointmentTypes from './appointment.types';
-import { AppointmentResponse } from '../../services/api/api.types';
 import { normalizeAppointments } from './appointment.utils';
 
 const fetchAppointmentsOfDayRequest = (): appointmentTypes.fetchAppointmentsRequest => {
@@ -90,15 +90,54 @@ const addAppointmentFailure = (
   };
 };
 
-export const addAppointment = (appointment: Appointment): ThunkResult<void> => {
+export const addAppointment = (
+  appointment: Appointment,
+  closeModal: () => void,
+): ThunkResult<void> => {
   return async function (dispatch, getState) {
-    dispatch(fetchAppointmentsOfDayRequest());
+    dispatch(addAppointmentRequest());
     return AppointmentService.addAppointment(appointment)
       .then((response: Appointment[]) => {
-        dispatch(fetchAppointmentsOfDaySuccess(response, date));
+        closeModal();
+        dispatch(fetchAppointmentsOfDaySuccess(response, appointment.date));
       })
       .catch((error) => {
-        dispatch(fetchAppointmentsOfDayFailure(error));
+        dispatch(addAppointmentFailure(error));
+      });
+  };
+};
+
+const deleteAppointmentRequest = (): appointmentTypes.deleteAppointmentRequest => {
+  return {
+    type: appointmentConstants.DELETE_APPOINTMENT_REQUEST,
+  };
+};
+
+const deleteAppointmentFailure = (
+  error: string,
+): appointmentTypes.deleteAppointmentFailure => {
+  return {
+    type: appointmentConstants.DELETE_APPOINTMENT_FAILURE,
+    payload: {
+      error,
+    },
+  };
+};
+
+export const deleteAppointment = (
+  appointmentId: string,
+  date: string,
+  closeModal: () => void,
+): ThunkResult<void> => {
+  return async function (dispatch, getState) {
+    dispatch(deleteAppointmentRequest());
+    return AppointmentService.deleteAppointment(appointmentId)
+      .then((response: Appointment[]) => {
+        dispatch(fetchAppointmentsOfDaySuccess(response, date));
+        closeModal();
+      })
+      .catch((error) => {
+        dispatch(deleteAppointmentFailure(error));
       });
   };
 };

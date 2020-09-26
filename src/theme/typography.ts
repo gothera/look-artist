@@ -109,8 +109,8 @@ export const typography = {
   } as TextStyle,
 
   smallTitle: {
-    ...font.bold,
-    fontSize: 15,
+    ...font.medium,
+    fontSize: 16,
   } as TextStyle,
 
   collapsedHeaderTitle: {
@@ -119,8 +119,8 @@ export const typography = {
   } as TextStyle,
 
   mutedDescription: {
-    ...font.regular,
-    fontSize: 15,
+    ...font.semiBold,
+    fontSize: 8,
   },
 
   smallInterval: {
@@ -136,5 +136,10 @@ export const typography = {
   serviceName: {
     ...font.semiBold,
     fontSize: 11,
+  },
+
+  label: {
+    ...font.semiBold,
+    fontSize: 13,
   },
 };

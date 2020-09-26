@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import {
   StyleProp,
   StyleSheet,
@@ -9,12 +9,13 @@ import {
 } from 'react-native';
 import RNPickerSelect, { PickerStyle } from 'react-native-picker-select';
 import { DownArrowIcon } from '../../res/svg';
-import { color, typography } from '../../theme';
+import { color, spacing, typography } from '../../theme';
 import { PickerItem } from '../../types/globalTypes';
 import LineDivider from '../ui/LineDivider';
 
 interface OwnProps {
   containerStyle?: StyleProp<ViewStyle>;
+  labelStyle?: TextStyle;
   label: string;
   onValueChanged?: (text: string) => void;
   placeholder: string;
@@ -30,33 +31,33 @@ const PickerInput: React.FC<OwnProps> = ({
   placeholder,
   items,
   value,
-  setSelected,
+  labelStyle,
 }) => {
-  const [selection, setSelection] = useState<string | undefined>(undefined);
-
   const renderDownArrowIcon = () => <DownArrowIcon />;
 
   const onValueChange = (newValue: string) => {
-    setSelection(newValue);
-    setSelected(newValue);
+    onValueChanged?.(newValue);
   };
+
+  useEffect(() => {});
 
   return (
     <View style={[styles.container, containerStyle]}>
-      <Text style={styles.label}>{label}</Text>
+      <Text style={[styles.label, labelStyle]}>{label}</Text>
       <View style={styles.rowTouchable}>
         <RNPickerSelect
-          onValueChange={onValueChange}
+          onValueChange={(value, index) => onValueChange(value)}
           items={items}
-          Icon={renderDownArrowIcon}
+          // Icon={renderDownArrowIcon}
           style={pickerStyle}
           value={value}
-          InputAccessoryView={() => null}
-          placeholder={{ label: 'Select a service', value: 'select-service' }}
+          // InputAccessoryView={() => null}
+          placeholder={{ label: placeholder, value: 'default' }}
+          // useNativeAndroidPickerStyle={false}
         />
       </View>
 
-      <LineDivider />
+      <LineDivider containerStyle={styles.divider} />
     </View>
   );
 };
@@ -65,6 +66,7 @@ interface Style {
   container: ViewStyle;
   label: TextStyle;
   rowTouchable: ViewStyle;
+  divider: ViewStyle;
 }
 
 const styles = StyleSheet.create<Style>({
@@ -82,6 +84,9 @@ const styles = StyleSheet.create<Style>({
     marginTop: 10,
     paddingBottom: 5,
   },
+  divider: {
+    marginTop: spacing.small,
+  },
 });
 
 const pickerStyle: PickerStyle = {
@@ -97,6 +102,10 @@ const pickerStyle: PickerStyle = {
     color: color.muted,
   },
   inputIOS: {
+    ...typography.textInput,
+    color: color.textSecondary,
+  },
+  inputAndroid: {
     ...typography.textInput,
     color: color.textSecondary,
   },

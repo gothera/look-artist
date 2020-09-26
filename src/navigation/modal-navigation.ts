@@ -2,21 +2,39 @@ import {
   Navigation,
   OptionsModalPresentationStyle,
 } from 'react-native-navigation';
+import { color } from '../theme';
 import {
-  LOADING_MODAL,
-  EDIT_PROGRAM_MODAL,
   ADD_APPOINTMENT_MODAL,
   APPOINTMENT_DETAILS_MODAL,
   DELETE_CONFIRMATION_MODAL,
+  EDIT_PROGRAM_MODAL,
+  LOADING_MODAL,
+  SELECT_TIME_MODAL,
 } from './modal-constants';
 import { Config, getConfig } from './utils-navigation';
-import { color } from '../theme';
 
 export const showLoadingModal = (pushConfig?: Config) => {
   const config = getConfig(pushConfig);
   Navigation.showOverlay({
     component: {
       name: LOADING_MODAL,
+      passProps: { ...config.props },
+      options: {
+        modalPresentationStyle:
+          OptionsModalPresentationStyle.overCurrentContext,
+        layout: {
+          backgroundColor: 'transparent',
+          componentBackgroundColor: 'transparent',
+        },
+      },
+    },
+  });
+};
+export const showSelectTimeModal = (pushConfig?: Config) => {
+  const config = getConfig(pushConfig);
+  Navigation.showOverlay({
+    component: {
+      name: SELECT_TIME_MODAL,
       passProps: { ...config.props },
       options: {
         modalPresentationStyle:

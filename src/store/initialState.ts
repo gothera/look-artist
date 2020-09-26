@@ -2,12 +2,16 @@ import { StoreState } from './store.types';
 const initialState: StoreState = {
   profile: {
     isLogging: false,
+    isFetching: false,
+    localProgramEntries: {},
+    programEntriesByDate: [],
     isUploadingProfilePicture: false,
   },
   view: {
     aux: '',
   },
-  offeredServices: {
+  offeredService: {
+    offeredServicesById: [],
     local: {},
   },
   notification: {

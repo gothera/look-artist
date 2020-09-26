@@ -1,15 +1,15 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import { styles } from './styles';
-import AppointmentIndicator from '../../ui/appointment-indicator/AppointmentIndicator';
-import UserAvatar from '../../avatar/user-avatar/UserAvatar';
-import AppointmentUserService from '../appointment-user-service/AppointmentUserService';
-import AddAppointmentText from '../../button/add-appointment-text/AddAppointmentText';
-import { StoreState } from '../../../store/store.types';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
-import { selectAppointmentById } from '../../../store/appointment/appointment.selectors';
-import { AppointmentType } from '../../../types/globalTypes';
 import { showAppointmentDetailsModal } from '../../../navigation';
+import { selectAppointmentById } from '../../../store/appointment/appointment.selectors';
+import { StoreState } from '../../../store/store.types';
+import { AppointmentType } from '../../../types/globalTypes';
+import UserAvatar from '../../avatar/user-avatar/UserAvatar';
+import AddAppointmentText from '../../button/add-appointment-text/AddAppointmentText';
+import AppointmentIndicator from '../../ui/appointment-indicator/AppointmentIndicator';
+import AppointmentUserService from '../appointment-user-service/AppointmentUserService';
+import { styles } from './styles';
 
 interface OwnProps {
   appointmentIdStr: string;
@@ -19,11 +19,12 @@ interface OwnProps {
 const mapStateToProps = (state: StoreState, ownProps: OwnProps) => {
   const appointment = selectAppointmentById(ownProps.appointmentIdStr)(state);
   const isFreeSpot = appointment.type === AppointmentType.Free;
-  const clientName = appointment.clientName;
+  const clientName = appointment?.clientName;
   const serviceName = appointment.serviceName;
   const clientPhoto = appointment.photo;
   const startingTime = appointment.startingTime;
   const endingTime = appointment.endingTime;
+  const date = appointment.date;
 
   return {
     isFreeSpot,
@@ -32,6 +33,7 @@ const mapStateToProps = (state: StoreState, ownProps: OwnProps) => {
     clientPhoto,
     startingTime,
     endingTime,
+    date,
   };
 };
 
@@ -48,8 +50,9 @@ const AppointmentRow: React.FC<OwnProps & PropsFromRedux> = ({
   endingTime,
   isLast,
   appointmentIdStr,
+  date,
 }) => {
-  const intervalStr = startingTime + '-' + endingTime;
+  const intervalStr = startingTime.substr(0, 5) + '-' + endingTime.substr(0, 5);
 
   const goToAppointmentDetailsModal = () => {
     showAppointmentDetailsModal({
@@ -82,7 +85,11 @@ const AppointmentRow: React.FC<OwnProps & PropsFromRedux> = ({
 
       {isFreeSpot && (
         <View style={styles.addAppointmentBtnContainer}>
-          <AddAppointmentText />
+          <AddAppointmentText
+            startingTime={startingTime.substr(0, 5)}
+            endingTime={endingTime.substr(0, 5)}
+            date={date}
+          />
         </View>
       )}
     </View>

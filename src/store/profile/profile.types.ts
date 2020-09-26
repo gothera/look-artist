@@ -1,4 +1,4 @@
-import { ArtistResponseApi } from '../../types/globalTypes';
+import { ArtistProgramEntry, ArtistResponseApi } from '../../types/globalTypes';
 import * as profileConstants from './profile.constants';
 
 export interface InvalidateStoreAction {
@@ -87,6 +87,20 @@ export interface fetchProfileFailure {
   type: typeof profileConstants.FETCH_PROFILE_FAILURE;
 }
 
+export interface updateArtistProgramSuccess {
+  type: typeof profileConstants.UPDATE_ARTIST_PROGRAM_SUCCESS;
+  payload: { programEntries: ArtistProgramEntry[] };
+}
+
+export interface updateArtistProgramFailure {
+  type: typeof profileConstants.UPDATE_ARTIST_PROGRAM_FAILURE;
+  payload: { error: string };
+}
+
+export interface updateArtistProgramRequest {
+  type: typeof profileConstants.UPDATE_ARTIST_PROGRAM_REQUEST;
+}
+
 export type ProfileAction =
   | InvalidateStoreAction
   | LoginSuccess
@@ -106,4 +120,7 @@ export type ProfileAction =
   | ChangeProfilePictureFailure
   | fetchProfileRequest
   | fetchProfileSuccess
-  | fetchProfileFailure;
+  | fetchProfileFailure
+  | updateArtistProgramSuccess
+  | updateArtistProgramRequest
+  | updateArtistProgramFailure;

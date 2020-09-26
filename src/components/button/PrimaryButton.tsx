@@ -1,16 +1,17 @@
 import React from 'react';
 import {
+  StyleProp,
   StyleSheet,
   Text,
-  StyleProp,
-  ViewStyle,
-  TouchableOpacity,
   TextStyle,
+  TouchableOpacity,
+  ViewStyle,
 } from 'react-native';
 import { color, typography } from '../../theme';
 
 interface OwnProps {
   containerStyle?: StyleProp<ViewStyle>;
+  textStyles?: StyleProp<TextStyle>;
   onPress: () => void;
   title: string;
   isDisabled?: boolean;
@@ -21,6 +22,7 @@ const PrimaryButton: React.FC<OwnProps> = ({
   onPress,
   title,
   isDisabled,
+  textStyles,
 }) => {
   return (
     <TouchableOpacity
@@ -28,7 +30,7 @@ const PrimaryButton: React.FC<OwnProps> = ({
       onPress={onPress}
       disabled={isDisabled}
     >
-      <Text style={styles.text}>{title}</Text>
+      <Text style={[styles.text, textStyles]}>{title}</Text>
     </TouchableOpacity>
   );
 };

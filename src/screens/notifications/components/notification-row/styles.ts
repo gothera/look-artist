@@ -8,6 +8,7 @@ interface Style {
   textContainer: ViewStyle;
   reviewTitle: TextStyle;
   reviewDescription: TextStyle;
+  dividerStyle: ViewStyle;
 }
 
 const styles = StyleSheet.create<Style>({
@@ -23,7 +24,13 @@ const styles = StyleSheet.create<Style>({
     display: 'flex',
   },
   reviewTitle: { ...typography.smallTitle, color: color.textPrimary },
-  reviewDescription: { ...typography.mutedDescription, color: color.muted },
+  reviewDescription: {
+    ...typography.mutedDescription,
+    marginTop: 4,
+    fontWeight: 'normal',
+    color: color.muted,
+  },
+  dividerStyle: { backgroundColor: '#EEEEEE' },
 });
 
 export default styles;

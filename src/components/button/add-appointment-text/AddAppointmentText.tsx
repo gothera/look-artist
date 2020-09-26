@@ -1,13 +1,23 @@
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
-import { styles } from './styles';
+import { showAddAppointmentModal } from '../../../navigation';
 import { PlusIcon } from '../../../res/svg';
 import { color } from '../../../theme';
-import { showAddAppointmentModal } from '../../../navigation';
+import { styles } from './styles';
 
-const AddAppointmentText: React.FC = () => {
+interface OwnProps {
+  startingTime: string;
+  endingTime: string;
+  date: string;
+}
+
+const AddAppointmentText: React.FC<OwnProps> = ({
+  startingTime,
+  endingTime,
+  date,
+}) => {
   const onPress = () => {
-    showAddAppointmentModal();
+    showAddAppointmentModal({ props: { startingTime, endingTime, date } });
   };
 
   return (

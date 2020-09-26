@@ -18,11 +18,13 @@ const fetchNotificationsRequest = (
 
 const fetchNotificationsSuccess = (
   notifications: Notification[],
+  isFirst: boolean,
 ): notificationTypes.fetchNotificationsSuccess => {
   return {
     type: notificationConstants.FETCH_NOTIFICATIONS_SUCCESS,
     payload: {
       notifications,
+      isFirst,
     },
   };
 };
@@ -53,7 +55,7 @@ export const fetchNotifications = (isFirst: boolean): ThunkResult<void> => {
     const pageNumber = getState().notification.nextPage;
     return NotificationService.fetchNotifications(pageNumber)
       .then((response: FetchNotificationsResponse) => {
-        dispatch(fetchNotificationsSuccess(response.content));
+        dispatch(fetchNotificationsSuccess(response.content, isFirst));
       })
       .catch((error) => {
         dispatch(fetchNotificationsFailure(error));

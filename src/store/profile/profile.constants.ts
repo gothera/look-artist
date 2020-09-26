@@ -22,3 +22,7 @@ export const CHANGE_PROFILE_PICTURE_FAILURE = 'change_profile_picture_failure';
 export const FETCH_PROFILE_REQUEST = 'fetch_profile_request';
 export const FETCH_PROFILE_SUCCESS = 'fetch_profile_success';
 export const FETCH_PROFILE_FAILURE = 'fetch_profile_failure';
+
+export const UPDATE_ARTIST_PROGRAM_SUCCESS = 'update_artist_program_success';
+export const UPDATE_ARTIST_PROGRAM_REQUEST = 'update_artist_program_request';
+export const UPDATE_ARTIST_PROGRAM_FAILURE = 'update_artist_program_failure';

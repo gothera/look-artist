@@ -1,3 +1,5 @@
+import { Currency } from './enums';
+
 export interface ImagePickerResponse {
   path: string;
   mime: string;
@@ -14,9 +16,11 @@ export interface PickerItem {
 export interface OfferedService {
   name: string;
   category: string;
+  description: string;
   price: number;
   duration: number;
   id: number;
+  currency: Currency;
 }
 
 export enum NotificationType {
@@ -47,6 +51,7 @@ export interface ArtistResponseApi {
   bio: string;
   offeredServices: OfferedService[];
   profilePicture: string;
+  programEntries: ArtistProgramEntry[];
 }
 
 export interface Appointment {
@@ -59,8 +64,10 @@ export interface Appointment {
   serviceName?: string;
   startingTime: string;
   endingTime: string;
+  cost?: number;
+  currency: Currency;
   type: AppointmentType;
-  date?: string;
+  date: string;
 }
 
 declare global {
@@ -74,4 +81,10 @@ declare global {
     append(name: string, value: FormDataValue, fileName?: string): void;
     set(name: string, value: FormDataValue, fileName?: string): void;
   }
+}
+
+export interface ArtistProgramEntry {
+  date: string;
+  startTime: string;
+  endTime: string;
 }

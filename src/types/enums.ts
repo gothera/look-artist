@@ -6,3 +6,10 @@ export enum Category {
   Nails,
   BodyCare,
 }
+
+export enum Currency {
+  RON,
+  USD,
+  EUR,
+  GBP,
+}

@@ -5,12 +5,13 @@ import { Navigation } from 'react-native-navigation';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import {
-  LoadingModal,
-  EditProgramModal,
   AddAppointmentModal,
   AppointmentDetailsModal,
   DeleteConfirmationModal,
+  EditProgramModal,
+  LoadingModal,
 } from '../modals';
+import SelectTimeModal from '../modals/select-time/SelectTimeModal';
 import {
   AddPostScreen,
   AuthScreen,
@@ -22,11 +23,12 @@ import {
 import { persistor, store } from '../store';
 import { loginKeychain } from '../store/profile/profile.actions';
 import {
-  LOADING_MODAL,
-  EDIT_PROGRAM_MODAL,
   ADD_APPOINTMENT_MODAL,
   APPOINTMENT_DETAILS_MODAL,
   DELETE_CONFIRMATION_MODAL,
+  EDIT_PROGRAM_MODAL,
+  LOADING_MODAL,
+  SELECT_TIME_MODAL,
 } from './modal-constants';
 import {
   ADD_POST_SCREEN,
@@ -74,6 +76,10 @@ const registerScreens = () => {
 const registerModals = () => {
   Navigation.registerComponent(LOADING_MODAL, () =>
     WrappedComponent(LoadingModal),
+  );
+
+  Navigation.registerComponent(SELECT_TIME_MODAL, () =>
+    WrappedComponent(SelectTimeModal),
   );
 
   Navigation.registerComponent(EDIT_PROGRAM_MODAL, () =>

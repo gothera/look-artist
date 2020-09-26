@@ -1,3 +1,4 @@
+import { addArrayToDictByProp } from '../../utils/global';
 import initialState from '../initialState';
 import { ProfileState, TAction } from '../store.types';
 import * as profileConstants from './profile.constants';
@@ -14,6 +15,14 @@ function profileReducer(
     case profileConstants.INVALIDATE_STORE: {
       return getInitialState();
     }
+
+    case profileConstants.FETCH_PROFILE_REQUEST:
+    case profileConstants.UPDATE_ARTIST_PROGRAM_REQUEST:
+      return {
+        ...state,
+        isFetching: true,
+      };
+
     case profileConstants.LOGIN_REQUEST: {
       return {
         ...state,
@@ -120,6 +129,35 @@ function profileReducer(
         phoneNumber: action.payload.profile.phone,
         profilePicture: action.payload.profile.profilePicture,
         bio: action.payload.profile.bio,
+        localProgramEntries: {
+          ...addArrayToDictByProp(
+            {},
+            action.payload.profile.programEntries,
+            'date',
+          ),
+        },
+        programEntriesByDate: action.payload.profile.programEntries.map(
+          (entry) => entry.date,
+        ),
+      };
+    }
+
+    case profileConstants.UPDATE_ARTIST_PROGRAM_SUCCESS: {
+      return {
+        ...state,
+        programEntriesByDate: [
+          ...new Set([
+            ...state.programEntriesByDate,
+            ...action.payload.programEntries.map((entry) => entry.date),
+          ]),
+        ],
+        localProgramEntries: {
+          ...addArrayToDictByProp(
+            state.localProgramEntries,
+            action.payload.programEntries,
+            'date',
+          ),
+        },
       };
     }
 

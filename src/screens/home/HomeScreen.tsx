@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
+import AppointmentsList from './components/appointments-list/AppointmentsList';
 import CalendarHeader from './components/calendar-header/CalendarHeader';
 import { styles } from './styles';
-import AppointmentsList from './components/appointments-list/AppointmentsList';
-import { StoreState, AsyncDispatch } from '../../store/store.types';
-import { fetchAppointmentOfDay } from '../../store/appointment/appointment.actions';
-import { connect, ConnectedProps } from 'react-redux';
 
 interface OwnProps {
   componentId: string;

@@ -9,11 +9,12 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import { color, typography, spacing } from '../../theme';
+import { color, spacing, typography } from '../../theme';
 import LineDivider from '../ui/LineDivider';
 
 interface OwnProps {
   containerStyle?: StyleProp<ViewStyle>;
+
   label: string;
   shouldAutofocus?: boolean;
   placeholder: string;
@@ -23,6 +24,7 @@ interface OwnProps {
   keyboardType?: KeyboardTypeOptions;
   setText: (_: string) => void;
   text: string;
+  labelStyle?: StyleProp<TextStyle>;
 }
 
 const TextInputWithLabel: React.FC<OwnProps> = ({
@@ -35,6 +37,7 @@ const TextInputWithLabel: React.FC<OwnProps> = ({
   numOfLines,
   keyboardType,
   setText,
+  labelStyle,
   text,
 }) => {
   const textInputRef = createRef<TextInput>();
@@ -55,7 +58,7 @@ const TextInputWithLabel: React.FC<OwnProps> = ({
 
   return (
     <View style={[styles.container, containerStyle]}>
-      <Text style={styles.label}>{label}</Text>
+      <Text style={[styles.label, labelStyle]}>{label}</Text>
       <TextInput
         ref={textInputRef}
         style={styles.input}
