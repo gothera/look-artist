@@ -4,31 +4,16 @@ import { getGenericPassword } from 'react-native-keychain';
 import { Navigation } from 'react-native-navigation';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import {
-  AddAppointmentModal,
-  AppointmentDetailsModal,
-  DeleteConfirmationModal,
-  EditProgramModal,
-  LoadingModal,
-} from '../modals';
-import SelectTimeModal from '../modals/select-time/SelectTimeModal';
-import {
-  AddPostScreen,
-  AuthScreen,
-  HomeScreen,
-  NotificationsScreen,
-  ProfileScreen,
-  SetupScreen,
-} from '../screens';
 import { persistor, store } from '../store';
 import { loginKeychain } from '../store/profile/profile.actions';
 import {
   ADD_APPOINTMENT_MODAL,
   APPOINTMENT_DETAILS_MODAL,
   DELETE_CONFIRMATION_MODAL,
+  EDIT_DEFAULT_DAYS_MODAL,
   EDIT_PROGRAM_MODAL,
-  LOADING_MODAL,
   SELECT_TIME_MODAL,
+  LOADING_MODAL,
 } from './modal-constants';
 import {
   ADD_POST_SCREEN,
@@ -38,6 +23,23 @@ import {
   PROFILE_SCREEN,
   SETUP_SCREEN,
 } from './screen-constants';
+import {
+  LoadingModal,
+  EditProgramModal,
+  AddAppointmentModal,
+  AppointmentDetailsModal,
+  DeleteConfirmationModal,
+  EditDefaultDaysModal,
+  SelectTimeModal,
+} from '../modals';
+import {
+  AddPostScreen,
+  AuthScreen,
+  HomeScreen,
+  NotificationsScreen,
+  ProfileScreen,
+  SetupScreen,
+} from '../screens';
 import { pushAuthScreen, setLoggedInRoot } from './screen-navigation';
 
 const WrappedComponent = (Component: React.ComponentType<any>) => {
@@ -96,6 +98,10 @@ const registerModals = () => {
 
   Navigation.registerComponent(DELETE_CONFIRMATION_MODAL, () =>
     WrappedComponent(DeleteConfirmationModal),
+  );
+
+  Navigation.registerComponent(EDIT_DEFAULT_DAYS_MODAL, () =>
+    WrappedComponent(EditDefaultDaysModal),
   );
 };
 

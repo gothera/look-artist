@@ -2,16 +2,18 @@ import {
   Navigation,
   OptionsModalPresentationStyle,
 } from 'react-native-navigation';
-import { color } from '../theme';
 import {
   ADD_APPOINTMENT_MODAL,
   APPOINTMENT_DETAILS_MODAL,
   DELETE_CONFIRMATION_MODAL,
-  EDIT_PROGRAM_MODAL,
-  LOADING_MODAL,
+  EDIT_DEFAULT_DAYS_MODAL,
   SELECT_TIME_MODAL,
+  LOADING_MODAL,
+  EDIT_PROGRAM_MODAL,
 } from './modal-constants';
 import { Config, getConfig } from './utils-navigation';
+import { color } from '../theme';
+import strings from '../res/strings/strings';
 
 export const showLoadingModal = (pushConfig?: Config) => {
   const config = getConfig(pushConfig);
@@ -61,11 +63,11 @@ export const showEditProgramModal = (pushConfig?: Config) => {
               modalPresentationStyle: OptionsModalPresentationStyle.pageSheet,
               layout: {
                 backgroundColor: color.background,
-                componentBackgroundColor: 'transparent',
+                componentBackgroundColor: color.background,
               },
               topBar: {
                 title: {
-                  text: 'Edit Program',
+                  text: strings.modal.editProgram.title,
                   fontFamily: 'Gilroy-SemiBold',
                 },
               },
@@ -79,6 +81,7 @@ export const showEditProgramModal = (pushConfig?: Config) => {
 
 export const showAddAppointmentModal = (pushConfig?: Config) => {
   const config = getConfig(pushConfig);
+
   Navigation.showModal({
     stack: {
       children: [
@@ -146,6 +149,45 @@ export const showDeleteConfirmationModal = (pushConfig?: Config) => {
         },
         topBar: {
           visible: false,
+        },
+      },
+    },
+  });
+};
+
+/**
+ * Pushed on EditProgram
+ * @param componentId
+ * @param pushConfig
+ */
+export const showEditDefaultDaysModal = (
+  componentId: string,
+  pushConfig?: Config,
+) => {
+  const config = getConfig(pushConfig);
+
+  Navigation.push(componentId, {
+    component: {
+      name: EDIT_DEFAULT_DAYS_MODAL,
+      passProps: { ...config.props },
+      options: {
+        overlay: {
+          interceptTouchOutside: true,
+          handleKeyboardEvents: true,
+        },
+        layout: {
+          componentBackgroundColor: color.background,
+        },
+        topBar: {
+          title: {
+            text: strings.modal.editDefaultDays.title,
+            fontFamily: 'Gilroy-SemiBold',
+          },
+          backButton: {
+            showTitle: false,
+            icon: require('../res/images/icons/chevron-left-icon.png'),
+            color: color.textPrimary,
+          },
         },
       },
     },

@@ -1,4 +1,6 @@
 import { Notification } from '../types/globalTypes';
+import { DaysAbbreviation } from '../types/enums';
+import { DAYS_ABBREVIATION } from '../res/constants';
 
 export type ContentProp = keyof Notification;
 
@@ -40,5 +42,24 @@ export const monthNumberToMonthName = (monthNumber: number) => {
       return 'November';
     default:
       return 'December';
+  }
+};
+
+export const dayAbbEnumValue = (dayAbb: DaysAbbreviation) => {
+  switch (dayAbb) {
+    case DaysAbbreviation.Mon:
+      return DAYS_ABBREVIATION.MONDAY;
+    case DaysAbbreviation.Tue:
+      return DAYS_ABBREVIATION.TUESDAY;
+    case DaysAbbreviation.Wed:
+      return DAYS_ABBREVIATION.WEDNESDAY;
+    case DaysAbbreviation.Thu:
+      return DAYS_ABBREVIATION.THURSDAY;
+    case DaysAbbreviation.Fri:
+      return DAYS_ABBREVIATION.FRIDAY;
+    case DaysAbbreviation.Sat:
+      return DAYS_ABBREVIATION.SATURDAY;
+    case DaysAbbreviation.Sun:
+      return DAYS_ABBREVIATION.SUNDAY;
   }
 };

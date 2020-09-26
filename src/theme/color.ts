@@ -9,4 +9,5 @@ export const color = {
   background: '#FFFFFF',
   success: '#00A26A',
   delete: '#E0525C',
+  highlight: '#F0F0F0',
 };

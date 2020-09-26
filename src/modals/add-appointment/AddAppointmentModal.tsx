@@ -71,6 +71,7 @@ const AddAppointmentModal: React.FC<OwnProps & PropsFromRedux> = ({
     setTime(startingDate);
     setServiceId('default');
   };
+
   Navigation.events().registerNavigationButtonPressedListener(
     ({ buttonId }) => {
       if (buttonId === LEFT_BUTTON_CLOSE) {
@@ -134,7 +135,6 @@ const AddAppointmentModal: React.FC<OwnProps & PropsFromRedux> = ({
         </Text>
       </TouchableWithoutFeedback>
       <LineDivider containerStyle={styles.divider} />
-
       <PickerInput
         label="Service"
         onValueChanged={setServiceId}

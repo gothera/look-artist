@@ -1,6 +1,11 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { Navigation } from 'react-native-navigation';
+import EditProgramOption from './components/edit-program-option/EditProgramOption';
+import { styles } from './styles';
+import { ScheduleBigIcon } from '../../res/svg';
+import strings from '../../res/strings/strings';
+import { showEditDefaultDaysModal } from '../../navigation';
 
 const LEFT_BUTTON_CLOSE = 'close-edit-program-modal';
 
@@ -32,10 +37,32 @@ const EditProgramModal: React.FC<OwnProps> = ({ componentId }) => {
     Navigation.dismissModal(componentId);
   };
 
+  const onDefaultDaysPress = () => {
+    showEditDefaultDaysModal(componentId);
+  };
+
   return (
-    <View>
-      <Text></Text>
-    </View>
+    <>
+      <View style={styles.scheduleIntroContainer}>
+        <ScheduleBigIcon />
+        <Text style={styles.scheduleIntroText}>
+          {strings.modal.editProgram.intro}
+        </Text>
+      </View>
+      <View style={styles.optionsContainer}>
+        <EditProgramOption
+          title={strings.modal.editProgram.options.defaultDays}
+          description={strings.modal.editProgram.options.defaultDaysDesc}
+          onPress={onDefaultDaysPress}
+        />
+        <EditProgramOption
+          title={strings.modal.editProgram.options.specificDays}
+          description={strings.modal.editProgram.options.specificDaysDesc}
+          onPress={() => {}}
+          isLast
+        />
+      </View>
+    </>
   );
 };
 

@@ -28,13 +28,11 @@ export const styles = StyleSheet.create<Style>({
   },
   clientLabel: {
     ...typography.label,
-
-    color: color.textPrimary,
+    color: color.textSecondary,
   },
   labelTitle: {
     ...typography.label,
-
-    color: color.textPrimary,
+    color: color.textSecondary,
     marginLeft: spacing.base,
     marginTop: spacing.largest,
   },
@@ -45,9 +43,9 @@ export const styles = StyleSheet.create<Style>({
   },
   textHour: {
     marginLeft: spacing.base,
-    marginTop: spacing.largest,
-    ...typography.smallTitle,
-    color: color.muted,
+    marginTop: spacing.base,
+    ...typography.body,
+    color: color.textSecondary,
   },
   clearBtn: {
     position: 'absolute',
@@ -64,8 +62,7 @@ export const styles = StyleSheet.create<Style>({
   },
   clearBtnText: {
     ...typography.textInput,
-
     color: color.textSecondary,
   },
-  container: { position: 'relative', height: '100%', width: '100%' },
+  container: { height: '100%', width: '100%' },
 });
