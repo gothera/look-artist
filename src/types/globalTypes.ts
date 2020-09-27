@@ -83,8 +83,11 @@ declare global {
   }
 }
 
-export interface ArtistProgramEntry {
-  date: string;
-  startTime: string;
-  endTime: string;
+export type RequestStatus = 'loading' | 'success' | 'failure';
+
+export interface SelectedDateCalendar {
+  [date: string]: {
+    selected: boolean;
+    selectedColor: string;
+  };
 }

@@ -14,6 +14,8 @@ import {
   EDIT_PROGRAM_MODAL,
   SELECT_TIME_MODAL,
   LOADING_MODAL,
+  EDIT_SPECIFIC_DAYS_MODAL,
+  ALERT_TEXT_MODAL,
 } from './modal-constants';
 import {
   ADD_POST_SCREEN,
@@ -31,6 +33,8 @@ import {
   DeleteConfirmationModal,
   EditDefaultDaysModal,
   SelectTimeModal,
+  EditSpecificDaysModal,
+  AlertTextModal,
 } from '../modals';
 import {
   AddPostScreen,
@@ -102,6 +106,14 @@ const registerModals = () => {
 
   Navigation.registerComponent(EDIT_DEFAULT_DAYS_MODAL, () =>
     WrappedComponent(EditDefaultDaysModal),
+  );
+
+  Navigation.registerComponent(EDIT_SPECIFIC_DAYS_MODAL, () =>
+    WrappedComponent(EditSpecificDaysModal),
+  );
+
+  Navigation.registerComponent(ALERT_TEXT_MODAL, () =>
+    WrappedComponent(AlertTextModal),
   );
 };
 

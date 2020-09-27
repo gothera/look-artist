@@ -4,6 +4,7 @@ import {
   ArtistProgramEntry,
   Notification,
   OfferedService,
+  RequestStatus,
 } from '../types/globalTypes';
 import { AppointmentAction } from './appointment/appointment.types';
 import { NotificationAction } from './notification/notification.types';
@@ -51,7 +52,10 @@ export interface OfferedServicesState {
 
 export interface ViewState {
   aux: string;
+  updateDefaultProgramRequestStatus?: RequestStatus;
+  updateSpecificProgramRequestStatus?: RequestStatus;
 }
+
 export interface State {
   profile: ProfileState;
   view: ViewState;

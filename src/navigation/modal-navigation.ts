@@ -10,6 +10,8 @@ import {
   SELECT_TIME_MODAL,
   LOADING_MODAL,
   EDIT_PROGRAM_MODAL,
+  EDIT_SPECIFIC_DAYS_MODAL,
+  ALERT_TEXT_MODAL,
 } from './modal-constants';
 import { Config, getConfig } from './utils-navigation';
 import { color } from '../theme';
@@ -188,6 +190,68 @@ export const showEditDefaultDaysModal = (
             icon: require('../res/images/icons/chevron-left-icon.png'),
             color: color.textPrimary,
           },
+        },
+      },
+    },
+  });
+};
+
+/**
+ * Pushed on EditProgram
+ * @param componentId
+ * @param pushConfig
+ */
+export const showEditSpecificDaysModal = (
+  componentId: string,
+  pushConfig?: Config,
+) => {
+  const config = getConfig(pushConfig);
+
+  Navigation.push(componentId, {
+    component: {
+      name: EDIT_SPECIFIC_DAYS_MODAL,
+      passProps: { ...config.props },
+      options: {
+        overlay: {
+          interceptTouchOutside: true,
+          handleKeyboardEvents: true,
+        },
+        layout: {
+          componentBackgroundColor: color.background,
+        },
+        topBar: {
+          title: {
+            text: strings.modal.editSpecificDays.title,
+            fontFamily: 'Gilroy-SemiBold',
+          },
+          backButton: {
+            showTitle: false,
+            icon: require('../res/images/icons/chevron-left-icon.png'),
+            color: color.textPrimary,
+          },
+        },
+      },
+    },
+  });
+};
+
+export const showAlertTextModal = (pushConfig?: Config) => {
+  const config = getConfig(pushConfig);
+
+  Navigation.showOverlay({
+    component: {
+      name: ALERT_TEXT_MODAL,
+      passProps: { ...config.props },
+      options: {
+        overlay: {
+          interceptTouchOutside: true,
+          handleKeyboardEvents: true,
+        },
+        layout: {
+          componentBackgroundColor: 'transparent',
+        },
+        topBar: {
+          visible: false,
         },
       },
     },

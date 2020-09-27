@@ -1,6 +1,11 @@
-import { ArtistProgramEntry, ArtistResponseApi } from '../../types/globalTypes';
-import { SetupBody } from './api.types';
+import { ArtistResponseApi } from '../../types/globalTypes';
+import {
+  SetupBody,
+  ProgramDefaultElement,
+  ProgramSpecificElement,
+} from './api.types';
 import { getRequest, postRequest, putRequest } from './apiRequest';
+import { DaysAbbreviation } from '../../types/enums';
 
 export const setup = (setupBody: SetupBody): Promise<ArtistResponseApi> => {
   const url = `artist/setup/`;
@@ -25,9 +30,49 @@ export const fetchProfile = (): Promise<ArtistResponseApi> => {
   return getRequest<ArtistResponseApi>(url);
 };
 
-export const updateArtistProgram = (
-  programEntries: ArtistProgramEntry[],
-): Promise<ArtistProgramEntry[]> => {
-  const url = `artist/program/`;
-  return putRequest<ArtistProgramEntry[]>(url, programEntries);
+/**
+ * Edit Specific days program schedule
+ * @param dates
+ * @param startTime
+ * @param endTime
+ */
+export const updateSpecificProgram = (
+  dates: string[],
+  startTime: string,
+  endTime: string,
+): Promise<ProgramSpecificElement[]> => {
+  const url = `artist/program/specific/`;
+  const data: ProgramSpecificElement[] = dates.map((date) => {
+    return {
+      date: date,
+      startTime: startTime,
+      endTime: endTime,
+    };
+  });
+  return putRequest<ProgramSpecificElement[]>(url, data);
+};
+
+/**
+ * Edit Default programs for days of the week
+ * @param days array of days to edit
+ * @param startTime
+ * @param endTime
+ * @param artistId
+ */
+export const updateDefaultProgram = (
+  days: DaysAbbreviation[],
+  startTime: string,
+  endTime: string,
+  artistId: number,
+): Promise<ProgramDefaultElement[]> => {
+  const url = 'artist/program/default/';
+  const data: ProgramDefaultElement[] = days.map((day) => {
+    return {
+      day: day,
+      startTime: startTime,
+      endTime: endTime,
+      artistId: artistId,
+    };
+  });
+  return putRequest<ProgramDefaultElement[]>(url, data);
 };

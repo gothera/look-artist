@@ -1,4 +1,5 @@
 import { AppointmentType, Notification } from '../../types/globalTypes';
+import { DaysAbbreviation } from '../../types/enums';
 
 export interface UserResponse {
   id: number;
@@ -55,4 +56,17 @@ export interface AppointmentResponse {
   currency: string;
   cost: number;
   date: string;
+}
+
+export interface ProgramDefaultElement {
+  startTime: string;
+  endTime: string;
+  day: DaysAbbreviation; // eg 0 = Monday
+  artistId: number;
+}
+
+export interface ProgramSpecificElement {
+  date: string;
+  startTime: string;
+  endTime: string;
 }

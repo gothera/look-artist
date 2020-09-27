@@ -10,7 +10,7 @@ import {
 import { fetchNotifications } from '../../store/notification/notification.actions';
 import {
   fetchProfile,
-  updateArtistProgram,
+  updateSpecificProgram,
 } from '../../store/profile/profile.actions';
 import { AsyncDispatch, StoreState } from '../../store/store.types';
 import {
@@ -33,8 +33,6 @@ const mapDispatchToProps = (dispatch: AsyncDispatch) => ({
   fetchAppointmentsOfDay: (date: string) =>
     dispatch(fetchAppointmentOfDay(date)),
   fetchProfile: () => dispatch(fetchProfile()),
-  updateArtistProgram: (entries: ArtistProgramEntry[]) =>
-    dispatch(updateArtistProgram(entries)),
   addAppointment: (appointment: Appointment) =>
     dispatch(addAppointment(appointment)),
 });
@@ -48,7 +46,6 @@ const NotificationsScreen: React.FC<PropsFromRedux> = ({
   fetchMoreNotifcations,
   fetchProfile,
   addAppointment,
-  updateArtistProgram,
 }) => {
   useEffect(() => {
     fetchMoreNotifcations(true);

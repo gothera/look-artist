@@ -17,10 +17,8 @@ function profileReducer(
     }
 
     case profileConstants.FETCH_PROFILE_REQUEST:
-    case profileConstants.UPDATE_ARTIST_PROGRAM_REQUEST:
       return {
         ...state,
-        isFetching: true,
       };
 
     case profileConstants.LOGIN_REQUEST: {
@@ -142,7 +140,13 @@ function profileReducer(
       };
     }
 
-    case profileConstants.UPDATE_ARTIST_PROGRAM_SUCCESS: {
+    case profileConstants.UPDATE_SPECIFIC_PROGRAM_REQUEST: {
+      return {
+        ...state,
+      };
+    }
+
+    case profileConstants.UPDATE_SPECIFIC_PROGRAM_SUCCESS: {
       return {
         ...state,
         programEntriesByDate: [

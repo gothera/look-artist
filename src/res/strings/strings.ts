@@ -23,6 +23,13 @@ const strings = {
       startingHour: 'Starting Hour',
       endingHour: 'Ending Hour',
     },
+    editSpecificDays: {
+      title: 'Edit Specific Days',
+      hoursError: 'Ending hour must be after staring hour',
+    },
+  },
+  action: {
+    clearAll: 'Clear All',
   },
 };
 

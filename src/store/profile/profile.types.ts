@@ -1,5 +1,6 @@
 import { ArtistProgramEntry, ArtistResponseApi } from '../../types/globalTypes';
 import * as profileConstants from './profile.constants';
+import { ProgramSpecificElement } from '../../services/api/api.types';
 
 export interface InvalidateStoreAction {
   type: typeof profileConstants.INVALIDATE_STORE;
@@ -87,18 +88,30 @@ export interface fetchProfileFailure {
   type: typeof profileConstants.FETCH_PROFILE_FAILURE;
 }
 
-export interface updateArtistProgramSuccess {
-  type: typeof profileConstants.UPDATE_ARTIST_PROGRAM_SUCCESS;
-  payload: { programEntries: ArtistProgramEntry[] };
+export interface updateSpecificProgramRequest {
+  type: typeof profileConstants.UPDATE_SPECIFIC_PROGRAM_REQUEST;
 }
 
-export interface updateArtistProgramFailure {
-  type: typeof profileConstants.UPDATE_ARTIST_PROGRAM_FAILURE;
+export interface updateSpecificProgramSuccess {
+  type: typeof profileConstants.UPDATE_SPECIFIC_PROGRAM_SUCCESS;
+  payload: { programEntries: ProgramSpecificElement[] };
+}
+
+export interface updateSpecificProgramFailure {
+  type: typeof profileConstants.UPDATE_SPECIFIC_PROGRAM_FAILURE;
   payload: { error: string };
 }
 
-export interface updateArtistProgramRequest {
-  type: typeof profileConstants.UPDATE_ARTIST_PROGRAM_REQUEST;
+export interface updateDefaultProgramRequest {
+  type: typeof profileConstants.UPDATE_DEFAULT_PROGRAM_REQUEST;
+}
+
+export interface updateDefaultProgramSuccess {
+  type: typeof profileConstants.UPDATE_DEFAULT_PROGRAM_SUCCESS;
+}
+
+export interface updateDefaultProgramFailure {
+  type: typeof profileConstants.UPDATE_DEFAULT_PROGRAM_FAILURE;
 }
 
 export type ProfileAction =
@@ -121,6 +134,9 @@ export type ProfileAction =
   | fetchProfileRequest
   | fetchProfileSuccess
   | fetchProfileFailure
-  | updateArtistProgramSuccess
-  | updateArtistProgramRequest
-  | updateArtistProgramFailure;
+  | updateSpecificProgramSuccess
+  | updateSpecificProgramRequest
+  | updateSpecificProgramFailure
+  | updateDefaultProgramRequest
+  | updateDefaultProgramSuccess
+  | updateDefaultProgramFailure;

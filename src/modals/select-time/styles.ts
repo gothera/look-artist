@@ -16,10 +16,10 @@ export const styles = StyleSheet.create<Style>({
     backgroundColor: color.modalBackground,
   },
   container: {
-    height: '30%',
+    height: '35%',
     width: '100%',
-    borderTopRightRadius: 15,
-    borderTopLeftRadius: 15,
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
     backgroundColor: color.background,
     justifyContent: 'center',
     alignItems: 'center',

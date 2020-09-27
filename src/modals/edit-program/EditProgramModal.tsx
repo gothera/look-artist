@@ -5,7 +5,10 @@ import EditProgramOption from './components/edit-program-option/EditProgramOptio
 import { styles } from './styles';
 import { ScheduleBigIcon } from '../../res/svg';
 import strings from '../../res/strings/strings';
-import { showEditDefaultDaysModal } from '../../navigation';
+import {
+  showEditDefaultDaysModal,
+  showEditSpecificDaysModal,
+} from '../../navigation';
 
 const LEFT_BUTTON_CLOSE = 'close-edit-program-modal';
 
@@ -41,8 +44,12 @@ const EditProgramModal: React.FC<OwnProps> = ({ componentId }) => {
     showEditDefaultDaysModal(componentId);
   };
 
+  const onSpecificDaysPress = () => {
+    showEditSpecificDaysModal(componentId);
+  };
+
   return (
-    <>
+    <View style={styles.container}>
       <View style={styles.scheduleIntroContainer}>
         <ScheduleBigIcon />
         <Text style={styles.scheduleIntroText}>
@@ -58,11 +65,11 @@ const EditProgramModal: React.FC<OwnProps> = ({ componentId }) => {
         <EditProgramOption
           title={strings.modal.editProgram.options.specificDays}
           description={strings.modal.editProgram.options.specificDaysDesc}
-          onPress={() => {}}
+          onPress={onSpecificDaysPress}
           isLast
         />
       </View>
-    </>
+    </View>
   );
 };
 

@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { Text, TouchableWithoutFeedback, View } from 'react-native';
+import { Text, TouchableWithoutFeedback, View, ScrollView } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import { connect, ConnectedProps } from 'react-redux';
-import PrimaryButton from '../../components/button/PrimaryButton';
-import FooterOptions from '../../components/footer/footer-options/FooterOptions';
 import PickerInput from '../../components/input/PickerInput';
 import TextInputWithLabel from '../../components/input/TextInputWithLabel';
 import LineDivider from '../../components/ui/LineDivider';
@@ -14,6 +12,8 @@ import { AsyncDispatch, StoreState } from '../../store/store.types';
 import { Currency } from '../../types/enums';
 import { Appointment, AppointmentType } from '../../types/globalTypes';
 import { styles } from './styles';
+import FooterSaveAndClear from '../../components/footer/footer-save-and-clear/FooterSaveAndClear';
+
 const LEFT_BUTTON_CLOSE = 'close-add-appointment-modal';
 
 interface OwnProps {
@@ -55,21 +55,18 @@ const AddAppointmentModal: React.FC<OwnProps & PropsFromRedux> = ({
   addAppointment,
   artistId,
 }) => {
-  const startingDate = new Date();
-  startingDate.setHours(
-    parseInt(startingTime.split(':')[0]),
-    parseInt(startingTime.split(':')[1]),
-    0,
-    0,
+  const [startingHour, setStartingHour] = useState<string | undefined>(
+    startingTime,
   );
+
   const [clientName, setClientName] = useState('');
-  const [time, setTime] = useState<Date | undefined>(startingDate);
+
   const [serviceId, setServiceId] = useState('default');
 
   const clearAllField = () => {
     setClientName('');
-    setTime(startingDate);
     setServiceId('default');
+    setStartingHour(undefined);
   };
 
   Navigation.events().registerNavigationButtonPressedListener(
@@ -85,10 +82,10 @@ const AddAppointmentModal: React.FC<OwnProps & PropsFromRedux> = ({
   };
 
   const saveAppointment = () => {
-    if (!time || !clientName || serviceId === 'default') return;
+    if (!startingHour || !clientName || serviceId === 'default') return;
     const appointment: Appointment = {
-      startingTime: time?.toTimeString().substring(0, 5),
-      endingTime: time?.toTimeString().substring(0, 5),
+      startingTime: startingHour,
+      endingTime: startingHour,
       currency: Currency.RON,
       type: AppointmentType.Reserved,
       date: date,
@@ -111,54 +108,50 @@ const AddAppointmentModal: React.FC<OwnProps & PropsFromRedux> = ({
     },
   });
 
+  const isClearDisabled = clientName === '' && serviceId === 'default';
+
   return (
     <View style={styles.container}>
-      <Text style={styles.subheadline}>Add an appointment to your program</Text>
-      <TextInputWithLabel
-        containerStyle={styles.clientContainer}
-        labelStyle={styles.clientLabel}
-        label="Client Name"
-        placeholder="Client name"
-        text={clientName}
-        setText={setClientName}
-      />
-      <Text style={styles.labelTitle}>Starting Hour</Text>
-      <TouchableWithoutFeedback
-        onPress={() =>
-          showSelectTimeModal({
-            props: { setTime: setTime, time: time, startingTime, endingTime },
-          })
-        }
-      >
-        <Text style={styles.textHour}>
-          {time?.toTimeString().substring(0, 5)}
+      <ScrollView>
+        <Text style={styles.subheadline}>
+          Add an appointment to your program
         </Text>
-      </TouchableWithoutFeedback>
-      <LineDivider containerStyle={styles.divider} />
-      <PickerInput
-        label="Service"
-        onValueChanged={setServiceId}
-        containerStyle={styles.clientContainer}
-        labelStyle={styles.clientLabel}
-        placeholder="Select a service"
-        setSelected={() => {}}
-        value={serviceId}
-        items={servicesItems}
+        <TextInputWithLabel
+          containerStyle={styles.clientContainer}
+          labelStyle={styles.clientLabel}
+          label="Client Name"
+          placeholder="Enter client name"
+          text={clientName}
+          setText={setClientName}
+        />
+        <Text style={styles.labelTitle}>Starting Hour</Text>
+        <TouchableWithoutFeedback
+          onPress={() =>
+            showSelectTimeModal({
+              props: { setHour: setStartingHour, startingTime, endingTime },
+            })
+          }
+        >
+          <Text style={styles.textHour}>{startingHour}</Text>
+        </TouchableWithoutFeedback>
+        <LineDivider containerStyle={styles.divider} />
+        <PickerInput
+          label="Service"
+          onValueChanged={setServiceId}
+          containerStyle={styles.clientContainer}
+          labelStyle={styles.clientLabel}
+          placeholder="Select a service"
+          setSelected={() => {}}
+          value={serviceId}
+          items={servicesItems}
+        />
+      </ScrollView>
+      <FooterSaveAndClear
+        onClear={clearAllField}
+        isClearDisabled={isClearDisabled}
+        isSaveDisabled={saveBtnDisabled}
+        onSave={saveAppointment}
       />
-      <FooterOptions>
-        <PrimaryButton
-          containerStyle={styles.clearBtn}
-          textStyles={styles.clearBtnText}
-          title="Clear all"
-          onPress={clearAllField}
-        ></PrimaryButton>
-        <PrimaryButton
-          containerStyle={styles.saveBtn}
-          title="Save"
-          isDisabled={saveBtnDisabled}
-          onPress={saveAppointment}
-        ></PrimaryButton>
-      </FooterOptions>
     </View>
   );
 };

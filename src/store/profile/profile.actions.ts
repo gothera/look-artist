@@ -4,6 +4,7 @@ import {
   LoginResponse,
   SetupBody,
   SignupResponse,
+  ProgramSpecificElement,
 } from '../../services/api/api.types';
 import * as AuthService from '../../services/api/AuthService';
 import * as ProfileService from '../../services/api/ProfileService';
@@ -11,6 +12,7 @@ import { ArtistProgramEntry, ArtistResponseApi } from '../../types/globalTypes';
 import { ThunkResult } from '../store.types';
 import * as profileConstants from './profile.constants';
 import * as profileTypes from './profile.types';
+import { DaysAbbreviation } from '../../types/enums';
 
 /**
  * LOGIN
@@ -304,47 +306,108 @@ export const fetchProfile = (): ThunkResult<void> => {
   };
 };
 
-export const updateArtistProgramRequest = (): profileTypes.updateArtistProgramRequest => {
+/**
+ * Update Specific Program
+ * ==========================
+ */
+
+export const updateSpecificProgramRequest = (): profileTypes.updateSpecificProgramRequest => {
   return {
-    type: profileConstants.UPDATE_ARTIST_PROGRAM_REQUEST,
+    type: profileConstants.UPDATE_SPECIFIC_PROGRAM_REQUEST,
   };
 };
 
-export const updateArtistProgramSuccess = (
-  programEntries: ArtistProgramEntry[],
-): profileTypes.updateArtistProgramSuccess => {
+export const updateSpecificProgramSuccess = (
+  programEntries: ProgramSpecificElement[],
+): profileTypes.updateSpecificProgramSuccess => {
   return {
-    type: profileConstants.UPDATE_ARTIST_PROGRAM_SUCCESS,
+    type: profileConstants.UPDATE_SPECIFIC_PROGRAM_SUCCESS,
     payload: { programEntries: programEntries },
   };
 };
 
-export const updateArtistProgramFailure = (
+export const updateSpecificProgramFailure = (
   error: string,
-): profileTypes.updateArtistProgramFailure => {
+): profileTypes.updateSpecificProgramFailure => {
   return {
-    type: profileConstants.UPDATE_ARTIST_PROGRAM_FAILURE,
+    type: profileConstants.UPDATE_SPECIFIC_PROGRAM_FAILURE,
     payload: { error },
   };
 };
 
-export const updateArtistProgram = (
-  entries: ArtistProgramEntry[],
+export const updateSpecificProgram = (
+  dates: string[],
+  startTime: string,
+  endTime: string,
 ): ThunkResult<void> => {
   return async function (dispatch, getState) {
-    dispatch(updateArtistProgramRequest());
+    dispatch(updateSpecificProgramRequest());
 
     const token = getState().profile.token;
     if (!token) {
       return Promise.resolve();
     }
 
-    return ProfileService.updateArtistProgram(entries)
-      .then((response: ArtistProgramEntry[]) => {
-        dispatch(updateArtistProgramSuccess(response));
+    return ProfileService.updateSpecificProgram(dates, startTime, endTime)
+      .then((response: ProgramSpecificElement[]) => {
+        dispatch(updateSpecificProgramSuccess(response));
       })
       .catch((error) => {
-        dispatch(updateArtistProgramFailure(error));
+        dispatch(updateSpecificProgramFailure(error));
+      });
+  };
+};
+
+/**
+ * Update Default Program
+ * ==========================
+ */
+
+export const updateDefaultProgramRequest = (): profileTypes.updateDefaultProgramRequest => {
+  return {
+    type: profileConstants.UPDATE_DEFAULT_PROGRAM_REQUEST,
+  };
+};
+
+export const updateDefaultProgramSuccess = (): profileTypes.updateDefaultProgramSuccess => {
+  return {
+    type: profileConstants.UPDATE_DEFAULT_PROGRAM_SUCCESS,
+  };
+};
+
+export const updateDefaultProgramFailure = (): profileTypes.updateDefaultProgramFailure => {
+  return {
+    type: profileConstants.UPDATE_DEFAULT_PROGRAM_FAILURE,
+  };
+};
+
+export const updateDefaultProgram = (
+  days: DaysAbbreviation[],
+  startTime: string,
+  endTime: string,
+): ThunkResult<void> => {
+  return async function (dispatch, getState) {
+    const artistId = getState().profile.artistId;
+    if (
+      getState().view.updateDefaultProgramRequestStatus === 'loading' ||
+      !artistId
+    ) {
+      return Promise.resolve();
+    }
+
+    dispatch(updateDefaultProgramRequest());
+
+    return ProfileService.updateDefaultProgram(
+      days,
+      startTime,
+      endTime,
+      artistId,
+    )
+      .then((_) => {
+        dispatch(updateDefaultProgramSuccess());
+      })
+      .catch((_) => {
+        dispatch(updateDefaultProgramFailure());
       });
   };
 };

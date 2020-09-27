@@ -1,4 +1,4 @@
-import { Notification } from '../types/globalTypes';
+import { Notification, SelectedDateCalendar } from '../types/globalTypes';
 import { DaysAbbreviation } from '../types/enums';
 import { DAYS_ABBREVIATION } from '../res/constants';
 
@@ -62,4 +62,42 @@ export const dayAbbEnumValue = (dayAbb: DaysAbbreviation) => {
     case DaysAbbreviation.Sun:
       return DAYS_ABBREVIATION.SUNDAY;
   }
+};
+
+/**
+ * @param selectedDates object {selected: true/ false}
+ * @return array of date strings where object.selected = true
+ */
+export const getSelectedDatesArrayFromCalendar = (
+  selectedDates: SelectedDateCalendar,
+): string[] => {
+  const arrDates: string[] = [];
+  for (let date in selectedDates) {
+    if (selectedDates[date].selected) {
+      arrDates.push(date);
+    }
+  }
+  return arrDates;
+};
+
+/**
+ * Compare starting = '08:00' with ending = '10:00';
+ * @param startingHour
+ * @param endingHour
+ */
+export const isEndingAfterStartingHour = (
+  startingHour: string,
+  endingHour: string,
+) => {
+  const hStart = parseInt(startingHour.split(':')[0]);
+  const mStart = parseInt(startingHour.split(':')[1]);
+
+  const hEnd = parseInt(endingHour.split(':')[0]);
+  const mEnd = parseInt(endingHour.split(':')[1]);
+
+  if (hStart === hEnd) {
+    return mEnd > mStart;
+  }
+
+  return hEnd > hStart;
 };

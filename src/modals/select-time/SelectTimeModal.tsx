@@ -6,34 +6,26 @@ import { styles } from './styles';
 
 interface OwnProps {
   componentId: string;
-  setTime: (_: Date) => void;
-  time: Date;
   startingTime: string;
-  endingTime: string;
+  setHour: (param: string) => void;
 }
 
 const SelectTimeModal: React.FC<OwnProps> = ({
   componentId,
-  setTime,
-  time,
   startingTime,
-  endingTime,
+  setHour,
 }) => {
-  //   const [time, _] = useState<Date | undefined>(new Date());
-  const startingDate = new Date();
-  const endingDate = new Date();
-  startingDate.setHours(
+  const time = new Date();
+  time.setHours(
     parseInt(startingTime.split(':')[0]),
     parseInt(startingTime.split(':')[1]),
     0,
     0,
   );
-  endingDate.setHours(
-    parseInt(endingTime.split(':')[0]),
-    parseInt(endingTime.split(':')[1]),
-    0,
-    0,
-  );
+  const startingDate = new Date();
+  const endingDate = new Date();
+  startingDate.setHours(0, 0, 0, 0);
+  endingDate.setHours(24, 0, 0, 0);
   const close = () => {
     Navigation.dismissOverlay(componentId);
   };
@@ -52,6 +44,10 @@ const SelectTimeModal: React.FC<OwnProps> = ({
     return () => backHandler.remove();
   }, []);
 
+  const setTime = (date: Date) => {
+    setHour(date.toTimeString().substring(0, 5));
+  };
+
   return (
     <TouchableWithoutFeedback onPress={close}>
       <View style={styles.background}>
@@ -64,6 +60,7 @@ const SelectTimeModal: React.FC<OwnProps> = ({
             minuteInterval={5}
             minimumDate={startingDate}
             maximumDate={endingDate}
+            is24hourSource="locale"
           />
         </View>
       </View>

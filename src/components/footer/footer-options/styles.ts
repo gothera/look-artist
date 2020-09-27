@@ -1,6 +1,5 @@
 import { StyleSheet, ViewStyle } from 'react-native';
-import { getBottomSpace } from 'react-native-iphone-x-helper';
-import { FOOTER_OPTIONS_HEIGHT } from '../../../res/constants';
+import { FOOTER_OPTIONS_HEIGHT, BOTTOM_SPACE } from '../../../res/constants';
 import { color, spacing } from '../../../theme';
 
 interface Style {
@@ -21,7 +20,7 @@ export const styles = StyleSheet.create<Style>({
   },
   contentContainer: {
     flex: 1,
-    marginBottom: getBottomSpace(),
+    marginBottom: BOTTOM_SPACE,
     paddingTop: spacing.larger,
     paddingHorizontal: spacing.base,
   },
