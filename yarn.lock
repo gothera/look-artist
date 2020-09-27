@@ -6848,7 +6848,7 @@ react-native-calendars@1.403.0:
     react-native-swipe-gestures "^1.0.5"
     xdate "^0.8.0"
 
-react-native-date-picker@^3.2.3:
+react-native-date-picker@3.2.3:
   version "3.2.3"
   resolved "https://registry.yarnpkg.com/react-native-date-picker/-/react-native-date-picker-3.2.3.tgz#e08b58495d9f061d60865c564ce159caba486b75"
   integrity sha512-fs+axioK1KjqtVDkI/FWfm4MzwOCL42DV6FNS6f2TEDHsm9IHlD6Y1YyzhEnDnP5HGKZqhDltXycIJ9ieD32NA==
