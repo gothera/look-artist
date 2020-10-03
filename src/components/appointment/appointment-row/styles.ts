@@ -14,14 +14,14 @@ export const styles = StyleSheet.create<Style>({
   container: {
     paddingRight: 8,
     paddingLeft: 16,
-    height: 90,
+    height: 94,
   },
   intervalContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   intervalText: {
-    ...typography.smallInterval,
+    ...typography.subheadlineRegular,
     color: color.muted,
   },
   intervalFreeSpotsLabel: {

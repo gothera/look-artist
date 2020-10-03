@@ -12,14 +12,12 @@ export const styles = StyleSheet.create<Style>({
     marginLeft: 10,
   },
   userNameText: {
-    ...typography.userName,
+    ...typography.bodySemiBold,
     color: color.textSecondary,
-    // maxWidth: '90%',
   },
   serviceName: {
-    ...typography.serviceName,
+    ...typography.caption1SemiBold,
     color: color.muted,
     marginTop: 2,
-    // maxWidth: '90%',
   },
 });

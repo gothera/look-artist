@@ -1,5 +1,9 @@
 const strings = {
-  screen: {},
+  screen: {
+    home: {
+      editProgramBtn: 'Edit Program',
+    },
+  },
   modal: {
     appointmentDetails: {
       serviceLabel: 'Scheduled for',
@@ -30,6 +34,7 @@ const strings = {
   },
   action: {
     clearAll: 'Clear All',
+    addAppointment: 'Add Appointment',
   },
 };
 

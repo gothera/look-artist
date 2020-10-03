@@ -31,7 +31,7 @@ export const styles = StyleSheet.create<Style>({
   },
   verticalLine: {
     width: 1.5,
-    height: 84,
+    height: 88,
     backgroundColor: color.unchosen,
   },
 });

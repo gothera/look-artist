@@ -137,7 +137,7 @@ index aead2f7..d833072 100644
        <Animated.View style={[this.style.todayButtonContainer, {transform: [{translateY: buttonY}]}]}>
          <TouchableOpacity style={[this.style.todayButton, this.props.todayButtonStyle]} onPress={this.onTodayPress} disabled={disabled}>
 diff --git a/node_modules/react-native-calendars/src/expandableCalendar/style.js b/node_modules/react-native-calendars/src/expandableCalendar/style.js
-index a226953..c026707 100644
+index a226953..6d30bf1 100644
 --- a/node_modules/react-native-calendars/src/expandableCalendar/style.js
 +++ b/node_modules/react-native-calendars/src/expandableCalendar/style.js
 @@ -73,7 +73,8 @@ export default function styleConstructor(theme = {}) {
@@ -166,6 +166,24 @@ index a226953..c026707 100644
      },
      dayHeader: {
        width: 32,
+@@ -109,14 +112,14 @@ export default function styleConstructor(theme = {}) {
+     todayButtonContainer: {
+       alignItems: appStyle.todayButtonPosition === 'right' ? 'flex-end' : 'flex-start',
+       position: 'absolute', 
+-      left: 20, 
++      // left: 0, 
+       right: 20, 
+       bottom : 0
+     },
+     todayButton: {
+-      height: commons.isTablet ? 40 : 28, 
++      height: commons.isTablet ? 40 : 34, 
+       paddingHorizontal: commons.isTablet ? 20 : 12,
+-      borderRadius: commons.isTablet ? 20 : 14,
++      borderRadius: commons.isTablet ? 20 : 18,
+       flexDirection: appStyle.todayButtonPosition === 'right' ? 'row-reverse' : 'row',
+       justifyContent: 'center',
+       alignItems: 'center',
 @@ -134,13 +137,13 @@ export default function styleConstructor(theme = {}) {
        })
      },

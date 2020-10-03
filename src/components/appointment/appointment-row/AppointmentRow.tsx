@@ -73,7 +73,7 @@ const AppointmentRow: React.FC<OwnProps & PropsFromRedux> = ({
           style={styles.rowContainer}
           onPress={goToAppointmentDetailsModal}
         >
-          <UserAvatar size={40} photoUrl={clientPhoto} />
+          <UserAvatar size={44} photoUrl={clientPhoto} />
           {clientName && serviceName && (
             <AppointmentUserService
               userName={clientName}

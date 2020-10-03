@@ -1,5 +1,5 @@
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
-import { color, font } from '../../../../theme';
+import { color, font, typography } from '../../../../theme';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import { ImageStyle } from 'react-native-fast-image';
 
@@ -10,6 +10,7 @@ interface Style {
   monthText: TextStyle;
   statusBarOverlay: ViewStyle;
   addProgramIconContainer: ViewStyle;
+  editText: TextStyle;
 }
 
 const styles = StyleSheet.create<Style>({
@@ -49,6 +50,9 @@ const styles = StyleSheet.create<Style>({
   },
   addProgramIconContainer: {
     marginBottom: 2,
+  },
+  editText: {
+    ...typography.subheadline,
   },
 });
 

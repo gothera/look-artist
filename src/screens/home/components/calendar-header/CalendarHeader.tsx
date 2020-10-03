@@ -60,7 +60,6 @@ const CalendarHeader: React.FC<OwnProps> = ({ onNewDateSelected }) => {
             textMonthFontFamily: 'Gilroy-Bold',
           }}
           firstDay={1}
-          // allowShadow={false}
           style={styles.expandableCalendarContainer}
         />
       </CalendarProvider>

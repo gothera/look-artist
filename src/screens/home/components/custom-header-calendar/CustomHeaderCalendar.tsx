@@ -2,8 +2,8 @@ import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import OwnAvatar from '../../../../components/avatar/own-avatar/OwnAvatar';
-import { AddProgramIcon } from '../../../../res/svg';
 import { showEditProgramModal } from '../../../../navigation';
+import strings from '../../../../res/strings/strings';
 
 interface OwnProps {
   month: string;
@@ -26,7 +26,9 @@ const CustomHeaderCalendar: React.FC<OwnProps> = ({ month }) => {
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
           onPress={onEditProgramPress}
         >
-          <AddProgramIcon width={20} />
+          <Text style={styles.editText}>
+            {strings.screen.home.editProgramBtn}
+          </Text>
         </TouchableOpacity>
       </View>
       <View style={styles.statusBarOverlay} />
