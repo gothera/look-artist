@@ -337,6 +337,8 @@ PODS:
     - TOCropViewController
   - RNKeychain (6.1.1):
     - React
+  - RNReanimated (1.13.1):
+    - React
   - RNSVG (12.1.0):
     - React
   - SDWebImage (5.9.2):
@@ -405,6 +407,7 @@ DEPENDENCIES:
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - RNKeychain (from `../node_modules/react-native-keychain`)
+  - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -494,6 +497,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-image-crop-picker"
   RNKeychain:
     :path: "../node_modules/react-native-keychain"
+  RNReanimated:
+    :path: "../node_modules/react-native-reanimated"
   RNSVG:
     :path: "../node_modules/react-native-svg"
   Yoga:
@@ -545,6 +550,7 @@ SPEC CHECKSUMS:
   RNGestureHandler: dde546180bf24af0b5f737c8ad04b6f3fa51609a
   RNImageCropPicker: f0557a908758c4a3f83978894ec7227651529b45
   RNKeychain: db956c02a018f7dd3a0ea8a6cf3087bc1894bf2b
+  RNReanimated: dd8c286ab5dd4ba36d3a7fef8bff7e08711b5476
   RNSVG: ce9d996113475209013317e48b05c21ee988d42e
   SDWebImage: 0b42b8719ab0c5257177d5894306e8a336b21cbb
   SDWebImageWebPCoder: d0dac55073088d24b2ac1b191a71a8f8d0adac21

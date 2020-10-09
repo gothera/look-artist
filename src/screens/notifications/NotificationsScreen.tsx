@@ -8,16 +8,9 @@ import {
   fetchAppointmentOfDay,
 } from '../../store/appointment/appointment.actions';
 import { fetchNotifications } from '../../store/notification/notification.actions';
-import {
-  fetchProfile,
-  updateSpecificProgram,
-} from '../../store/profile/profile.actions';
+import { fetchProfile } from '../../store/profile/profile.actions';
 import { AsyncDispatch, StoreState } from '../../store/store.types';
-import {
-  Appointment,
-  AppointmentType,
-  ArtistProgramEntry,
-} from '../../types/globalTypes';
+import { Appointment, AppointmentType } from '../../types/globalTypes';
 import NotificationRow from './components/notification-row/NotificationRow';
 
 const mapStateToProps = (state: StoreState) => {
@@ -78,7 +71,7 @@ const NotificationsScreen: React.FC<PropsFromRedux> = ({
             date: '2020-09-22',
             startingTime: '08:00',
             endingTime: '09:00',
-            currency: 'RON',
+            currency: 0,
             type: AppointmentType.Reserved,
           })
         }

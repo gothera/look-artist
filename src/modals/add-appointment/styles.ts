@@ -18,12 +18,10 @@ export const styles = StyleSheet.create<Style>({
   subheadline: {
     ...typography.subheadline,
     color: color.muted,
-    marginLeft: spacing.base,
     marginTop: spacing.large,
     marginBottom: spacing.largest,
   },
   clientContainer: {
-    marginLeft: spacing.base,
     marginTop: spacing.larger,
   },
   clientLabel: {
@@ -33,16 +31,13 @@ export const styles = StyleSheet.create<Style>({
   labelTitle: {
     ...typography.label,
     color: color.textSecondary,
-    marginLeft: spacing.base,
     marginTop: spacing.largest,
   },
   divider: {
-    marginLeft: spacing.base,
     marginRight: spacing.base,
     marginTop: spacing.base,
   },
   textHour: {
-    marginLeft: spacing.base,
     marginTop: spacing.base,
     ...typography.body,
     color: color.textSecondary,
@@ -64,5 +59,5 @@ export const styles = StyleSheet.create<Style>({
     ...typography.textInput,
     color: color.textSecondary,
   },
-  container: { height: '100%', width: '100%' },
+  container: { paddingLeft: spacing.base, height: '100%', width: '100%' },
 });

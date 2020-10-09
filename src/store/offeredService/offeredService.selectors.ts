@@ -12,3 +12,6 @@ export const selectServices = createSelector(
     return serviceIds.map((id) => local[id]);
   },
 );
+
+export const selectServiceById = (id: number) =>
+  createSelector([selectLocalServices], (local) => local[id]);

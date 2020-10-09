@@ -1,6 +1,6 @@
-import { Notification, SelectedDateCalendar } from '../types/globalTypes';
-import { DaysAbbreviation } from '../types/enums';
 import { DAYS_ABBREVIATION } from '../res/constants';
+import { DaysAbbreviation } from '../types/enums';
+import { Notification, SelectedDateCalendar } from '../types/globalTypes';
 
 export type ContentProp = keyof Notification;
 
@@ -14,6 +14,13 @@ export const addArrayToDictByProp = <T extends any, A extends any>(
   });
 
   return dict;
+};
+export const textWithZecimals = (text: string) => {
+  if (text.includes('.')) {
+    return `${text.split('.')[0]}.${text.split('.')[1][0]}`;
+  } else {
+    return text + '.0';
+  }
 };
 
 export const monthNumberToMonthName = (monthNumber: number) => {

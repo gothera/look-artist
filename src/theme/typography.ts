@@ -112,6 +112,10 @@ export const typography = {
     ...font.medium,
     fontSize: 16,
   } as TextStyle,
+  subTitle: {
+    ...font.medium,
+    fontSize: 10,
+  } as TextStyle,
 
   collapsedHeaderTitle: {
     ...font.bold,
@@ -120,6 +124,10 @@ export const typography = {
 
   mutedDescription: {
     ...font.semiBold,
+    fontSize: 8,
+  },
+  mutedDescriptionMedium: {
+    ...font.medium,
     fontSize: 8,
   },
 
@@ -141,5 +149,13 @@ export const typography = {
   label: {
     ...font.semiBold,
     fontSize: 13,
+  },
+  boldTitle: {
+    ...font.bold,
+    fontSize: 16,
+  },
+  boldSubtitle: {
+    ...font.bold,
+    fontSize: 14,
   },
 };

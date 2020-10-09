@@ -41,6 +41,19 @@ export interface Notification {
   date: string;
 }
 
+export interface ArtistProgramEntry {
+  date: string;
+  startTime: string;
+  endTime: string;
+}
+
+export interface Post {
+  id: number;
+  description: string;
+  pictures: string[];
+  artistId: number;
+}
+
 export interface ArtistResponseApi {
   id: number;
   firstName: string;
@@ -50,7 +63,11 @@ export interface ArtistResponseApi {
   phone: string;
   bio: string;
   offeredServices: OfferedService[];
+  scheduledDates: string[];
   profilePicture: string;
+  likes: number;
+  appointmentsCount: number;
+  rating: number;
   programEntries: ArtistProgramEntry[];
 }
 
@@ -69,6 +86,13 @@ export interface Appointment {
   type: AppointmentType;
   date: string;
 }
+// nu am pus toate prorietatile unei pagini
+export interface Page<T> {
+  content: T[];
+  last: boolean;
+  numberOfElements: number;
+  size: number;
+}
 
 declare global {
   interface FormDataValue {
@@ -85,6 +109,16 @@ declare global {
 
 export type RequestStatus = 'loading' | 'success' | 'failure';
 
+export interface Review {
+  id: number;
+  artistId: number;
+  clientId: number;
+  name: string;
+  avatar: string;
+  rating: number;
+  description: string;
+  date: string;
+}
 export interface SelectedDateCalendar {
   [date: string]: {
     selected: boolean;

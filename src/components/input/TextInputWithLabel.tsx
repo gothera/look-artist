@@ -24,6 +24,7 @@ interface OwnProps {
   keyboardType?: KeyboardTypeOptions;
   setText: (_: string) => void;
   text: string;
+  dividerStyle?: ViewStyle;
   labelStyle?: StyleProp<TextStyle>;
 }
 
@@ -39,6 +40,7 @@ const TextInputWithLabel: React.FC<OwnProps> = ({
   setText,
   labelStyle,
   text,
+  dividerStyle,
 }) => {
   const textInputRef = createRef<TextInput>();
 
@@ -72,7 +74,7 @@ const TextInputWithLabel: React.FC<OwnProps> = ({
         numberOfLines={numOfLines}
         multiline={multiline}
       />
-      <LineDivider />
+      <LineDivider containerStyle={dividerStyle} />
     </View>
   );
 };

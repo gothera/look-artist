@@ -127,6 +127,10 @@ function profileReducer(
         phoneNumber: action.payload.profile.phone,
         profilePicture: action.payload.profile.profilePicture,
         bio: action.payload.profile.bio,
+        likes: action.payload.profile.likes,
+        rating: action.payload.profile.rating,
+        appointmentsCount: action.payload.profile.appointmentsCount,
+        scheduledDates: action.payload.profile.scheduledDates,
         localProgramEntries: {
           ...addArrayToDictByProp(
             {},

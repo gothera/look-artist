@@ -92,13 +92,13 @@ const addAppointmentFailure = (
 
 export const addAppointment = (
   appointment: Appointment,
-  closeModal: () => void,
+  closeModal?: () => void,
 ): ThunkResult<void> => {
   return async function (dispatch, getState) {
     dispatch(addAppointmentRequest());
     return AppointmentService.addAppointment(appointment)
       .then((response: Appointment[]) => {
-        closeModal();
+        closeModal?.();
         dispatch(fetchAppointmentsOfDaySuccess(response, appointment.date));
       })
       .catch((error) => {

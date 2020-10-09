@@ -6,6 +6,10 @@ const initialState: StoreState = {
     localProgramEntries: {},
     programEntriesByDate: [],
     isUploadingProfilePicture: false,
+    likes: 0,
+    appointmentsCount: 0,
+    scheduledDates: [],
+    rating: 5,
   },
   view: {
     aux: '',
@@ -24,6 +28,20 @@ const initialState: StoreState = {
     appointmentIDs: {},
     local: {},
     fetching: true,
+  },
+  post: {
+    postsById: [],
+    local: {},
+    nextPage: 0,
+    isFetching: false,
+    hasNext: true,
+  },
+  review: {
+    reviewById: [],
+    local: {},
+    nextPage: 0,
+    isFetching: false,
+    hasNext: true,
   },
 };
 

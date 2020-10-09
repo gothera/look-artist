@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Text, TouchableWithoutFeedback, View, ScrollView } from 'react-native';
+import { ScrollView, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import { connect, ConnectedProps } from 'react-redux';
+import FooterSaveAndClear from '../../components/footer/footer-save-and-clear/FooterSaveAndClear';
 import PickerInput from '../../components/input/PickerInput';
 import TextInputWithLabel from '../../components/input/TextInputWithLabel';
 import LineDivider from '../../components/ui/LineDivider';
@@ -12,7 +13,6 @@ import { AsyncDispatch, StoreState } from '../../store/store.types';
 import { Currency } from '../../types/enums';
 import { Appointment, AppointmentType } from '../../types/globalTypes';
 import { styles } from './styles';
-import FooterSaveAndClear from '../../components/footer/footer-save-and-clear/FooterSaveAndClear';
 
 const LEFT_BUTTON_CLOSE = 'close-add-appointment-modal';
 
@@ -123,6 +123,7 @@ const AddAppointmentModal: React.FC<OwnProps & PropsFromRedux> = ({
           placeholder="Enter client name"
           text={clientName}
           setText={setClientName}
+          dividerStyle={styles.divider}
         />
         <Text style={styles.labelTitle}>Starting Hour</Text>
         <TouchableWithoutFeedback
@@ -140,6 +141,7 @@ const AddAppointmentModal: React.FC<OwnProps & PropsFromRedux> = ({
           onValueChanged={setServiceId}
           containerStyle={styles.clientContainer}
           labelStyle={styles.clientLabel}
+          dividerStyle={styles.divider}
           placeholder="Select a service"
           setSelected={() => {}}
           value={serviceId}

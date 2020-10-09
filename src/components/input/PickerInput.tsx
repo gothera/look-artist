@@ -22,6 +22,7 @@ interface OwnProps {
   items: PickerItem[];
   setSelected: (newValue: string) => void;
   value: string | undefined;
+  dividerStyle?: ViewStyle;
 }
 
 const PickerInput: React.FC<OwnProps> = ({
@@ -32,6 +33,7 @@ const PickerInput: React.FC<OwnProps> = ({
   items,
   value,
   labelStyle,
+  dividerStyle,
 }) => {
   const renderDownArrowIcon = () => <DownArrowIcon />;
 
@@ -57,7 +59,7 @@ const PickerInput: React.FC<OwnProps> = ({
         />
       </View>
 
-      <LineDivider containerStyle={styles.divider} />
+      <LineDivider containerStyle={[styles.divider, dividerStyle]} />
     </View>
   );
 };
