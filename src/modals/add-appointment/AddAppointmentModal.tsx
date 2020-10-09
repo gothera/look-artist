@@ -55,6 +55,25 @@ const AddAppointmentModal: React.FC<OwnProps & PropsFromRedux> = ({
   addAppointment,
   artistId,
 }) => {
+  Navigation.mergeOptions(componentId, {
+    topBar: {
+      leftButtons: [
+        {
+          id: LEFT_BUTTON_CLOSE,
+          icon: require('../../res/images/icons/close-icon.png'),
+        },
+      ],
+    },
+  });
+
+  Navigation.events().registerNavigationButtonPressedListener(
+    ({ buttonId }) => {
+      if (buttonId === LEFT_BUTTON_CLOSE) {
+        closeModal();
+      }
+    },
+  );
+
   const [startingHour, setStartingHour] = useState<string | undefined>(
     startingTime,
   );
@@ -68,14 +87,6 @@ const AddAppointmentModal: React.FC<OwnProps & PropsFromRedux> = ({
     setServiceId('default');
     setStartingHour(undefined);
   };
-
-  Navigation.events().registerNavigationButtonPressedListener(
-    ({ buttonId }) => {
-      if (buttonId === LEFT_BUTTON_CLOSE) {
-        closeModal();
-      }
-    },
-  );
 
   const closeModal = () => {
     Navigation.dismissModal(componentId);
@@ -96,17 +107,6 @@ const AddAppointmentModal: React.FC<OwnProps & PropsFromRedux> = ({
     addAppointment(appointment, closeModal);
   };
   const saveBtnDisabled = !clientName || serviceId === 'default';
-
-  Navigation.mergeOptions(componentId, {
-    topBar: {
-      leftButtons: [
-        {
-          id: LEFT_BUTTON_CLOSE,
-          icon: require('../../res/images/icons/close-icon.png'),
-        },
-      ],
-    },
-  });
 
   const isClearDisabled = clientName === '' && serviceId === 'default';
 

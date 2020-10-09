@@ -12,6 +12,7 @@ import {
   EDIT_PROGRAM_MODAL,
   EDIT_SPECIFIC_DAYS_MODAL,
   ALERT_TEXT_MODAL,
+  ADD_POST_MODAL,
 } from './modal-constants';
 import { Config, getConfig } from './utils-navigation';
 import { color } from '../theme';
@@ -34,6 +35,7 @@ export const showLoadingModal = (pushConfig?: Config) => {
     },
   });
 };
+
 export const showSelectTimeModal = (pushConfig?: Config) => {
   const config = getConfig(pushConfig);
   Navigation.showOverlay({
@@ -254,6 +256,36 @@ export const showAlertTextModal = (pushConfig?: Config) => {
           visible: false,
         },
       },
+    },
+  });
+};
+
+export const showAddPostModal = (pushConfig?: Config) => {
+  const config = getConfig(pushConfig);
+  Navigation.showModal({
+    stack: {
+      children: [
+        {
+          component: {
+            name: ADD_POST_MODAL,
+            passProps: { ...config.props },
+            options: {
+              modalPresentationStyle:
+                OptionsModalPresentationStyle.overCurrentContext,
+              layout: {
+                backgroundColor: color.background,
+                componentBackgroundColor: color.background,
+              },
+              topBar: {
+                title: {
+                  text: strings.modal.addPost.title,
+                  fontFamily: 'Gilroy-SemiBold',
+                },
+              },
+            },
+          },
+        },
+      ],
     },
   });
 };

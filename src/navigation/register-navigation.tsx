@@ -16,6 +16,7 @@ import {
   LOADING_MODAL,
   EDIT_SPECIFIC_DAYS_MODAL,
   ALERT_TEXT_MODAL,
+  ADD_POST_MODAL,
 } from './modal-constants';
 import {
   ADD_POST_SCREEN,
@@ -24,6 +25,7 @@ import {
   NOTIFICATIONS_SCREEN,
   PROFILE_SCREEN,
   SETUP_SCREEN,
+  ADD_POST_DESCRIPTION_SCREEN,
 } from './screen-constants';
 import {
   LoadingModal,
@@ -35,6 +37,7 @@ import {
   SelectTimeModal,
   EditSpecificDaysModal,
   AlertTextModal,
+  AddPostModal,
 } from '../modals';
 import {
   AddPostScreen,
@@ -43,6 +46,7 @@ import {
   NotificationsScreen,
   ProfileScreen,
   SetupScreen,
+  AddPostDescriptionScreen,
 } from '../screens';
 import { pushAuthScreen, setLoggedInRoot } from './screen-navigation';
 
@@ -74,6 +78,9 @@ const registerScreens = () => {
   );
   Navigation.registerComponent(PROFILE_SCREEN, () =>
     WrappedComponent(ProfileScreen),
+  );
+  Navigation.registerComponent(ADD_POST_DESCRIPTION_SCREEN, () =>
+    WrappedComponent(AddPostDescriptionScreen),
   );
 
   registerModals();
@@ -114,6 +121,10 @@ const registerModals = () => {
 
   Navigation.registerComponent(ALERT_TEXT_MODAL, () =>
     WrappedComponent(AlertTextModal),
+  );
+
+  Navigation.registerComponent(ADD_POST_MODAL, () =>
+    WrappedComponent(AddPostModal),
   );
 };
 

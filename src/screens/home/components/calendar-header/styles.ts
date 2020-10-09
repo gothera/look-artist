@@ -1,9 +1,11 @@
-import { StyleSheet, ViewStyle } from 'react-native';
+import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
+import { typography, color } from '../../../../theme';
 
 interface Style {
   container: ViewStyle;
   expandableCalendarContainer: ViewStyle;
+  todayBtnText: TextStyle;
 }
 
 export const styles = StyleSheet.create<Style>({
@@ -14,5 +16,9 @@ export const styles = StyleSheet.create<Style>({
   },
   expandableCalendarContainer: {
     marginTop: getStatusBarHeight(true),
+  },
+  todayBtnText: {
+    ...typography.subheadline,
+    color: color.textSecondary,
   },
 });

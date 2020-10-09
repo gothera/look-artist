@@ -83,7 +83,7 @@ index 358f5b4..94ec8de 100644
      ...(theme[STYLESHEET_ID] || {})
    });
 diff --git a/node_modules/react-native-calendars/src/expandableCalendar/calendarProvider.js b/node_modules/react-native-calendars/src/expandableCalendar/calendarProvider.js
-index aead2f7..d833072 100644
+index aead2f7..6c9d6d4 100644
 --- a/node_modules/react-native-calendars/src/expandableCalendar/calendarProvider.js
 +++ b/node_modules/react-native-calendars/src/expandableCalendar/calendarProvider.js
 @@ -1,6 +1,6 @@
@@ -102,7 +102,16 @@ index aead2f7..d833072 100644
  
  const commons = require('./commons');
  const UPDATE_SOURCES = commons.UPDATE_SOURCES;
-@@ -47,7 +48,7 @@ class CalendarProvider extends Component {
+@@ -36,6 +37,8 @@ class CalendarProvider extends Component {
+     todayBottomMargin: PropTypes.number,
+     /** Today button's style */
+     todayButtonStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number, PropTypes.array]),
++    /** Today button's text styl */
++    todayButtonTextStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number, PropTypes.array]),
+     /** The opacity for the disabled today button (0-1) */
+     disabledOpacity: PropTypes.number
+   }
+@@ -47,7 +50,7 @@ class CalendarProvider extends Component {
      this.state = {
        date: this.props.date || XDate().toString('yyyy-MM-dd'),
        updateSource: UPDATE_SOURCES.CALENDAR_INIT,
@@ -111,7 +120,7 @@ index aead2f7..d833072 100644
        buttonIcon: this.getButtonIcon(props.date),
        disabled: false,
        opacity: new Animated.Value(1)
-@@ -124,13 +125,15 @@ class CalendarProvider extends Component {
+@@ -124,13 +127,15 @@ class CalendarProvider extends Component {
        const isToday = today === date;
  
        Animated.spring(this.state.buttonY, {
@@ -128,7 +137,7 @@ index aead2f7..d833072 100644
  
    animateOpacity(disabled) {
      const {disabledOpacity} = this.props;
-@@ -153,6 +156,7 @@ class CalendarProvider extends Component {
+@@ -153,11 +158,12 @@ class CalendarProvider extends Component {
      const todayString = XDate.locales[XDate.defaultLocale].today || commons.todayString;
      const today = todayString.charAt(0).toUpperCase() + todayString.slice(1);
  
@@ -136,6 +145,12 @@ index aead2f7..d833072 100644
      return (
        <Animated.View style={[this.style.todayButtonContainer, {transform: [{translateY: buttonY}]}]}>
          <TouchableOpacity style={[this.style.todayButton, this.props.todayButtonStyle]} onPress={this.onTodayPress} disabled={disabled}>
+           <Animated.Image style={[this.style.todayButtonImage, {opacity}]} source={buttonIcon}/>
+-          <Animated.Text allowFontScaling={false} style={[this.style.todayButtonText, {opacity}]}>{today}</Animated.Text>
++          <Animated.Text allowFontScaling={false} style={[this.style.todayButtonText, this.props.todayButtonTextStyle, {opacity}]}>{today}</Animated.Text>
+         </TouchableOpacity>
+       </Animated.View>
+     );
 diff --git a/node_modules/react-native-calendars/src/expandableCalendar/style.js b/node_modules/react-native-calendars/src/expandableCalendar/style.js
 index a226953..6d30bf1 100644
 --- a/node_modules/react-native-calendars/src/expandableCalendar/style.js

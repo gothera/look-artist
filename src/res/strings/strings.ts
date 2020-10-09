@@ -31,10 +31,18 @@ const strings = {
       title: 'Edit Specific Days',
       hoursError: 'Ending hour must be after staring hour',
     },
+    addPost: {
+      title: 'Add Post',
+      description: 'Select multiple photos for your post',
+    },
   },
+
   action: {
     clearAll: 'Clear All',
     addAppointment: 'Add Appointment',
+    select: 'Select',
+    next: 'Next',
+    post: 'Post',
   },
 };
 

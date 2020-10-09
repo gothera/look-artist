@@ -14,7 +14,6 @@ import LineDivider from '../ui/LineDivider';
 
 interface OwnProps {
   containerStyle?: StyleProp<ViewStyle>;
-
   label: string;
   shouldAutofocus?: boolean;
   placeholder: string;

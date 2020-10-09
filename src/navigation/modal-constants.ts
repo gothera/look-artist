@@ -7,3 +7,4 @@ export const EDIT_DEFAULT_DAYS_MODAL = 'look-artist.EditDefaultDaysModal';
 export const SELECT_TIME_MODAL = 'look-artist.SelectTimeModal';
 export const EDIT_SPECIFIC_DAYS_MODAL = 'look-artist.EditSpecificDaysModal';
 export const ALERT_TEXT_MODAL = 'look-artist.AlertTextModal';
+export const ADD_POST_MODAL = 'look-artist.AddPostModal';

@@ -7,8 +7,10 @@ import {
   NOTIFICATIONS_SCREEN,
   PROFILE_SCREEN,
   SETUP_SCREEN,
+  ADD_POST_DESCRIPTION_SCREEN,
 } from './screen-constants';
 import { Config, getConfig } from './utils-navigation';
+import strings from '../res/strings/strings';
 
 export const setLoggedInRoot = () => {
   Navigation.setRoot({
@@ -49,20 +51,17 @@ export const setLoggedInRoot = () => {
             },
           },
           {
+            /**
+             * Stack for add post, use registerBottomTabPressedListener instead
+             */
             stack: {
-              children: [
-                {
-                  component: {
-                    name: ADD_POST_SCREEN,
-                  },
-                },
-              ],
               options: {
                 bottomTab: {
                   icon: require('../res/images/bottom-tabs/add-post.png'),
                   selectedIcon: require('../res/images/bottom-tabs/add-post-selected.png'),
                   iconColor: color.muted,
                   selectedIconColor: color.textPrimary,
+                  selectTabOnPress: false,
                 },
                 topBar: {
                   visible: false,
@@ -184,6 +183,41 @@ export const pushSetupScreen = (pushConfig?: Config) => {
           },
           animations: {
             ...config.animations,
+          },
+        },
+      },
+    },
+  });
+};
+
+/**
+ * Pushed on Add Post
+ * @param componentId
+ * @param pushConfig
+ */
+export const pushAddPostDescriptionScreen = (
+  componentId: string,
+  pushConfig?: Config,
+) => {
+  const config = getConfig(pushConfig);
+
+  Navigation.push(componentId, {
+    component: {
+      name: ADD_POST_DESCRIPTION_SCREEN,
+      passProps: { ...config.props },
+      options: {
+        layout: {
+          componentBackgroundColor: color.background,
+        },
+        topBar: {
+          title: {
+            text: strings.modal.addPost.title,
+            fontFamily: 'Gilroy-SemiBold',
+          },
+          backButton: {
+            showTitle: false,
+            icon: require('../res/images/icons/chevron-left-icon.png'),
+            color: color.textPrimary,
           },
         },
       },
