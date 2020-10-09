@@ -5,6 +5,8 @@ import CustomHeaderCalendar from '../custom-header-calendar/CustomHeaderCalendar
 import { styles } from './styles';
 import { View } from 'react-native';
 import { monthNumberToMonthName } from '../../../../utils/global';
+import { StoreState } from '../../../../store/store.types';
+import { connect, ConnectedProps } from 'react-redux';
 
 /**
  * For props
@@ -16,7 +18,19 @@ interface OwnProps {
   onNewDateSelected: (newDate: string) => void;
 }
 
-const CalendarHeader: React.FC<OwnProps> = ({ onNewDateSelected }) => {
+const mapStateToProps = (state: StoreState) => {
+  const scheduledDates = state.profile.scheduledDates;
+  return { scheduledDates };
+};
+
+const connector = connect(mapStateToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+const CalendarHeader: React.FC<OwnProps & PropsFromRedux> = ({
+  onNewDateSelected,
+  scheduledDates,
+}) => {
   const dateNow = new Date().toISOString().split('T')[0];
   const initialMonthName = monthNumberToMonthName(
     parseInt(dateNow.split('-')[1], 10),
@@ -33,6 +47,18 @@ const CalendarHeader: React.FC<OwnProps> = ({ onNewDateSelected }) => {
     const monthName = monthNumberToMonthName(month);
     setCurrMonthName(monthName);
   };
+
+  const markedDates = Object.assign(
+    {},
+    ...scheduledDates.map((key) => ({
+      [key]: {
+        marked: true,
+        dotColor: color.brand,
+      },
+    })),
+  );
+
+  console.log('=aa ==', markedDates);
 
   return (
     <View style={styles.container}>
@@ -62,6 +88,7 @@ const CalendarHeader: React.FC<OwnProps> = ({ onNewDateSelected }) => {
           }}
           firstDay={1}
           style={styles.expandableCalendarContainer}
+          markedDates={markedDates}
         />
       </CalendarProvider>
       <CustomHeaderCalendar month={currMonthName} />
@@ -69,4 +96,4 @@ const CalendarHeader: React.FC<OwnProps> = ({ onNewDateSelected }) => {
   );
 };
 
-export default CalendarHeader;
+export default connector(CalendarHeader);
