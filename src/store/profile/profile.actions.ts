@@ -77,6 +77,7 @@ export const loginKeychain = (token: string): ThunkResult<void> => {
   return async function (dispatch) {
     setGenericPassword('token', token).then(async () => {
       dispatch(loginSuccess(token));
+      dispatch(fetchProfile(token));
     });
   };
 };
@@ -286,7 +287,7 @@ export const fetchProfileFailure = (): profileTypes.fetchProfileFailure => {
   };
 };
 
-export const fetchProfile = (): ThunkResult<void> => {
+export const fetchProfile = (token?: string): ThunkResult<void> => {
   return async function (dispatch, getState) {
     dispatch(fetchProfileRequest());
 
@@ -295,7 +296,7 @@ export const fetchProfile = (): ThunkResult<void> => {
     //   return Promise.resolve();
     // }
 
-    return ProfileService.fetchProfile()
+    return ProfileService.fetchProfile(token)
       .then((response: ArtistResponseApi) => {
         dispatch(fetchProfileSuccess(response));
       })

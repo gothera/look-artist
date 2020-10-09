@@ -6,6 +6,7 @@ import {
 } from './api.types';
 import { getRequest, postRequest, putRequest } from './apiRequest';
 import { DaysAbbreviation } from '../../types/enums';
+import { AxiosRequestConfig } from 'axios';
 
 export const setup = (setupBody: SetupBody): Promise<ArtistResponseApi> => {
   const url = `artist/setup/`;
@@ -24,10 +25,16 @@ export const changeProfilePicture = (formData: FormData): Promise<any> => {
   return postRequest<any>(url, formData, config);
 };
 
-export const fetchProfile = (): Promise<ArtistResponseApi> => {
+export const fetchProfile = (token?: string): Promise<ArtistResponseApi> => {
   const url = `artist/current/`;
 
-  return getRequest<ArtistResponseApi>(url);
+  const extraConfig: AxiosRequestConfig = {
+    headers: {
+      Authorization: 'Bearer ' + token,
+    },
+  };
+
+  return getRequest<ArtistResponseApi>(url, { ...(token && extraConfig) });
 };
 
 /**

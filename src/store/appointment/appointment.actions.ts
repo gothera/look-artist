@@ -36,11 +36,12 @@ const fetchAppointmentsOfDayFailure = (
   };
 };
 
-export const fetchAppointmentOfDay = (date: string): ThunkResult<void> => {
+export const fetchAppointmentOfDay = (
+  date: string,
+  token?: string,
+): ThunkResult<void> => {
   return async function (dispatch, getState) {
-    console.log('am ajuns aici');
-    // if (getState().notification.fetching || getState().notification.error)
-    //   return Promise.resolve();
+    if (getState().notification.fetching) return Promise.resolve();
 
     const artistId = getState().profile.artistId;
 
@@ -49,7 +50,7 @@ export const fetchAppointmentOfDay = (date: string): ThunkResult<void> => {
     }
 
     dispatch(fetchAppointmentsOfDayRequest());
-    return AppointmentService.fetchAppointmentsOfDay(artistId, date)
+    return AppointmentService.fetchAppointmentsOfDay(artistId, date, token)
       .then((response: AppointmentResponse[]) => {
         const normalizedAppointments = normalizeAppointments(response);
         dispatch(fetchAppointmentsOfDaySuccess(normalizedAppointments, date));
