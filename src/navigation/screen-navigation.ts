@@ -18,7 +18,7 @@ export const setLoggedInRoot = () => {
       bottomTabs: {
         options: {
           bottomTabs: {
-            animate: false,
+            animate: true,
             titleDisplayMode: 'alwaysHide',
             elevation: 30,
             backgroundColor: color.background,
@@ -42,6 +42,11 @@ export const setLoggedInRoot = () => {
                   selectedIcon: require('../res/images/bottom-tabs/calendar-selected.png'),
                   iconColor: color.muted,
                   selectedIconColor: color.textPrimary,
+                  // text: 'Program',
+                  // textColor: color.muted,
+                  // selectedTextColor: color.textPrimary,
+                  // fontFamily: 'Gilroy-SemiBold',
+                  // fontSize: 10,
                 },
                 topBar: {
                   visible: false,
