@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-               BuildableName = "templateApp-tvOS.app"
-               BlueprintName = "templateApp-tvOS"
-               ReferencedContainer = "container:templateApp.xcodeproj">
+               BuildableName = "look-artist-tvOS.app"
+               BlueprintName = "look-artist-tvOS"
+               ReferencedContainer = "container:look-artist.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "templateApp-tvOSTests.xctest"
-               BlueprintName = "templateApp-tvOSTests"
-               ReferencedContainer = "container:templateApp.xcodeproj">
+               BuildableName = "look-artist-tvOSTests.xctest"
+               BlueprintName = "look-artist-tvOSTests"
+               ReferencedContainer = "container:look-artist.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "templateApp-tvOS.app"
-            BlueprintName = "templateApp-tvOS"
-            ReferencedContainer = "container:templateApp.xcodeproj">
+            BuildableName = "look-artist-tvOS.app"
+            BlueprintName = "look-artist-tvOS"
+            ReferencedContainer = "container:look-artist.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "templateApp-tvOS.app"
-            BlueprintName = "templateApp-tvOS"
-            ReferencedContainer = "container:templateApp.xcodeproj">
+            BuildableName = "look-artist-tvOS.app"
+            BlueprintName = "look-artist-tvOS"
+            ReferencedContainer = "container:look-artist.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

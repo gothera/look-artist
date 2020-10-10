@@ -1,4 +1,4 @@
-package com.templateapp;
+package com.look-artist;
 
 import com.reactnativenavigation.NavigationActivity;
 
