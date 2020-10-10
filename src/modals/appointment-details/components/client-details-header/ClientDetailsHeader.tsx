@@ -16,7 +16,7 @@ const ClientDetailsHeader: React.FC<OwnProps> = ({
   return (
     <View style={styles.container}>
       <View style={styles.rowContainer}>
-        {clientPhoto && <UserAvatar photoUrl={clientPhoto} size={40} />}
+        <UserAvatar photoUrl={clientPhoto} size={40} />
         <Text style={styles.clientName}>{clientName}</Text>
       </View>
       <LineDivider containerStyle={styles.lineDivider} />

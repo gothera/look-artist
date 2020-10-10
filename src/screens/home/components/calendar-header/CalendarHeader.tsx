@@ -58,8 +58,6 @@ const CalendarHeader: React.FC<OwnProps & PropsFromRedux> = ({
     })),
   );
 
-  console.log('=aa ==', markedDates);
-
   return (
     <View style={styles.container}>
       <CalendarProvider
