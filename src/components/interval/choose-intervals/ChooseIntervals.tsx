@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleProp, ViewStyle } from 'react-native';
 import { styles } from './styles';
 import strings from '../../../res/strings/strings';
-import IntervalHourOption from '../../../modals/edit-default-days/components/interval-hour-option/IntervalHourOption';
+import IntervalHourOption from '../../../modals/edit-weekly-program/components/interval-hour-option/IntervalHourOption';
 
 interface OwnProps {
   showIntervals: boolean;

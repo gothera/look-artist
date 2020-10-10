@@ -24,7 +24,7 @@ const connector = connect(null, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-const EditDefaultDaysModal: React.FC<OwnProps & PropsFromRedux> = ({
+const EditWeeklyProgramModal: React.FC<OwnProps & PropsFromRedux> = ({
   updateDefaultProgram,
 }) => {
   const [selectedDays, setSelectedDays] = useState<DaysAbbreviation[]>([]);
@@ -114,4 +114,4 @@ const EditDefaultDaysModal: React.FC<OwnProps & PropsFromRedux> = ({
   );
 };
 
-export default connector(EditDefaultDaysModal);
+export default connector(EditWeeklyProgramModal);

@@ -6,11 +6,11 @@ import {
   ADD_APPOINTMENT_MODAL,
   APPOINTMENT_DETAILS_MODAL,
   DELETE_CONFIRMATION_MODAL,
-  EDIT_DEFAULT_DAYS_MODAL,
+  EDIT_WEEKLY_PROGRAM_MODAL,
   SELECT_TIME_MODAL,
   LOADING_MODAL,
   EDIT_PROGRAM_MODAL,
-  EDIT_SPECIFIC_DAYS_MODAL,
+  EDIT_DAILY_PROGRAM_MODAL,
   ALERT_TEXT_MODAL,
   ADD_POST_MODAL,
 } from './modal-constants';
@@ -164,7 +164,7 @@ export const showDeleteConfirmationModal = (pushConfig?: Config) => {
  * @param componentId
  * @param pushConfig
  */
-export const showEditDefaultDaysModal = (
+export const showEditWeeklyProgramModal = (
   componentId: string,
   pushConfig?: Config,
 ) => {
@@ -172,7 +172,7 @@ export const showEditDefaultDaysModal = (
 
   Navigation.push(componentId, {
     component: {
-      name: EDIT_DEFAULT_DAYS_MODAL,
+      name: EDIT_WEEKLY_PROGRAM_MODAL,
       passProps: { ...config.props },
       options: {
         overlay: {
@@ -203,7 +203,7 @@ export const showEditDefaultDaysModal = (
  * @param componentId
  * @param pushConfig
  */
-export const showEditSpecificDaysModal = (
+export const showEditDailyProgramModal = (
   componentId: string,
   pushConfig?: Config,
 ) => {
@@ -211,7 +211,7 @@ export const showEditSpecificDaysModal = (
 
   Navigation.push(componentId, {
     component: {
-      name: EDIT_SPECIFIC_DAYS_MODAL,
+      name: EDIT_DAILY_PROGRAM_MODAL,
       passProps: { ...config.props },
       options: {
         overlay: {

@@ -10,11 +10,11 @@ import {
   ADD_APPOINTMENT_MODAL,
   APPOINTMENT_DETAILS_MODAL,
   DELETE_CONFIRMATION_MODAL,
-  EDIT_DEFAULT_DAYS_MODAL,
+  EDIT_WEEKLY_PROGRAM_MODAL,
   EDIT_PROGRAM_MODAL,
   SELECT_TIME_MODAL,
   LOADING_MODAL,
-  EDIT_SPECIFIC_DAYS_MODAL,
+  EDIT_DAILY_PROGRAM_MODAL,
   ALERT_TEXT_MODAL,
   ADD_POST_MODAL,
 } from './modal-constants';
@@ -33,9 +33,9 @@ import {
   AddAppointmentModal,
   AppointmentDetailsModal,
   DeleteConfirmationModal,
-  EditDefaultDaysModal,
+  EditWeeklyProgramModal,
   SelectTimeModal,
-  EditSpecificDaysModal,
+  EditDailyProgramModal,
   AlertTextModal,
   AddPostModal,
 } from '../modals';
@@ -111,12 +111,12 @@ const registerModals = () => {
     WrappedComponent(DeleteConfirmationModal),
   );
 
-  Navigation.registerComponent(EDIT_DEFAULT_DAYS_MODAL, () =>
-    WrappedComponent(EditDefaultDaysModal),
+  Navigation.registerComponent(EDIT_WEEKLY_PROGRAM_MODAL, () =>
+    WrappedComponent(EditWeeklyProgramModal),
   );
 
-  Navigation.registerComponent(EDIT_SPECIFIC_DAYS_MODAL, () =>
-    WrappedComponent(EditSpecificDaysModal),
+  Navigation.registerComponent(EDIT_DAILY_PROGRAM_MODAL, () =>
+    WrappedComponent(EditDailyProgramModal),
   );
 
   Navigation.registerComponent(ALERT_TEXT_MODAL, () =>

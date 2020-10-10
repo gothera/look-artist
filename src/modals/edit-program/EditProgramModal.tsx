@@ -6,8 +6,8 @@ import { styles } from './styles';
 import { ScheduleBigIcon } from '../../res/svg';
 import strings from '../../res/strings/strings';
 import {
-  showEditDefaultDaysModal,
-  showEditSpecificDaysModal,
+  showEditWeeklyProgramModal,
+  showEditDailyProgramModal,
 } from '../../navigation';
 
 const LEFT_BUTTON_CLOSE = 'close-edit-program-modal';
@@ -41,11 +41,11 @@ const EditProgramModal: React.FC<OwnProps> = ({ componentId }) => {
   };
 
   const onDefaultDaysPress = () => {
-    showEditDefaultDaysModal(componentId);
+    showEditWeeklyProgramModal(componentId);
   };
 
   const onSpecificDaysPress = () => {
-    showEditSpecificDaysModal(componentId);
+    showEditDailyProgramModal(componentId);
   };
 
   return (

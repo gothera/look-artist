@@ -13,14 +13,14 @@ const strings = {
       title: 'Edit Program',
       intro: 'Choose your availability',
       options: {
-        defaultDays: 'Default Days',
+        defaultDays: 'Weekly Program',
         defaultDaysDesc: 'Set a schedule for week days',
-        specificDays: 'Specific Days',
+        specificDays: 'Daily Program',
         specificDaysDesc: 'Schedule specific dates',
       },
     },
     editDefaultDays: {
-      title: 'Edit Default Days',
+      title: 'Edit Weekly Program',
       chooseDaysDescription: 'Choose days',
       chooseSchedule: 'Choose schedule',
       chooseScheduleDesc: 'Clients will see you available in this interval',
@@ -28,7 +28,7 @@ const strings = {
       endingHour: 'Ending Hour',
     },
     editSpecificDays: {
-      title: 'Edit Specific Days',
+      title: 'Edit Daily Program',
       hoursError: 'Ending hour must be after staring hour',
     },
     addPost: {
