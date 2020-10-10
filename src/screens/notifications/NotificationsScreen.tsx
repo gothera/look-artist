@@ -1,16 +1,9 @@
 import React, { useEffect } from 'react';
-import { FlatListProps, Text } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { FlatListProps } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import ScreenFlatList from '../../containers/screen/ScreenFlatList';
-import {
-  addAppointment,
-  fetchAppointmentOfDay,
-} from '../../store/appointment/appointment.actions';
 import { fetchNotifications } from '../../store/notification/notification.actions';
-import { fetchProfile } from '../../store/profile/profile.actions';
 import { AsyncDispatch, StoreState } from '../../store/store.types';
-import { Appointment, AppointmentType } from '../../types/globalTypes';
 import NotificationRow from './components/notification-row/NotificationRow';
 
 const mapStateToProps = (state: StoreState) => {
@@ -23,11 +16,6 @@ const mapStateToProps = (state: StoreState) => {
 const mapDispatchToProps = (dispatch: AsyncDispatch) => ({
   fetchMoreNotifcations: (isFirst: boolean) =>
     dispatch(fetchNotifications(isFirst)),
-  fetchAppointmentsOfDay: (date: string) =>
-    dispatch(fetchAppointmentOfDay(date)),
-  fetchProfile: () => dispatch(fetchProfile()),
-  addAppointment: (appointment: Appointment) =>
-    dispatch(addAppointment(appointment)),
 });
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -37,8 +25,6 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 const NotificationsScreen: React.FC<PropsFromRedux> = ({
   notificationsById,
   fetchMoreNotifcations,
-  fetchProfile,
-  addAppointment,
 }) => {
   useEffect(() => {
     fetchMoreNotifcations(true);
@@ -61,29 +47,6 @@ const NotificationsScreen: React.FC<PropsFromRedux> = ({
 
   return (
     <>
-      <TouchableOpacity
-        style={{ marginTop: 100, width: '100%', height: 100 }}
-        onPress={() =>
-          addAppointment({
-            clientId: 1,
-            artistId: 1,
-            serviceId: 1,
-            date: '2020-09-22',
-            startingTime: '08:00',
-            endingTime: '09:00',
-            currency: 0,
-            type: AppointmentType.Reserved,
-          })
-        }
-      >
-        <Text>Buna ziua</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={{ marginTop: 100, width: '100%', height: 100 }}
-        onPress={() => fetchProfile()}
-      >
-        <Text>fetch profile</Text>
-      </TouchableOpacity>
       <ScreenFlatList
         headerTitle="Notifications"
         flatListProps={flatListProps}

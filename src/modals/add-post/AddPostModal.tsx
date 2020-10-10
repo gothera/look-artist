@@ -5,8 +5,8 @@ import SelectPostImages from './components/select-post-images/SelectPostImages';
 import { color } from '../../theme';
 import SelectedImagesList from './components/selected-images-list/SelectedImagesList';
 import strings from '../../res/strings/strings';
-import { TextInput } from 'react-native';
 import { TextInputRef } from '../../types/refTypes';
+import { Text, View } from 'react-native';
 
 const LEFT_BUTTON_CLOSE = 'close-add-post-modal';
 const RIGHT_BUTTON_NEXT = 'next-add-post-modal';
@@ -76,8 +76,9 @@ const AddPostModal: React.FC<OwnProps> = ({ componentId }) => {
   const imagesPath = imagesPicked?.map((image: Image) => image.path);
 
   return (
-    <>
-      {!hasSelectedImages && <SelectPostImages onSelect={openImagePicker} />}
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Available soon</Text>
+      {/* {!hasSelectedImages && <SelectPostImages onSelect={openImagePicker} />}
       {hasSelectedImages && imagesPath && (
         <>
           <SelectedImagesList
@@ -85,8 +86,8 @@ const AddPostModal: React.FC<OwnProps> = ({ componentId }) => {
             passedRef={descInputRef}
           />
         </>
-      )}
-    </>
+      )} */}
+    </View>
   );
 };
 
