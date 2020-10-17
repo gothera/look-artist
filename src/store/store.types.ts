@@ -36,6 +36,7 @@ export interface ProfileState {
   isFetching: boolean;
   localProgramEntries: Record<string, ArtistProgramEntry>;
   programEntriesByDate: string[];
+  birthDate?: string;
 }
 
 export interface NotificationState {

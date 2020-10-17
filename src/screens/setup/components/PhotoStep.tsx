@@ -15,10 +15,11 @@ import PrimaryButton from '../../../components/button/PrimaryButton';
 import { BigAvatarPlaceholder } from '../../../res/svg';
 import { changeProfilePicture } from '../../../store/profile/profile.actions';
 import { AsyncDispatch, StoreState } from '../../../store/store.types';
-import { color, typography } from '../../../theme';
+import { color, typography, spacing } from '../../../theme';
 import { ImagePickerResponse } from '../../../types/globalTypes';
 import StepTitle from './StepTitle';
 import { showLoadingModal } from '../../../navigation';
+import strings from '../../../res/strings/strings';
 
 const ImagePicker = NativeModules.ImageCropPicker;
 
@@ -60,7 +61,7 @@ const PhotoStep: React.FC<OwnProps & PropsFromRedux> = ({
       width: 500,
       height: 500,
       cropping: true,
-      cropperCircleOverlay: false,
+      cropperCircleOverlay: true,
       sortOrder: 'none',
     }).then((image: any) => {
       const imagePickedMapped = {
@@ -93,10 +94,10 @@ const PhotoStep: React.FC<OwnProps & PropsFromRedux> = ({
 
   return (
     <View style={styles.container}>
-      <StepTitle
-        title="Choose a profile picture"
-        description="This is how you will remain in people's head"
-      />
+      <Text style={styles.title}>{strings.screen.setup.photo.title}</Text>
+      <Text style={styles.description}>
+        {strings.screen.setup.photo.description}
+      </Text>
       <View style={styles.avatarContainer}>
         {!imagePicked && <BigAvatarPlaceholder />}
         {imagePicked && (
@@ -134,6 +135,8 @@ interface Style {
   chooseText: TextStyle;
   btnContainer: ViewStyle;
   image: ImageStyle;
+  title: TextStyle;
+  description: TextStyle;
 }
 
 const styles = StyleSheet.create<Style>({
@@ -173,6 +176,15 @@ const styles = StyleSheet.create<Style>({
     width: 200,
     height: 200,
     borderRadius: 200,
+  },
+  title: {
+    ...typography.title3Bold,
+    color: color.textSecondary,
+  },
+  description: {
+    ...typography.subheadlineSemiBold,
+    color: color.muted,
+    marginTop: spacing.smallest,
   },
 });
 

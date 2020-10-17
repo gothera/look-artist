@@ -1,5 +1,5 @@
 import CheckBox from '@react-native-community/checkbox';
-import React, { useState } from 'react';
+import React from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -9,34 +9,24 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import { connect, ConnectedProps } from 'react-redux';
 import PrimaryButton from '../../../components/button/PrimaryButton';
 import { Categories } from '../../../res/strings/categories';
-import { setCategory } from '../../../store/profile/profile.actions';
-import { AsyncDispatch } from '../../../store/store.types';
-import { color, typography } from '../../../theme';
+
+import { color, typography, spacing } from '../../../theme';
 import { Category } from '../../../types/enums';
-import StepTitle from './StepTitle';
+import strings from '../../../res/strings/strings';
 
 interface OwnProps {
   slideToNext: () => void;
+  selectedCategory: Category | undefined;
+  setSelectedCategory: (param: Category | undefined) => void;
 }
 
-const mapDispatchToProps = (dispatch: AsyncDispatch) => ({
-  setCategory: (category: string) => dispatch(setCategory(category)),
-});
-
-const connector = connect(null, mapDispatchToProps);
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-const CategoryStep: React.FC<OwnProps & PropsFromRedux> = ({
+const CategoryStep: React.FC<OwnProps> = ({
   slideToNext,
-  setCategory,
+  selectedCategory,
+  setSelectedCategory,
 }) => {
-  const [selectedCategory, setSelectedCategory] = useState<
-    Category | undefined
-  >(undefined);
-
   const onMakeupChange = (newValue: boolean) => {
     if (newValue === false) {
       setSelectedCategory(undefined);
@@ -96,7 +86,6 @@ const CategoryStep: React.FC<OwnProps & PropsFromRedux> = ({
       categoryName = 'Body Care';
     }
 
-    setCategory(categoryName);
     slideToNext();
   };
 
@@ -106,7 +95,10 @@ const CategoryStep: React.FC<OwnProps & PropsFromRedux> = ({
         contentContainerStyle={styles.scrollContainer}
         showsVerticalScrollIndicator={false}
       >
-        <StepTitle title="What's your category?" description="ceva" />
+        <Text style={styles.title}>{strings.screen.setup.category.title}</Text>
+        <Text style={styles.description}>
+          {strings.screen.setup.category.description}
+        </Text>
         <View style={styles.checksContainer}>
           <View style={styles.rowOption}>
             <CheckBox
@@ -238,6 +230,8 @@ interface Style {
   optionText: TextStyle;
   continueBtn: ViewStyle;
   textContainer: ViewStyle;
+  title: TextStyle;
+  description: TextStyle;
 }
 
 const styles = StyleSheet.create<Style>({
@@ -279,6 +273,15 @@ const styles = StyleSheet.create<Style>({
   textContainer: {
     width: '100%',
   },
+  title: {
+    ...typography.title3Bold,
+    color: color.textSecondary,
+  },
+  description: {
+    ...typography.subheadlineSemiBold,
+    color: color.muted,
+    marginTop: spacing.smallest,
+  },
 });
 
-export default connector(CategoryStep) as React.FC<OwnProps>;
+export default CategoryStep;

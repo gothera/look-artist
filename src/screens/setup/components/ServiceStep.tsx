@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, ViewStyle } from 'react-native';
+import React from 'react';
+import { StyleSheet, View, ViewStyle, Text, TextStyle } from 'react-native';
 import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { connect, ConnectedProps } from 'react-redux';
 import PrimaryButton from '../../../components/button/PrimaryButton';
 import PickerInput from '../../../components/input/PickerInput';
 import TextInputWithLabel from '../../../components/input/TextInputWithLabel';
@@ -14,72 +13,60 @@ import {
   makeupServicesSelection,
   nailsServicesSelection,
 } from '../../../res/constants/pickerItems';
-import { setup } from '../../../store/profile/profile.actions';
-import { AsyncDispatch, StoreState } from '../../../store/store.types';
-import { color } from '../../../theme';
-import StepTitle from './StepTitle';
+import { color, typography, spacing } from '../../../theme';
 
-interface OwnProps {}
+import { Category } from '../../../types/enums';
+import strings from '../../../res/strings/strings';
 
-const mapStateToProps = (state: StoreState) => {
-  return {
-    category: state.profile.category,
-  };
-};
+interface OwnProps {
+  category?: Category;
+  serviceName: string | undefined;
+  setServiceName: (param: string) => void;
+  description: string;
+  setDescription: (param: string) => void;
+  priceStr: string;
+  setPriceStr: (param: string) => void;
+  durationStr: string;
+  setDurationStr: (param: string) => void;
 
-const mapDispatchToProps = (dispatch: AsyncDispatch) => ({
-  setup: (
-    serviceName: string,
-    serviceDescription: string,
-    servicePrice: string,
-    serviceDuration: string,
-  ) =>
-    dispatch(
-      setup(serviceName, serviceDescription, servicePrice, serviceDuration),
-    ),
-});
+  onDone: () => void;
+}
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-const ServiceStep: React.FC<OwnProps & PropsFromRedux> = ({
+const ServiceStep: React.FC<OwnProps> = ({
   category,
-  setup,
+  onDone,
+  serviceName,
+  setServiceName,
+  description,
+  setDescription,
+  priceStr,
+  setPriceStr,
+  durationStr,
+  setDurationStr,
 }) => {
-  const [serviceName, setServiceName] = useState<string | undefined>(undefined);
-  const [description, setDescription] = useState('');
-  const [priceStr, setPriceStr] = useState('');
-  const [durationStr, setDurationStr] = useState('');
-
   const getPickerServices = () => {
     switch (category) {
-      case 'Makeup': {
+      case Category.Makeup: {
         return makeupServicesSelection;
       }
-      case 'Lashes': {
+      case Category.Lashes: {
         return lashesServicesSelection;
       }
-      case 'Eyebrows': {
+      case Category.Eyebrows: {
         return eyebrowsServicesSelection;
       }
-      case 'Nails': {
+      case Category.Nails: {
         return nailsServicesSelection;
       }
-      case 'Body Care': {
+      case Category.BodyCare: {
         return bodyCareServicesSelection;
       }
-      case 'Hair': {
+      case Category.Hair: {
         return hairServicesSelection;
       }
       default: {
         return makeupServicesSelection;
       }
-    }
-  };
-
-  const onDonePress = () => {
-    if (serviceName) {
-      setup(serviceName, description, priceStr, durationStr);
     }
   };
 
@@ -90,17 +77,18 @@ const ServiceStep: React.FC<OwnProps & PropsFromRedux> = ({
         showsVerticalScrollIndicator={false}
         extraScrollHeight={50}
       >
-        <StepTitle
-          title="A service"
-          description="Choose and describe a service to get started"
-        />
+        <Text style={styles.title}>{strings.screen.setup.service.title}</Text>
+        <Text style={styles.description}>
+          {strings.screen.setup.service.description}
+        </Text>
         <PickerInput
           label="Service Name"
           containerStyle={styles.input}
           value={serviceName}
           placeholder="Select a service"
           items={getPickerServices()}
-          setSelected={setServiceName}
+          setSelected={() => {}}
+          onValueChanged={setServiceName}
         />
         <TextInputWithLabel
           label="Description"
@@ -114,7 +102,7 @@ const ServiceStep: React.FC<OwnProps & PropsFromRedux> = ({
         />
 
         <TextInputWithLabel
-          label="Price"
+          label="Price LEI"
           containerStyle={styles.input}
           placeholder="Enter a price"
           keyboardType="number-pad"
@@ -123,7 +111,7 @@ const ServiceStep: React.FC<OwnProps & PropsFromRedux> = ({
         />
 
         <TextInputWithLabel
-          label="Duration"
+          label="Duration Minutes"
           containerStyle={styles.input}
           placeholder="Enter duration"
           keyboardType="number-pad"
@@ -133,7 +121,9 @@ const ServiceStep: React.FC<OwnProps & PropsFromRedux> = ({
       </KeyboardAwareScrollView>
 
       <KeyboardAccessoryView alwaysVisible style={styles.keyboardAccessory}>
-        <PrimaryButton title="Done" onPress={onDonePress} />
+        <View style={{ marginHorizontal: 16 }}>
+          <PrimaryButton title="Done" onPress={onDone} />
+        </View>
       </KeyboardAccessoryView>
     </View>
   );
@@ -144,17 +134,20 @@ interface Style {
   scrollContainer: ViewStyle;
   input: ViewStyle;
   keyboardAccessory: ViewStyle;
+  title: TextStyle;
+  description: TextStyle;
 }
 
 const styles = StyleSheet.create<Style>({
   container: {
-    marginTop: 40,
     flex: 1,
     width: '100%',
-    paddingHorizontal: 20,
   },
   scrollContainer: {
-    flex: 1,
+    paddingHorizontal: spacing.base,
+    marginTop: spacing.larger,
+    width: '100%',
+    height: '100%',
   },
   input: {
     marginTop: 30,
@@ -164,6 +157,15 @@ const styles = StyleSheet.create<Style>({
     marginBottom: 20,
     borderTopWidth: 0,
   },
+  title: {
+    ...typography.title3Bold,
+    color: color.textSecondary,
+  },
+  description: {
+    ...typography.subheadlineSemiBold,
+    color: color.muted,
+    marginTop: spacing.smallest,
+  },
 });
 
-export default connector(ServiceStep) as React.FC<OwnProps>;
+export default ServiceStep;

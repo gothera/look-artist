@@ -8,3 +8,4 @@ export { default as SelectTimeModal } from './select-time/SelectTimeModal';
 export { default as EditDailyProgramModal } from './edit-daily-program/EditDailyProgramModal';
 export { default as AlertTextModal } from './alert-text/AlertTextModal';
 export { default as AddPostModal } from './add-post/AddPostModal';
+export { default as SelectDateModal } from './select-date/SelectDateModal';

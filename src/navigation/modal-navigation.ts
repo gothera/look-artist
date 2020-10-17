@@ -13,6 +13,7 @@ import {
   EDIT_DAILY_PROGRAM_MODAL,
   ALERT_TEXT_MODAL,
   ADD_POST_MODAL,
+  SELECT_DATE_MODAL,
 } from './modal-constants';
 import { Config, getConfig } from './utils-navigation';
 import { color } from '../theme';
@@ -286,6 +287,24 @@ export const showAddPostModal = (pushConfig?: Config) => {
           },
         },
       ],
+    },
+  });
+};
+
+export const showSelectDateModal = (pushConfig?: Config) => {
+  const config = getConfig(pushConfig);
+  Navigation.showOverlay({
+    component: {
+      name: SELECT_DATE_MODAL,
+      passProps: { ...config.props },
+      options: {
+        modalPresentationStyle:
+          OptionsModalPresentationStyle.overCurrentContext,
+        layout: {
+          backgroundColor: 'transparent',
+          componentBackgroundColor: 'transparent',
+        },
+      },
     },
   });
 };

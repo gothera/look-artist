@@ -30,11 +30,12 @@ export interface SetupBody {
   firstName: string;
   lastName: string;
   category: string;
-  phone: string;
-  name: string;
+  phone?: string;
+  name: string; // service name
   description: string;
   price: number;
   duration: number;
+  birthDate: string; // ISO string
 }
 
 export interface FetchNotificationsResponse {

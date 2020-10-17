@@ -17,6 +17,7 @@ import {
   EDIT_DAILY_PROGRAM_MODAL,
   ALERT_TEXT_MODAL,
   ADD_POST_MODAL,
+  SELECT_DATE_MODAL,
 } from './modal-constants';
 import {
   ADD_POST_SCREEN,
@@ -38,6 +39,7 @@ import {
   EditDailyProgramModal,
   AlertTextModal,
   AddPostModal,
+  SelectDateModal,
 } from '../modals';
 import {
   AddPostScreen,
@@ -126,6 +128,10 @@ const registerModals = () => {
   Navigation.registerComponent(ADD_POST_MODAL, () =>
     WrappedComponent(AddPostModal),
   );
+
+  Navigation.registerComponent(SELECT_DATE_MODAL, () =>
+    WrappedComponent(SelectDateModal),
+  );
 };
 
 export async function initNavigationAsync() {
@@ -137,6 +143,7 @@ export async function initNavigationAsync() {
       const loggedIn = genericPassword && genericPassword.username === 'token';
 
       // setLoggedInRoot();
+      // pushAuthScreen();
 
       if (loggedIn) {
         store.dispatch(loginKeychain((genericPassword as any).password));

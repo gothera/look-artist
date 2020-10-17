@@ -69,6 +69,7 @@ export interface ArtistResponseApi {
   appointmentsCount: number;
   rating: number;
   programEntries: ArtistProgramEntry[];
+  birthDate: string;
 }
 
 export interface Appointment {

@@ -3,6 +3,30 @@ const strings = {
     home: {
       editProgramBtn: 'Edit Program',
     },
+    setup: {
+      information: {
+        title: 'About you',
+        description: 'Configure your account',
+        firstNameLabel: 'First Name',
+        firstNamePlaceholder: 'Introduce First Name',
+        lastNameLabel: 'Last Name',
+        lastNamePlaceholder: 'Introduce Last Name',
+        birthdayLabel: 'Birthday',
+        birthdayPlaceholder: 'DD - Month - YYYY',
+      },
+      photo: {
+        title: 'Profile picture',
+        description: 'Select a picture for your profile',
+      },
+      category: {
+        title: 'Category',
+        description: 'Select artist category',
+      },
+      service: {
+        title: 'First Service',
+        description: 'Add your first service',
+      },
+    },
   },
   modal: {
     appointmentDetails: {

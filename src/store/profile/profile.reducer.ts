@@ -94,6 +94,7 @@ function profileReducer(
         phoneNumber: action.payload.phone,
         bio: action.payload.bio,
         artistId: action.payload.id,
+        birthDate: action.payload.birthDate,
       };
     }
     case profileConstants.CHANGE_PROFILE_PICTURE_REQUEST: {

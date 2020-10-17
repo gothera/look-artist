@@ -158,7 +158,7 @@ export const setCategory = (category: string): profileTypes.SetCategory => {
 /**
  * SETUP
  */
-// TODO
+
 export const setupRequest = (): profileTypes.SetupRequest => {
   return {
     type: profileConstants.SETUP_REQUEST,
@@ -181,36 +181,36 @@ export const setupFailure = (): profileTypes.SetupFailure => {
 };
 
 export const setup = (
+  firstName: string,
+  lastName: string,
+  category: string,
+  birthDateISO: string,
   serviceName: string,
   serviceDescription: string,
   servicePrice: string,
   serviceDuration: string,
 ): ThunkResult<void> => {
-  return async function (dispatch, getState) {
-    dispatch(setupRequest);
-
-    const { profile } = getState();
+  return async function (dispatch, _) {
+    dispatch(setupRequest());
 
     const setupBody: SetupBody = {
-      firstName: profile.firstName || '',
-      lastName: profile.lastName || '',
-      category: profile.category || '',
-      phone: profile.phoneNumber || '',
+      firstName: firstName,
+      lastName: lastName,
+      category: category,
       name: serviceName,
       description: serviceDescription,
       price: parseInt(servicePrice, 10),
       duration: parseInt(serviceDuration, 10),
+      birthDate: birthDateISO,
     };
-
-    console.log('== setup body ==', setupBody);
 
     return ProfileService.setup(setupBody)
       .then((response: ArtistResponseApi) => {
-        setupSuccess(response);
+        dispatch(setupSuccess(response));
         setLoggedInRoot();
       })
       .catch((error) => {
-        dispatch(setupFailure);
+        dispatch(setupFailure());
         console.log('Setup Failure', error);
       });
   };
@@ -219,6 +219,7 @@ export const setup = (
 /**
  * CHANGE PROFILE PICTURE
  */
+
 export const changeProfilePictureRequest = (): profileTypes.ChangeProfilePictureRequest => {
   return {
     type: profileConstants.CHANGE_PROFILE_PICTURE_REQUEST,

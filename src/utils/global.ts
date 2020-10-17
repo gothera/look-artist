@@ -1,6 +1,7 @@
 import { DAYS_ABBREVIATION } from '../res/constants';
-import { DaysAbbreviation } from '../types/enums';
+import { DaysAbbreviation, Category } from '../types/enums';
 import { Notification, SelectedDateCalendar } from '../types/globalTypes';
+import { Categories } from '../res/strings/categories';
 
 export type ContentProp = keyof Notification;
 
@@ -107,4 +108,21 @@ export const isEndingAfterStartingHour = (
   }
 
   return hEnd > hStart;
+};
+
+export const categoryEnumToStr = (category: Category) => {
+  switch (category) {
+    case Category.Makeup:
+      return Categories.makeup;
+    case Category.Lashes:
+      return Categories.lashes;
+    case Category.Hair:
+      return Categories.hair;
+    case Category.Eyebrows:
+      return Categories.eyebrows;
+    case Category.Nails:
+      return Categories.nails;
+    case Category.BodyCare:
+      return Categories.bodyCare;
+  }
 };

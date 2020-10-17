@@ -3,7 +3,7 @@ export const color = {
   textSecondary: '#34353E',
   textInverted: '#FFFFFF',
   muted: '#AFAFAF',
-  unchosen: '#DCDCDC',
+  unchosen: '#C5C5C7',
   brand: '#E0525C',
   modalBackground: 'rgba(0, 0, 0, 0.6)',
   background: '#FFFFFF',

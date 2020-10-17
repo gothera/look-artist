@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  ScrollView,
-  StyleSheet,
-  TextStyle,
-  View,
-  ViewStyle,
-} from 'react-native';
+import { StyleSheet, TextStyle, View, ViewStyle } from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import { connect, ConnectedProps } from 'react-redux';
 import { showLoadingModal } from '../../navigation';
@@ -13,6 +7,7 @@ import { StoreState } from '../../store/store.types';
 import { color, font, typography } from '../../theme';
 import LoginContent from './components/LoginContent';
 import SignInContent from './components/SignInContent';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const STATUS_BAR_HEIGHT = getStatusBarHeight();
 
@@ -56,7 +51,9 @@ const AuthScreen: React.FC<OwnProps & PropsFromRedux> = ({
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollContentContainer}>
+      <KeyboardAwareScrollView
+        contentContainerStyle={styles.scrollContentContainer}
+      >
         {authType === AuthType.Login && (
           <LoginContent
             componentId={componentId}
@@ -69,7 +66,7 @@ const AuthScreen: React.FC<OwnProps & PropsFromRedux> = ({
             onChangeAuthType={onChangeAuthTypePress}
           />
         )}
-      </ScrollView>
+      </KeyboardAwareScrollView>
     </View>
   );
 };

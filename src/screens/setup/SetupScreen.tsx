@@ -1,15 +1,17 @@
 import React, { useState, useRef } from 'react';
-import { StyleSheet, Text, View, ViewStyle } from 'react-native';
+import { StyleSheet, Text, View, ViewStyle, Platform } from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import Swiper from 'react-native-swiper';
 import { typography, color } from '../../theme';
 import StepsIndicator from './components/StepsIndicator';
-import PrimaryButton from '../../components/button/PrimaryButton';
 import PhotoStep from './components/PhotoStep';
-import NameStep from './components/NameStep';
-import PhoneNumberStep from './components/PhoneNumberStep';
 import CategoryStep from './components/CategoryStep';
 import ServiceStep from './components/ServiceStep';
+import InformationStep from './components/information-step/InformationStep';
+import { Category } from '../../types/enums';
+import { setup } from '../../store/profile/profile.actions';
+import { connect, ConnectedProps } from 'react-redux';
+import { categoryEnumToStr } from '../../utils/global';
 
 const STATUS_BAR_HEIGHT = getStatusBarHeight();
 
@@ -17,9 +19,34 @@ interface OwnProps {
   componentId: string;
 }
 
-const SetupScreen: React.FC<OwnProps> = ({ componentId }) => {
+const mapDispatchToProps = {
+  setup,
+};
+
+const connector = connect(null, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+const SetupScreen: React.FC<OwnProps & PropsFromRedux> = ({
+  componentId,
+  setup,
+}) => {
   const [step, setStep] = useState(0);
   const swiperRef = useRef<Swiper>(null);
+
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+
+  const [birthdayDate, setBirthdayDate] = useState<Date | undefined>(undefined);
+
+  const [selectedCategory, setSelectedCategory] = useState<
+    Category | undefined
+  >(undefined);
+
+  const [serviceName, setServiceName] = useState<string | undefined>(undefined);
+  const [description, setDescription] = useState('');
+  const [priceStr, setPriceStr] = useState('');
+  const [durationStr, setDurationStr] = useState('');
 
   const slideToNext = () => {
     if (step < 4) {
@@ -30,12 +57,27 @@ const SetupScreen: React.FC<OwnProps> = ({ componentId }) => {
     }
   };
 
+  const onDoneSetup = () => {
+    // if (selectedCategory && birthdayDate && serviceName) {
+    setup(
+      firstName,
+      lastName,
+      categoryEnumToStr(selectedCategory),
+      birthdayDate.toISOString(),
+      serviceName,
+      description,
+      priceStr,
+      durationStr,
+    );
+    // }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerText}>{`Step ${step + 1}`}</Text>
         <StepsIndicator
-          numOfSteps={5}
+          numOfSteps={4}
           currentStep={step}
           containerStyle={styles.stepsIndicatorContainer}
         />
@@ -48,19 +90,39 @@ const SetupScreen: React.FC<OwnProps> = ({ componentId }) => {
         scrollEnabled={false}
       >
         <View style={styles.swiperSlide}>
+          <InformationStep
+            slideToNext={slideToNext}
+            firstName={firstName}
+            setFirstName={setFirstName}
+            lastName={lastName}
+            setLastName={setLastName}
+            birthdayDate={birthdayDate}
+            setBirthdayDate={setBirthdayDate}
+          />
+        </View>
+        <View style={styles.swiperSlide}>
           <PhotoStep slideToNext={slideToNext} />
         </View>
         <View style={styles.swiperSlide}>
-          <NameStep slideToNext={slideToNext} isFocused={step === 1} />
+          <CategoryStep
+            slideToNext={slideToNext}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+          />
         </View>
         <View style={styles.swiperSlide}>
-          <PhoneNumberStep slideToNext={slideToNext} isFocused={step === 2} />
-        </View>
-        <View style={styles.swiperSlide}>
-          <CategoryStep slideToNext={slideToNext} />
-        </View>
-        <View style={styles.swiperSlide}>
-          <ServiceStep />
+          <ServiceStep
+            serviceName={serviceName}
+            setServiceName={setServiceName}
+            description={description}
+            setDescription={setDescription}
+            priceStr={priceStr}
+            setPriceStr={setPriceStr}
+            onDone={onDoneSetup}
+            durationStr={durationStr}
+            setDurationStr={setDurationStr}
+            category={selectedCategory}
+          />
         </View>
       </Swiper>
     </View>
@@ -81,10 +143,10 @@ const styles = StyleSheet.create<Style>({
     paddingTop: STATUS_BAR_HEIGHT,
   },
   header: {
-    marginTop: 40,
+    marginTop: Platform.OS === 'ios' ? STATUS_BAR_HEIGHT : 0,
   },
   headerText: {
-    ...typography.screenHeader,
+    ...typography.largeTitleBold,
     color: color.textPrimary,
     marginLeft: 16,
   },
@@ -97,4 +159,4 @@ const styles = StyleSheet.create<Style>({
   },
 });
 
-export default SetupScreen;
+export default connector(SetupScreen);
