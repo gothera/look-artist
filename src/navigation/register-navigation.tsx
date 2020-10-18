@@ -17,6 +17,7 @@ import {
   EDIT_DAILY_PROGRAM_MODAL,
   ALERT_TEXT_MODAL,
   ADD_POST_MODAL,
+  EDIT_PROFILE_MODAL,
   SELECT_DATE_MODAL,
 } from './modal-constants';
 import {
@@ -51,6 +52,7 @@ import {
   AddPostDescriptionScreen,
 } from '../screens';
 import { pushAuthScreen, setLoggedInRoot } from './screen-navigation';
+import EditProfileModal from '../modals/edit-profile/EditProfileModal';
 
 const WrappedComponent = (Component: React.ComponentType<any>) => {
   return gestureHandlerRootHOC(
@@ -123,6 +125,10 @@ const registerModals = () => {
 
   Navigation.registerComponent(ALERT_TEXT_MODAL, () =>
     WrappedComponent(AlertTextModal),
+  );
+
+  Navigation.registerComponent(EDIT_PROFILE_MODAL, () =>
+    WrappedComponent(EditProfileModal),
   );
 
   Navigation.registerComponent(ADD_POST_MODAL, () =>

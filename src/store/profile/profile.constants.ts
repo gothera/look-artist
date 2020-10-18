@@ -33,3 +33,7 @@ export const UPDATE_SPECIFIC_PROGRAM_FAILURE =
 export const UPDATE_DEFAULT_PROGRAM_REQUEST = 'update_default_program_request';
 export const UPDATE_DEFAULT_PROGRAM_SUCCESS = 'update_default_program_success';
 export const UPDATE_DEFAULT_PROGRAM_FAILURE = 'update_default_program_failure';
+
+export const UPDATE_ARTIST_PROFILE_REQUEST = 'update_artist_profile_request';
+export const UPDATE_ARTIST_PROFILE_SUCCESS = 'update_artist_profile_success';
+export const UPDATE_ARTIST_PROFILE_FAILURE = 'update_artist_profile_failure';

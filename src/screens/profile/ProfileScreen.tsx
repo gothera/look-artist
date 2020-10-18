@@ -3,13 +3,12 @@ import {
   Animated,
   Dimensions,
   FlatList,
-  SafeAreaView,
   Text,
   View,
+  Platform,
 } from 'react-native';
 import { TabBar, TabView } from 'react-native-tab-view';
 import { connect, ConnectedProps } from 'react-redux';
-import PostThumbnail from '../../components/post/post-thumbnail/PostThumbnail';
 import LineDivider from '../../components/ui/LineDivider';
 import { fetchArtistPosts } from '../../store/post/post.actions';
 import { fetchArtistReviews } from '../../store/review/review.actions';
@@ -19,10 +18,14 @@ import ProfileReviewCard from './components/profile-review-card/ProfileReviewCar
 import ProfileServiceCard from './components/profile-service-card/ProfileServiceCard';
 import TabScene from './components/profile-tab-scroller/ProfileTabScroller';
 import { styles } from './styles';
-const HeaderHeight = 210;
+import { STATUS_BAR_HEIGHT } from '../../res/constants';
+import { color } from '../../theme';
+import strings from '../../res/strings/strings';
 
-const tab1ItemSize = (Dimensions.get('window').width - 30) / 2;
-const tab2ItemSize = (Dimensions.get('window').width - 40) / 3;
+const HeaderHeight = 220;
+
+const HANDLE_STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? STATUS_BAR_HEIGHT : 0;
+
 interface Route {
   key: string;
   title: string;
@@ -54,9 +57,9 @@ const ProfileScreen: React.FC<PropsFromRedux> = ({
 }) => {
   const [tabIndex, setIndex] = useState(0);
   const [routes] = useState<Route[]>([
-    { key: 'tab1', title: 'Gallery' },
-    { key: 'tab2', title: 'Services' },
-    { key: 'tab3', title: 'Reviews' },
+    { key: 'tab1', title: strings.screen.profile.tabs.gallery },
+    { key: 'tab2', title: strings.screen.profile.tabs.services },
+    { key: 'tab3', title: strings.screen.profile.tabs.reviews },
   ]);
   const scrollY = useRef(new Animated.Value(0)).current;
   let listRefArr = useRef<{ key: string; value: FlatList<number> }[]>([]);
@@ -122,8 +125,11 @@ const ProfileScreen: React.FC<PropsFromRedux> = ({
 
   const renderHeader = () => {
     const y = scrollY.interpolate({
-      inputRange: [0, HeaderHeight],
-      outputRange: [0, -HeaderHeight],
+      inputRange: [0, HeaderHeight + HANDLE_STATUS_BAR_HEIGHT],
+      outputRange: [
+        HANDLE_STATUS_BAR_HEIGHT,
+        -HeaderHeight - HANDLE_STATUS_BAR_HEIGHT,
+      ],
       extrapolateRight: 'clamp',
     });
     return (
@@ -136,21 +142,7 @@ const ProfileScreen: React.FC<PropsFromRedux> = ({
   };
 
   const rednerTab1Item = ({ item, index }: { item: number; index: number }) => {
-    return (
-      <View
-        style={{
-          borderRadius: 16,
-          marginLeft: index % 2 === 0 ? 0 : 10,
-          width: tab1ItemSize,
-          height: tab1ItemSize * 2,
-          backgroundColor: '#aaa',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <PostThumbnail postId={item} />
-      </View>
-    );
+    return <Text>soon</Text>;
   };
 
   const rednerTab2Item = ({ item, index }: { item: number; index: number }) => {
@@ -176,7 +168,6 @@ const ProfileScreen: React.FC<PropsFromRedux> = ({
   };
 
   const renderScene = ({ route }: { route: Route }) => {
-    const focused = route.key === routes[tabIndex].key;
     let numCols;
     let data;
     let renderItem;
@@ -280,12 +271,16 @@ const ProfileScreen: React.FC<PropsFromRedux> = ({
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={{ flex: 1 }}>
-        {renderTabView()}
-        {renderHeader()}
-      </View>
-    </SafeAreaView>
+    <View style={{ flex: 1, backgroundColor: color.background }}>
+      {Platform.OS === 'ios' && (
+        <>
+          <View style={styles.statusBarAbsolute} />
+          <View style={styles.statusBar} />
+        </>
+      )}
+      {renderHeader()}
+      {renderTabView()}
+    </View>
   );
 };
 

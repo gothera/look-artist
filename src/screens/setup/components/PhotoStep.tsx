@@ -61,7 +61,6 @@ const PhotoStep: React.FC<OwnProps & PropsFromRedux> = ({
       width: 500,
       height: 500,
       cropping: true,
-      cropperCircleOverlay: true,
       sortOrder: 'none',
     }).then((image: any) => {
       const imagePickedMapped = {

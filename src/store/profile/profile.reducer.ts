@@ -169,6 +169,28 @@ function profileReducer(
         },
       };
     }
+    case profileConstants.UPDATE_ARTIST_PROFILE_REQUEST:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case profileConstants.UPDATE_DEFAULT_PROGRAM_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+      };
+
+    case profileConstants.UPDATE_ARTIST_PROFILE_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        email: action.payload.profile.email,
+        firstName: action.payload.profile.firstName,
+        lastName: action.payload.profile.lastName,
+        bio: action.payload.profile.bio,
+        category: action.payload.profile.category,
+        phoneNumber: action.payload.profile.phone,
+      };
 
     default:
       return state;

@@ -6,7 +6,6 @@ interface Style {
   container: ViewStyle;
   avatarStyle: ImageStyle;
   title: TextStyle;
-  subTitle: TextStyle;
   statsContainer: ViewStyle;
   rightContainer: ViewStyle;
   counterContainer: ViewStyle;
@@ -16,22 +15,23 @@ interface Style {
   divider: ViewStyle;
   fullContainer: ViewStyle;
   bioText: TextStyle;
+  editButton: ViewStyle;
+  editBtnText: TextStyle;
+  categoryText: TextStyle;
 }
 
 export const styles = StyleSheet.create<Style>({
   fullContainer: {
     paddingHorizontal: spacing.base,
+    width: '100%',
+    marginTop: 0,
   },
   container: {
     width: '100%',
-
-    backgroundColor: color.background,
-    display: 'flex',
     flexDirection: 'row',
-    marginTop: spacing.extraLarge,
+    marginTop: 20,
   },
   rightContainer: {
-    flex: 1,
     marginRight: spacing.extraLarge,
   },
   avatarStyle: {
@@ -42,36 +42,32 @@ export const styles = StyleSheet.create<Style>({
   },
   title: {
     ...typography.title3Bold,
-  },
-  subTitle: {
-    ...typography.subTitle,
     color: color.textSecondary,
   },
   statsContainer: {
-    display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: spacing.base,
   },
   counterContainer: {
-    display: 'flex',
     marginBottom: spacing.smallest,
-
     flexDirection: 'row',
     alignItems: 'center',
+    height: 20,
   },
   metricContainer: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    marginRight: 38,
   },
   metricText: {
-    ...typography.mutedDescriptionMedium,
+    ...typography.caption2,
     color: color.muted,
   },
   counterText: {
-    ...typography.label,
-    // marginTop:spacing.smallest,
+    ...typography.bodySemiBold,
+    color: color.textSecondary,
     marginLeft: spacing.smallest,
   },
   divider: {
@@ -84,5 +80,21 @@ export const styles = StyleSheet.create<Style>({
     color: color.textSecondary,
     marginTop: spacing.small,
     lineHeight: spacing.larger,
+  },
+  editButton: {
+    ...typography.subheadline,
+    paddingLeft: spacing.large,
+    paddingVertical: spacing.smallest,
+    alignSelf: 'flex-end',
+    marginTop: 10,
+  },
+  categoryText: {
+    ...typography.body,
+    color: color.textSecondary,
+    marginTop: spacing.smallest,
+  },
+  editBtnText: {
+    ...typography.body,
+    color: color.textPrimary,
   },
 });

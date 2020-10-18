@@ -5,6 +5,7 @@ import {
   SetupBody,
   SignupResponse,
   ProgramSpecificElement,
+  UpdateArtistApi,
 } from '../../services/api/api.types';
 import * as AuthService from '../../services/api/AuthService';
 import * as ProfileService from '../../services/api/ProfileService';
@@ -261,7 +262,8 @@ export const changeProfilePicture = (
          */
         onSuccess && onSuccess();
       })
-      .catch((_) => {
+      .catch((e) => {
+        console.log('change picture failed', e);
         dispatch(changeProfilePictureFailure());
       });
   };
@@ -410,6 +412,49 @@ export const updateDefaultProgram = (
       })
       .catch((_) => {
         dispatch(updateDefaultProgramFailure());
+      });
+  };
+};
+
+export const updateArtistProfileRequest = (): profileTypes.updateArtistProfileRequest => {
+  return {
+    type: profileConstants.UPDATE_ARTIST_PROFILE_REQUEST,
+  };
+};
+
+export const updateArtistProfileSuccess = (
+  profile: UpdateArtistApi,
+): profileTypes.updateArtistProfileSuccess => {
+  return {
+    type: profileConstants.UPDATE_ARTIST_PROFILE_SUCCESS,
+    payload: { profile: profile },
+  };
+};
+
+export const updateArtistProfileFailure = (): profileTypes.updateArtistProfileFailure => {
+  return {
+    type: profileConstants.UPDATE_ARTIST_PROFILE_FAILURE,
+  };
+};
+
+export const updateArtistProfile = (
+  profile: UpdateArtistApi,
+): ThunkResult<void> => {
+  return async function (dispatch, getState) {
+    const token = getState().profile.token;
+    const isFetching = getState().profile.isFetching;
+    if (!token || isFetching) {
+      return Promise.resolve();
+    }
+    dispatch(updateArtistProfileRequest());
+
+    return ProfileService.updateProfile(profile)
+      .then((response: UpdateArtistApi) => {
+        dispatch(updateArtistProfileSuccess(response));
+      })
+      .catch((e) => {
+        console.log(e);
+        dispatch(updateArtistProfileFailure());
       });
   };
 };

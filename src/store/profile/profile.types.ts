@@ -1,6 +1,9 @@
 import { ArtistProgramEntry, ArtistResponseApi } from '../../types/globalTypes';
 import * as profileConstants from './profile.constants';
-import { ProgramSpecificElement } from '../../services/api/api.types';
+import {
+  ProgramSpecificElement,
+  UpdateArtistApi,
+} from '../../services/api/api.types';
 
 export interface InvalidateStoreAction {
   type: typeof profileConstants.INVALIDATE_STORE;
@@ -114,6 +117,19 @@ export interface updateDefaultProgramFailure {
   type: typeof profileConstants.UPDATE_DEFAULT_PROGRAM_FAILURE;
 }
 
+export interface updateArtistProfileRequest {
+  type: typeof profileConstants.UPDATE_ARTIST_PROFILE_REQUEST;
+}
+
+export interface updateArtistProfileSuccess {
+  type: typeof profileConstants.UPDATE_ARTIST_PROFILE_SUCCESS;
+  payload: { profile: UpdateArtistApi };
+}
+
+export interface updateArtistProfileFailure {
+  type: typeof profileConstants.UPDATE_ARTIST_PROFILE_FAILURE;
+}
+
 export type ProfileAction =
   | InvalidateStoreAction
   | LoginSuccess
@@ -139,4 +155,7 @@ export type ProfileAction =
   | updateSpecificProgramFailure
   | updateDefaultProgramRequest
   | updateDefaultProgramSuccess
-  | updateDefaultProgramFailure;
+  | updateDefaultProgramFailure
+  | updateArtistProfileRequest
+  | updateArtistProfileSuccess
+  | updateArtistProfileFailure;

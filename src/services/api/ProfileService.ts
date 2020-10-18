@@ -3,6 +3,7 @@ import {
   SetupBody,
   ProgramDefaultElement,
   ProgramSpecificElement,
+  UpdateArtistApi,
 } from './api.types';
 import { getRequest, postRequest, putRequest } from './apiRequest';
 import { DaysAbbreviation } from '../../types/enums';
@@ -82,4 +83,12 @@ export const updateDefaultProgram = (
     };
   });
   return putRequest<ProgramDefaultElement[]>(url, data);
+};
+
+export const updateProfile = (
+  profile: UpdateArtistApi,
+): Promise<UpdateArtistApi> => {
+  const url = 'artist/profile/';
+
+  return putRequest<UpdateArtistApi>(url, profile);
 };

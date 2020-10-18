@@ -27,11 +27,26 @@ const strings = {
         description: 'Add your first service',
       },
     },
+    profile: {
+      tabs: {
+        gallery: 'Gallery',
+        services: 'Services',
+        reviews: 'Reviews',
+      },
+      metrics: {
+        rate: 'Rate',
+        likes: 'Likes',
+        appointments: 'Appointments',
+      },
+    },
   },
   modal: {
     appointmentDetails: {
       serviceLabel: 'Scheduled for',
       cancelAppointment: 'Cancel Appointment',
+    },
+    editProfile: {
+      title: 'Edit Profile',
     },
     editProgram: {
       title: 'Edit Program',
@@ -67,6 +82,8 @@ const strings = {
     select: 'Select',
     next: 'Next',
     post: 'Post',
+    save: 'Save',
+    edit: 'Edit',
   },
 };
 

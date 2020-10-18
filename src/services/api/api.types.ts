@@ -71,3 +71,12 @@ export interface ProgramSpecificElement {
   startTime: string;
   endTime: string;
 }
+
+export interface UpdateArtistApi {
+  firstName: string;
+  lastName: string;
+  email: string;
+  category: string;
+  bio: string;
+  phone: string;
+}

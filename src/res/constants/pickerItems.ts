@@ -1,4 +1,11 @@
-import { Services } from '../strings/categories';
+import { Services, Categories } from '../strings/categories';
+
+export const categoriesSelection = Object.values(Categories).map((name) => {
+  return {
+    value: name,
+    label: name,
+  };
+});
 
 export const makeupServicesSelection = Object.values(Services.makeup).map(
   (name) => {

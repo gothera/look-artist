@@ -20,7 +20,7 @@ interface OwnProps {
   onValueChanged?: (text: string) => void;
   placeholder: string;
   items: PickerItem[];
-  setSelected: (newValue: string) => void;
+  setSelected?: (newValue: string) => void;
   value: string | undefined;
   dividerStyle?: ViewStyle;
 }
@@ -76,8 +76,8 @@ const styles = StyleSheet.create<Style>({
     width: '100%',
   },
   label: {
-    ...typography.textInputLabel,
-    color: color.muted,
+    ...typography.subheadlineSemiBold,
+    color: color.textSecondary,
   },
   rowTouchable: {
     flexDirection: 'row',

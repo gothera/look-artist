@@ -8,4 +8,5 @@ export const SELECT_TIME_MODAL = 'look-artist.SelectTimeModal';
 export const EDIT_DAILY_PROGRAM_MODAL = 'look-artist.EditDailyProgramModal';
 export const ALERT_TEXT_MODAL = 'look-artist.AlertTextModal';
 export const ADD_POST_MODAL = 'look-artist.AddPostModal';
+export const EDIT_PROFILE_MODAL = 'look-artist.EditProfileModal';
 export const SELECT_DATE_MODAL = 'look-artist.SelectDateModal';

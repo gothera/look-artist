@@ -13,6 +13,7 @@ import {
   EDIT_DAILY_PROGRAM_MODAL,
   ALERT_TEXT_MODAL,
   ADD_POST_MODAL,
+  EDIT_PROFILE_MODAL,
   SELECT_DATE_MODAL,
 } from './modal-constants';
 import { Config, getConfig } from './utils-navigation';
@@ -280,6 +281,36 @@ export const showAddPostModal = (pushConfig?: Config) => {
               topBar: {
                 title: {
                   text: strings.modal.addPost.title,
+                  fontFamily: 'Gilroy-SemiBold',
+                },
+              },
+            },
+          },
+        },
+      ],
+    },
+  });
+};
+
+export const showEditProfileModal = (pushConfig?: Config) => {
+  const config = getConfig(pushConfig);
+  Navigation.showModal({
+    stack: {
+      children: [
+        {
+          component: {
+            name: EDIT_PROFILE_MODAL,
+            passProps: { ...config.props },
+            options: {
+              modalPresentationStyle:
+                OptionsModalPresentationStyle.overCurrentContext,
+              layout: {
+                backgroundColor: color.background,
+                componentBackgroundColor: color.background,
+              },
+              topBar: {
+                title: {
+                  text: strings.modal.editProfile.title,
                   fontFamily: 'Gilroy-SemiBold',
                 },
               },
