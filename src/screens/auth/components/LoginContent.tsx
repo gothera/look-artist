@@ -75,9 +75,7 @@ const LoginContent: React.FC<OwnProps & PropsFromRedux> = ({
       <OrLineDivider containerStyle={styles.orDividerContainer} />
       <ButtonWithIcon
         title="Continue with Facebook"
-        onPress={() => {
-          pushSetupScreen();
-        }}
+        onPress={() => {}}
         containerStyle={styles.socialBtn}
         icon={<FacebookBtnIcon />}
       />

@@ -1,5 +1,12 @@
-import { setGenericPassword } from 'react-native-keychain';
-import { pushSetupScreen, setLoggedInRoot } from '../../navigation';
+import {
+  setGenericPassword,
+  resetGenericPassword,
+} from 'react-native-keychain';
+import {
+  pushSetupScreen,
+  setLoggedInRoot,
+  pushAuthScreen,
+} from '../../navigation';
 import {
   LoginResponse,
   SetupBody,
@@ -67,6 +74,23 @@ export const login = (
         dispatch(loginFailure());
         console.log('Login error', error);
       });
+  };
+};
+
+/** LOGOUT */
+
+export const postLogout = (): profileTypes.postLogout => {
+  return {
+    type: profileConstants.POST_LOGOUT,
+  };
+};
+
+export const logout = (): ThunkResult<void> => {
+  return function (dispatch) {
+    resetGenericPassword().then(async () => {
+      dispatch(postLogout());
+      pushAuthScreen();
+    });
   };
 };
 

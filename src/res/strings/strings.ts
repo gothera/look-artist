@@ -84,6 +84,7 @@ const strings = {
     post: 'Post',
     save: 'Save',
     edit: 'Edit',
+    logout: 'Logout',
   },
 };
 

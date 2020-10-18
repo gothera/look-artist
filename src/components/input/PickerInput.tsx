@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   StyleProp,
   StyleSheet,
@@ -8,7 +8,6 @@ import {
   ViewStyle,
 } from 'react-native';
 import RNPickerSelect, { PickerStyle } from 'react-native-picker-select';
-import { DownArrowIcon } from '../../res/svg';
 import { color, spacing, typography } from '../../theme';
 import { PickerItem } from '../../types/globalTypes';
 import LineDivider from '../ui/LineDivider';
@@ -35,13 +34,9 @@ const PickerInput: React.FC<OwnProps> = ({
   labelStyle,
   dividerStyle,
 }) => {
-  const renderDownArrowIcon = () => <DownArrowIcon />;
-
   const onValueChange = (newValue: string) => {
     onValueChanged?.(newValue);
   };
-
-  useEffect(() => {});
 
   return (
     <View style={[styles.container, containerStyle]}>
@@ -50,12 +45,9 @@ const PickerInput: React.FC<OwnProps> = ({
         <RNPickerSelect
           onValueChange={(value, index) => onValueChange(value)}
           items={items}
-          // Icon={renderDownArrowIcon}
           style={pickerStyle}
           value={value}
-          // InputAccessoryView={() => null}
           placeholder={{ label: placeholder, value: 'default' }}
-          // useNativeAndroidPickerStyle={false}
         />
       </View>
 
@@ -87,7 +79,7 @@ const styles = StyleSheet.create<Style>({
     paddingBottom: 5,
   },
   divider: {
-    marginTop: spacing.small,
+    // marginTop: spacing.small,
   },
 });
 

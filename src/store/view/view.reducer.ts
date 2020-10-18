@@ -7,6 +7,7 @@ import {
   UPDATE_SPECIFIC_PROGRAM_REQUEST,
   UPDATE_SPECIFIC_PROGRAM_SUCCESS,
   UPDATE_SPECIFIC_PROGRAM_FAILURE,
+  POST_LOGOUT,
 } from '../profile/profile.constants';
 import initialState from '../initialState';
 import { ViewState, TAction } from '../store.types';
@@ -17,6 +18,10 @@ function getInitialState(): ViewState {
 
 function viewReducer(state = getInitialState(), action: TAction): ViewState {
   switch (action.type) {
+    case POST_LOGOUT: {
+      return getInitialState();
+    }
+
     case UPDATE_DEFAULT_PROGRAM_REQUEST: {
       return {
         ...state,

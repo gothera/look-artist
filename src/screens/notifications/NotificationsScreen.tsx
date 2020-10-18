@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { FlatListProps } from 'react-native';
+import { FlatListProps, Text, View } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import ScreenFlatList from '../../containers/screen/ScreenFlatList';
 import { fetchNotifications } from '../../store/notification/notification.actions';
@@ -34,7 +34,7 @@ const NotificationsScreen: React.FC<PropsFromRedux> = ({
   };
 
   const flatListProps: FlatListProps<any> = {
-    data: notificationsById,
+    data: [],
     keyExtractor: (item) => `Notification$${item}`,
     renderItem: renderItem,
     onEndReached: () => {
@@ -43,6 +43,18 @@ const NotificationsScreen: React.FC<PropsFromRedux> = ({
     },
     onEndReachedThreshold: 0.3,
     contentContainerStyle: { paddingHorizontal: 16 },
+    ListEmptyComponent: (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Text>Available soon</Text>
+      </View>
+    ),
+    style: { flex: 1 },
   };
 
   return (

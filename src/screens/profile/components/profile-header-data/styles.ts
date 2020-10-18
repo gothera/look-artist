@@ -62,7 +62,7 @@ export const styles = StyleSheet.create<Style>({
     marginRight: 38,
   },
   metricText: {
-    ...typography.caption2,
+    ...typography.caption1,
     color: color.muted,
   },
   counterText: {

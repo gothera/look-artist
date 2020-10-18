@@ -13,13 +13,15 @@ interface Style {
   saveButton: ViewStyle;
   disabledSaveButton: ViewStyle;
   saveContainer: ViewStyle;
+  logoutContainer: ViewStyle;
+  logoutText: TextStyle;
 }
 
 export const styles = StyleSheet.create<Style>({
   scrollContainer: {
     paddingHorizontal: spacing.base,
     paddingTop: spacing.larger,
-    paddingBottom: 80,
+    paddingBottom: 100,
   },
   container: {
     display: 'flex',
@@ -64,5 +66,11 @@ export const styles = StyleSheet.create<Style>({
     justifyContent: 'flex-end',
     marginTop: spacing.base,
     marginRight: spacing.base,
+  },
+  logoutContainer: {
+    marginTop: spacing.base,
+  },
+  logoutText: {
+    color: color.delete,
   },
 });

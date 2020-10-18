@@ -9,7 +9,6 @@ interface Style {
   divider: ViewStyle;
   textHour: TextStyle;
   clearBtn: ViewStyle;
-  container: ViewStyle;
   clearBtnText: TextStyle;
   saveBtn: ViewStyle;
 }
@@ -29,13 +28,12 @@ export const styles = StyleSheet.create<Style>({
     color: color.textSecondary,
   },
   labelTitle: {
-    ...typography.label,
+    ...typography.subheadlineSemiBold,
     color: color.textSecondary,
     marginTop: spacing.largest,
   },
   divider: {
-    marginRight: spacing.base,
-    marginTop: spacing.base,
+    marginTop: spacing.smaller,
   },
   textHour: {
     marginTop: spacing.base,
@@ -59,5 +57,4 @@ export const styles = StyleSheet.create<Style>({
     ...typography.textInput,
     color: color.textSecondary,
   },
-  container: { paddingLeft: spacing.base, height: '100%', width: '100%' },
 });

@@ -130,6 +130,10 @@ export interface updateArtistProfileFailure {
   type: typeof profileConstants.UPDATE_ARTIST_PROFILE_FAILURE;
 }
 
+export interface postLogout {
+  type: typeof profileConstants.POST_LOGOUT;
+}
+
 export type ProfileAction =
   | InvalidateStoreAction
   | LoginSuccess
@@ -158,4 +162,5 @@ export type ProfileAction =
   | updateDefaultProgramFailure
   | updateArtistProfileRequest
   | updateArtistProfileSuccess
-  | updateArtistProfileFailure;
+  | updateArtistProfileFailure
+  | postLogout;

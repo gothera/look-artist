@@ -59,6 +59,11 @@ const AppointmentDetailsModal: React.FC<OwnProps & PropsFromRedux> = ({
 }) => {
   const modalizeRef = useRef<Modalize>(null);
 
+  const dateObj = new Date(date);
+  const todayDate = new Date();
+
+  const isPreviousDate = dateObj.getTime() < todayDate.getTime();
+
   useEffect(() => {
     openBottomSheet();
   }, []);
@@ -105,11 +110,13 @@ const AppointmentDetailsModal: React.FC<OwnProps & PropsFromRedux> = ({
           currency={Currency[currency]}
         />
       </Modalize>
-      <AppointmentDetailsFooter
-        appointmentIdStr={appointmentIdStr}
-        date={date}
-        closeModal={closeModal}
-      />
+      {!isPreviousDate && (
+        <AppointmentDetailsFooter
+          appointmentIdStr={appointmentIdStr}
+          date={date}
+          closeModal={closeModal}
+        />
+      )}
     </>
   );
 };

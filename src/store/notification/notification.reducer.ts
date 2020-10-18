@@ -2,6 +2,7 @@ import { addArrayToDictByProp } from '../../utils/global';
 import initialState from '../initialState';
 import { NotificationState, TAction } from '../store.types';
 import * as notificationConstants from './notification.constants';
+import { POST_LOGOUT } from '../profile/profile.constants';
 
 function getInitialState() {
   return Object.assign({}, initialState.notification);
@@ -15,6 +16,11 @@ function notificationReducer(
     case notificationConstants.INVALIDATE_STORE: {
       return getInitialState();
     }
+
+    case POST_LOGOUT: {
+      return getInitialState();
+    }
+
     case notificationConstants.FETCH_NOTIFICATIONS_FAILURE: {
       return {
         ...state,

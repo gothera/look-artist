@@ -16,6 +16,10 @@ function profileReducer(
       return getInitialState();
     }
 
+    case profileConstants.POST_LOGOUT: {
+      return getInitialState();
+    }
+
     case profileConstants.FETCH_PROFILE_REQUEST:
       return {
         ...state,

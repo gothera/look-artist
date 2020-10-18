@@ -1,6 +1,7 @@
 import initialState from '../initialState';
 import { AppointmentState, TAction } from '../store.types';
 import * as appointmentConstants from './appointment.constants';
+import { POST_LOGOUT } from '../profile/profile.constants';
 
 function getInitialState() {
   return Object.assign({}, initialState.appointment);
@@ -14,6 +15,11 @@ function appointmentReducer(
     case appointmentConstants.INVALIDATE_STORE: {
       return getInitialState();
     }
+
+    case POST_LOGOUT: {
+      return getInitialState();
+    }
+
     case appointmentConstants.DELETE_APPOINTMENT_FAILURE:
     case appointmentConstants.FETCH_APPOINTMENTS_OF_DAY_FAILURE: {
       return {

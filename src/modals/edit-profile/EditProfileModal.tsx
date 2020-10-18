@@ -5,7 +5,7 @@ import { categoriesSelection } from '../../res/constants/pickerItems';
 import { Text, View, Image, TouchableOpacity } from 'react-native';
 import { styles } from './styles';
 import { BigAvatarPlaceholder } from '../../res/svg/placeholder/BigAvatarPlaceholder';
-import { AsyncDispatch, StoreState } from '../../store/store.types';
+import { StoreState } from '../../store/store.types';
 import { connect, ConnectedProps } from 'react-redux';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import TextInputWithLabel from '../../components/input/TextInputWithLabel';
@@ -14,11 +14,12 @@ import PickerInput from '../../components/input/PickerInput';
 import {
   changeProfilePicture,
   updateArtistProfile,
+  logout,
 } from '../../store/profile/profile.actions';
-import { UpdateArtistApi } from '../../services/api/api.types';
 import FooterOptions from '../../components/footer/footer-options/FooterOptions';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import PrimaryButton from '../../components/button/PrimaryButton';
+import TextEntry from '../../components/entry/text-entry/TextEntry';
 
 const LEFT_BUTTON_CLOSE = 'close-edit-profile-modal';
 
@@ -32,13 +33,10 @@ const mapStateToProps = (store: StoreState) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: AsyncDispatch) => {
-  return {
-    updateProfileDetails: (profile: UpdateArtistApi) =>
-      dispatch(updateArtistProfile(profile)),
-    changeProfilePicture: (data: FormData) =>
-      dispatch(changeProfilePicture(data)),
-  };
+const mapDispatchToProps = {
+  changeProfilePicture,
+  updateArtistProfile,
+  logout,
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -48,8 +46,9 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 const EditProfileModal: React.FC<OwnProps & PropsFromRedux> = ({
   componentId,
   profile,
-  updateProfileDetails,
+  updateArtistProfile,
   changeProfilePicture,
+  logout,
 }) => {
   const {
     profilePicture,
@@ -90,7 +89,7 @@ const EditProfileModal: React.FC<OwnProps & PropsFromRedux> = ({
   });
 
   const onSavePress = () => {
-    updateProfileDetails({
+    updateArtistProfile({
       firstName,
       bio,
       lastName,
@@ -137,6 +136,10 @@ const EditProfileModal: React.FC<OwnProps & PropsFromRedux> = ({
   };
 
   const imagesPath = imagesPicked?.path || profilePicture;
+
+  const onLogoutPress = () => {
+    logout();
+  };
 
   return (
     <>
@@ -207,6 +210,12 @@ const EditProfileModal: React.FC<OwnProps & PropsFromRedux> = ({
             setText={setPhone}
             containerStyle={styles.input}
             keyboardType={'numeric'}
+          />
+          <TextEntry
+            title={strings.action.logout}
+            onPress={onLogoutPress}
+            containerStyle={styles.logoutContainer}
+            titleStyle={styles.logoutText}
           />
         </View>
       </KeyboardAwareScrollView>

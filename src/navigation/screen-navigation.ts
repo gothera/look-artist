@@ -46,7 +46,7 @@ export const setLoggedInRoot = () => {
                   // textColor: color.muted,
                   // selectedTextColor: color.textPrimary,
                   // fontFamily: 'Gilroy-SemiBold',
-                  // fontSize: 10,
+                  // fontSize: 12,
                 },
                 topBar: {
                   visible: false,

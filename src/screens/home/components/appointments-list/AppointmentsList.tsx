@@ -7,6 +7,8 @@ import { fetchAppointmentOfDay } from '../../../../store/appointment/appointment
 import { ConnectedProps, connect } from 'react-redux';
 import { selectAppointmentsIdsPerDay } from '../../../../store/appointment/appointment.selectors';
 import { color } from '../../../../theme';
+import EmptyPreviousAppointments from '../empty-previous-appointments/EmptyPreviousAppointments';
+import EmptyNextProgram from '../empty-next-program/EmptyNextProgram';
 
 interface OwnProps {
   date: string;
@@ -38,6 +40,11 @@ const AppointmentsList: React.FC<OwnProps & PropsFromRedux> = ({
   useEffect(() => {
     fetchAppointmentsOfDay(date);
   }, [date]);
+
+  const dateObj = new Date(date);
+  const todayDate = new Date();
+
+  const isPreviousDate = dateObj.getTime() < todayDate.getTime();
 
   const onPullToRefresh = () => {
     fetchAppointmentsOfDay(date);
@@ -78,6 +85,13 @@ const AppointmentsList: React.FC<OwnProps & PropsFromRedux> = ({
       showsVerticalScrollIndicator={false}
       refreshControl={renderRefreshControl}
       keyExtractor={keyExtractor}
+      ListEmptyComponent={
+        isPreviousDate ? (
+          <EmptyPreviousAppointments date={date} />
+        ) : (
+          <EmptyNextProgram />
+        )
+      }
     />
   );
 };

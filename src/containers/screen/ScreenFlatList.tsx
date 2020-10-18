@@ -1,7 +1,8 @@
 import React, { useRef } from 'react';
-import { Animated, FlatList, FlatListProps } from 'react-native';
+import { Animated, FlatList, FlatListProps, View } from 'react-native';
 import AnimatedScreenHeader from '../../components/header/animated-screen-header/AnimatedScreenHeader';
 import { HEADER_SCREEN_HEIGHT } from '../../res/constants';
+import { color } from '../../theme';
 
 interface OwnPros {
   headerTitle: string;
@@ -23,7 +24,7 @@ const ScreenFlatList: React.FC<OwnPros> = ({ headerTitle, flatListProps }) => {
    */
 
   return (
-    <>
+    <View style={{ flex: 1, backgroundColor: color.background }}>
       <AnimatedScreenHeader title={headerTitle} scrollY={scrollY} />
       <Animated.FlatList
         data={flatListProps.data}
@@ -37,8 +38,9 @@ const ScreenFlatList: React.FC<OwnPros> = ({ headerTitle, flatListProps }) => {
         onEndReachedThreshold={flatListProps.onEndReachedThreshold}
         onEndReached={flatListProps.onEndReached}
         ListHeaderComponent={flatListProps.ListHeaderComponent}
+        ListEmptyComponent={flatListProps.ListEmptyComponent}
       />
-    </>
+    </View>
   );
 };
 

@@ -161,7 +161,12 @@ const ProfileScreen: React.FC<PropsFromRedux> = ({
     focused: boolean;
   }) => {
     return (
-      <Text style={[styles.label, { opacity: focused ? 1 : 0.125 }]}>
+      <Text
+        style={[
+          styles.label,
+          { color: focused ? color.textSecondary : color.muted },
+        ]}
+      >
         {route.title}
       </Text>
     );

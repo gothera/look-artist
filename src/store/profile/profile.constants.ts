@@ -37,3 +37,5 @@ export const UPDATE_DEFAULT_PROGRAM_FAILURE = 'update_default_program_failure';
 export const UPDATE_ARTIST_PROFILE_REQUEST = 'update_artist_profile_request';
 export const UPDATE_ARTIST_PROFILE_SUCCESS = 'update_artist_profile_success';
 export const UPDATE_ARTIST_PROFILE_FAILURE = 'update_artist_profile_failure';
+
+export const POST_LOGOUT = 'post_logout';

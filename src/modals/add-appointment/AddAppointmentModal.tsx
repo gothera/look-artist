@@ -110,29 +110,27 @@ const AddAppointmentModal: React.FC<OwnProps & PropsFromRedux> = ({
 
   const isClearDisabled = clientName === '' && serviceId === 'default';
 
+  const onSelectHour = () => {
+    showSelectTimeModal({
+      props: { setHour: setStartingHour, startingTime, endingTime },
+    });
+  };
+
   return (
-    <View style={styles.container}>
-      <ScrollView>
+    <>
+      <ScrollView contentContainerStyle={{ paddingHorizontal: 16 }}>
         <Text style={styles.subheadline}>
           Add an appointment to your program
         </Text>
         <TextInputWithLabel
           containerStyle={styles.clientContainer}
-          labelStyle={styles.clientLabel}
           label="Client Name"
           placeholder="Enter client name"
           text={clientName}
           setText={setClientName}
-          dividerStyle={styles.divider}
         />
         <Text style={styles.labelTitle}>Starting Hour</Text>
-        <TouchableWithoutFeedback
-          onPress={() =>
-            showSelectTimeModal({
-              props: { setHour: setStartingHour, startingTime, endingTime },
-            })
-          }
-        >
+        <TouchableWithoutFeedback onPress={onSelectHour}>
           <Text style={styles.textHour}>{startingHour}</Text>
         </TouchableWithoutFeedback>
         <LineDivider containerStyle={styles.divider} />
@@ -140,8 +138,6 @@ const AddAppointmentModal: React.FC<OwnProps & PropsFromRedux> = ({
           label="Service"
           onValueChanged={setServiceId}
           containerStyle={styles.clientContainer}
-          labelStyle={styles.clientLabel}
-          dividerStyle={styles.divider}
           placeholder="Select a service"
           setSelected={() => {}}
           value={serviceId}
@@ -154,7 +150,7 @@ const AddAppointmentModal: React.FC<OwnProps & PropsFromRedux> = ({
         isSaveDisabled={saveBtnDisabled}
         onSave={saveAppointment}
       />
-    </View>
+    </>
   );
 };
 

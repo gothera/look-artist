@@ -2,6 +2,7 @@ import { addArrayToDictByProp } from '../../utils/global';
 import initialState from '../initialState';
 import { PostState, TAction } from '../store.types';
 import * as postConstants from './post.constants';
+import { POST_LOGOUT } from '../profile/profile.constants';
 
 function getInitialState() {
   return Object.assign({}, initialState.post);
@@ -10,6 +11,10 @@ function getInitialState() {
 function profileReducer(state = getInitialState(), action: TAction): PostState {
   switch (action.type) {
     case postConstants.INVALIDATE_STORE: {
+      return getInitialState();
+    }
+
+    case POST_LOGOUT: {
       return getInitialState();
     }
 
