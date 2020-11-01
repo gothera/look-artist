@@ -2,6 +2,7 @@ import { addArrayToDictByProp } from '../../utils/global';
 import initialState from '../initialState';
 import { ProfileState, TAction } from '../store.types';
 import * as profileConstants from './profile.constants';
+import { ADD_APPOINTMENT_REQUEST } from '../appointment/appointment.constants';
 
 function getInitialState() {
   return Object.assign({}, initialState.profile);
@@ -194,6 +195,12 @@ function profileReducer(
         bio: action.payload.profile.bio,
         category: action.payload.profile.category,
         phoneNumber: action.payload.profile.phone,
+      };
+
+    case ADD_APPOINTMENT_REQUEST:
+      return {
+        ...state,
+        appointmentsCount: state.appointmentsCount + 1,
       };
 
     default:

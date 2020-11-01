@@ -87,7 +87,7 @@ const AppointmentsList: React.FC<OwnProps & PropsFromRedux> = ({
       contentContainerStyle={[
         styles.contentContainerList,
         appointmentsIds.length === 0 &&
-          !isPreviousDate && { paddingHorizontal: 0 },
+          (!isPreviousDate || isToday) && { paddingHorizontal: 0 },
       ]}
       showsVerticalScrollIndicator={false}
       refreshControl={renderRefreshControl}
