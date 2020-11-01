@@ -68,7 +68,7 @@ const strings = {
     },
     editSpecificDays: {
       title: 'Edit Daily Program',
-      hoursError: 'Ending hour must be after staring hour',
+      hoursError: 'Ending hour must be after starting hour',
     },
     addPost: {
       title: 'Add Post',

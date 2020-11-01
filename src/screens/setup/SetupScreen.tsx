@@ -48,6 +48,9 @@ const SetupScreen: React.FC<OwnProps & PropsFromRedux> = ({
   const [priceStr, setPriceStr] = useState('');
   const [durationStr, setDurationStr] = useState('');
 
+  const isDoneFinalDisabled =
+    !serviceName || priceStr === '' || durationStr === '';
+
   const slideToNext = () => {
     if (step < 4) {
       setStep((old) => old + 1);
@@ -122,6 +125,7 @@ const SetupScreen: React.FC<OwnProps & PropsFromRedux> = ({
             durationStr={durationStr}
             setDurationStr={setDurationStr}
             category={selectedCategory}
+            isDoneDisabled={isDoneFinalDisabled}
           />
         </View>
       </Swiper>

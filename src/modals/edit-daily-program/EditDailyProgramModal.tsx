@@ -105,6 +105,7 @@ const EditDailyProgramModal: React.FC<OwnProps & PropsFromRedux> = ({
           setStartingHour={setStartingHour}
           setEndingHour={setEndingHour}
           containerStyle={styles.chooseIntervalContainer}
+          showDescription
         />
         <ErrorText
           errorMessage={strings.modal.editSpecificDays.hoursError}

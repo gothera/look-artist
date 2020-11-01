@@ -20,7 +20,7 @@ const TabScene: React.FC<
   onScroll,
   data,
   renderItem,
-
+  ListFooterComponent,
   onScrollEndDrag,
   onMomentumScrollEnd,
   onMomentumScrollBegin,
@@ -41,10 +41,12 @@ const TabScene: React.FC<
       onMomentumScrollEnd={onMomentumScrollEnd}
       ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
       ListHeaderComponent={() => <View style={{ height: 10 }} />}
+      ListFooterComponent={ListFooterComponent}
       contentContainerStyle={{
         paddingTop: HeaderHeight + TabBarHeight,
         paddingHorizontal: 10,
         minHeight: windowHeight - TabBarHeight,
+        paddingBottom: 30,
       }}
       showsHorizontalScrollIndicator={false}
       data={data}

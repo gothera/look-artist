@@ -1,5 +1,5 @@
 import { AppointmentType, Notification } from '../../types/globalTypes';
-import { DaysAbbreviation } from '../../types/enums';
+import { DaysAbbreviation, Currency } from '../../types/enums';
 
 export interface UserResponse {
   id: number;
@@ -79,4 +79,13 @@ export interface UpdateArtistApi {
   category: string;
   bio: string;
   phone: string;
+}
+
+export interface AddOfferedServiceApi {
+  name: string;
+  category: string;
+  description: string;
+  price: number;
+  duration: number;
+  currency: Currency;
 }

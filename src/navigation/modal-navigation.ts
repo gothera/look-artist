@@ -15,6 +15,7 @@ import {
   ADD_POST_MODAL,
   EDIT_PROFILE_MODAL,
   SELECT_DATE_MODAL,
+  ADD_SERVICE_MODAL,
 } from './modal-constants';
 import { Config, getConfig } from './utils-navigation';
 import { color } from '../theme';
@@ -336,6 +337,36 @@ export const showSelectDateModal = (pushConfig?: Config) => {
           componentBackgroundColor: 'transparent',
         },
       },
+    },
+  });
+};
+
+export const showAddServiceModal = (pushConfig?: Config) => {
+  const config = getConfig(pushConfig);
+
+  Navigation.showModal({
+    stack: {
+      children: [
+        {
+          component: {
+            name: ADD_SERVICE_MODAL,
+            passProps: { ...config.props },
+            options: {
+              modalPresentationStyle: OptionsModalPresentationStyle.pageSheet,
+              layout: {
+                backgroundColor: color.background,
+                componentBackgroundColor: 'transparent',
+              },
+              topBar: {
+                title: {
+                  text: 'Add Service',
+                  fontFamily: 'Gilroy-SemiBold',
+                },
+              },
+            },
+          },
+        },
+      ],
     },
   });
 };

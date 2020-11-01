@@ -367,6 +367,7 @@ export const updateSpecificProgram = (
   dates: string[],
   startTime: string,
   endTime: string,
+  onSuccess?: () => void,
 ): ThunkResult<void> => {
   return async function (dispatch, getState) {
     dispatch(updateSpecificProgramRequest());
@@ -379,6 +380,7 @@ export const updateSpecificProgram = (
     return ProfileService.updateSpecificProgram(dates, startTime, endTime)
       .then((response: ProgramSpecificElement[]) => {
         dispatch(updateSpecificProgramSuccess(response));
+        onSuccess && onSuccess();
       })
       .catch((error) => {
         dispatch(updateSpecificProgramFailure(error));

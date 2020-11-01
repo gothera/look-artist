@@ -2,6 +2,14 @@ import { DAYS_ABBREVIATION } from '../res/constants';
 import { DaysAbbreviation, Category } from '../types/enums';
 import { Notification, SelectedDateCalendar } from '../types/globalTypes';
 import { Categories } from '../res/strings/categories';
+import {
+  makeupServicesSelection,
+  lashesServicesSelection,
+  eyebrowsServicesSelection,
+  nailsServicesSelection,
+  bodyCareServicesSelection,
+  hairServicesSelection,
+} from '../res/constants/pickerItems';
 
 export type ContentProp = keyof Notification;
 
@@ -125,4 +133,64 @@ export const categoryEnumToStr = (category: Category) => {
     case Category.BodyCare:
       return Categories.bodyCare;
   }
+};
+
+export const categoryStrToEnum = (category: string) => {
+  if (category === Categories.makeup) {
+    return Category.Makeup;
+  }
+  if (category === Categories.lashes) {
+    return Category.Lashes;
+  }
+  if (category === Categories.hair) {
+    return Category.Hair;
+  }
+  if (category === Categories.eyebrows) {
+    return Category.Eyebrows;
+  }
+  if (category === Categories.nails) {
+    return Category.Nails;
+  }
+  if (category === Categories.bodyCare) {
+    return Category.BodyCare;
+  }
+  return Category.Makeup;
+};
+
+export const getPickerServices = (category: Category) => {
+  switch (category) {
+    case Category.Makeup: {
+      return makeupServicesSelection;
+    }
+    case Category.Lashes: {
+      return lashesServicesSelection;
+    }
+    case Category.Eyebrows: {
+      return eyebrowsServicesSelection;
+    }
+    case Category.Nails: {
+      return nailsServicesSelection;
+    }
+    case Category.BodyCare: {
+      return bodyCareServicesSelection;
+    }
+    case Category.Hair: {
+      return hairServicesSelection;
+    }
+    default: {
+      return makeupServicesSelection;
+    }
+  }
+};
+
+/**
+ * @param date
+ * ```
+ * 2020-11-03 -> 3 November
+ * ```
+ */
+export const dateToDayMonth = (date: string) => {
+  const dayNumber = parseInt(date.split('-')[2]);
+  const monthName = monthNumberToMonthName(parseInt(date.split('-')[1]));
+  return dayNumber + ' ' + monthName;
 };

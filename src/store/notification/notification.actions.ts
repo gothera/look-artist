@@ -46,8 +46,7 @@ const fetchNotificationsFailure = (
  */
 
 export const fetchNotifications = (isFirst: boolean): ThunkResult<void> => {
-  return async function (dispatch, getState) {
-    console.log('am ajuns aici');
+  return async (dispatch, getState) => {
     // if (getState().notification.fetching || getState().notification.error)
     //   return Promise.resolve();
 

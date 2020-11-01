@@ -9,6 +9,7 @@ import { selectAppointmentsIdsPerDay } from '../../../../store/appointment/appoi
 import { color } from '../../../../theme';
 import EmptyPreviousAppointments from '../empty-previous-appointments/EmptyPreviousAppointments';
 import EmptyNextProgram from '../empty-next-program/EmptyNextProgram';
+import SetDayProgram from '../set-day-program/SetDayProgram';
 
 interface OwnProps {
   date: string;
@@ -43,6 +44,8 @@ const AppointmentsList: React.FC<OwnProps & PropsFromRedux> = ({
 
   const dateObj = new Date(date);
   const todayDate = new Date();
+
+  const isToday = dateObj.toDateString() === todayDate.toDateString();
 
   const isPreviousDate = dateObj.getTime() < todayDate.getTime();
 
@@ -81,15 +84,19 @@ const AppointmentsList: React.FC<OwnProps & PropsFromRedux> = ({
       data={appointmentsIds}
       renderItem={renderAppointmentRow}
       style={styles.list}
-      contentContainerStyle={styles.contentContainerList}
+      contentContainerStyle={[
+        styles.contentContainerList,
+        appointmentsIds.length === 0 &&
+          !isPreviousDate && { paddingHorizontal: 0 },
+      ]}
       showsVerticalScrollIndicator={false}
       refreshControl={renderRefreshControl}
       keyExtractor={keyExtractor}
       ListEmptyComponent={
-        isPreviousDate ? (
+        isPreviousDate && !isToday ? (
           <EmptyPreviousAppointments date={date} />
         ) : (
-          <EmptyNextProgram />
+          <SetDayProgram date={date} />
         )
       }
     />

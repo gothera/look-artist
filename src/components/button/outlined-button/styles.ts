@@ -15,8 +15,8 @@ export const styles = StyleSheet.create<Style>({
     borderWidth: 0.7,
     borderColor: color.textPrimary,
     paddingHorizontal: 20,
-    paddingBottom: 10,
-    paddingTop: 10,
+    paddingBottom: 12,
+    paddingTop: 14,
   },
   title: {
     ...typography.body,
