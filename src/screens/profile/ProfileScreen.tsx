@@ -21,6 +21,8 @@ import { styles } from './styles';
 import { STATUS_BAR_HEIGHT } from '../../res/constants';
 import { color } from '../../theme';
 import strings from '../../res/strings/strings';
+import OutlinedButton from '../../components/button/outlined-button/OutlinedButton';
+import { showAddServiceModal } from '../../navigation';
 
 const HeaderHeight = 220;
 
@@ -172,11 +174,16 @@ const ProfileScreen: React.FC<PropsFromRedux> = ({
     );
   };
 
+  const onAddServicePress = () => {
+    showAddServiceModal();
+  };
+
   const renderScene = ({ route }: { route: Route }) => {
     let numCols;
     let data;
     let renderItem;
     let onEndReached = () => {};
+    let ListFooterComponent;
     switch (route.key) {
       case 'tab1':
         numCols = 2;
@@ -188,6 +195,9 @@ const ProfileScreen: React.FC<PropsFromRedux> = ({
         numCols = 1;
         data = servicesById;
         renderItem = rednerTab2Item;
+        ListFooterComponent = (
+          <OutlinedButton title={'Add Service'} onPress={onAddServicePress} />
+        );
         break;
       case 'tab3':
         numCols = 1;
@@ -205,6 +215,7 @@ const ProfileScreen: React.FC<PropsFromRedux> = ({
         numColumns={numCols}
         data={data}
         renderItem={renderItem}
+        ListFooterComponent={ListFooterComponent}
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { y: scrollY } } }],
           { useNativeDriver: true },

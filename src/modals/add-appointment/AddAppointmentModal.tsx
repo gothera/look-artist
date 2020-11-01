@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ScrollView, Text, TouchableWithoutFeedback, View } from 'react-native';
+import { ScrollView, Text, TouchableWithoutFeedback } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import { connect, ConnectedProps } from 'react-redux';
 import FooterSaveAndClear from '../../components/footer/footer-save-and-clear/FooterSaveAndClear';

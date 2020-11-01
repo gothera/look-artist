@@ -19,6 +19,7 @@ import {
   ADD_POST_MODAL,
   EDIT_PROFILE_MODAL,
   SELECT_DATE_MODAL,
+  ADD_SERVICE_MODAL,
 } from './modal-constants';
 import {
   ADD_POST_SCREEN,
@@ -41,6 +42,7 @@ import {
   AlertTextModal,
   AddPostModal,
   SelectDateModal,
+  AddServiceModal,
 } from '../modals';
 import {
   AddPostScreen,
@@ -137,6 +139,10 @@ const registerModals = () => {
 
   Navigation.registerComponent(SELECT_DATE_MODAL, () =>
     WrappedComponent(SelectDateModal),
+  );
+
+  Navigation.registerComponent(ADD_SERVICE_MODAL, () =>
+    WrappedComponent(AddServiceModal),
   );
 };
 

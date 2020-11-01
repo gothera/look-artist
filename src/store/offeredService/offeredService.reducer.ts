@@ -27,6 +27,7 @@ function offeredServiceReducer(
 
     case FETCH_PROFILE_SUCCESS: {
       return {
+        ...state,
         local: {
           ...addArrayToDictByProp({}, action.payload.profile.offeredServices),
         },
@@ -37,12 +38,28 @@ function offeredServiceReducer(
     }
     case SETUP_SUCCESS: {
       return {
+        ...state,
         local: {
           ...addArrayToDictByProp({}, action.payload.offeredServices),
         },
         offeredServicesById: action.payload.offeredServices.map(
           (offeredService) => offeredService.id,
         ),
+      };
+    }
+
+    case offeredServiceConstants.ADD_SERVICE_ACTION: {
+      return {
+        ...state,
+        local: {
+          ...addArrayToDictByProp(state.local, [action.payload.offeredService]),
+        },
+        offeredServicesById: [
+          ...new Set([
+            ...state.offeredServicesById,
+            action.payload.offeredService.id,
+          ]),
+        ],
       };
     }
 

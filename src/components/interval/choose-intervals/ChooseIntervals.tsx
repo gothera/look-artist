@@ -11,6 +11,8 @@ interface OwnProps {
   setStartingHour: (hour: string) => void;
   setEndingHour: (hour: string) => void;
   containerStyle?: StyleProp<ViewStyle>;
+  showDescription?: boolean;
+  optionsContainerStyle?: StyleProp<ViewStyle>;
 }
 
 const ChooseIntervals: React.FC<OwnProps> = ({
@@ -20,20 +22,24 @@ const ChooseIntervals: React.FC<OwnProps> = ({
   setStartingHour,
   setEndingHour,
   containerStyle,
+  showDescription,
+  optionsContainerStyle,
 }) => {
   return (
     <>
       {showIntervals && (
         <View style={[styles.container, containerStyle]}>
-          <View style={styles.textContainer}>
-            <Text style={styles.chooseTitle}>
-              {strings.modal.editDefaultDays.chooseSchedule}
-            </Text>
-            <Text style={styles.chooseDescription}>
-              {strings.modal.editDefaultDays.chooseScheduleDesc}
-            </Text>
-          </View>
-          <View style={styles.optionsContainer}>
+          {showDescription && (
+            <View style={styles.textContainer}>
+              <Text style={styles.chooseTitle}>
+                {strings.modal.editDefaultDays.chooseSchedule}
+              </Text>
+              <Text style={styles.chooseDescription}>
+                {strings.modal.editDefaultDays.chooseScheduleDesc}
+              </Text>
+            </View>
+          )}
+          <View style={[styles.optionsContainer, optionsContainerStyle]}>
             <IntervalHourOption
               title={strings.modal.editDefaultDays.startingHour}
               selectedHour={startingHour}

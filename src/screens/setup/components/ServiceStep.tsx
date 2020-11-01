@@ -1,22 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, ViewStyle, Text, TextStyle } from 'react-native';
 import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import PrimaryButton from '../../../components/button/PrimaryButton';
 import PickerInput from '../../../components/input/PickerInput';
 import TextInputWithLabel from '../../../components/input/TextInputWithLabel';
-import {
-  bodyCareServicesSelection,
-  eyebrowsServicesSelection,
-  hairServicesSelection,
-  lashesServicesSelection,
-  makeupServicesSelection,
-  nailsServicesSelection,
-} from '../../../res/constants/pickerItems';
 import { color, typography, spacing } from '../../../theme';
 
 import { Category } from '../../../types/enums';
 import strings from '../../../res/strings/strings';
+import { getPickerServices } from '../../../utils/global';
 
 interface OwnProps {
   category?: Category;
@@ -30,6 +23,8 @@ interface OwnProps {
   setDurationStr: (param: string) => void;
 
   onDone: () => void;
+
+  isDoneDisabled: boolean;
 }
 
 const ServiceStep: React.FC<OwnProps> = ({
@@ -43,31 +38,20 @@ const ServiceStep: React.FC<OwnProps> = ({
   setPriceStr,
   durationStr,
   setDurationStr,
+  isDoneDisabled,
 }) => {
-  const getPickerServices = () => {
-    switch (category) {
-      case Category.Makeup: {
-        return makeupServicesSelection;
-      }
-      case Category.Lashes: {
-        return lashesServicesSelection;
-      }
-      case Category.Eyebrows: {
-        return eyebrowsServicesSelection;
-      }
-      case Category.Nails: {
-        return nailsServicesSelection;
-      }
-      case Category.BodyCare: {
-        return bodyCareServicesSelection;
-      }
-      case Category.Hair: {
-        return hairServicesSelection;
-      }
-      default: {
-        return makeupServicesSelection;
-      }
+  const [isDurationDividedBy30, setIsDurationDividedBy30] = useState(true);
+
+  const checkDurationDividedBy30 = (durationStrParam: string) => {
+    setIsDurationDividedBy30(parseInt(durationStrParam) % 30 === 0);
+    return parseInt(durationStrParam) % 30 === 0;
+  };
+
+  const onDonePress = () => {
+    if (!checkDurationDividedBy30(durationStr)) {
+      return;
     }
+    onDone();
   };
 
   return (
@@ -86,7 +70,7 @@ const ServiceStep: React.FC<OwnProps> = ({
           containerStyle={styles.input}
           value={serviceName}
           placeholder="Select a service"
-          items={getPickerServices()}
+          items={getPickerServices(category!)}
           setSelected={() => {}}
           onValueChanged={setServiceName}
         />
@@ -111,18 +95,29 @@ const ServiceStep: React.FC<OwnProps> = ({
         />
 
         <TextInputWithLabel
-          label="Duration Minutes"
+          label="Duration in minutes"
           containerStyle={styles.input}
           placeholder="Enter duration"
           keyboardType="number-pad"
           text={durationStr}
           setText={setDurationStr}
+          description={'Service duration is allowed every 30 minutes'}
         />
+        {!isDurationDividedBy30 && (
+          <Text style={styles.errorDurationText}>
+            Please enter a multiple of 30. Durations are allowed at every 30
+            min.
+          </Text>
+        )}
       </KeyboardAwareScrollView>
 
       <KeyboardAccessoryView alwaysVisible style={styles.keyboardAccessory}>
         <View style={{ marginHorizontal: 16 }}>
-          <PrimaryButton title="Done" onPress={onDone} />
+          <PrimaryButton
+            title="Done"
+            onPress={onDonePress}
+            isDisabled={isDoneDisabled}
+          />
         </View>
       </KeyboardAccessoryView>
     </View>
@@ -136,6 +131,7 @@ interface Style {
   keyboardAccessory: ViewStyle;
   title: TextStyle;
   description: TextStyle;
+  errorDurationText: TextStyle;
 }
 
 const styles = StyleSheet.create<Style>({
@@ -165,6 +161,11 @@ const styles = StyleSheet.create<Style>({
     ...typography.subheadlineSemiBold,
     color: color.muted,
     marginTop: spacing.smallest,
+  },
+  errorDurationText: {
+    ...typography.caption1,
+    color: color.delete,
+    marginTop: spacing.smaller,
   },
 });
 

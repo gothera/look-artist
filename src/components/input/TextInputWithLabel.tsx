@@ -25,6 +25,7 @@ interface OwnProps {
   text: string;
   dividerStyle?: ViewStyle;
   labelStyle?: StyleProp<TextStyle>;
+  description?: string;
 }
 
 const TextInputWithLabel: React.FC<OwnProps> = ({
@@ -40,6 +41,7 @@ const TextInputWithLabel: React.FC<OwnProps> = ({
   labelStyle,
   text,
   dividerStyle,
+  description,
 }) => {
   const textInputRef = createRef<TextInput>();
 
@@ -60,6 +62,7 @@ const TextInputWithLabel: React.FC<OwnProps> = ({
   return (
     <View style={[styles.container, containerStyle]}>
       <Text style={[styles.label, labelStyle]}>{label}</Text>
+      {description && <Text style={styles.description}>{description}</Text>}
       <TextInput
         ref={textInputRef}
         style={styles.input}
@@ -82,6 +85,7 @@ interface Style {
   container: ViewStyle;
   label: TextStyle;
   input: TextStyle;
+  description: TextStyle;
 }
 
 const styles = StyleSheet.create<Style>({
@@ -97,6 +101,11 @@ const styles = StyleSheet.create<Style>({
     color: color.textSecondary,
     paddingVertical: 8,
     marginTop: spacing.smallest,
+  },
+  description: {
+    ...typography.caption2Regular,
+    marginTop: spacing.smallest,
+    color: color.muted,
   },
 });
 

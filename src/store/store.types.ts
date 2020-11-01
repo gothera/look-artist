@@ -13,6 +13,7 @@ import { NotificationAction } from './notification/notification.types';
 import { PostAction } from './post/post.types';
 import { ProfileAction } from './profile/profile.types';
 import { ReviewAction } from './review/review.types';
+import { OfferedServiceAction } from './offeredService/offeredService.types';
 
 export type Primitive = undefined | null | boolean | string | number | Function;
 
@@ -98,7 +99,8 @@ export type TAction =
   | NotificationAction
   | AppointmentAction
   | PostAction
-  | ReviewAction;
+  | ReviewAction
+  | OfferedServiceAction;
 
 export type ThunkResult<R> = ThunkAction<R, StoreState, null, TAction>;
 
