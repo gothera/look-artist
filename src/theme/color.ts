@@ -8,6 +8,6 @@ export const color = {
   modalBackground: 'rgba(0, 0, 0, 0.6)',
   background: '#FFFFFF',
   success: '#00A26A',
-  delete: '#E0525C',
+  delete: '#D34848',
   highlight: '#F0F0F0',
 };
