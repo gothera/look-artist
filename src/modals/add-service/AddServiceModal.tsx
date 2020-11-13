@@ -6,9 +6,14 @@ import FooterSaveAndClear from '../../components/footer/footer-save-and-clear/Fo
 import { StoreState } from '../../store/store.types';
 import { styles } from './styles';
 import PickerInput from '../../components/input/PickerInput';
-import { getPickerServices, categoryStrToEnum } from '../../utils/global';
+import {
+  getPickerServices,
+  categoryStrToEnum,
+  categoryEnumToStr,
+} from '../../utils/global';
 import TextInputWithLabel from '../../components/input/TextInputWithLabel';
 import { addService } from '../../store/offeredService/offeredService.actions';
+import { Category } from '../../types/enums';
 
 const LEFT_BUTTON_CLOSE = 'close-add-appointment-modal';
 
@@ -85,7 +90,15 @@ const AddAppointmentModal: React.FC<OwnProps & PropsFromRedux> = ({
     if (!checkDurationDividedBy30(durationStr)) {
       return;
     }
-    if (category && serviceName) {
+    console.log(
+      durationStr,
+      !checkDurationDividedBy30(durationStr),
+      category,
+      serviceName,
+    );
+    console.log('da1');
+    if (category !== undefined && categoryEnumToStr(category) && serviceName) {
+      console.log('da');
       addService(
         category,
         serviceName,
@@ -105,7 +118,7 @@ const AddAppointmentModal: React.FC<OwnProps & PropsFromRedux> = ({
           containerStyle={styles.input}
           value={serviceName}
           placeholder="Select a service"
-          items={getPickerServices(categoryStrToEnum(category!))}
+          items={getPickerServices(category!)}
           setSelected={() => {}}
           onValueChanged={setServiceName}
         />

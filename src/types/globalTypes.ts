@@ -1,4 +1,4 @@
-import { Currency } from './enums';
+import { Category, Currency } from './enums';
 
 export interface ImagePickerResponse {
   path: string;
@@ -15,7 +15,7 @@ export interface PickerItem {
 
 export interface OfferedService {
   name: string;
-  category: string;
+  category: Category;
   description: string;
   price: number;
   duration: number;
@@ -59,7 +59,7 @@ export interface ArtistResponseApi {
   firstName: string;
   lastName: string;
   email: string;
-  category: string;
+  category: Category;
   phone: string;
   bio: string;
   offeredServices: OfferedService[];

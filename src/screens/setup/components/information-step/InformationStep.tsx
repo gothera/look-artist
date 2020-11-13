@@ -1,6 +1,5 @@
 import React from 'react';
 import { Text, View, ScrollView } from 'react-native';
-import { KeyboardAccessoryView } from 'react-native-keyboard-accessory';
 import { styles } from './styles';
 import strings from '../../../../res/strings/strings';
 import TextInputWithLabel from '../../../../components/input/TextInputWithLabel';
@@ -37,7 +36,7 @@ const InformationStep: React.FC<OwnProps> = ({
   };
 
   return (
-    <View style={{ flex: 1, width: '100%' }}>
+    <>
       <ScrollView
         style={styles.scroll}
         contentContainerStyle={styles.scrollContainer}
@@ -73,18 +72,17 @@ const InformationStep: React.FC<OwnProps> = ({
           onPress={onBirthdaySelect}
         />
       </ScrollView>
-      <KeyboardAccessoryView alwaysVisible style={styles.keyboardAccessory}>
-        <View style={{ marginHorizontal: 16 }}>
-          <PrimaryButton
-            title="Continue"
-            onPress={slideToNext}
-            isDisabled={
-              firstName === '' || lastName === '' || birthdayDate === undefined
-            }
-          />
-        </View>
-      </KeyboardAccessoryView>
-    </View>
+
+      <View style={styles.btnContainer}>
+        <PrimaryButton
+          title="Continue"
+          onPress={slideToNext}
+          isDisabled={
+            firstName === '' || lastName === '' || birthdayDate === undefined
+          }
+        />
+      </View>
+    </>
   );
 };
 

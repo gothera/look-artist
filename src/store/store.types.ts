@@ -14,6 +14,7 @@ import { PostAction } from './post/post.types';
 import { ProfileAction } from './profile/profile.types';
 import { ReviewAction } from './review/review.types';
 import { OfferedServiceAction } from './offeredService/offeredService.types';
+import { Category } from '../types/enums';
 
 export type Primitive = undefined | null | boolean | string | number | Function;
 
@@ -25,7 +26,7 @@ export interface ProfileState {
   userId?: number;
   artistId?: number;
   email?: string;
-  category?: string;
+  category?: Category;
   phoneNumber?: string;
   profilePicture?: string;
   isUploadingProfilePicture: boolean;

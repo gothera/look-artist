@@ -20,6 +20,7 @@ import { ImagePickerResponse } from '../../../types/globalTypes';
 import StepTitle from './StepTitle';
 import { showLoadingModal } from '../../../navigation';
 import strings from '../../../res/strings/strings';
+import { BOTTOM_SPACE } from '../../../res/constants';
 
 const ImagePicker = NativeModules.ImageCropPicker;
 
@@ -92,29 +93,31 @@ const PhotoStep: React.FC<OwnProps & PropsFromRedux> = ({
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>{strings.screen.setup.photo.title}</Text>
-      <Text style={styles.description}>
-        {strings.screen.setup.photo.description}
-      </Text>
-      <View style={styles.avatarContainer}>
-        {!imagePicked && <BigAvatarPlaceholder />}
-        {imagePicked && (
-          <Image
-            style={styles.image}
-            source={{
-              uri: imagePicked?.path,
-            }}
-          />
-        )}
-        <TouchableOpacity
-          style={styles.chooseBtnContainer}
-          onPress={onOpenLibrary}
-        >
-          <Text style={styles.chooseText}>
-            {!imagePicked ? 'Choose from library' : 'Choose another photo'}
-          </Text>
-        </TouchableOpacity>
+    <>
+      <View style={styles.container}>
+        <Text style={styles.title}>{strings.screen.setup.photo.title}</Text>
+        <Text style={styles.description}>
+          {strings.screen.setup.photo.description}
+        </Text>
+        <View style={styles.avatarContainer}>
+          {!imagePicked && <BigAvatarPlaceholder />}
+          {imagePicked && (
+            <Image
+              style={styles.image}
+              source={{
+                uri: imagePicked?.path,
+              }}
+            />
+          )}
+          <TouchableOpacity
+            style={styles.chooseBtnContainer}
+            onPress={onOpenLibrary}
+          >
+            <Text style={styles.chooseText}>
+              {!imagePicked ? 'Choose from library' : 'Choose another photo'}
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
       <View style={styles.btnContainer}>
         <PrimaryButton
@@ -123,7 +126,7 @@ const PhotoStep: React.FC<OwnProps & PropsFromRedux> = ({
           isDisabled={isContinueDisabled}
         />
       </View>
-    </View>
+    </>
   );
 };
 
@@ -161,14 +164,13 @@ const styles = StyleSheet.create<Style>({
   },
   btnContainer: {
     position: 'absolute',
-    zIndex: 1,
-    bottom: 0,
+    zIndex: 2,
+    bottom: BOTTOM_SPACE,
     left: 0,
     right: 0,
-    marginBottom: 100,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 20,
+    marginHorizontal: spacing.base,
   },
   image: {
     resizeMode: 'contain',

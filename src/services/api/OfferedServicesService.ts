@@ -1,10 +1,10 @@
 import { OfferedService } from '../../types/globalTypes';
 import { postRequest } from './apiRequest';
-import { Currency } from '../../types/enums';
+import { Category, Currency } from '../../types/enums';
 import { AddOfferedServiceApi } from './api.types';
 
 export const addService = (
-  category: string,
+  category: Category,
   name: string,
   description: string,
   price: number,

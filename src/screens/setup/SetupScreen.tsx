@@ -11,7 +11,6 @@ import InformationStep from './components/information-step/InformationStep';
 import { Category } from '../../types/enums';
 import { setup } from '../../store/profile/profile.actions';
 import { connect, ConnectedProps } from 'react-redux';
-import { categoryEnumToStr } from '../../utils/global';
 
 const STATUS_BAR_HEIGHT = getStatusBarHeight();
 
@@ -61,18 +60,16 @@ const SetupScreen: React.FC<OwnProps & PropsFromRedux> = ({
   };
 
   const onDoneSetup = () => {
-    // if (selectedCategory && birthdayDate && serviceName) {
     setup(
       firstName,
       lastName,
-      categoryEnumToStr(selectedCategory),
+      selectedCategory,
       birthdayDate.toISOString(),
       serviceName,
       description,
       priceStr,
       durationStr,
     );
-    // }
   };
 
   return (

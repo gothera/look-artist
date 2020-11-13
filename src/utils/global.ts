@@ -61,6 +61,23 @@ export const monthNumberToMonthName = (monthNumber: number) => {
   }
 };
 
+export const categoryToCategoryName = (category: Category) => {
+  switch (category) {
+    case Category.BodyCare:
+      return 'Body Care';
+    case Category.Eyebrows:
+      return 'Eyebrows';
+    case Category.Hair:
+      return 'Hair';
+    case Category.Lashes:
+      return 'Lashes';
+    case Category.Makeup:
+      return 'Makeup';
+    case Category.Nails:
+      return 'Nails';
+  }
+};
+
 export const dayAbbEnumValue = (dayAbb: DaysAbbreviation) => {
   switch (dayAbb) {
     case DaysAbbreviation.Mon:

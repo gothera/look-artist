@@ -4,6 +4,7 @@ import {
   ProgramSpecificElement,
   UpdateArtistApi,
 } from '../../services/api/api.types';
+import { Category } from '../../types/enums';
 
 export interface InvalidateStoreAction {
   type: typeof profileConstants.INVALIDATE_STORE;
@@ -47,7 +48,7 @@ export interface SetPhoneNumber {
 
 export interface SetCategory {
   type: typeof profileConstants.SET_CATEGORY;
-  payload: { category: string };
+  payload: { category: Category };
 }
 
 // TODO COMPLETE PAYLOAD

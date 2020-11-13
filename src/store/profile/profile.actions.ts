@@ -20,7 +20,7 @@ import { ArtistProgramEntry, ArtistResponseApi } from '../../types/globalTypes';
 import { ThunkResult } from '../store.types';
 import * as profileConstants from './profile.constants';
 import * as profileTypes from './profile.types';
-import { DaysAbbreviation } from '../../types/enums';
+import { Category, DaysAbbreviation } from '../../types/enums';
 
 /**
  * LOGIN
@@ -173,7 +173,7 @@ export const setPhoneNumber = (
   };
 };
 
-export const setCategory = (category: string): profileTypes.SetCategory => {
+export const setCategory = (category: Category): profileTypes.SetCategory => {
   return {
     type: profileConstants.SET_CATEGORY,
     payload: { category: category },
@@ -208,7 +208,7 @@ export const setupFailure = (): profileTypes.SetupFailure => {
 export const setup = (
   firstName: string,
   lastName: string,
-  category: string,
+  category: Category,
   birthDateISO: string,
   serviceName: string,
   serviceDescription: string,

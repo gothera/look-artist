@@ -6,7 +6,7 @@ import LineDivider from '../../../../components/ui/LineDivider';
 import { showEditProfileModal } from '../../../../navigation';
 import { AppointmentIcon, LikesIcon, RatingStar } from '../../../../res/svg';
 import { StoreState } from '../../../../store/store.types';
-import { textWithZecimals } from '../../../../utils/global';
+import { categoryEnumToStr, textWithZecimals } from '../../../../utils/global';
 import { styles } from './styles';
 import strings from '../../../../res/strings/strings';
 import { color } from '../../../../theme';
@@ -49,7 +49,9 @@ const ProfileHeaderData: React.FC<PropsFromRedux> = ({ profile }) => {
         />
         <View style={styles.rightContainer}>
           <Text style={styles.title}>{firstName + ' ' + lastName}</Text>
-          <Text style={styles.categoryText}>{category}</Text>
+          <Text style={styles.categoryText}>
+            {categoryEnumToStr(category!)}
+          </Text>
           <View style={styles.statsContainer}>
             <View style={styles.metricContainer}>
               <View style={styles.counterContainer}>
@@ -94,7 +96,9 @@ const ProfileHeaderData: React.FC<PropsFromRedux> = ({ profile }) => {
         </View>
       </View>
       <LineDivider containerStyle={styles.divider} />
-      <Text style={styles.bioText}>{bio || ''}</Text>
+      <Text style={styles.bioText} numberOfLines={3}>
+        {bio || ''}
+      </Text>
     </View>
   );
 };

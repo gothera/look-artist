@@ -3,6 +3,7 @@ import * as offeredServiceTypes from './offeredService.types';
 import * as OfferedServicesService from '../../services/api/OfferedServicesService';
 import { OfferedService } from '../../types/globalTypes';
 import { ThunkResult } from '../store.types';
+import { Category } from '../../types/enums';
 
 const addServiceAction = (
   offeredService: OfferedService,
@@ -16,7 +17,7 @@ const addServiceAction = (
 };
 
 export const addService = (
-  category: string,
+  category: Category,
   name: string,
   description: string,
   price: number,

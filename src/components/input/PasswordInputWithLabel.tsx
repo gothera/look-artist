@@ -64,8 +64,8 @@ const styles = StyleSheet.create<Style>({
     width: '100%',
   },
   label: {
-    ...typography.textInputLabel,
-    color: color.muted,
+    ...typography.subheadlineSemiBold,
+    color: color.textSecondary,
   },
   input: {
     ...typography.textInput,

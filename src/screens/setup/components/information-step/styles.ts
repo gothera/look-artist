@@ -1,4 +1,5 @@
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
+import { BOTTOM_SPACE } from '../../../../res/constants';
 import { typography, color, spacing } from '../../../../theme';
 
 interface Style {
@@ -9,6 +10,7 @@ interface Style {
   fNameContainer: ViewStyle;
   birthdayContainer: ViewStyle;
   keyboardAccessory: ViewStyle;
+  btnContainer: ViewStyle;
 }
 
 export const styles = StyleSheet.create<Style>({
@@ -41,5 +43,13 @@ export const styles = StyleSheet.create<Style>({
     backgroundColor: color.background,
     marginBottom: 24,
     borderTopWidth: 0,
+  },
+  btnContainer: {
+    marginHorizontal: spacing.base,
+    bottom: BOTTOM_SPACE,
+    position: 'absolute',
+    zIndex: 2,
+    left: 0,
+    right: 0,
   },
 });

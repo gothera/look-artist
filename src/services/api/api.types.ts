@@ -1,5 +1,5 @@
 import { AppointmentType, Notification } from '../../types/globalTypes';
-import { DaysAbbreviation, Currency } from '../../types/enums';
+import { DaysAbbreviation, Currency, Category } from '../../types/enums';
 
 export interface UserResponse {
   id: number;
@@ -23,13 +23,13 @@ export interface SignupResponse {
   user: UserResponse;
   offeredServices: any[];
   profilePicture: string;
-  category: string;
+  category: Category;
 }
 
 export interface SetupBody {
   firstName: string;
   lastName: string;
-  category: string;
+  category: Category;
   phone?: string;
   name: string; // service name
   description: string;
@@ -76,14 +76,14 @@ export interface UpdateArtistApi {
   firstName: string;
   lastName: string;
   email: string;
-  category: string;
+  category: Category;
   bio: string;
   phone: string;
 }
 
 export interface AddOfferedServiceApi {
   name: string;
-  category: string;
+  category: Category;
   description: string;
   price: number;
   duration: number;

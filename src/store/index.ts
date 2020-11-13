@@ -33,6 +33,7 @@ const migrations: any = {
 const profileBlacklist = createBlacklistFilter('profile', [
   'isLogging',
   'isUploadingProfilePicture',
+  'isFetching',
 ]);
 
 const viewBlacklist = createBlacklistFilter('view', [

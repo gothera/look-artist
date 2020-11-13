@@ -20,6 +20,8 @@ import FooterOptions from '../../components/footer/footer-options/FooterOptions'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import PrimaryButton from '../../components/button/PrimaryButton';
 import TextEntry from '../../components/entry/text-entry/TextEntry';
+import { Category } from '../../types/enums';
+import { categoryEnumToStr, categoryStrToEnum } from '../../utils/global';
 
 const LEFT_BUTTON_CLOSE = 'close-edit-profile-modal';
 
@@ -64,17 +66,19 @@ const EditProfileModal: React.FC<OwnProps & PropsFromRedux> = ({
   const [firstName, setFirstName] = useState(initialFirstName || '');
   const [lastName, setLastName] = useState(initialLastName || '');
   const [bio, setBio] = useState(initialBio || '');
-  const [category, setCategory] = useState<string | undefined>(initialCategory);
+  const [category, setCategory] = useState<Category | undefined>(
+    initialCategory,
+  );
   const [phone, setPhone] = useState(initialPhone || '');
   const [email, setEmail] = useState(initialEmail || '');
 
   const isDisabled =
     firstName === initialFirstName &&
-    initialBio === bio &&
+    (initialBio === bio || bio === '') &&
     lastName === initialLastName &&
     initialCategory === category &&
     email === initialEmail &&
-    phone === initialPhone &&
+    (phone === initialPhone || phone === '') &&
     !imagesPicked;
 
   Navigation.mergeOptions(componentId, {
@@ -95,7 +99,7 @@ const EditProfileModal: React.FC<OwnProps & PropsFromRedux> = ({
       lastName,
       phone,
       email,
-      category: category || 'Makeup',
+      category: category || 0,
     });
     if (imagesPicked) {
       const picture = {
@@ -190,10 +194,12 @@ const EditProfileModal: React.FC<OwnProps & PropsFromRedux> = ({
             label="Category"
             containerStyle={styles.input}
             dividerStyle={styles.divider}
-            value={category}
+            value={categoryEnumToStr(category!)}
             placeholder="category"
             items={categoriesSelection}
-            onValueChanged={setCategory}
+            onValueChanged={(str: string) =>
+              setCategory(categoryStrToEnum(str))
+            }
           />
           <TextInputWithLabel
             label="Email address"
