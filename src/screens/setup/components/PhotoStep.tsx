@@ -79,6 +79,7 @@ const PhotoStep: React.FC<OwnProps & PropsFromRedux> = ({
 
   const onContinuePress = () => {
     if (!imagePicked) {
+      slideToNext();
       return;
     }
     const picture = {
@@ -123,7 +124,7 @@ const PhotoStep: React.FC<OwnProps & PropsFromRedux> = ({
         <PrimaryButton
           title={'Continue'}
           onPress={onContinuePress}
-          isDisabled={isContinueDisabled}
+          // isDisabled={isContinueDisabled}
         />
       </View>
     </>

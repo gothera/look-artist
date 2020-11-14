@@ -111,15 +111,13 @@ const ServiceStep: React.FC<OwnProps> = ({
         )}
       </KeyboardAwareScrollView>
 
-      <KeyboardAccessoryView alwaysVisible style={styles.keyboardAccessory}>
-        <View style={{ marginHorizontal: 16 }}>
-          <PrimaryButton
-            title="Done"
-            onPress={onDonePress}
-            isDisabled={isDoneDisabled}
-          />
-        </View>
-      </KeyboardAccessoryView>
+      <View style={styles.doneBtnContainer}>
+        <PrimaryButton
+          title="Done"
+          onPress={onDonePress}
+          isDisabled={isDoneDisabled}
+        />
+      </View>
     </View>
   );
 };
@@ -132,6 +130,7 @@ interface Style {
   title: TextStyle;
   description: TextStyle;
   errorDurationText: TextStyle;
+  doneBtnContainer: ViewStyle;
 }
 
 const styles = StyleSheet.create<Style>({
@@ -166,6 +165,13 @@ const styles = StyleSheet.create<Style>({
     ...typography.caption1,
     color: color.delete,
     marginTop: spacing.smaller,
+  },
+  doneBtnContainer: {
+    position: 'absolute',
+    bottom: 50,
+    left: 0,
+    right: 0,
+    paddingHorizontal: spacing.base,
   },
 });
 
