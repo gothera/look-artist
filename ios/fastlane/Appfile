@@ -1,0 +1,8 @@
+app_identifier("com.lookbeautyapp.artist") # The bundle identifier of your app
+apple_id("sabinhantu@icloud.com") # Your Apple email address
+
+itc_team_id("122331697") # App Store Connect Team ID
+team_id("CBG87U85UW") # Developer Portal Team ID
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile
