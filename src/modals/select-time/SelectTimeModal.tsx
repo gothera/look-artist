@@ -1,7 +1,14 @@
 import React, { useEffect } from 'react';
-import { BackHandler, TouchableWithoutFeedback, View } from 'react-native';
+import {
+  BackHandler,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+  Text,
+} from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import { Navigation } from 'react-native-navigation';
+import strings from '../../res/strings/strings';
 import { styles } from './styles';
 
 interface OwnProps {
@@ -51,18 +58,23 @@ const SelectTimeModal: React.FC<OwnProps> = ({
   return (
     <TouchableWithoutFeedback onPress={close}>
       <View style={styles.background}>
-        <View style={styles.container}>
-          <DatePicker
-            date={time}
-            onDateChange={setTime}
-            mode="time"
-            locale="ro"
-            minuteInterval={30}
-            minimumDate={startingDate}
-            maximumDate={endingDate}
-            is24hourSource="locale"
-          />
-        </View>
+        <TouchableWithoutFeedback>
+          <View style={styles.container}>
+            <DatePicker
+              date={time}
+              onDateChange={setTime}
+              mode="time"
+              locale="ro"
+              minuteInterval={30}
+              minimumDate={startingDate}
+              maximumDate={endingDate}
+              is24hourSource="locale"
+            />
+            <TouchableOpacity style={styles.doneBtnContainer} onPress={close}>
+              <Text style={styles.doneBtnText}>{strings.action.done}</Text>
+            </TouchableOpacity>
+          </View>
+        </TouchableWithoutFeedback>
       </View>
     </TouchableWithoutFeedback>
   );

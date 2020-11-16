@@ -5,8 +5,7 @@ const strings = {
     },
     setup: {
       information: {
-        title: 'About you',
-        description: 'Configure your account',
+        title: 'Configure your artist account',
         firstNameLabel: 'First Name',
         firstNamePlaceholder: 'Introduce First Name',
         lastNameLabel: 'Last Name',
@@ -15,16 +14,13 @@ const strings = {
         birthdayPlaceholder: 'DD - Month - YYYY',
       },
       photo: {
-        title: 'Profile picture',
-        description: 'Select a picture for your profile',
+        title: 'Select a picture for your account',
       },
       category: {
-        title: 'Category',
-        description: 'Select artist category',
+        title: 'Choose your category',
       },
       service: {
-        title: 'First Service',
-        description: 'Add your first service',
+        title: 'Start by adding first service',
       },
     },
     profile: {
@@ -35,7 +31,7 @@ const strings = {
       },
       metrics: {
         rate: 'Rate',
-        likes: 'Likes',
+        saves: 'Saves',
         appointments: 'Appointments',
       },
     },
@@ -85,6 +81,8 @@ const strings = {
     save: 'Save',
     edit: 'Edit',
     logout: 'Logout',
+    continue: 'Continue',
+    done: 'Done',
   },
 };
 

@@ -46,8 +46,8 @@ export const setLoggedInRoot = () => {
                   textColor: color.muted,
                   selectedTextColor: color.textPrimary,
                   fontFamily: 'Gilroy-Medium',
-                  fontSize: 11,
-                  iconInsets: { top: 2 },
+                  fontSize: 10,
+                  iconInsets: { bottom: 3 },
                 },
                 topBar: {
                   visible: false,
@@ -71,8 +71,8 @@ export const setLoggedInRoot = () => {
                   textColor: color.muted,
                   selectedTextColor: color.textPrimary,
                   fontFamily: 'Gilroy-Medium',
-                  fontSize: 11,
-                  iconInsets: { top: 2 },
+                  fontSize: 10,
+                  iconInsets: { bottom: 4 },
                 },
                 topBar: {
                   visible: false,
@@ -100,8 +100,8 @@ export const setLoggedInRoot = () => {
                   textColor: color.muted,
                   selectedTextColor: color.textPrimary,
                   fontFamily: 'Gilroy-Medium',
-                  fontSize: 11,
-                  iconInsets: { top: 2 },
+                  fontSize: 10,
+                  iconInsets: { bottom: 3 },
                 },
                 topBar: {
                   visible: false,
@@ -129,8 +129,8 @@ export const setLoggedInRoot = () => {
                   textColor: color.muted,
                   selectedTextColor: color.textPrimary,
                   fontFamily: 'Gilroy-Medium',
-                  fontSize: 11,
-                  iconInsets: { top: 2 },
+                  fontSize: 10,
+                  iconInsets: { bottom: 3 },
                 },
                 topBar: {
                   visible: false,

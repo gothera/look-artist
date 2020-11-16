@@ -65,11 +65,12 @@ export interface ArtistResponseApi {
   offeredServices: OfferedService[];
   scheduledDates: string[];
   profilePicture: string;
-  likes: number;
+  saves: number;
   appointmentsCount: number;
   rating: number;
   programEntries: ArtistProgramEntry[];
   birthDate: string;
+  hasSetup: boolean;
 }
 
 export interface Appointment {

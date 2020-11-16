@@ -86,6 +86,7 @@ const styles = StyleSheet.create<Style>({
   container: {
     flex: 1,
     paddingTop: STATUS_BAR_HEIGHT,
+    backgroundColor: color.background,
   },
   text: {
     ...font.blackItalic,

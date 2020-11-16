@@ -1,55 +1,29 @@
-import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
+import { StyleSheet, ViewStyle } from 'react-native';
 import { BOTTOM_SPACE } from '../../../../res/constants';
-import { typography, color, spacing } from '../../../../theme';
+import { spacing } from '../../../../theme';
 
 interface Style {
-  title: TextStyle;
-  description: TextStyle;
-  scroll: ViewStyle;
-  scrollContainer: ViewStyle;
-  fNameContainer: ViewStyle;
-  birthdayContainer: ViewStyle;
-  keyboardAccessory: ViewStyle;
-  btnContainer: ViewStyle;
+  container: ViewStyle;
+  continueBtnContainer: ViewStyle;
+  elementMarginTop: ViewStyle;
 }
 
 export const styles = StyleSheet.create<Style>({
-  title: {
-    ...typography.title3Bold,
-    color: color.textSecondary,
-  },
-  description: {
-    ...typography.subheadlineSemiBold,
-    color: color.muted,
-    marginTop: spacing.smallest,
-  },
-  scroll: {
+  container: {
     width: '100%',
-    height: '100%',
-  },
-  scrollContainer: {
     paddingHorizontal: spacing.base,
-    marginTop: spacing.larger,
-    width: '100%',
-    height: '100%',
+    paddingTop: spacing.largest,
   },
-  fNameContainer: {
-    marginTop: spacing.largest,
-  },
-  birthdayContainer: {
-    marginTop: spacing.largest,
-  },
-  keyboardAccessory: {
-    backgroundColor: color.background,
-    marginBottom: 24,
-    borderTopWidth: 0,
-  },
-  btnContainer: {
-    marginHorizontal: spacing.base,
-    bottom: BOTTOM_SPACE,
+  continueBtnContainer: {
     position: 'absolute',
     zIndex: 2,
     left: 0,
     right: 0,
+    bottom: 0,
+    paddingBottom: BOTTOM_SPACE,
+    paddingHorizontal: spacing.base,
+  },
+  elementMarginTop: {
+    marginTop: spacing.larger,
   },
 });

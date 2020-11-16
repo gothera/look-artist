@@ -6,9 +6,7 @@ import {
   ViewStyle,
   TouchableOpacity,
 } from 'react-native';
-
 import { styles } from './styles';
-import { color } from '../../../theme';
 import LineDivider from '../../ui/LineDivider';
 
 interface OwnProps {

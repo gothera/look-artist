@@ -10,6 +10,7 @@ import { categoryEnumToStr, textWithZecimals } from '../../../../utils/global';
 import { styles } from './styles';
 import strings from '../../../../res/strings/strings';
 import { color } from '../../../../theme';
+import OwnAvatar from '../../../../components/avatar/own-avatar/OwnAvatar';
 
 const mapStateToProps = (state: StoreState) => {
   return {
@@ -23,10 +24,9 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 
 const ProfileHeaderData: React.FC<PropsFromRedux> = ({ profile }) => {
   const {
-    profilePicture,
     firstName,
     lastName,
-    likes,
+    saves,
     appointmentsCount,
     rating,
     bio,
@@ -42,11 +42,7 @@ const ProfileHeaderData: React.FC<PropsFromRedux> = ({ profile }) => {
         <Text style={styles.editBtnText}>{strings.action.edit}</Text>
       </TouchableOpacity>
       <View style={styles.container}>
-        <FastImage
-          resizeMode="contain"
-          style={styles.avatarStyle}
-          source={{ uri: profilePicture }}
-        />
+        <OwnAvatar size={80} />
         <View style={styles.rightContainer}>
           <Text style={styles.title}>{firstName + ' ' + lastName}</Text>
           <Text style={styles.categoryText}>
@@ -74,10 +70,10 @@ const ProfileHeaderData: React.FC<PropsFromRedux> = ({ profile }) => {
                   stroke={color.textSecondary}
                   style={{ marginBottom: 2 }}
                 />
-                <Text style={styles.counterText}>{likes}</Text>
+                <Text style={styles.counterText}>{saves}</Text>
               </View>
               <Text style={styles.metricText}>
-                {strings.screen.profile.metrics.likes}
+                {strings.screen.profile.metrics.saves}
               </Text>
             </View>
             <View style={styles.metricContainer}>

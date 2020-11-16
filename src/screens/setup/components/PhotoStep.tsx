@@ -17,9 +17,7 @@ import { changeProfilePicture } from '../../../store/profile/profile.actions';
 import { AsyncDispatch, StoreState } from '../../../store/store.types';
 import { color, typography, spacing } from '../../../theme';
 import { ImagePickerResponse } from '../../../types/globalTypes';
-import StepTitle from './StepTitle';
 import { showLoadingModal } from '../../../navigation';
-import strings from '../../../res/strings/strings';
 import { BOTTOM_SPACE } from '../../../res/constants';
 
 const ImagePicker = NativeModules.ImageCropPicker;
@@ -34,10 +32,9 @@ const mapStateToProps = (state: StoreState) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: AsyncDispatch) => ({
-  changeProfilePicture: (formData: FormData, onSuccess: () => void) =>
-    dispatch(changeProfilePicture(formData, onSuccess)),
-});
+const mapDispatchToProps = {
+  changeProfilePicture,
+};
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
@@ -50,6 +47,8 @@ const PhotoStep: React.FC<OwnProps & PropsFromRedux> = ({
   const [imagePicked, setImagePicked] = useState<
     ImagePickerResponse | undefined
   >(undefined);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (isUploadingProfilePicture) {
@@ -77,6 +76,10 @@ const PhotoStep: React.FC<OwnProps & PropsFromRedux> = ({
 
   const isContinueDisabled = !imagePicked;
 
+  const setLoadingToFalse = () => {
+    setIsLoading(false);
+  };
+
   const onContinuePress = () => {
     if (!imagePicked) {
       slideToNext();
@@ -90,16 +93,14 @@ const PhotoStep: React.FC<OwnProps & PropsFromRedux> = ({
     const formData = new FormData();
     formData.append('picture', picture);
 
-    changeProfilePicture(formData, slideToNext);
+    setIsLoading(true);
+
+    changeProfilePicture(formData, slideToNext, setLoadingToFalse);
   };
 
   return (
     <>
       <View style={styles.container}>
-        <Text style={styles.title}>{strings.screen.setup.photo.title}</Text>
-        <Text style={styles.description}>
-          {strings.screen.setup.photo.description}
-        </Text>
         <View style={styles.avatarContainer}>
           {!imagePicked && <BigAvatarPlaceholder />}
           {imagePicked && (
@@ -124,7 +125,7 @@ const PhotoStep: React.FC<OwnProps & PropsFromRedux> = ({
         <PrimaryButton
           title={'Continue'}
           onPress={onContinuePress}
-          // isDisabled={isContinueDisabled}
+          loading={isLoading}
         />
       </View>
     </>

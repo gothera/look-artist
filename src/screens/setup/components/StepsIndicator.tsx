@@ -11,7 +11,7 @@ import { color } from '../../../theme';
 const SCREEN_WIDTH = Dimensions.get('screen').width;
 
 const getStepLineWidth = (numOfSteps: number) =>
-  (SCREEN_WIDTH - numOfSteps - 20) / numOfSteps;
+  (SCREEN_WIDTH - numOfSteps - 36) / numOfSteps;
 
 interface OwnProps {
   numOfSteps: number;
@@ -62,12 +62,14 @@ const styles = StyleSheet.create<Style>({
     alignItems: 'center',
   },
   lineNeutral: {
-    height: 2,
-    backgroundColor: color.unchosen,
+    height: 3,
+    backgroundColor: color.highlight,
+    borderRadius: 2,
   },
   lineCurrent: {
     height: 4,
-    backgroundColor: color.textPrimary,
+    backgroundColor: color.textSecondary,
+    borderRadius: 2,
   },
 });
 

@@ -32,6 +32,7 @@ const CalendarHeader: React.FC<OwnProps & PropsFromRedux> = ({
   scheduledDates,
 }) => {
   const dateNow = new Date().toISOString().split('T')[0];
+
   const initialMonthName = monthNumberToMonthName(
     parseInt(dateNow.split('-')[1], 10),
   );
@@ -43,9 +44,12 @@ const CalendarHeader: React.FC<OwnProps & PropsFromRedux> = ({
   };
 
   const onMonthChange = (newDate: any) => {
-    const { month } = newDate;
+    const { month, year } = newDate;
     const monthName = monthNumberToMonthName(month);
-    setCurrMonthName(monthName);
+
+    const currentYear = parseInt(dateNow.split('-')[0]);
+    const isDifferentYear = year !== currentYear;
+    setCurrMonthName(monthName + (isDifferentYear ? `, ${year}` : ''));
   };
 
   const markedDates = Object.assign(

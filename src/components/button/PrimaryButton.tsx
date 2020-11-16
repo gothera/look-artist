@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  ActivityIndicator,
   StyleProp,
   StyleSheet,
   Text,
@@ -15,6 +16,7 @@ interface OwnProps {
   onPress: () => void;
   title: string;
   isDisabled?: boolean;
+  loading?: boolean;
 }
 
 const PrimaryButton: React.FC<OwnProps> = ({
@@ -23,14 +25,19 @@ const PrimaryButton: React.FC<OwnProps> = ({
   title,
   isDisabled,
   textStyles,
+  loading,
 }) => {
   return (
     <TouchableOpacity
       style={[styles.container, containerStyle, isDisabled && styles.disabled]}
       onPress={onPress}
-      disabled={isDisabled}
+      disabled={isDisabled || loading}
     >
-      <Text style={[styles.text, textStyles]}>{title}</Text>
+      {loading ? (
+        <ActivityIndicator color={color.background} />
+      ) : (
+        <Text style={[styles.text, textStyles]}>{title}</Text>
+      )}
     </TouchableOpacity>
   );
 };
@@ -48,12 +55,11 @@ const styles = StyleSheet.create<Style>({
     alignContent: 'center',
     borderRadius: 12,
     backgroundColor: color.brand,
+    height: 42,
   },
   text: {
     ...typography.button,
     color: color.textInverted,
-    paddingBottom: 13,
-    paddingTop: 14,
     textAlign: 'center',
   },
   disabled: {

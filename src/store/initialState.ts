@@ -10,6 +10,7 @@ const initialState: StoreState = {
     appointmentsCount: 0,
     scheduledDates: [],
     rating: 5,
+    hasSetup: true,
   },
   view: {
     aux: '',

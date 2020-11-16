@@ -1,10 +1,8 @@
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
-import { ImageStyle } from 'react-native-fast-image';
 import { color, spacing, typography } from '../../../../theme';
 
 interface Style {
   container: ViewStyle;
-  avatarStyle: ImageStyle;
   title: TextStyle;
   statsContainer: ViewStyle;
   rightContainer: ViewStyle;
@@ -33,13 +31,9 @@ export const styles = StyleSheet.create<Style>({
   },
   rightContainer: {
     marginRight: spacing.extraLarge,
+    marginLeft: spacing.large,
   },
-  avatarStyle: {
-    width: 80,
-    height: 80,
-    borderRadius: 50,
-    marginRight: spacing.large,
-  },
+
   title: {
     ...typography.title3Bold,
     color: color.textSecondary,

@@ -32,13 +32,14 @@ export interface ProfileState {
   isUploadingProfilePicture: boolean;
   scheduledDates: string[];
   bio?: string;
-  likes: number;
+  saves: number;
   appointmentsCount: number;
   rating: number;
   isFetching: boolean;
   localProgramEntries: Record<string, ArtistProgramEntry>;
   programEntriesByDate: string[];
   birthDate?: string;
+  hasSetup: boolean;
 }
 
 export interface NotificationState {

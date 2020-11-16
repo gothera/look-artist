@@ -22,7 +22,7 @@
   "dependencies": {
     "@react-native-community/checkbox": "0.4.2",
     "axios": "0.19.1",
-    "formik": "2.1.5",
+    "formik": "2.2.5",
     "patch-package": "6.2.2",
     "postinstall-postinstall": "2.1.0",
     "react": "16.13.1",

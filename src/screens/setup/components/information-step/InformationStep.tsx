@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, ScrollView } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { styles } from './styles';
 import strings from '../../../../res/strings/strings';
 import TextInputWithLabel from '../../../../components/input/TextInputWithLabel';
@@ -7,12 +7,11 @@ import PlaceholderInput from '../../../../components/input/placeholder-input/Pla
 import { showSelectDateModal } from '../../../../navigation';
 import { formatDateToDDMMYYY } from '../../../../utils/date.utils';
 import PrimaryButton from '../../../../components/button/PrimaryButton';
+import { Formik } from 'formik';
 
 interface OwnProps {
   slideToNext: () => void;
-  firstName: string;
   setFirstName: (param: string) => void;
-  lastName: string;
   setLastName: (param: string) => void;
   birthdayDate: Date | undefined;
   setBirthdayDate: (param: Date) => void;
@@ -20,12 +19,10 @@ interface OwnProps {
 
 const InformationStep: React.FC<OwnProps> = ({
   slideToNext,
-  firstName,
   setFirstName,
-  lastName,
   setLastName,
-  birthdayDate,
   setBirthdayDate,
+  birthdayDate,
 }) => {
   const onBirthdaySelect = () => {
     showSelectDateModal({
@@ -36,53 +33,54 @@ const InformationStep: React.FC<OwnProps> = ({
   };
 
   return (
-    <>
-      <ScrollView
-        style={styles.scroll}
-        contentContainerStyle={styles.scrollContainer}
-        keyboardShouldPersistTaps="always"
-      >
-        <Text style={styles.title}>
-          {strings.screen.setup.information.title}
-        </Text>
-        <Text style={styles.description}>
-          {strings.screen.setup.information.description}
-        </Text>
-        <TextInputWithLabel
-          label={strings.screen.setup.information.firstNameLabel}
-          text={firstName}
-          setText={setFirstName}
-          placeholder={strings.screen.setup.information.firstNamePlaceholder}
-          containerStyle={styles.fNameContainer}
-          keyboardType="default"
-        />
-        <TextInputWithLabel
-          label={strings.screen.setup.information.lastNameLabel}
-          text={lastName}
-          setText={setLastName}
-          placeholder={strings.screen.setup.information.lastNamePlaceholder}
-          containerStyle={styles.fNameContainer}
-          keyboardType="default"
-        />
-        <PlaceholderInput
-          label={strings.screen.setup.information.birthdayLabel}
-          placeholder={strings.screen.setup.information.birthdayPlaceholder}
-          containerStyle={styles.birthdayContainer}
-          text={birthdayDate && formatDateToDDMMYYY(birthdayDate)}
-          onPress={onBirthdaySelect}
-        />
-      </ScrollView>
-
-      <View style={styles.btnContainer}>
-        <PrimaryButton
-          title="Continue"
-          onPress={slideToNext}
-          isDisabled={
-            firstName === '' || lastName === '' || birthdayDate === undefined
-          }
-        />
-      </View>
-    </>
+    <Formik
+      initialValues={{ firstName: '', lastName: '' }}
+      onSubmit={(values) => {
+        setFirstName(values.firstName);
+        setLastName(values.lastName);
+        slideToNext();
+      }}
+    >
+      {({ handleChange, handleSubmit, values }) => (
+        <>
+          <ScrollView style={styles.container}>
+            <TextInputWithLabel
+              setText={handleChange('firstName')}
+              text={values.firstName}
+              label={strings.screen.setup.information.firstNameLabel}
+              placeholder={
+                strings.screen.setup.information.firstNamePlaceholder
+              }
+            />
+            <TextInputWithLabel
+              setText={handleChange('lastName')}
+              text={values.lastName}
+              label={strings.screen.setup.information.lastNameLabel}
+              placeholder={strings.screen.setup.information.lastNamePlaceholder}
+              containerStyle={styles.elementMarginTop}
+            />
+            <PlaceholderInput
+              label={strings.screen.setup.information.birthdayLabel}
+              placeholder={strings.screen.setup.information.birthdayPlaceholder}
+              containerStyle={styles.elementMarginTop}
+              text={birthdayDate && formatDateToDDMMYYY(birthdayDate)}
+              onPress={onBirthdaySelect}
+            />
+          </ScrollView>
+          <View style={styles.continueBtnContainer}>
+            <PrimaryButton
+              onPress={handleSubmit}
+              title={strings.action.continue}
+              isDisabled={
+                values.firstName === '' ||
+                values.lastName === '' ||
+                birthdayDate === undefined
+              }
+            />
+          </View>
+        </>
+      )}
+    </Formik>
   );
 };
 

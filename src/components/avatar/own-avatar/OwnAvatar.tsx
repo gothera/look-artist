@@ -26,7 +26,10 @@ const OwnAvatar: React.FC<OwnProps & PropsFromRedux> = ({
 }) => {
   const imageSrc = photoUrl
     ? { uri: photoUrl }
-    : { uri: 'https://unsplash.it/400/400?image=1' };
+    : {
+        uri:
+          'https://i.pinimg.com/originals/e3/eb/0a/e3eb0af2a2dff64cc6e48cd89780ce5b.jpg',
+      };
   return (
     <FastImage
       source={imageSrc}

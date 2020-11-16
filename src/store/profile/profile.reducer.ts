@@ -2,7 +2,10 @@ import { addArrayToDictByProp } from '../../utils/global';
 import initialState from '../initialState';
 import { ProfileState, TAction } from '../store.types';
 import * as profileConstants from './profile.constants';
-import { ADD_APPOINTMENT_REQUEST } from '../appointment/appointment.constants';
+import {
+  ADD_APPOINTMENT_REQUEST,
+  FETCH_APPOINTMENTS_OF_DAY_SUCCESS,
+} from '../appointment/appointment.constants';
 
 function getInitialState() {
   return Object.assign({}, initialState.profile);
@@ -100,6 +103,7 @@ function profileReducer(
         bio: action.payload.bio,
         artistId: action.payload.id,
         birthDate: action.payload.birthDate,
+        hasSetup: true,
       };
     }
     case profileConstants.CHANGE_PROFILE_PICTURE_REQUEST: {
@@ -133,7 +137,7 @@ function profileReducer(
         phoneNumber: action.payload.profile.phone,
         profilePicture: action.payload.profile.profilePicture,
         bio: action.payload.profile.bio,
-        likes: action.payload.profile.likes,
+        saves: action.payload.profile.saves,
         rating: action.payload.profile.rating,
         appointmentsCount: action.payload.profile.appointmentsCount,
         scheduledDates: action.payload.profile.scheduledDates,
@@ -147,6 +151,7 @@ function profileReducer(
         programEntriesByDate: action.payload.profile.programEntries.map(
           (entry) => entry.date,
         ),
+        hasSetup: action.payload.profile.hasSetup,
       };
     }
 
@@ -202,6 +207,17 @@ function profileReducer(
         ...state,
         appointmentsCount: state.appointmentsCount + 1,
       };
+
+    case FETCH_APPOINTMENTS_OF_DAY_SUCCESS: {
+      const { appointments, date } = action.payload;
+      return {
+        ...state,
+        scheduledDates:
+          appointments.length > 1
+            ? [...new Set([...state.scheduledDates, date])]
+            : state.scheduledDates,
+      };
+    }
 
     default:
       return state;

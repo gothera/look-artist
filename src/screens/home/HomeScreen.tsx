@@ -4,6 +4,7 @@ import AppointmentsList from './components/appointments-list/AppointmentsList';
 import CalendarHeader from './components/calendar-header/CalendarHeader';
 import { styles } from './styles';
 import { useNavigationListeners } from '../../hooks/useNavigationListeners';
+import { useHomeEntered } from '../../hooks';
 
 interface OwnProps {
   componentId: string;
@@ -11,6 +12,7 @@ interface OwnProps {
 
 const HomeScreen: React.FC<OwnProps> = ({ componentId }) => {
   useNavigationListeners();
+  useHomeEntered();
 
   const dateNow = new Date().toISOString().split('T')[0];
   const [selectedDate, setSelectedDate] = useState(dateNow);

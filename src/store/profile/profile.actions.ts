@@ -16,7 +16,7 @@ import {
 } from '../../services/api/api.types';
 import * as AuthService from '../../services/api/AuthService';
 import * as ProfileService from '../../services/api/ProfileService';
-import { ArtistProgramEntry, ArtistResponseApi } from '../../types/globalTypes';
+import { ArtistResponseApi } from '../../types/globalTypes';
 import { ThunkResult } from '../store.types';
 import * as profileConstants from './profile.constants';
 import * as profileTypes from './profile.types';
@@ -269,6 +269,7 @@ export const changeProfilePictureFailure = (): profileTypes.ChangeProfilePicture
 export const changeProfilePicture = (
   formData: FormData,
   onSuccess?: () => void,
+  onRequestFinished?: () => void,
 ): ThunkResult<void> => {
   return async function (dispatch, getState) {
     dispatch(changeProfilePictureRequest());
@@ -284,10 +285,12 @@ export const changeProfilePicture = (
         /**
          * Callback onSuccess
          */
+        onRequestFinished && onRequestFinished();
         onSuccess && onSuccess();
       })
       .catch((e) => {
         console.log('change picture failed', e);
+        onRequestFinished && onRequestFinished();
         dispatch(changeProfilePictureFailure());
       });
   };

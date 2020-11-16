@@ -10,11 +10,11 @@ import {
   ViewStyle,
 } from 'react-native';
 import PrimaryButton from '../../../components/button/PrimaryButton';
+import { BOTTOM_SPACE } from '../../../res/constants';
 import { Categories } from '../../../res/strings/categories';
 
 import { color, typography, spacing } from '../../../theme';
 import { Category } from '../../../types/enums';
-import strings from '../../../res/strings/strings';
 
 interface OwnProps {
   slideToNext: () => void;
@@ -95,10 +95,6 @@ const CategoryStep: React.FC<OwnProps> = ({
         contentContainerStyle={styles.scrollContainer}
         showsVerticalScrollIndicator={false}
       >
-        <Text style={styles.title}>{strings.screen.setup.category.title}</Text>
-        <Text style={styles.description}>
-          {strings.screen.setup.category.description}
-        </Text>
         <View style={styles.checksContainer}>
           <View style={styles.rowOption}>
             <CheckBox
@@ -209,13 +205,14 @@ const CategoryStep: React.FC<OwnProps> = ({
             </TouchableOpacity>
           </View>
         </View>
+      </ScrollView>
+      <View style={styles.continueBtn}>
         <PrimaryButton
-          containerStyle={styles.continueBtn}
           title="Continue"
           onPress={onContinuePress}
           isDisabled={isContinueDisabled}
         />
-      </ScrollView>
+      </View>
     </View>
   );
 };
@@ -236,7 +233,6 @@ interface Style {
 
 const styles = StyleSheet.create<Style>({
   container: {
-    marginTop: 40,
     flex: 1,
     width: '100%',
     paddingHorizontal: 20,
@@ -268,7 +264,10 @@ const styles = StyleSheet.create<Style>({
   },
   continueBtn: {
     position: 'absolute',
-    bottom: 50,
+    bottom: BOTTOM_SPACE,
+    left: 0,
+    right: 0,
+    paddingHorizontal: spacing.base,
   },
   textContainer: {
     width: '100%',

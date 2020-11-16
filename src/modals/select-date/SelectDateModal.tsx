@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { View, TouchableWithoutFeedback, BackHandler } from 'react-native';
+import {
+  View,
+  TouchableWithoutFeedback,
+  BackHandler,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import { styles } from './styles';
 import { Navigation } from 'react-native-navigation';
+import strings from '../../res/strings/strings';
 
 interface OwnProps {
   componentId: string;
@@ -38,15 +45,20 @@ const SelectDateModal: React.FC<OwnProps> = ({ componentId, onDateChange }) => {
   return (
     <TouchableWithoutFeedback onPress={close}>
       <View style={styles.background}>
-        <View style={styles.container}>
-          <DatePicker
-            date={date}
-            onDateChange={onDateChangeHandler}
-            mode="date"
-            locale="ro"
-            is24hourSource="locale"
-          />
-        </View>
+        <TouchableWithoutFeedback>
+          <View style={styles.container}>
+            <DatePicker
+              date={date}
+              onDateChange={onDateChangeHandler}
+              mode="date"
+              locale="ro"
+              is24hourSource="locale"
+            />
+            <TouchableOpacity style={styles.doneBtnContainer} onPress={close}>
+              <Text style={styles.doneBtnText}>{strings.action.done}</Text>
+            </TouchableOpacity>
+          </View>
+        </TouchableWithoutFeedback>
       </View>
     </TouchableWithoutFeedback>
   );

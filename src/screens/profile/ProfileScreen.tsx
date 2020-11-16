@@ -143,11 +143,11 @@ const ProfileScreen: React.FC<PropsFromRedux> = ({
     );
   };
 
-  const rednerTab1Item = ({ item, index }: { item: number; index: number }) => {
+  const renderTab1Item = ({ item, index }: { item: number; index: number }) => {
     return <Text>soon</Text>;
   };
 
-  const rednerTab2Item = ({ item, index }: { item: number; index: number }) => {
+  const renderTab2Item = ({ item, index }: { item: number; index: number }) => {
     return <ProfileServiceCard serviceId={item} />;
   };
 
@@ -188,13 +188,13 @@ const ProfileScreen: React.FC<PropsFromRedux> = ({
       case 'tab1':
         numCols = 2;
         data = postsById;
-        renderItem = rednerTab1Item;
+        renderItem = renderTab1Item;
         onEndReached = () => fetchArtistPosts(false);
         break;
       case 'tab2':
         numCols = 1;
         data = servicesById;
-        renderItem = rednerTab2Item;
+        renderItem = renderTab2Item;
         ListFooterComponent = (
           <OutlinedButton title={'Add Service'} onPress={onAddServicePress} />
         );

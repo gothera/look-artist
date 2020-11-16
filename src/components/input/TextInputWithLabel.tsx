@@ -66,7 +66,7 @@ const TextInputWithLabel: React.FC<OwnProps> = ({
       <TextInput
         ref={textInputRef}
         style={styles.input}
-        keyboardType={keyboardType || 'email-address'}
+        keyboardType={keyboardType || 'default'}
         maxLength={maxLengthUndefined ? undefined : 80}
         value={text}
         onChangeText={_onChangeText}
@@ -75,6 +75,7 @@ const TextInputWithLabel: React.FC<OwnProps> = ({
         placeholder={placeholder}
         numberOfLines={numOfLines}
         multiline={multiline}
+        placeholderTextColor={color.muted}
       />
       <LineDivider containerStyle={dividerStyle} />
     </View>
@@ -93,7 +94,7 @@ const styles = StyleSheet.create<Style>({
     width: '100%',
   },
   label: {
-    ...typography.subheadlineSemiBold,
+    ...typography.subheadline,
     color: color.textSecondary,
   },
   input: {

@@ -1,16 +1,16 @@
 import React, { useState, useRef } from 'react';
-import { StyleSheet, Text, View, ViewStyle, Platform } from 'react-native';
+import { StyleSheet, View, ViewStyle, Platform } from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import Swiper from 'react-native-swiper';
 import { typography, color } from '../../theme';
-import StepsIndicator from './components/StepsIndicator';
 import PhotoStep from './components/PhotoStep';
 import CategoryStep from './components/CategoryStep';
-import ServiceStep from './components/ServiceStep';
+import ServiceStep from './components/service-step/ServiceStep';
 import InformationStep from './components/information-step/InformationStep';
 import { Category } from '../../types/enums';
 import { setup } from '../../store/profile/profile.actions';
 import { connect, ConnectedProps } from 'react-redux';
+import SetupHeader from './components/setup-header/SetupHeader';
 
 const STATUS_BAR_HEIGHT = getStatusBarHeight();
 
@@ -34,6 +34,7 @@ const SetupScreen: React.FC<OwnProps & PropsFromRedux> = ({
   const swiperRef = useRef<Swiper>(null);
 
   const [firstName, setFirstName] = useState('');
+
   const [lastName, setLastName] = useState('');
 
   const [birthdayDate, setBirthdayDate] = useState<Date | undefined>(undefined);
@@ -43,12 +44,6 @@ const SetupScreen: React.FC<OwnProps & PropsFromRedux> = ({
   >(undefined);
 
   const [serviceName, setServiceName] = useState<string | undefined>(undefined);
-  const [description, setDescription] = useState('');
-  const [priceStr, setPriceStr] = useState('');
-  const [durationStr, setDurationStr] = useState('');
-
-  const isDoneFinalDisabled =
-    !serviceName || priceStr === '' || durationStr === '';
 
   const slideToNext = () => {
     if (step < 4) {
@@ -59,7 +54,11 @@ const SetupScreen: React.FC<OwnProps & PropsFromRedux> = ({
     }
   };
 
-  const onDoneSetup = () => {
+  const onDoneSetup = (
+    description: string,
+    priceStr: string,
+    durationStr: string,
+  ) => {
     setup(
       firstName,
       lastName,
@@ -74,14 +73,7 @@ const SetupScreen: React.FC<OwnProps & PropsFromRedux> = ({
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>{`Step ${step + 1}`}</Text>
-        <StepsIndicator
-          numOfSteps={4}
-          currentStep={step}
-          containerStyle={styles.stepsIndicatorContainer}
-        />
-      </View>
+      <SetupHeader step={step} />
       <Swiper
         ref={swiperRef}
         index={0}
@@ -92,12 +84,10 @@ const SetupScreen: React.FC<OwnProps & PropsFromRedux> = ({
         <View style={styles.swiperSlide}>
           <InformationStep
             slideToNext={slideToNext}
-            firstName={firstName}
             setFirstName={setFirstName}
-            lastName={lastName}
             setLastName={setLastName}
-            birthdayDate={birthdayDate}
             setBirthdayDate={setBirthdayDate}
+            birthdayDate={birthdayDate}
           />
         </View>
         <View style={styles.swiperSlide}>
@@ -114,15 +104,11 @@ const SetupScreen: React.FC<OwnProps & PropsFromRedux> = ({
           <ServiceStep
             serviceName={serviceName}
             setServiceName={setServiceName}
-            description={description}
-            setDescription={setDescription}
-            priceStr={priceStr}
-            setPriceStr={setPriceStr}
+            // setDescription={setDescription}
+            // setPriceStr={setPriceStr}
             onDone={onDoneSetup}
-            durationStr={durationStr}
-            setDurationStr={setDurationStr}
+            // setDurationStr={setDurationStr}
             category={selectedCategory}
-            isDoneDisabled={isDoneFinalDisabled}
           />
         </View>
       </Swiper>
@@ -142,17 +128,19 @@ const styles = StyleSheet.create<Style>({
   container: {
     flex: 1,
     paddingTop: STATUS_BAR_HEIGHT,
+    backgroundColor: color.background,
   },
   header: {
     marginTop: Platform.OS === 'ios' ? STATUS_BAR_HEIGHT : 0,
   },
   headerText: {
-    ...typography.largeTitleBold,
-    color: color.textPrimary,
+    ...typography.title1Bold,
+    color: color.textSecondary,
     marginLeft: 16,
   },
   stepsIndicatorContainer: {
     marginTop: 10,
+    paddingHorizontal: 8,
   },
   swiperSlide: {
     flex: 1,

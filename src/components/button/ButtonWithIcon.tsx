@@ -9,7 +9,6 @@ import {
   View,
 } from 'react-native';
 import { color, typography } from '../../theme';
-import { SVGProps } from '../../res/svg';
 
 interface OwnProps {
   containerStyle?: StyleProp<ViewStyle>;
@@ -28,6 +27,7 @@ const ButtonWithIcon: React.FC<OwnProps> = ({
     <TouchableOpacity
       style={[styles.container, containerStyle]}
       onPress={onPress}
+      disabled
     >
       <View style={styles.iconContainer}>{icon}</View>
       <Text style={styles.text}>{title}</Text>
@@ -49,11 +49,13 @@ const styles = StyleSheet.create<Style>({
     borderRadius: 12,
     backgroundColor: color.textInverted,
     borderWidth: 0.5,
-    borderColor: color.textPrimary,
+    // borderColor: color.textPrimary,
+    borderColor: color.muted,
   },
   text: {
     ...typography.button,
-    color: color.textPrimary,
+    // color: color.textPrimary,
+    color: color.muted,
     paddingBottom: 13,
     paddingTop: 14,
     textAlign: 'center',
@@ -65,6 +67,7 @@ const styles = StyleSheet.create<Style>({
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: 20,
+    opacity: 0.2,
   },
 });
 

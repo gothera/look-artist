@@ -59,6 +59,7 @@ const LoginContent: React.FC<OwnProps & PropsFromRedux> = ({
         containerStyle={styles.emailTextInput}
         label="Email address"
         placeholder={'Enter email address'}
+        keyboardType={'email-address'}
       />
       <PasswordInputWithLabel
         containerStyle={styles.passwordInput}
@@ -120,7 +121,7 @@ const styles = StyleSheet.create<Style>({
     color: color.textPrimary,
   },
   headerDescription: {
-    ...typography.headerDescription,
+    ...typography.subheadlineRegular,
     color: color.muted,
     marginTop: 10,
   },

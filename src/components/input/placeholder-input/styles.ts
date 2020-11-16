@@ -10,7 +10,7 @@ interface Style {
 
 export const styles = StyleSheet.create<Style>({
   label: {
-    ...typography.subheadlineSemiBold,
+    ...typography.subheadline,
     color: color.textSecondary,
   },
   input: {
