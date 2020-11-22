@@ -32,6 +32,7 @@ interface Route {
   key: string;
   title: string;
 }
+
 const mapStateToProps = (state: StoreState) => {
   return {
     postsById: state.post.postsById,
