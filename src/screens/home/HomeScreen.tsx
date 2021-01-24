@@ -11,7 +11,7 @@ interface OwnProps {
 }
 
 const HomeScreen: React.FC<OwnProps> = ({ componentId }) => {
-  useNavigationListeners();
+  useNavigationListeners(componentId);
   useHomeEntered();
 
   const dateNow = new Date().toISOString().split('T')[0];

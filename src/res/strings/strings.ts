@@ -68,7 +68,7 @@ const strings = {
     },
     addPost: {
       title: 'Add Post',
-      description: 'Select multiple photos for your post',
+      description: 'Select photo(s) for your post',
     },
   },
 

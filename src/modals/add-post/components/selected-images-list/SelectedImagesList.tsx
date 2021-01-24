@@ -1,24 +1,18 @@
-import React, { useState, useRef, RefObject, useImperativeHandle } from 'react';
-import { View, Text, FlatList, TextInput } from 'react-native';
+import React from 'react';
+import { View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { styles } from './styles';
-import TextInputWithLabel from '../../../../components/input/TextInputWithLabel';
-import LineDivider from '../../../../components/ui/LineDivider';
 import { KeyboardAwareFlatList } from 'react-native-keyboard-aware-scroll-view';
-import { TextInputRef } from '../../../../types/refTypes';
 
 interface OwnProps {
   imagesPath: string[];
-  passedRef: RefObject<TextInputRef>;
+  ListFooterComponent?: React.ComponentType<any> | React.ReactElement | null;
 }
 
-const SelectedImagesList: React.FC<OwnProps> = ({ imagesPath, passedRef }) => {
-  const descInputRef = useRef<TextInput>(null);
-
-  useImperativeHandle(passedRef, () => ({ getValue }));
-
-  const getValue = () => descInputRef.current?.props.value || '';
-
+const SelectedImagesList: React.FC<OwnProps> = ({
+  imagesPath,
+  ListFooterComponent,
+}) => {
   const renderImage = ({ item }: { item: string; index: number }) => {
     return (
       <View style={styles.listItemContainer}>
@@ -26,21 +20,6 @@ const SelectedImagesList: React.FC<OwnProps> = ({ imagesPath, passedRef }) => {
       </View>
     );
   };
-
-  const renderListFooter = () => (
-    <View style={styles.descriptionContainer}>
-      <Text style={styles.descriptionLabel}>Description</Text>
-      <TextInput
-        ref={descInputRef}
-        style={styles.descriptionInput}
-        multiline
-        placeholder={'Enter post description'}
-        // onChangeText={setDescription}
-        // value={description}
-      />
-      <LineDivider />
-    </View>
-  );
 
   return (
     <KeyboardAwareFlatList
@@ -50,7 +29,7 @@ const SelectedImagesList: React.FC<OwnProps> = ({ imagesPath, passedRef }) => {
       horizontal={false}
       contentContainerStyle={styles.listContentContainer}
       keyExtractor={(item: string, index: number) => `image-${item}-${index}`}
-      ListFooterComponent={renderListFooter}
+      ListFooterComponent={ListFooterComponent}
       extraHeight={300}
     />
   );

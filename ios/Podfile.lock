@@ -307,12 +307,12 @@ PODS:
     - React-Core (= 0.63.2)
     - React-cxxreact (= 0.63.2)
     - React-jsi (= 0.63.2)
-  - ReactNativeNavigation (7.3.0):
+  - ReactNativeNavigation (7.8.4):
     - React-Core
     - React-RCTImage
     - React-RCTText
-    - ReactNativeNavigation/Core (= 7.3.0)
-  - ReactNativeNavigation/Core (7.3.0):
+    - ReactNativeNavigation/Core (= 7.8.4)
+  - ReactNativeNavigation/Core (7.8.4):
     - React-Core
     - React-RCTImage
     - React-RCTText
@@ -341,9 +341,9 @@ PODS:
     - React-Core
   - RNSVG (12.1.0):
     - React
-  - SDWebImage (5.10.2):
-    - SDWebImage/Core (= 5.10.2)
-  - SDWebImage/Core (5.10.2)
+  - SDWebImage (5.10.3):
+    - SDWebImage/Core (= 5.10.3)
+  - SDWebImage/Core (5.10.3)
   - SDWebImageWebPCoder (0.6.1):
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.7)
@@ -543,7 +543,7 @@ SPEC CHECKSUMS:
   React-RCTText: 1b6773e776e4b33f90468c20fe3b16ca3e224bb8
   React-RCTVibration: 4d2e726957f4087449739b595f107c0d4b6c2d2d
   ReactCommon: a0a1edbebcac5e91338371b72ffc66aa822792ce
-  ReactNativeNavigation: c2dcda2b86e32090c443182206c915107d03106f
+  ReactNativeNavigation: f32d9ba91d2a88e182b23ecabdee73d7a5ee74d1
   rn-fetch-blob: f065bb7ab7fb48dd002629f8bdcb0336602d3cba
   RNCCheckbox: 357578d3b42652c78ee9a1bb9bcfc3195af6e161
   RNFastImage: e19ba191922e7dab9d932a4d59d62d76660aa222
@@ -552,7 +552,7 @@ SPEC CHECKSUMS:
   RNKeychain: db956c02a018f7dd3a0ea8a6cf3087bc1894bf2b
   RNReanimated: e03f7425cb7a38dcf1b644d680d1bfc91c3337ad
   RNSVG: ce9d996113475209013317e48b05c21ee988d42e
-  SDWebImage: b969dcfc02c40a5da71eac0b03b8f1a0c794a86f
+  SDWebImage: e378178472b735e84b007bfb55514c97948a0598
   SDWebImageWebPCoder: d0dac55073088d24b2ac1b191a71a8f8d0adac21
   TOCropViewController: 3105367e808b7d3d886a74ff59bf4804e7d3ab38
   Yoga: 7740b94929bbacbddda59bf115b5317e9a161598

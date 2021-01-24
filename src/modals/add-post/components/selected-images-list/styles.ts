@@ -10,9 +10,6 @@ interface Style {
   listItemContainer: ViewStyle;
   footerContainer: ViewStyle;
   footerText: TextStyle;
-  descriptionContainer: ViewStyle;
-  descriptionInput: TextStyle;
-  descriptionLabel: TextStyle;
 }
 
 export const styles = StyleSheet.create<Style>({
@@ -40,19 +37,5 @@ export const styles = StyleSheet.create<Style>({
   footerContainer: {
     marginTop: spacing.large,
     alignItems: 'center',
-  },
-  descriptionContainer: {
-    marginTop: spacing.extraLarge,
-    paddingHorizontal: spacing.smaller,
-  },
-  descriptionInput: {
-    marginBottom: spacing.smaller,
-    ...typography.body,
-    color: color.textSecondary,
-  },
-  descriptionLabel: {
-    ...typography.subheadline,
-    color: color.textSecondary,
-    marginBottom: spacing.smaller,
   },
 });

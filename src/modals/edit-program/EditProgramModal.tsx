@@ -9,6 +9,7 @@ import {
   showEditWeeklyProgramModal,
   showEditDailyProgramModal,
 } from '../../navigation';
+import { color } from '../../theme';
 
 const LEFT_BUTTON_CLOSE = 'close-edit-program-modal';
 
@@ -23,6 +24,7 @@ const EditProgramModal: React.FC<OwnProps> = ({ componentId }) => {
         {
           id: LEFT_BUTTON_CLOSE,
           icon: require('../../res/images/icons/close-icon.png'),
+          color: color.textPrimary,
         },
       ],
     },

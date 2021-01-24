@@ -73,6 +73,7 @@ export const setLoggedInRoot = () => {
                   fontFamily: 'Gilroy-Medium',
                   fontSize: 10,
                   iconInsets: { bottom: 4 },
+                  selectTabOnPress: false,
                 },
                 topBar: {
                   visible: false,
