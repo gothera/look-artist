@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView } from 'react-native';
 import { styles } from './styles';
 import CalendarSelectDays from './components/calendar-select-days/CalendarSelectDays';
@@ -15,21 +15,29 @@ import strings from '../../res/strings/strings';
 import { connect, ConnectedProps } from 'react-redux';
 import { updateSpecificProgram } from '../../store/profile/profile.actions';
 import { Navigation } from 'react-native-navigation';
+import { State } from '../../store/store.types';
 
 interface OwnProps {
   componentId: string;
 }
 
+const mapStateToProps = (store: State) => {
+  return {
+    specificProgram: store.profile.localProgramEntries,
+  };
+};
+
 const mapDispatchToProps = {
   updateSpecificProgram,
 };
 
-const connector = connect(null, mapDispatchToProps);
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 const EditDailyProgramModal: React.FC<OwnProps & PropsFromRedux> = ({
   updateSpecificProgram,
+  specificProgram,
 }) => {
   const [selectedDates, setSelectedDates] = useState<SelectedDateCalendar>({});
   const selectedDatesArr = getSelectedDatesArrayFromCalendar(selectedDates);
@@ -37,6 +45,16 @@ const EditDailyProgramModal: React.FC<OwnProps & PropsFromRedux> = ({
     undefined,
   );
   const [endingHour, setEndingHour] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    if (selectedDatesArr.length !== 0 && !startingHour && !endingHour) {
+      setStartingHour(specificProgram[selectedDatesArr[0]]?.startTime);
+      setEndingHour(specificProgram[selectedDatesArr[0]]?.endTime);
+    } else if (selectedDatesArr.length === 0) {
+      setStartingHour(undefined);
+      setEndingHour(undefined);
+    }
+  }, [selectedDatesArr]);
 
   const setNewDaySelected = (date: string) => {
     if (!(date in selectedDates) || selectedDates[date].selected === false) {

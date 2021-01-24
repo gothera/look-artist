@@ -148,6 +148,7 @@ function profileReducer(
             'date',
           ),
         },
+        defaultProgram: action.payload.profile.defaultProgram,
         programEntriesByDate: action.payload.profile.programEntries.map(
           (entry) => entry.date,
         ),

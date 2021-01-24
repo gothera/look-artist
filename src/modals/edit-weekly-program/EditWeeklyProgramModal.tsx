@@ -11,21 +11,29 @@ import { Navigation } from 'react-native-navigation';
 import { isEndingAfterStartingHour } from '../../utils/global';
 import ErrorText from '../../components/errors/error-text/ErrorText';
 import strings from '../../res/strings/strings';
+import { State } from '../../store/store.types';
 
 interface OwnProps {
   componentId: string;
 }
 
+const mapStateToProps = (state: State) => {
+  return {
+    defaultProgram: state.profile.defaultProgram,
+  };
+};
+
 const mapDispatchToProps = {
   updateDefaultProgram,
 };
 
-const connector = connect(null, mapDispatchToProps);
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 const EditWeeklyProgramModal: React.FC<OwnProps & PropsFromRedux> = ({
   updateDefaultProgram,
+  defaultProgram,
 }) => {
   const [selectedDays, setSelectedDays] = useState<DaysAbbreviation[]>([]);
   const [showIntervals, setShowIntervals] = useState(false);
@@ -41,6 +49,17 @@ const EditWeeklyProgramModal: React.FC<OwnProps & PropsFromRedux> = ({
     }
     if (selectedDays.length === 0 && showIntervals === true) {
       setShowIntervals(false);
+      setEndingHour(undefined);
+      setStartingHour(undefined);
+    }
+    const program = defaultProgram.find(
+      (pr) => pr.day === selectedDays[0]?.valueOf(),
+    );
+
+    if (selectedDays.length === 1 && program) {
+      const { startTime, endTime } = program;
+      setStartingHour(startTime.substr(0, 5));
+      setEndingHour(endTime.substr(0, 5));
     }
   }, [selectedDays]);
 

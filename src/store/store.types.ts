@@ -2,6 +2,7 @@ import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import {
   Appointment,
   ArtistProgramEntry,
+  DefaultProgramEntry,
   Notification,
   OfferedService,
   Post,
@@ -40,6 +41,7 @@ export interface ProfileState {
   programEntriesByDate: string[];
   birthDate?: string;
   hasSetup: boolean;
+  defaultProgram: DefaultProgramEntry[];
 }
 
 export interface NotificationState {

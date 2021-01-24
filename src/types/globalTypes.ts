@@ -54,6 +54,12 @@ export interface Post {
   artistId: number;
 }
 
+export interface DefaultProgramEntry {
+  startTime: string;
+  endTime: string;
+  day: number;
+}
+
 export interface ArtistResponseApi {
   id: number;
   firstName: string;
@@ -71,6 +77,7 @@ export interface ArtistResponseApi {
   programEntries: ArtistProgramEntry[];
   birthDate: string;
   hasSetup: boolean;
+  defaultProgram: DefaultProgramEntry[];
 }
 
 export interface Appointment {

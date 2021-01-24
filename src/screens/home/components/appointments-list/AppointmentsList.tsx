@@ -93,7 +93,7 @@ const AppointmentsList: React.FC<OwnProps & PropsFromRedux> = ({
       refreshControl={renderRefreshControl}
       keyExtractor={keyExtractor}
       ListEmptyComponent={
-        isPreviousDate && !isToday ? (
+        isLoading ? null : isPreviousDate && !isToday ? (
           <EmptyPreviousAppointments date={date} />
         ) : (
           <SetDayProgram date={date} />
