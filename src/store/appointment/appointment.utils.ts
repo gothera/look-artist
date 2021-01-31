@@ -1,4 +1,5 @@
 import { AppointmentResponse } from '../../services/api/api.types';
+import { Currency } from '../../types/enums';
 import { Appointment } from '../../types/globalTypes';
 
 /**
@@ -17,10 +18,10 @@ export const normalizeAppointment = (
     photo: appointmentResponse.photo,
     serviceName: appointmentResponse.serviceName,
     date: appointmentResponse.date,
-    startingTime: appointmentResponse.startingTime.substring(0, 5), // '20:00:00' to '20:00'
-    endingTime: appointmentResponse.endingTime.substring(0, 5),
+    startingTime: appointmentResponse.startingTime?.substring(0, 5), // '20:00:00' to '20:00'
+    endingTime: appointmentResponse.endingTime?.substring(0, 5),
     cost: appointmentResponse.cost,
-    currency: appointmentResponse.currency,
+    currency: Currency.RON,
     type: appointmentResponse.type,
   };
   return normalizedAppointment;

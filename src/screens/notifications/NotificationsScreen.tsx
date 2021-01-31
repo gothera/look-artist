@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { FlatListProps, Text, View } from 'react-native';
+import { useNavigationBottomTabSelect } from 'react-native-navigation-hooks/dist/hooks';
 import { connect, ConnectedProps } from 'react-redux';
+import LineDivider from '../../components/ui/LineDivider';
 import ScreenFlatList from '../../containers/screen/ScreenFlatList';
 import { fetchNotifications } from '../../store/notification/notification.actions';
 import { AsyncDispatch, StoreState } from '../../store/store.types';
@@ -26,35 +28,27 @@ const NotificationsScreen: React.FC<PropsFromRedux> = ({
   notificationsById,
   fetchMoreNotifcations,
 }) => {
-  useEffect(() => {
-    fetchMoreNotifcations(true);
-  }, []);
+  useNavigationBottomTabSelect((e) => {
+    if (e.selectedTabIndex === 2) {
+      fetchMoreNotifcations(true);
+    }
+  });
+
   const renderItem = ({ item }: { item: number; index: number }) => {
     return <NotificationRow id={item} />;
   };
 
   const flatListProps: FlatListProps<any> = {
-    data: [],
+    data: notificationsById,
     keyExtractor: (item) => `Notification$${item}`,
     renderItem: renderItem,
     onEndReached: () => {
-      console.log('bam end');
       fetchMoreNotifcations(notificationsById.length === 0);
     },
     onEndReachedThreshold: 0.3,
     contentContainerStyle: { paddingHorizontal: 16 },
-    ListEmptyComponent: (
-      <View
-        style={{
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <Text>Available soon</Text>
-      </View>
-    ),
     style: { flex: 1 },
+    ItemSeparatorComponent: LineDivider,
   };
 
   return (

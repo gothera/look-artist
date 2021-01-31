@@ -24,9 +24,9 @@ export interface OfferedService {
 }
 
 export enum NotificationType {
-  NewAppointment,
-  CancelledAppointment,
-  Review,
+  CreateAppointment = 'CREATE_APPOINTMENT',
+  CancelAppointment = 'CANCEL_APPOINTMENT',
+  AddReview = 'ADD_REVIEW',
 }
 
 export enum AppointmentType {

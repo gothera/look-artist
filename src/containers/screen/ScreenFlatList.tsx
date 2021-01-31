@@ -39,6 +39,7 @@ const ScreenFlatList: React.FC<OwnPros> = ({ headerTitle, flatListProps }) => {
         onEndReached={flatListProps.onEndReached}
         ListHeaderComponent={flatListProps.ListHeaderComponent}
         ListEmptyComponent={flatListProps.ListEmptyComponent}
+        ItemSeparatorComponent={flatListProps.ItemSeparatorComponent}
       />
     </View>
   );
