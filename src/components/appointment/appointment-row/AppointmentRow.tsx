@@ -52,7 +52,8 @@ const AppointmentRow: React.FC<OwnProps & PropsFromRedux> = ({
   appointmentIdStr,
   date,
 }) => {
-  const intervalStr = startingTime.substr(0, 5) + '-' + endingTime.substr(0, 5);
+  const intervalStr =
+    startingTime?.substr(0, 5) + '-' + endingTime?.substr(0, 5);
 
   const goToAppointmentDetailsModal = () => {
     showAppointmentDetailsModal({
