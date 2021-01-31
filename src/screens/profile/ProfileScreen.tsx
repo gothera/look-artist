@@ -23,6 +23,7 @@ import { color } from '../../theme';
 import strings from '../../res/strings/strings';
 import OutlinedButton from '../../components/button/outlined-button/OutlinedButton';
 import { showAddServiceModal } from '../../navigation';
+import { useNavigationBottomTabSelect } from 'react-native-navigation-hooks/dist/hooks';
 
 const HeaderHeight = 220;
 
@@ -78,6 +79,12 @@ const ProfileScreen: React.FC<PropsFromRedux> = ({
       scrollY.removeAllListeners();
     };
   }, [routes, tabIndex]);
+
+  useNavigationBottomTabSelect((e) => {
+    if (e.selectedTabIndex === 3) {
+      fetchArtistPosts(true);
+    }
+  });
 
   const syncScrollOffset = () => {
     const curRouteKey = routes[tabIndex].key;
