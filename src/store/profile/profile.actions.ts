@@ -331,8 +331,8 @@ export const fetchProfile = (token?: string): ThunkResult<void> => {
         dispatch(fetchProfileSuccess(response));
       })
       .catch((error) => {
-        dispatch(setupFailure());
-        console.log('Setup Failure', error);
+        dispatch(fetchProfileFailure());
+        console.log('fetch profile failure', error);
       });
   };
 };
