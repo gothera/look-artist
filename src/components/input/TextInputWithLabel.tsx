@@ -94,7 +94,7 @@ const styles = StyleSheet.create<Style>({
     width: '100%',
   },
   label: {
-    ...typography.subheadline,
+    ...typography.subheadlineSemiBold,
     color: color.textSecondary,
   },
   input: {

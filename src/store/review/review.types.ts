@@ -1,3 +1,4 @@
+import { ArtistReviewsSummarization } from '../../services/api/api.types';
 import { Review } from '../../types/globalTypes';
 import * as reviewConstants from './review.constants';
 
@@ -7,7 +8,11 @@ export interface InvalidateStoreAction {
 
 export interface fetchArtistReviewsSuccess {
   type: typeof reviewConstants.FETCH_ARTIST_REVIEWS_SUCCESS;
-  payload: { reviews: Review[]; last: boolean };
+  payload: {
+    reviews: Review[];
+    last: boolean;
+    summarization?: ArtistReviewsSummarization;
+  };
 }
 
 export interface fetchArtistReviewsRequest {

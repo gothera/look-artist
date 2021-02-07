@@ -10,3 +10,4 @@ export { default as AlertTextModal } from './alert-text/AlertTextModal';
 export { default as AddPostModal } from './add-post/AddPostModal';
 export { default as SelectDateModal } from './select-date/SelectDateModal';
 export { default as AddServiceModal } from './add-service/AddServiceModal';
+export { default as PostModal } from './post/PostModal';

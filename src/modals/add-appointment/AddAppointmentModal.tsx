@@ -10,6 +10,7 @@ import { showSelectTimeModal } from '../../navigation';
 import { addAppointment } from '../../store/appointment/appointment.actions';
 import { selectServices } from '../../store/offeredService/offeredService.selectors';
 import { AsyncDispatch, StoreState } from '../../store/store.types';
+import { color } from '../../theme';
 import { Currency } from '../../types/enums';
 import { Appointment, AppointmentType } from '../../types/globalTypes';
 import { styles } from './styles';
@@ -61,6 +62,7 @@ const AddAppointmentModal: React.FC<OwnProps & PropsFromRedux> = ({
         {
           id: LEFT_BUTTON_CLOSE,
           icon: require('../../res/images/icons/close-icon.png'),
+          color: color.textPrimary,
         },
       ],
     },

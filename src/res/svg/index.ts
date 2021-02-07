@@ -5,3 +5,4 @@ export * from './profile';
 export * from './social';
 export * from './svg-props';
 export * from './touchable';
+export * from './info';

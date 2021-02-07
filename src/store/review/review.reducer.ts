@@ -30,6 +30,7 @@ function profileReducer(
       };
     }
     case reviewConstants.FETCH_ARTIST_REVIEWS_SUCCESS: {
+      const { summarization } = action.payload;
       return {
         ...state,
         isFetching: false,
@@ -44,6 +45,7 @@ function profileReducer(
         },
         nextPage: state.nextPage + 1,
         hasNext: !action.payload.last,
+        summarization: summarization || state.summarization,
       };
     }
     case reviewConstants.FETCH_ARTIST_REVIEWS_FAILURE: {

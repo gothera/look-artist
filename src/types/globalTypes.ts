@@ -1,3 +1,4 @@
+import { PostApi, ReviewApi } from '../services/api/api.types';
 import { Category, Currency } from './enums';
 
 export interface ImagePickerResponse {
@@ -47,12 +48,7 @@ export interface ArtistProgramEntry {
   endTime: string;
 }
 
-export interface Post {
-  id: number;
-  description: string;
-  pictures: string[];
-  artistId: number;
-}
+export interface Post extends PostApi {}
 
 export interface DefaultProgramEntry {
   startTime: string;
@@ -118,19 +114,19 @@ declare global {
 
 export type RequestStatus = 'loading' | 'success' | 'failure';
 
-export interface Review {
-  id: number;
-  artistId: number;
-  clientId: number;
-  name: string;
-  avatar: string;
-  rating: number;
-  description: string;
-  date: string;
-}
+export interface Review extends ReviewApi {}
+
 export interface SelectedDateCalendar {
   [date: string]: {
     selected: boolean;
     selectedColor: string;
   };
+}
+
+export interface ArtistData {
+  artistPicture: string;
+  rating: number;
+  name: string;
+  reviewsCount: number;
+  category: Category;
 }

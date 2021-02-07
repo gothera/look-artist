@@ -1,3 +1,4 @@
+import { ArtistReviewsResponse } from '../../services/api/api.types';
 import * as ReviewService from '../../services/api/ReviewService';
 import { Page, Review } from '../../types/globalTypes';
 import { ThunkResult } from '../store.types';
@@ -14,11 +15,15 @@ const fetchArtistReviewsRequest = (
 };
 
 const fetchArtistReviewsSuccess = (
-  response: Page<Review>,
+  response: ArtistReviewsResponse,
 ): reviewTypes.fetchArtistReviewsSuccess => {
   return {
     type: postConstants.FETCH_ARTIST_REVIEWS_SUCCESS,
-    payload: { reviews: response.content, last: response.last },
+    payload: {
+      reviews: response.content,
+      last: response.last,
+      summarization: response.summarization,
+    },
   };
 };
 
@@ -41,7 +46,7 @@ export const fetchArtistReviews = (first: boolean): ThunkResult<void> => {
     const page = first ? 0 : getState().post.nextPage;
     const artistId = getState().profile.artistId;
     return ReviewService.fetchReviewsOfArtists(artistId || 0, page)
-      .then((response: Page<Review>) => {
+      .then((response: ArtistReviewsResponse) => {
         dispatch(fetchArtistReviewsSuccess(response));
       })
       .catch(() => {

@@ -38,6 +38,7 @@ const CalendarSelectDays: React.FC<OwnProps> = ({
         textDayFontSize: 15,
         textMonthFontFamily: 'Gilroy-Medium',
       }}
+      minDate={dateNow} // disable all previous days
     />
   );
 };

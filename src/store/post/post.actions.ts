@@ -1,3 +1,4 @@
+import { ArtistPostsResponse } from '../../services/api/api.types';
 import * as PostService from '../../services/api/PostService';
 import { Page, Post } from '../../types/globalTypes';
 import { ThunkResult } from '../store.types';
@@ -17,7 +18,7 @@ const fetchArtistPostsRequest = (
 };
 
 const fetchArtistPostsSuccess = (
-  response: Page<Post>,
+  response: ArtistPostsResponse,
 ): profileTypes.fetchArtistPostsSuccess => {
   return {
     type: postConstants.FETCH_ARTIST_POSTS_SUCCESS,
@@ -44,8 +45,13 @@ export const fetchArtistPosts = (first: boolean): ThunkResult<void> => {
 
     const page = getState().post.nextPage;
     const artistId = getState().profile.artistId;
-    return PostService.fetchPostsOfArtists(artistId || 0, page)
-      .then((response: Page<Post>) => {
+
+    if (artistId === undefined) {
+      return Promise.resolve();
+    }
+
+    return PostService.getArtistPosts(artistId, page)
+      .then((response) => {
         dispatch(fetchArtistPostsSuccess(response));
       })
       .catch(() => {

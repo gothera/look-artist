@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 import { StoreState } from '../store.types';
 
-const selectServicesById = (state: StoreState) =>
+export const selectServicesById = (state: StoreState) =>
   state.offeredService.offeredServicesById;
 
 const selectLocalServices = (state: StoreState) => state.offeredService.local;

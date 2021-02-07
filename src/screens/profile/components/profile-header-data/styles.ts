@@ -36,7 +36,7 @@ export const styles = StyleSheet.create<Style>({
 
   title: {
     ...typography.title3Bold,
-    color: color.textSecondary,
+    color: color.textPrimary,
   },
   statsContainer: {
     flexDirection: 'row',
@@ -61,7 +61,7 @@ export const styles = StyleSheet.create<Style>({
   },
   counterText: {
     ...typography.bodySemiBold,
-    color: color.textSecondary,
+    color: color.textPrimary,
     marginLeft: spacing.smallest,
   },
   divider: {
@@ -71,7 +71,7 @@ export const styles = StyleSheet.create<Style>({
   },
   bioText: {
     ...typography.textInputLabel,
-    color: color.textSecondary,
+    color: color.textPrimary,
     marginTop: spacing.small,
     lineHeight: spacing.larger,
   },
@@ -84,7 +84,7 @@ export const styles = StyleSheet.create<Style>({
   },
   categoryText: {
     ...typography.body,
-    color: color.textSecondary,
+    color: color.textPrimary,
     marginTop: spacing.smallest,
   },
   editBtnText: {

@@ -1,4 +1,8 @@
-import { AppointmentType, Notification } from '../../types/globalTypes';
+import {
+  AppointmentType,
+  ArtistData,
+  Notification,
+} from '../../types/globalTypes';
 import { DaysAbbreviation, Currency, Category } from '../../types/enums';
 
 export interface UserResponse {
@@ -88,4 +92,59 @@ export interface AddOfferedServiceApi {
   price: number;
   duration: number;
   currency: Currency;
+}
+
+export interface ReviewApi {
+  id: number;
+  artistId: number;
+  clientId: number;
+  name: string;
+  avatar: string;
+  rating: number;
+  description: string;
+  date: string;
+}
+
+export interface ArtistReviewsSummarization {
+  reviewsAverage: number;
+  reviewsCount: number;
+  numberOf1s: number;
+  numberOf2s: number;
+  numberOf3s: number;
+  numberOf4s: number;
+  numberOf5s: number;
+}
+
+export interface ArtistReviewsResponse {
+  content: ReviewApi[];
+  last: boolean;
+  number: number;
+  summarization: ArtistReviewsSummarization;
+}
+
+export interface ArtistPostsResponse {
+  content: PostApi[];
+  last: boolean;
+  number: number;
+}
+
+export interface PostApi {
+  id: number;
+  description: string;
+  pictures: string[];
+  artistId: number;
+  saves: number;
+  isSaved: boolean;
+  artistData: ArtistData;
+}
+
+export interface ReviewApi {
+  id: number;
+  artistId: number;
+  clientId: number;
+  name: string;
+  avatar: string;
+  rating: number;
+  description: string;
+  date: string;
 }

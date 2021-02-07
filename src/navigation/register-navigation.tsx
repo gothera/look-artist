@@ -20,6 +20,7 @@ import {
   EDIT_PROFILE_MODAL,
   SELECT_DATE_MODAL,
   ADD_SERVICE_MODAL,
+  POST_MODAL,
 } from './modal-constants';
 import {
   ADD_POST_SCREEN,
@@ -43,6 +44,7 @@ import {
   AddPostModal,
   SelectDateModal,
   AddServiceModal,
+  PostModal,
 } from '../modals';
 import {
   AddPostScreen,
@@ -144,6 +146,8 @@ const registerModals = () => {
   Navigation.registerComponent(ADD_SERVICE_MODAL, () =>
     WrappedComponent(AddServiceModal),
   );
+
+  Navigation.registerComponent(POST_MODAL, () => WrappedComponent(PostModal));
 };
 
 export async function initNavigationAsync() {

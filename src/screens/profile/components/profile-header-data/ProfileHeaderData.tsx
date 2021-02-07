@@ -52,7 +52,7 @@ const ProfileHeaderData: React.FC<PropsFromRedux> = ({ profile }) => {
             <View style={styles.metricContainer}>
               <View style={styles.counterContainer}>
                 <RatingStar
-                  stroke={color.textSecondary}
+                  stroke={color.textPrimary}
                   style={{ marginBottom: 5 }}
                 />
                 <Text style={styles.counterText}>
@@ -67,7 +67,7 @@ const ProfileHeaderData: React.FC<PropsFromRedux> = ({ profile }) => {
             <View style={styles.metricContainer}>
               <View style={styles.counterContainer}>
                 <LikesIcon
-                  stroke={color.textSecondary}
+                  stroke={color.textPrimary}
                   style={{ marginBottom: 2 }}
                 />
                 <Text style={styles.counterText}>{saves}</Text>
@@ -79,7 +79,7 @@ const ProfileHeaderData: React.FC<PropsFromRedux> = ({ profile }) => {
             <View style={styles.metricContainer}>
               <View style={styles.counterContainer}>
                 <AppointmentIcon
-                  stroke={color.textSecondary}
+                  stroke={color.textPrimary}
                   style={{ marginBottom: 3 }}
                 />
                 <Text style={styles.counterText}>{appointmentsCount}</Text>

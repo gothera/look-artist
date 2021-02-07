@@ -22,6 +22,7 @@ import PrimaryButton from '../../components/button/PrimaryButton';
 import TextEntry from '../../components/entry/text-entry/TextEntry';
 import { Category } from '../../types/enums';
 import { categoryEnumToStr, categoryStrToEnum } from '../../utils/global';
+import { color } from '../../theme';
 
 const LEFT_BUTTON_CLOSE = 'close-edit-profile-modal';
 
@@ -87,6 +88,7 @@ const EditProfileModal: React.FC<OwnProps & PropsFromRedux> = ({
         {
           id: LEFT_BUTTON_CLOSE,
           icon: require('../../res/images/icons/close-icon.png'),
+          color: color.textPrimary,
         },
       ],
     },
@@ -164,7 +166,7 @@ const EditProfileModal: React.FC<OwnProps & PropsFromRedux> = ({
             style={styles.chooseBtnContainer}
             onPress={openImagePicker}
           >
-            <Text>Choose profile picture</Text>
+            <Text style={styles.pictureText}>Choose profile picture</Text>
           </TouchableOpacity>
 
           <TextInputWithLabel

@@ -5,3 +5,5 @@ export const selectLocalPosts = (state: StoreState) => state.post.local;
 
 export const selectPostById = (id: number) =>
   createSelector([selectLocalPosts], (posts) => posts[id]);
+
+export const selectPostsById = (state: StoreState) => state.post.postsById;

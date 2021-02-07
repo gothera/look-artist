@@ -16,6 +16,7 @@ import {
   EDIT_PROFILE_MODAL,
   SELECT_DATE_MODAL,
   ADD_SERVICE_MODAL,
+  POST_MODAL,
 } from './modal-constants';
 import { Config, getConfig } from './utils-navigation';
 import { color } from '../theme';
@@ -362,6 +363,29 @@ export const showAddServiceModal = (pushConfig?: Config) => {
                   text: 'Add Service',
                   fontFamily: 'Gilroy-SemiBold',
                 },
+              },
+            },
+          },
+        },
+      ],
+    },
+  });
+};
+
+export const showPostModal = (pushConfig?: Config) => {
+  const config = getConfig(pushConfig);
+  Navigation.showModal({
+    stack: {
+      children: [
+        {
+          component: {
+            name: POST_MODAL,
+            passProps: { ...config.props },
+            options: {
+              modalPresentationStyle:
+                OptionsModalPresentationStyle.overCurrentContext,
+              topBar: {
+                visible: false,
               },
             },
           },

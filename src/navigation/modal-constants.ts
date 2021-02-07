@@ -11,3 +11,4 @@ export const ADD_POST_MODAL = 'look-artist.AddPostModal';
 export const EDIT_PROFILE_MODAL = 'look-artist.EditProfileModal';
 export const SELECT_DATE_MODAL = 'look-artist.SelectDateModal';
 export const ADD_SERVICE_MODAL = 'look-artist.AddServiceModal';
+export const POST_MODAL = 'look-artist.PostModal';

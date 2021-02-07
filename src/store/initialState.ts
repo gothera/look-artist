@@ -6,7 +6,7 @@ const initialState: StoreState = {
     localProgramEntries: {},
     programEntriesByDate: [],
     isUploadingProfilePicture: false,
-    likes: 0,
+    saves: 0,
     appointmentsCount: 0,
     scheduledDates: [],
     rating: 5,

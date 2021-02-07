@@ -1,12 +1,12 @@
-import { Page, Post } from '../../types/globalTypes';
+import { ArtistPostsResponse } from './api.types';
 import { getRequest, postRequest } from './apiRequest';
 
-export const fetchPostsOfArtists = (
+export const getArtistPosts = (
   artistId: number,
   page: number,
-): Promise<Page<Post>> => {
+): Promise<ArtistPostsResponse> => {
   const url = `post/artist/posts/${artistId}?page=${page}`;
-  return getRequest<Page<Post>>(url);
+  return getRequest<ArtistPostsResponse>(url);
 };
 
 export const addPost = (formData: FormData): Promise<any> => {

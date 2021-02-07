@@ -15,6 +15,7 @@ interface Style {
   saveContainer: ViewStyle;
   logoutContainer: ViewStyle;
   logoutText: TextStyle;
+  pictureText: TextStyle;
 }
 
 export const styles = StyleSheet.create<Style>({
@@ -72,5 +73,9 @@ export const styles = StyleSheet.create<Style>({
   },
   logoutText: {
     color: color.delete,
+  },
+  pictureText: {
+    ...typography.body,
+    color: color.textPrimary,
   },
 });

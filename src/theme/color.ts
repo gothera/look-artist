@@ -10,4 +10,5 @@ export const color = {
   success: '#00A26A',
   delete: '#D34848',
   highlight: '#F0F0F0',
+  alert: '#fdb827',
 };

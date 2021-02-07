@@ -16,6 +16,7 @@ import { ProfileAction } from './profile/profile.types';
 import { ReviewAction } from './review/review.types';
 import { OfferedServiceAction } from './offeredService/offeredService.types';
 import { Category } from '../types/enums';
+import { ArtistReviewsSummarization } from '../services/api/api.types';
 
 export type Primitive = undefined | null | boolean | string | number | Function;
 
@@ -84,6 +85,7 @@ export interface ReviewState {
   isFetching: boolean;
   reviewById: number[];
   local: Record<number, Review>;
+  summarization?: ArtistReviewsSummarization;
 }
 
 export interface State {
