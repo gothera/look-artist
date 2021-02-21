@@ -6,14 +6,10 @@ import FooterSaveAndClear from '../../components/footer/footer-save-and-clear/Fo
 import { StoreState } from '../../store/store.types';
 import { styles } from './styles';
 import PickerInput from '../../components/input/PickerInput';
-import {
-  getPickerServices,
-  categoryStrToEnum,
-  categoryEnumToStr,
-} from '../../utils/global';
+import { getPickerServices, categoryEnumToStr } from '../../utils/global';
 import TextInputWithLabel from '../../components/input/TextInputWithLabel';
 import { addService } from '../../store/offeredService/offeredService.actions';
-import { Category } from '../../types/enums';
+import { color } from '../../theme';
 
 const LEFT_BUTTON_CLOSE = 'close-add-appointment-modal';
 
@@ -44,6 +40,7 @@ const AddAppointmentModal: React.FC<OwnProps & PropsFromRedux> = ({
         {
           id: LEFT_BUTTON_CLOSE,
           icon: require('../../res/images/icons/close-icon.png'),
+          color: color.textPrimary,
         },
       ],
     },

@@ -1,10 +1,11 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, View, Text } from 'react-native';
 import { HPageViewHoc } from 'react-native-head-tab-view';
 import { useSelector } from 'react-redux';
 import ReviewEntry from '../../../../components/review/review-entry/ReviewEntry';
 import ReviewSummarization from '../../../../components/review/review-summarization/ReviewSummarization';
 import { selectReviews } from '../../../../store/review/review.selectors';
+import { typography } from '../../../../theme';
 import { Review } from '../../../../types/globalTypes';
 import { styles } from './styles';
 
@@ -31,6 +32,12 @@ const ArtistReviews: React.FC<Props> = ({ listProps }) => {
     );
   };
 
+  const emptyComponent = (
+    <View style={{ marginTop: 64, alignItems: 'center' }}>
+      <Text style={{ ...typography.bodyRegular }}>You have no reviews</Text>
+    </View>
+  );
+
   return (
     <HFlatList
       {...listProps}
@@ -46,6 +53,7 @@ const ArtistReviews: React.FC<Props> = ({ listProps }) => {
         )
       }
       ListHeaderComponentStyle={styles.headerContainer}
+      ListEmptyComponent={emptyComponent}
     />
   );
 };
