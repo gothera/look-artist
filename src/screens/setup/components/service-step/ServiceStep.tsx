@@ -46,7 +46,8 @@ const ServiceStep: React.FC<OwnProps> = ({
           <KeyboardAwareScrollView
             contentContainerStyle={styles.scrollContainer}
             showsVerticalScrollIndicator={false}
-            extraScrollHeight={50}
+            extraScrollHeight={100}
+            extraHeight={50}
           >
             <PickerInput
               label="Service Name"

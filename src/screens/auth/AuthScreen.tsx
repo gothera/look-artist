@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, TextStyle, View, ViewStyle } from 'react-native';
+import { Platform, StyleSheet, TextStyle, View, ViewStyle } from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import { connect, ConnectedProps } from 'react-redux';
 import { showLoadingModal } from '../../navigation';
@@ -85,7 +85,7 @@ interface Style {
 const styles = StyleSheet.create<Style>({
   container: {
     flex: 1,
-    paddingTop: STATUS_BAR_HEIGHT,
+    paddingTop: Platform.OS === 'ios' ? STATUS_BAR_HEIGHT : 0,
     backgroundColor: color.background,
   },
   text: {

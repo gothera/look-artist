@@ -29,6 +29,12 @@ const AddPostModal: React.FC<OwnProps & NavigationComponentProps> = ({
             color: color.textPrimary,
           },
         ],
+        background: {
+          color: color.background,
+        },
+        title: {
+          color: color.textPrimary,
+        },
       },
     });
   }, [componentId]);

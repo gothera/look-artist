@@ -5,7 +5,7 @@ import { Navigation } from 'react-native-navigation';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistor, store } from '../store';
-import { loginKeychain } from '../store/profile/profile.actions';
+import { login } from '../store/profile/profile.actions';
 import {
   ADD_APPOINTMENT_MODAL,
   APPOINTMENT_DETAILS_MODAL,
@@ -59,16 +59,18 @@ import { pushAuthScreen, setLoggedInRoot } from './screen-navigation';
 import EditProfileModal from '../modals/edit-profile/EditProfileModal';
 
 const WrappedComponent = (Component: React.ComponentType<any>) => {
-  return gestureHandlerRootHOC(
-    React.memo((props) => {
-      return (
-        <Provider store={store}>
-          <PersistGate persistor={persistor}>
-            <Component {...props} />
-          </PersistGate>
-        </Provider>
-      );
-    }),
+  return gestureHandlerRootHOC(reduxProvider(Component));
+};
+
+export const reduxProvider = (Component: React.ComponentType<any>) => (
+  props: any,
+) => {
+  return (
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <Component {...props} />
+      </PersistGate>
+    </Provider>
   );
 };
 
@@ -154,15 +156,11 @@ export async function initNavigationAsync() {
   registerScreens();
   Navigation.events().registerAppLaunchedListener(async () => {
     try {
-      const genericPassword = await getGenericPassword();
+      const credentials = await getGenericPassword();
 
-      const loggedIn = genericPassword && genericPassword.username === 'token';
-
-      // setLoggedInRoot();
-      // pushAuthScreen();
-
-      if (loggedIn) {
-        store.dispatch(loginKeychain((genericPassword as any).password));
+      if (credentials) {
+        // logged in
+        store.dispatch(login(credentials.username, credentials.password));
         /**
          * Screens with bottom navigation
          */

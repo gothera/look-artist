@@ -17,7 +17,6 @@ import { FacebookBtnIcon, GoogleBtnIcon, LogoOnHeader } from '../../../res/svg';
 import { login } from '../../../store/profile/profile.actions';
 import { AsyncDispatch } from '../../../store/store.types';
 import { color, typography, spacing } from '../../../theme';
-import { pushSetupScreen } from '../../../navigation';
 
 interface OwnProps {
   componentId: string;

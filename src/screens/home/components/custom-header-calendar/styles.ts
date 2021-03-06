@@ -1,4 +1,4 @@
-import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
+import { Platform, StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import { color, font, typography } from '../../../../theme';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import { ImageStyle } from 'react-native-fast-image';
@@ -26,6 +26,7 @@ const styles = StyleSheet.create<Style>({
     justifyContent: 'space-between',
     elevation: 3,
     paddingHorizontal: 16,
+    paddingTop: Platform.OS === 'android' ? 20 : 0,
   },
   leftRowContainer: {
     alignItems: 'center',

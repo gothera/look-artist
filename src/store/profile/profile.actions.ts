@@ -48,11 +48,7 @@ const loginFailure = (): profileTypes.LoginFailure => {
  * Used when pressing Login
  * API Call for login
  */
-export const login = (
-  email: string,
-  password: string,
-  isRegister?: boolean,
-): ThunkResult<void> => {
+export const login = (email: string, password: string): ThunkResult<void> => {
   return async function (dispatch, getState) {
     // if (getState().profile.isLogging) {
     //   return Promise.resolve();
@@ -62,14 +58,12 @@ export const login = (
 
     return AuthService.login(email, password)
       .then((response: LoginResponse) => {
-        dispatch(loginKeychain(response.accessToken));
+        setGenericPassword(email, password).then(() => {
+          dispatch(loginSuccess(response.accessToken));
+          dispatch(fetchProfile(response.accessToken));
+        });
       })
-      .then(() => {
-        if (!isRegister) {
-          // pushHomeScreen();
-          setLoggedInRoot();
-        }
-      })
+
       .catch((error) => {
         dispatch(loginFailure());
         console.log('Login error', error);
@@ -97,6 +91,7 @@ export const logout = (): ThunkResult<void> => {
 /**
  * Used after login request and on init navigation
  * Set login in keychain
+ * @deprecated
  */
 export const loginKeychain = (token: string): ThunkResult<void> => {
   return async function (dispatch) {
@@ -104,6 +99,10 @@ export const loginKeychain = (token: string): ThunkResult<void> => {
       dispatch(loginSuccess(token));
       dispatch(fetchProfile(token));
     });
+    // setGenericPassword(email, password).then(() => {
+    //   dispatch(loginSuccess(token));
+    //   dispatch(fetchProfile(token));
+    // });
   };
 };
 

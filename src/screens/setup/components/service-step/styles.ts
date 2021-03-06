@@ -22,6 +22,7 @@ export const styles = StyleSheet.create<Style>({
   scrollContainer: {
     paddingHorizontal: spacing.base,
     flex: 1,
+    paddingBottom: 100,
   },
   input: {
     marginTop: spacing.larger,

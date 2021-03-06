@@ -28,7 +28,7 @@ const OwnAvatar: React.FC<OwnProps & PropsFromRedux> = ({
     ? { uri: photoUrl }
     : {
         uri:
-          'https://i.pinimg.com/originals/e3/eb/0a/e3eb0af2a2dff64cc6e48cd89780ce5b.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png',
       };
   return (
     <FastImage

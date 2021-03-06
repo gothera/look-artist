@@ -1,4 +1,4 @@
-import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import { StyleSheet, ViewStyle, TextStyle, Platform } from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import { typography, color } from '../../../../theme';
 

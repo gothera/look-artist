@@ -87,15 +87,7 @@ const AddAppointmentModal: React.FC<OwnProps & PropsFromRedux> = ({
     if (!checkDurationDividedBy30(durationStr)) {
       return;
     }
-    console.log(
-      durationStr,
-      !checkDurationDividedBy30(durationStr),
-      category,
-      serviceName,
-    );
-    console.log('da1');
     if (category !== undefined && categoryEnumToStr(category) && serviceName) {
-      console.log('da');
       addService(
         category,
         serviceName,
