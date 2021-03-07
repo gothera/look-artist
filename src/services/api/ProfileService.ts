@@ -26,8 +26,11 @@ export const changeProfilePicture = (formData: FormData): Promise<any> => {
   return postRequest<any>(url, formData, config);
 };
 
-export const fetchProfile = (token?: string): Promise<ArtistResponseApi> => {
-  const url = `artist/current/`;
+export const fetchProfile = (
+  token?: string,
+  fcmToken?: string,
+): Promise<ArtistResponseApi> => {
+  const url = `artist/current/?token=${fcmToken}`;
 
   const extraConfig: AxiosRequestConfig = {
     headers: {

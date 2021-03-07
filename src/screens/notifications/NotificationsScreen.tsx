@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { FlatListProps, Text, View } from 'react-native';
+import React from 'react';
+import { FlatListProps } from 'react-native';
 import { useNavigationBottomTabSelect } from 'react-native-navigation-hooks/dist/hooks';
 import { connect, ConnectedProps } from 'react-redux';
 import LineDivider from '../../components/ui/LineDivider';
@@ -40,7 +40,7 @@ const NotificationsScreen: React.FC<PropsFromRedux> = ({
 
   const flatListProps: FlatListProps<any> = {
     data: notificationsById,
-    keyExtractor: (item) => `Notification$${item}`,
+    keyExtractor: (item) => `notification-${item}`,
     renderItem: renderItem,
     onEndReached: () => {
       fetchMoreNotifcations(notificationsById.length === 0);

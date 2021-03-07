@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "6805336607",
+    "project_id": "look-5d68c",
+    "storage_bucket": "look-5d68c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:6805336607:android:e1e2cea0b9f98144f9db2a",
+        "android_client_info": {
+          "package_name": "com.lookartist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "6805336607-jubju2apgql6bp71dnqru909qe89seci.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVzIGeXDr05OUw9WthWMsfpEekPripoT4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "6805336607-jubju2apgql6bp71dnqru909qe89seci.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,6 +2,7 @@ import {
   setGenericPassword,
   resetGenericPassword,
 } from 'react-native-keychain';
+import messaging from '@react-native-firebase/messaging';
 import {
   pushSetupScreen,
   setLoggedInRoot,
@@ -141,7 +142,7 @@ export const signUp = (email: string, password: string): ThunkResult<void> => {
         dispatch(signUpSuccess(userId, artistId, email));
       })
       .then(() => {
-        dispatch(login(email, password, true));
+        dispatch(login(email, password));
       })
       .then(() => {
         pushSetupScreen();
@@ -325,7 +326,9 @@ export const fetchProfile = (token?: string): ThunkResult<void> => {
     //   return Promise.resolve();
     // }
 
-    return ProfileService.fetchProfile(token)
+    const fcmToken = await messaging().getToken();
+
+    return ProfileService.fetchProfile(token, fcmToken)
       .then((response: ArtistResponseApi) => {
         dispatch(fetchProfileSuccess(response));
       })

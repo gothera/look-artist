@@ -64,3 +64,5 @@ dist
 # jest
 coverage/
 .jest
+
+/android/java_pid53340.hprof
