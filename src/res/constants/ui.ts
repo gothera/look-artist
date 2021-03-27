@@ -2,7 +2,7 @@ import { getStatusBarHeight } from 'react-native-status-bar-height';
 import { Dimensions, Platform } from 'react-native';
 import { getBottomSpace } from 'react-native-iphone-x-helper';
 
-const AUX_BOTTOM_SPACE = getBottomSpace() !== 0 ? getBottomSpace() + 10 : 30;
+const AUX_BOTTOM_SPACE = getBottomSpace() !== 0 ? getBottomSpace() + 10 : 16;
 
 export const STATUS_BAR_HEIGHT = getStatusBarHeight();
 
