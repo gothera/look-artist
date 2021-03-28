@@ -350,6 +350,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = CBG87U85UW;
 						LastSwiftMigration = 1120;
 						ProvisioningStyle = Automatic;
 					};
@@ -753,10 +754,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "look-artist/look-artist.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
-				DEVELOPMENT_TEAM = "";
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = CBG87U85UW;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "look-artist/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -783,9 +784,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "look-artist/look-artist.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Costin-Sabin Hantu (CBG87U85UW)";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = CBG87U85UW;
 				INFOPLIST_FILE = "look-artist/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -797,7 +798,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lookbeautyapp.artist;
 				PRODUCT_NAME = "look-artist";
-				PROVISIONING_PROFILE_SPECIFIER = "Look Artist Prov Profile with Push Notif";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
