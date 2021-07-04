@@ -45,6 +45,8 @@ const SetupScreen: React.FC<OwnProps & PropsFromRedux> = ({
 
   const [serviceName, setServiceName] = useState<string | undefined>(undefined);
 
+  const [address, setAddress] = useState<string | undefined>(undefined);
+
   const slideToNext = () => {
     if (step < 4) {
       setStep((old) => old + 1);
@@ -68,6 +70,7 @@ const SetupScreen: React.FC<OwnProps & PropsFromRedux> = ({
       description,
       priceStr,
       durationStr,
+      address
     );
   };
 
@@ -88,6 +91,7 @@ const SetupScreen: React.FC<OwnProps & PropsFromRedux> = ({
             setLastName={setLastName}
             setBirthdayDate={setBirthdayDate}
             birthdayDate={birthdayDate}
+            setAddress={setAddress}
           />
         </View>
         <View style={styles.swiperSlide}>

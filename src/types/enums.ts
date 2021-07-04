@@ -1,10 +1,10 @@
 export enum Category {
   Makeup,
-  Lashes,
+  Nails,
   Hair,
   Eyebrows,
-  Nails,
   BodyCare,
+  Lashes,
 }
 
 export enum DaysAbbreviation {

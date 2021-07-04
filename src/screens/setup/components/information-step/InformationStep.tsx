@@ -15,6 +15,7 @@ interface OwnProps {
   setLastName: (param: string) => void;
   birthdayDate: Date | undefined;
   setBirthdayDate: (param: Date) => void;
+  setAddress: (param: string) => void;
 }
 
 const InformationStep: React.FC<OwnProps> = ({
@@ -23,6 +24,7 @@ const InformationStep: React.FC<OwnProps> = ({
   setLastName,
   setBirthdayDate,
   birthdayDate,
+  setAddress,
 }) => {
   const onBirthdaySelect = () => {
     showSelectDateModal({
@@ -34,10 +36,11 @@ const InformationStep: React.FC<OwnProps> = ({
 
   return (
     <Formik
-      initialValues={{ firstName: '', lastName: '' }}
+      initialValues={{ firstName: '', lastName: '', address: '' }}
       onSubmit={(values) => {
         setFirstName(values.firstName);
         setLastName(values.lastName);
+        setAddress(values.address);
         slideToNext();
       }}
     >
@@ -65,6 +68,14 @@ const InformationStep: React.FC<OwnProps> = ({
               containerStyle={styles.elementMarginTop}
               text={birthdayDate && formatDateToDDMMYYY(birthdayDate)}
               onPress={onBirthdaySelect}
+            />
+
+            <TextInputWithLabel
+              setText={handleChange('address')}
+              text={values.address}
+              label={strings.screen.setup.information.addressLabel}
+              placeholder={strings.screen.setup.information.addressPlaceholder}
+              containerStyle={styles.elementMarginTop}
             />
           </ScrollView>
           <View style={styles.continueBtnContainer}>

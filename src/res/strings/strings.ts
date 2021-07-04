@@ -12,6 +12,8 @@ const strings = {
         lastNamePlaceholder: 'Introduce Last Name',
         birthdayLabel: 'Birthday',
         birthdayPlaceholder: 'DD - Month - YYYY',
+        addressLabel: 'Address',
+        addressPlaceholder: 'Your address...'
       },
       photo: {
         title: 'Select a picture for your account',

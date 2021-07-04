@@ -74,6 +74,7 @@ export interface ArtistResponseApi {
   birthDate: string;
   hasSetup: boolean;
   defaultProgram: DefaultProgramEntry[];
+  address: string;
 }
 
 export interface Appointment {

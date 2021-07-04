@@ -40,6 +40,7 @@ export interface SetupBody {
   price: number;
   duration: number;
   birthDate: string; // ISO string
+  address: string;
 }
 
 export interface FetchNotificationsResponse {

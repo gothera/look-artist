@@ -235,6 +235,7 @@ export const setup = (
   serviceDescription: string,
   servicePrice: string,
   serviceDuration: string,
+  address: string
 ): ThunkResult<void> => {
   return async function (dispatch, _) {
     dispatch(setupRequest());
@@ -248,6 +249,7 @@ export const setup = (
       price: parseInt(servicePrice, 10),
       duration: parseInt(serviceDuration, 10),
       birthDate: birthDateISO,
+      address: address
     };
 
     return ProfileService.setup(setupBody)

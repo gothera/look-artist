@@ -73,7 +73,7 @@ const LoginContent: React.FC<OwnProps & PropsFromRedux> = ({
         isDisabled={isContinueBtnDisabled}
       />
       <OrLineDivider containerStyle={styles.orDividerContainer} />
-      <ButtonWithIcon
+      {/* <ButtonWithIcon
         title="Continue with Facebook"
         onPress={() => { }}
         containerStyle={styles.socialBtn}
@@ -84,7 +84,7 @@ const LoginContent: React.FC<OwnProps & PropsFromRedux> = ({
         onPress={() => { }}
         containerStyle={styles.socialBtn}
         icon={<GoogleBtnIcon />}
-      />
+      /> */}
       <View style={styles.alreadyContainer}>
         <Text style={styles.alreadyDescriptionText}>
           Don't have an account yet?
