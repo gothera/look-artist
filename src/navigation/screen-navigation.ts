@@ -19,7 +19,7 @@ export const setLoggedInRoot = () => {
         options: {
           bottomTabs: {
             animate: true,
-            titleDisplayMode: 'alwaysHide',
+            titleDisplayMode: 'alwaysShow',
             elevation: 30,
             backgroundColor: color.background,
             // drawBehind: true,
@@ -44,6 +44,7 @@ export const setLoggedInRoot = () => {
                   selectedIconColor: color.brand,
                   text: 'Program',
                   textColor: color.muted,
+                  // titleDisplayMode: 'alwaysHide',
                   selectedTextColor: color.textPrimary,
                   fontFamily: 'Gilroy-Medium',
                   fontSize: 10,

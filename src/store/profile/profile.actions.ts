@@ -62,6 +62,27 @@ export const login = (email: string, password: string): ThunkResult<void> => {
         setGenericPassword(email, password).then(() => {
           dispatch(loginSuccess(response.accessToken));
           dispatch(fetchProfile(response.accessToken));
+          // setLoggedInRoot();
+        });
+      })
+
+      .catch((error) => {
+        dispatch(loginFailure());
+        console.log('Login error', error);
+      });
+  };
+};
+
+export const default_login = (email: string, password: string): ThunkResult<void> => {
+  return async function (dispatch, getState) {
+    dispatch(loginRequest());
+
+    return AuthService.login(email, password)
+      .then((response: LoginResponse) => {
+        setGenericPassword(email, password).then(() => {
+          dispatch(loginSuccess(response.accessToken));
+          dispatch(fetchProfile(response.accessToken));
+          setLoggedInRoot();
         });
       })
 
@@ -142,10 +163,10 @@ export const signUp = (email: string, password: string): ThunkResult<void> => {
         dispatch(signUpSuccess(userId, artistId, email));
       })
       .then(() => {
-        dispatch(login(email, password));
+        pushSetupScreen();
       })
       .then(() => {
-        pushSetupScreen();
+        dispatch(login(email, password));
       })
       .catch((error) => {
         dispatch(loginFailure());
@@ -327,6 +348,7 @@ export const fetchProfile = (token?: string): ThunkResult<void> => {
     // }
 
     const fcmToken = await messaging().getToken();
+    console.log("Am TOKENUL ", fcmToken);
 
     return ProfileService.fetchProfile(token, fcmToken)
       .then((response: ArtistResponseApi) => {

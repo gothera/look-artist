@@ -14,7 +14,7 @@ import PasswordInputWithLabel from '../../../components/input/PasswordInputWithL
 import TextInputWithLabel from '../../../components/input/TextInputWithLabel';
 import OrLineDivider from '../../../components/ui/OrLineDivider';
 import { FacebookBtnIcon, GoogleBtnIcon, LogoOnHeader } from '../../../res/svg';
-import { login } from '../../../store/profile/profile.actions';
+import { login, default_login } from '../../../store/profile/profile.actions';
 import { AsyncDispatch } from '../../../store/store.types';
 import { color, typography, spacing } from '../../../theme';
 
@@ -25,7 +25,7 @@ interface OwnProps {
 
 const mapDispatchToProps = (dispatch: AsyncDispatch) => ({
   loginWithEmailAndPassword: (email: string, password: string) =>
-    dispatch(login(email, password)),
+    dispatch(default_login(email, password)),
 });
 
 const connector = connect(null, mapDispatchToProps);
@@ -75,13 +75,13 @@ const LoginContent: React.FC<OwnProps & PropsFromRedux> = ({
       <OrLineDivider containerStyle={styles.orDividerContainer} />
       <ButtonWithIcon
         title="Continue with Facebook"
-        onPress={() => {}}
+        onPress={() => { }}
         containerStyle={styles.socialBtn}
         icon={<FacebookBtnIcon />}
       />
       <ButtonWithIcon
         title="Continue with Google"
-        onPress={() => {}}
+        onPress={() => { }}
         containerStyle={styles.socialBtn}
         icon={<GoogleBtnIcon />}
       />

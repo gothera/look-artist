@@ -81,13 +81,13 @@ const SignInContent: React.FC<OwnProps & PropsFromRedux> = ({
       <OrLineDivider containerStyle={styles.orDividerContainer} />
       <ButtonWithIcon
         title="Continue with Facebook"
-        onPress={() => {}}
+        onPress={() => { }}
         containerStyle={styles.socialBtn}
         icon={<FacebookBtnIcon />}
       />
       <ButtonWithIcon
         title="Continue with Google"
-        onPress={() => {}}
+        onPress={() => { }}
         containerStyle={styles.socialBtn}
         icon={<GoogleBtnIcon />}
       />
