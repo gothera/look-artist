@@ -1,33 +1,62 @@
 {
   "project_info": {
-    "project_number": "6805336607",
-    "project_id": "look-5d68c",
-    "storage_bucket": "look-5d68c.appspot.com"
+    "project_number": "658817639502",
+    "project_id": "look-43762",
+    "storage_bucket": "look-43762.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:6805336607:android:e1e2cea0b9f98144f9db2a",
+        "mobilesdk_app_id": "1:658817639502:android:a61470247b26db7f91cf1f",
         "android_client_info": {
           "package_name": "com.lookartist"
         }
       },
       "oauth_client": [
         {
-          "client_id": "6805336607-jubju2apgql6bp71dnqru909qe89seci.apps.googleusercontent.com",
+          "client_id": "658817639502-125db0ifijf0dmbn27hc4f07ghr3nsb0.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAVzIGeXDr05OUw9WthWMsfpEekPripoT4"
+          "current_key": "AIzaSyC9_4kDSfCf8EoOnnpP_dn0ETCcts4wH0s"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "6805336607-jubju2apgql6bp71dnqru909qe89seci.apps.googleusercontent.com",
+              "client_id": "658817639502-125db0ifijf0dmbn27hc4f07ghr3nsb0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:658817639502:android:203477c892b45f4691cf1f",
+        "android_client_info": {
+          "package_name": "com.lookclient"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "658817639502-125db0ifijf0dmbn27hc4f07ghr3nsb0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9_4kDSfCf8EoOnnpP_dn0ETCcts4wH0s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "658817639502-125db0ifijf0dmbn27hc4f07ghr3nsb0.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

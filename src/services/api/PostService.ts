@@ -14,7 +14,7 @@ export const addPost = (formData: FormData): Promise<any> => {
 
   const config = {
     headers: {
-      'content-type': 'multipart/form-data',
+      'Content-Type': 'multipart/form-data',
     },
   };
 

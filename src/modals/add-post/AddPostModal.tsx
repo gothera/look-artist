@@ -92,10 +92,11 @@ const AddPostModal: React.FC<OwnProps & NavigationComponentProps> = ({
   const onPost = async () => {
     setIsAddingPost(true);
     const pictures = imagesPicked?.map((imagePicked) => {
+    const splitName = imagePicked.path.split('/')
       return {
-        name: imagePicked.filename,
-        type: 'image/jpg',
-        uri: imagePicked.path.replace('file://', ''),
+        name: splitName == undefined ? imagePicked.path : splitName[splitName.length-1],
+        type: imagePicked.mime,
+        uri: imagePicked.path,
       };
     });
 
@@ -104,6 +105,7 @@ const AddPostModal: React.FC<OwnProps & NavigationComponentProps> = ({
 
     pictures?.forEach((picture) => {
       formData.append('pictures', picture);
+      console.log(picture)
     });
 
     addPost(formData)

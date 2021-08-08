@@ -44,6 +44,7 @@
     "react-native-keyboard-spacer-view": "0.0.3",
     "react-native-keychain": "6.1.1",
     "react-native-linear-gradient": "2.5.6",
+    "react-native-mime-types": "^2.3.0",
     "react-native-modalize": "2.0.6",
     "react-native-navigation": "7.8.4",
     "react-native-navigation-hooks": "6.2.0",

@@ -44,6 +44,7 @@ export const fetchArtistPosts = (first: boolean): ThunkResult<void> => {
     dispatch(fetchArtistPostsRequest(first));
 
     const page = getState().post.nextPage;
+    console.log("PAGINA ESTEEEEEEEEEEEEEEEEEE", page)
     const artistId = getState().profile.artistId;
 
     if (artistId === undefined) {
