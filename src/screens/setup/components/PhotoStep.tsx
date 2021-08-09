@@ -85,10 +85,11 @@ const PhotoStep: React.FC<OwnProps & PropsFromRedux> = ({
       slideToNext();
       return;
     }
+    const splitName = imagePicked.path.split('/')
     const picture = {
-      name: imagePicked.filename,
-      type: 'image/jpg',
-      uri: imagePicked.path.replace('file://', ''),
+      name: splitName == undefined ? imagePicked.path : splitName[splitName.length-1],
+      type: imagePicked.mime,
+      uri: imagePicked.path,
     };
     const formData = new FormData();
     formData.append('picture', picture);

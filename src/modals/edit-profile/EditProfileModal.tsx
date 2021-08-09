@@ -104,11 +104,15 @@ const EditProfileModal: React.FC<OwnProps & PropsFromRedux> = ({
       category: category || 0,
     });
     if (imagesPicked) {
+      console.log("IMAGINI", imagesPicked)
+      const splitName = imagesPicked.path.split('/')
+    
       const picture = {
-        name: imagesPicked.filename,
-        type: 'image/jpg',
-        uri: imagesPicked.path.replace('file://', ''),
+        name: splitName == undefined ? imagesPicked.path : splitName[splitName.length-1],
+        type: imagesPicked.mime,
+        uri: imagesPicked.path,
       };
+      console.log(picture)
       const formData = new FormData();
       formData.append('picture', picture);
       changeProfilePicture(formData);
@@ -138,6 +142,7 @@ const EditProfileModal: React.FC<OwnProps & PropsFromRedux> = ({
       if (!Array.isArray(imagePickerResponse)) {
         setImagesPicked(imagePickerResponse);
       }
+      console.log("IMAGES", imagesPicked)
     });
   };
 

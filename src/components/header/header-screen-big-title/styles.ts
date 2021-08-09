@@ -12,7 +12,7 @@ interface Style {
 
 const styles = StyleSheet.create<Style>({
   container: {
-    marginTop: STATUS_BAR_HEIGHT,
+    marginTop: STATUS_BAR_HEIGHT/8,
     height: HEADER_SCREEN_HEIGHT,
     justifyContent: 'flex-end',
     backgroundColor: color.background,
