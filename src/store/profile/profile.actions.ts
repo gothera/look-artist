@@ -495,6 +495,7 @@ export const updateArtistProfileFailure = (): profileTypes.updateArtistProfileFa
 export const updateArtistProfile = (
   profile: UpdateArtistApi,
 ): ThunkResult<void> => {
+  profile.phone = "+40" + profile.phone
   return async function (dispatch, getState) {
     const token = getState().profile.token;
     const isFetching = getState().profile.isFetching;
