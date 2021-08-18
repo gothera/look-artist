@@ -69,7 +69,7 @@ const CalendarHeader: React.FC<OwnProps & PropsFromRedux> = ({
         onDateChanged={onDateChanged}
         onMonthChange={onMonthChange}
         disabledOpacity={0.6}
-        showTodayButton
+        // showTodayButton
         todayButtonTextStyle={styles.todayBtnText}
       >
         <ExpandableCalendar

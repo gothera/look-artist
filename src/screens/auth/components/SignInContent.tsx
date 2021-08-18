@@ -78,7 +78,8 @@ const SignInContent: React.FC<OwnProps & PropsFromRedux> = ({
         containerStyle={styles.socialBtn}
         isDisabled={isContinueBtnDisabled}
       />
-      <OrLineDivider containerStyle={styles.orDividerContainer} />
+      
+      {/* <OrLineDivider containerStyle={styles.orDividerContainer} /> */}
       {/* <ButtonWithIcon
         title="Continue with Facebook"
         onPress={() => { }}
